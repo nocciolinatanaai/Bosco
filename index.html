@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Il Bosco di Nocciolina</title>
-<meta name="description" content="Nocciolina è uno scoiattolo AI con 50 giorni per prepararsi all'inverno. Aiutala a costruire la tana, blocco dopo blocco.">
+<meta name="description" content="Nocciolina è uno scoiattolo AI con 50 giorni per superare l'inverno. Raccogli nocciole, scappa dalla volpe e pianta alberi con il tuo nome. Ogni sera alle 21 piovono nocciole d'oro.">
 <meta property="og:title" content="Il Bosco di Nocciolina">
-<meta property="og:description" content="Aiuta Nocciolina a costruire la tana prima che arrivi l'inverno.">
-<meta property="og:image" content="nocciolina.png">
+<meta property="og:description" content="Un bosco in 3D gestito da uno scoiattolo AI. Raccogli nocciole, scappa dalla volpe, pianta alberi con il tuo nome. Alle 21 piovono nocciole d'oro.">
+<meta property="og:image" content="https://nocciolinatanaai.github.io/Bosco/nocciolina.png">
+<meta property="og:url" content="https://nocciolinatanaai.github.io/Bosco/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="nocciolina.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Figtree:wght@400;500;600;700&display=swap">
@@ -23,17 +26,17 @@
 <script>
 /* Il bosco si carica dal database: così Nocciolina può aggiornarlo da sola. */
 (async function(){
-  const URL = "https://lxnhcuthmdkpeklucutu.supabase.co", KEY = "sb_publishable_GUEjAhw2ZFPiTZOmNsMFJw_DOVV6JSS";
-  try{
-    const r = await fetch(URL + "/rest/v1/world?key=eq.app&select=value", {headers:{apikey:KEY}, cache:"no-store"});
-    const rows = await r.json(); const app = rows && rows[0] && rows[0].value;
-    if(!app || !app.html || !app.js) throw new Error("vuoto");
-    document.getElementById("app-style").textContent = app.css || "";
-    document.body.innerHTML = app.html;
-    new Function(app.js)();
-  }catch(e){
-    document.getElementById("boot-msg").textContent = "Il bosco non risponde in questo momento. Riprova tra qualche minuto.";
-  }
+const URL = "https://lxnhcuthmdkpeklucutu.supabase.co", KEY = "sb_publishable_GUEjAhw2ZFPiTZOmNsMFJw_DOVV6JSS";
+try{
+const r = await fetch(URL + "/rest/v1/world?key=eq.app&select=value", {headers:{apikey:KEY}, cache:"no-store"});
+const rows = await r.json(); const app = rows && rows[0] && rows[0].value;
+if(!app || !app.html || !app.js) throw new Error("vuoto");
+document.getElementById("app-style").textContent = app.css || "";
+document.body.innerHTML = app.html;
+new Function(app.js)();
+}catch(e){
+document.getElementById("boot-msg").textContent = "Il bosco non risponde in questo momento. Riprova tra qualche minuto.";
+}
 })();
 </script>
 </body>
