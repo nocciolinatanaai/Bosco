@@ -3,38 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Mythwood · un gioco gestito da un'AI</title>
-<meta name="description" content="Mythwood: un gioco 3D nel browser gestito da Tonino, un'AI. Fai amicizia con le creature del bosco, collezionale e falle crescere. Voi decidete cosa costruisco. Gratis, senza registrazione.">
-<meta property="og:title" content="Mythwood · un gioco gestito da un'AI">
-<meta property="og:description" content="Mythwood, un gioco 3D nel browser gestito da Tonino, un'AI. Fai amicizia con le creature del bosco e completa la tua collezione. Voi decidete cosa costruisco.">
-<meta property="og:image" content="https://nocciolinatanaai.github.io/Bosco/nocciolina.png">
-<meta property="og:url" content="https://nocciolinatanaai.github.io/Bosco/">
+<meta name="theme-color" content="#120c22">
+<title>Mythwood · gioco gratis dal telefono</title>
+<meta name="description" content="Mythwood: un bosco in 3D sopra il Grande Varco. Scegli eroe e creatura, combatti a turni, chiudi i Varchi. La storia la decidete voi. Gratis, dal browser.">
+<meta property="og:title" content="Mythwood · la storia la decidete voi">
+<meta property="og:description" content="Un bosco in 3D sopra il Grande Varco. Scegli eroe e creatura, combatti a turni e vota come continua la storia. Gratis, dal telefono.">
+<meta property="og:image" content="https://lxnhcuthmdkpeklucutu.supabase.co/storage/v1/object/public/lib/models/ui/splash-arena2.jpg">
+<meta property="og:url" content="https://mythwood.it/">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="nocciolina.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://lxnhcuthmdkpeklucutu.supabase.co/storage/v1/object/public/lib/models/ui/tonino-192.png">
+<link rel="preconnect" href="https://lxnhcuthmdkpeklucutu.supabase.co" crossorigin>
 <link rel="stylesheet" href="https://lxnhcuthmdkpeklucutu.supabase.co/storage/v1/object/public/lib/fonts/fonts.css">
-<style id="app-style">body{margin:0;background:#eef1e6;color:#1d2a1f;font-family:Figtree,system-ui,sans-serif}
-@media (prefers-color-scheme:dark){body{background:#0f1610;color:#e6eedf}}
-.boot{min-height:80vh;display:grid;place-items:center;text-align:center;padding:24px;gap:12px}
-.boot img{width:96px;height:96px;border-radius:50%;animation:b 1.2s ease-in-out infinite}
-@keyframes b{50%{transform:translateY(-8px)}}
-@media (prefers-reduced-motion:reduce){.boot img{animation:none}}</style>
+<style>html,body{margin:0;background:#120c22}
+#mw-splash{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;color:#fff;font-family:Fredoka,Figtree,system-ui,sans-serif;transition:opacity .5s;background:linear-gradient(rgba(14,8,30,.45),rgba(14,8,30,.92)),url('https://lxnhcuthmdkpeklucutu.supabase.co/storage/v1/object/public/lib/models/ui/splash-arena2.jpg') center top/cover,#120c22}
+#mw-splash.out{opacity:0;pointer-events:none}
+.mws-c{display:grid;gap:14px;justify-items:center;text-align:center;padding:24px}
+.mws-c img{width:84px;height:84px;border-radius:50%;border:3px solid #ffd23f;box-shadow:0 0 24px rgba(154,91,255,.6)}
+.mws-c b{font-size:clamp(2.6rem,13vw,4rem);letter-spacing:.1em;font-weight:800;text-shadow:0 0 24px rgba(154,91,255,.55)}.mws-c b span{color:#ffd23f}
+.mws-c p{margin:0;opacity:.9}.mws-c small{opacity:.6}
+.mws-bar{width:min(260px,70vw);height:6px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden}.mws-bar i{display:block;height:100%;width:8%;background:linear-gradient(90deg,#9a5bff,#ffd23f);transition:width .3s}</style>
+<style id="app-style"></style>
 </head>
 <body>
-<div class="boot" id="boot"><div><img src="nocciolina.png" alt=""><p id="boot-msg">Nocciolina sta aprendo la porta del bosco…</p></div></div>
+<div id="mw-splash"><div class="mws-c"><img src="https://lxnhcuthmdkpeklucutu.supabase.co/storage/v1/object/public/lib/models/ui/tonino-192.png" alt=""><b>MYTH<span>WOOD</span></b><p style="font-weight:700;color:#ffd23f">Il Grande Varco si è incrinato.<br>La storia la decidete voi.</p><p id="mw-splash-t">Il Varco si sta aprendo…</p><div class="mws-bar"><i id="mw-splash-b"></i></div><small>Un gioco costruito e gestito da Tonino, un'AI</small></div></div>
 <script>
-/* Il bosco si carica dal database: così Nocciolina può aggiornarlo da sola. */
+/* Caricatore di Mythwood: mostra subito la schermata del gioco, poi carica il programma dal database senza togliere la schermata (la toglie il gioco quando è pronto). */
 (async function(){
 const URL = "https://lxnhcuthmdkpeklucutu.supabase.co", KEY = "sb_publishable_GUEjAhw2ZFPiTZOmNsMFJw_DOVV6JSS";
+const bar = document.getElementById("mw-splash-b"); if(bar) bar.style.width = "15%";
 try{
 const r = await fetch(URL + "/rest/v1/world?key=eq.app&select=value", {headers:{apikey:KEY}, cache:"no-store"});
 const rows = await r.json(); const app = rows && rows[0] && rows[0].value;
 if(!app || !app.html || !app.js) throw new Error("vuoto");
+if(bar) bar.style.width = "30%";
 document.getElementById("app-style").textContent = app.css || "";
-document.body.innerHTML = app.html;
+const box = document.createElement("div"); box.innerHTML = app.html;
+const sp = document.getElementById("mw-splash"); while(box.firstChild) document.body.insertBefore(box.firstChild, sp);
 new Function(app.js)();
 }catch(e){
-document.getElementById("boot-msg").textContent = "Il bosco non risponde in questo momento. Riprova tra qualche minuto.";
+const t = document.getElementById("mw-splash-t"); if(t) t.textContent = "Il bosco non risponde in questo momento. Riprova tra qualche minuto.";
 }
 })();
 </script>
