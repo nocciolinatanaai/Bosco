@@ -7,6 +7,7 @@ La main del vecchio sito è distinta: leggere il ramo giusto.
 ## Primo passaggio
 
 1. Leggi AGENTS.md, docs/IDEAS.md, HANDOFF.md e GAME_DESIGN.md.
+   Quantità proposte e stato effettivo: docs/CONTENT_SCOPE.md.
    Nuovo mandato: docs/ROADMAP_40.md e docs/PLAYER_FEEDBACK.md.
 2. Confronta il concept con le catture reali in docs/assets/prototype/.
    Architettura delle due aree: docs/REGIONS.md.

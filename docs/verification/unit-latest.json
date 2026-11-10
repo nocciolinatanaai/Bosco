@@ -1,8 +1,8 @@
 {
-  "checkedSourceCommit": "45f89baa460b62294e75f2cf3a4d544ce8a8367f",
+  "checkedSourceCommit": "864f97ff5fedce58da97fab769fb02cd6a2643b6",
   "command": "npm test",
-  "tests": 88,
-  "passed": 88,
+  "tests": 94,
+  "passed": 94,
   "failed": 0,
   "database": "PostgreSQL WASM/PGlite with synthetic data only"
 }

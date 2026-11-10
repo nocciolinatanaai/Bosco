@@ -321,3 +321,9 @@ della giacca e orientamento arco durante il tiro. Quattro pose renderizzate con
 stessa camera/luci per confronto col modello precedente, zero errori/richieste
 esterne. Non è una cattura gameplay o qualità finale. Checkpoint prima della
 regressione integrata; caption e quantità restano proposte pubblicabili come stato/direzione.
+
+
+Studio visivo condiviso con hash/sorgenti 864f97f e 94 test superati. Immagini
+chiaramente etichettate come authoring, non gameplay e non confronto con Bosco
+pubblicato. Regressione integrata in corso; nessuna qualità finale o risultato
+umano dedotti. Contenuti quantitativi indicati come proposta, non promessa.

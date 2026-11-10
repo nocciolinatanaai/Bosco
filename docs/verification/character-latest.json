@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "fixture": "authoring comparison with the same lighting/camera; not gameplay",
+  "startedAtUtc": "2026-11-10T19:13:17.944Z",
+  "images": [
+    {
+      "pose": "base",
+      "sha256": "8827b36562bea8f3159bb3ee9eb4cc62fba09776b7464d4dcd82a81a4e1b2d48"
+    },
+    {
+      "pose": "resonance",
+      "sha256": "a327a6728b50c6ea7ff4259a9f9b5f1ce33ccdcb2aff7b5146eb999f26e27000"
+    },
+    {
+      "pose": "draw",
+      "sha256": "c3b55b9c38325b0d6ac8475793827257aae383817482038751c6da162f6592a1"
+    },
+    {
+      "pose": "back",
+      "sha256": "c6f04d644951a09d65bf9de96abd8e0c051aeeaac5df4c41160559f7cc36029a"
+    }
+  ],
+  "runnerSha256": "00903c3c46e07a23493e5c3deb59071a65ee295cd6bf29846002eae5325fcede",
+  "rangerSourceSha256": "db182b21010e6dc6c96228374db8c19f2f574ee082c8255cd632ed5fec752bb9",
+  "model": {
+    "meshTriangles": 8524,
+    "meshes": 44,
+    "materials": 14
+  },
+  "errors": 0,
+  "externalRequests": 0,
+  "finishedAtUtc": "2026-11-10T19:13:22.266Z",
+  "checkedSourceCommit": "864f97ff5fedce58da97fab769fb02cd6a2643b6",
+  "renderer": "Chromium SwiftShader; authoring scene, not gameplay or physical-device performance"
+}

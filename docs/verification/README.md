@@ -45,3 +45,8 @@ Checkpoint Giardino concluso: regressione normale 3412915, percorso Giardino
 47b9f36, ultimo testo UI e ripresa sentinella sconfitta 45f89ba. Il test rapido
 ora controlla anche v2 con bussola conservata e sentinella assente, senza scritture
 quando l'autosalvataggio è spento. La matrice corrente è in HANDOFF.md.
+
+
+character-latest.json: studio d'autore dei due modelli con medesime luce/camera,
+quattro pose e hash sorgente/immagini. Non è screenshot della camera di gioco né
+misura di FPS. Il conteggio 8.524 triangoli include anche mesh nascoste.

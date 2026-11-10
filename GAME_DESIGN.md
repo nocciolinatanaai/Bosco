@@ -277,3 +277,11 @@ la prossima base; PLAYER_FEEDBACK.md riserva capacità alle prove e correzioni.
 Codex coordina direzione e integrazione, Claude può implementare incarichi
 circoscritti e contestare le scelte con evidenze. Nessun collegamento automatico
 alle sessioni o feedback ricevuto viene presunto.
+
+
+## Quantità del primo arco — proposta Codex
+
+CONTENT_SCOPE.md distingue obiettivi e contenuti presenti: sei personaggi, tre
+NPC, otto tipi di nemico e dieci missioni proposti per un primo arco. Solo i sei
+ruoli sono già concordati; gli altri numeri non sono contenuti realizzati né
+scadenze approvate. Lasciare margine alle richieste del pubblico.

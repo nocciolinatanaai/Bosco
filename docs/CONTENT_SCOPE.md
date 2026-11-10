@@ -26,3 +26,9 @@ di ore di durata o contenuti procedurali infiniti sulla base del conteggio.
 Capacità per correzioni/richieste: PLAYER_FEEDBACK.md. Nessuna spesa o aumento del
 budget autorizzato da questo piano. Non usare questi numeri nella promozione come
 funzionalità disponibili; comunicare separatamente stato e direzione.
+
+
+Le sei missioni principali sono una prima storia condivisa e giocabile con ogni
+classe, non sei campagne separate. Evoluzioni diverse non vengono ricontate
+come nuovi personaggi. Il numero di tipi di nemico non limita il numero degli
+incontri; ogni famiglia richiede però un comportamento riconoscibile.
