@@ -1,4 +1,4 @@
-import { createGarden, inArea, gardenPosition, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
+import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
 import { createTrail, resonateTrail } from './trail.js';
 import { prepareEnemyAttack } from './enemy-attacks.js';
@@ -175,6 +175,7 @@ function projectile(s, action, damage, empowered = false, echo = false) {
 function resolve(s, action) {
   const inRange = s.enemies.filter((e) => inArea(s, e) && e.hp > 0 && !e.sealed && distance(e, s) <= action.range);
   const inFront = inRange.filter((e) => {
+    if (s.area === 'garden' && blockedByGardenCover(s, e)) return false;
     const d = distance(e, s);
     return d < .1 || ((e.x - s.x) * action.facing.x + (e.z - s.z) * action.facing.z) / d >= Math.cos(action.combo === 3 ? Math.PI / 2 : Math.PI * .35);
   });
@@ -236,6 +237,11 @@ export function tickCooldowns(s, delta) {
     const target = s.enemies.find((e) => inArea(s, e) && e.id === p.targetId && e.hp > 0);
     if (!target || p.life <= 0) { p.life = 0; continue; }
     const d = distance(target, p), step = p.speed * dt;
+    const travel = Math.min(d, d <= step + .4 ? d : step);
+    const next = { x: p.x + (target.x - p.x) / Math.max(d, .001) * travel, z: p.z + (target.z - p.z) / Math.max(d, .001) * travel };
+    if (s.area === 'garden' && blockedByGardenCover(p, next)) {
+      p.life = 0; emit(s, 'projectile-blocked', { x: p.x, z: p.z }); continue;
+    }
     if (d <= step + .4) { hit(s, target, p.damage, p.empowered ? .65 : 0); p.life = 0; }
     else { p.x += (target.x - p.x) / d * step; p.z += (target.z - p.z) / d * step; }
   }

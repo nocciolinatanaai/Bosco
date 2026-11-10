@@ -74,3 +74,10 @@ prima. Correggere almeno i problemi bloccanti prima di allargare la mappa.
 Incarico Codex registrato in COLLABORATION. La geometria viene creata al primo
 ingresso e conservata per il riuso: non è streaming di file o del mondo.
 Nessun lavoro svolto o revisione di Claude presunti.
+
+
+Le colonne bloccano il raggio, i proiettili del giocatore e gli attacchi fisici
+diretti. Impulsi e implosioni ad area restano effetti magici e non dipendono
+da una traiettoria di freccia. In orizzontale le azioni della missione sono nella
+fascia superiore per separarle dal joystick. Movimento assistito opzionale in
+linea verso gli obiettivi, interrompibile con i comandi; non è pathfinding.

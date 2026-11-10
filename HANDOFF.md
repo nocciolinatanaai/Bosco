@@ -3,6 +3,20 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Checkpoint intermedio — layout corretto e coperture fisiche
+
+Prova dedicata del giardino superata su desktop/mobile a tempo normale dopo la
+correzione landscape: azioni spostate sopra il joystick. Tre rivisite a caldo
+senza nuovi buffer WebGL osservati (non una misura di tutte le risorse GPU o FPS).
+Un errore locale di sovrascrittura CSS è stato intercettato dalla build e corretto
+dal checkpoint, senza push di quella versione non compilabile.
+
+Aggiunta successiva: le colonne fermano anche proiettili del giocatore e colpi
+fisici diretti, con scintille d'impatto. Gli impulsi/implosioni ad area restano
+magici. 88 test passati. L'ultima patch richiede build/prova dedicata finale e
+regressione completa, ancora pendenti. Runners test:garden e test:browser
+con rapporti atomici; nessuna produzione o spesa.
+
 ## Checkpoint corrente — Giardino dei nomi in verifica
 
 Base 47f1140; remoto controllato e allineato. Seconda area locale implementata:

@@ -54,6 +54,7 @@ try {
     await page.waitForFunction(() => document.getElementById('audio-status').dataset.state === 'on');
     assert.equal(await page.locator('#selection').evaluate((element) => element.open), false);
     assert.equal(await page.locator('#role-name').innerText(), 'Guaritore');
+    assert.equal(await page.locator('#world-interact').isHidden(), true, 'Il giardino resta chiuso prima delle tracce');
     await page.locator('#skill').click();
     await page.waitForFunction(() => document.getElementById('toast').textContent.includes('Risonanza vitale'));
     assert.equal(await page.locator('#skill').isDisabled(), true);
@@ -208,6 +209,7 @@ try {
     }
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#quest-title').innerText(), 'La mappa ricorda');
+    assert.equal(await page.locator('#world-interact').isVisible(), true, 'Tre tracce aprono il passaggio al giardino');
     assert.equal(await page.locator('#follow-trail').isHidden(), true);
     await page.locator('#help').click(); await page.locator('#save-option').uncheck();
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).autoSave), false);

@@ -59,6 +59,14 @@ export function gardenPosition(x, z) {
   }
   return { x, z };
 }
+export function blockedByGardenCover(from, to) {
+  const dx = to.x - from.x, dz = to.z - from.z, squared = dx * dx + dz * dz;
+  if (!squared) return false;
+  return GARDEN_COVER.some(cover => {
+    const t = Math.max(0, Math.min(1, ((cover.x - from.x) * dx + (cover.z - from.z) * dz) / squared));
+    return (from.x + t * dx - cover.x) ** 2 + (from.z + t * dz - cover.z) ** 2 <= cover.radius ** 2;
+  });
+}
 export function prepareBeam(enemy, player) {
   const distance = Math.hypot(player.x - enemy.x, player.z - enemy.z);
   enemy.beamDX = distance ? (player.x - enemy.x) / distance : 0;

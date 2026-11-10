@@ -52,6 +52,7 @@ export function createCombatEffects(scene) {
       }
       if (event.type === 'enemy-impact' && event.kind !== 'beam') ring(event.x, event.z, event.radius, event.kind === 'nova' ? '#c5a5ff' : '#f48477', reducedMotion ? .15 : .35);
       if (event.type === 'hit' && !reducedMotion) sparks(event.x, event.z, event.critical ? '#fff3cb' : color);
+      if (event.type === 'projectile-blocked' && !reducedMotion) sparks(event.x, event.z, '#e2cf9b');
       if (event.type === 'action-start' && event.kind === 'skill' && state.role.id === 'mage') ring(event.aimX, event.aimZ, 3.2, color, event.windup);
       if (event.type === 'dodge' && !reducedMotion) ring(event.x, event.z, .7, '#9bd7e9', .25);
       if (event.type === 'echo-burst') ring(event.x, event.z, event.radius, '#ffe0a0', .3);

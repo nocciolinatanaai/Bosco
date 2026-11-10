@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import * as THREE from 'three';
 import { CLASSES, createSession, interactGarden, movePlayer, cast, attack, tickCooldowns, advanceEnemies, drainEvents, selectedEnemy, setTarget } from '../src/game.js';
 import { restoreCheckpoint, checkpointFromSession, validateCheckpoint, createCheckpointStore, CHECKPOINT_KEY } from '../src/checkpoints.js';
-import { GARDEN_COVER, prepareBeam, beamHits, createSentry, gardenObjective } from '../src/garden.js';
+import { GARDEN_COVER, blockedByGardenCover, prepareBeam, beamHits, createSentry, gardenObjective } from '../src/garden.js';
 import { createMaterials } from '../src/visuals/materials.js';
 import { createGardenWorld } from '../src/visuals/garden.js';
 import { createBeamTelegraph, updateTelegraph } from '../src/visuals/telegraph.js';
@@ -115,4 +115,17 @@ test('visite e aggiornamenti riusano la stessa geometria senza aggiungere nodi',
   const before = []; scene.traverse(node => before.push(node));
   for (let i = 0; i < 40; i++) { s.garden.step = i % 4 + 1; view.update(s, i % 2 === 0); }
   const after = []; scene.traverse(node => after.push(node)); assert.deepEqual(after, before);
+});
+
+
+test('colonne fermano proiettili e armi fisiche, senza impedire un tiro libero laterale', () => {
+  assert.equal(blockedByGardenCover({x:-4,z:-10},{x:-4,z:10}), true);
+  assert.equal(blockedByGardenCover({x:0,z:-10},{x:0,z:10}), false);
+  const ranger = garden(), sentry = ranger.enemies[3];
+  ranger.x = -4; ranger.z = 5; sentry.x = -4; sentry.z = 0;
+  const hp = sentry.hp; cast(ranger); step(ranger, 1.5);
+  assert.equal(sentry.hp, hp); assert.ok(drainEvents(ranger).some(e => e.type === 'projectile-blocked'));
+  step(ranger, 3); ranger.x = 4; assert.equal(blockedByGardenCover(ranger, sentry), false); cast(ranger); step(ranger, 1.5); assert.ok(sentry.hp < hp);
+  const fighter = garden('fighter'), target = fighter.enemies[3]; fighter.x = -4; fighter.z = 3.7; target.x = -4; target.z = .3;
+  attack(fighter); step(fighter, .5); assert.equal(target.hp, target.maxHp);
 });

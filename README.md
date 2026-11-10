@@ -99,3 +99,8 @@ Seconda area in verifica: dopo tre tracce, Entra nel giardino/F. Recupera la
 bussola e riporta il segnale alla soglia; puoi aggirare la sentinella. Le colonne
 fermano il suo raggio. Checkpoint v2 compatibili in lettura con v1. Stato delle
 verifiche e limiti in HANDOFF e docs/QUEST_02.md.
+
+
+`npm run test:garden` verifica migrazione, nuova area, bussola, ricarica, ritorno
+e rivisite su desktop/mobile, a tempo normale. In Cloud usare la stessa variabile
+MYTHWOOD_CHROMIUM_PATH. Partenza da un checkpoint sintetico dopo la prima missione.

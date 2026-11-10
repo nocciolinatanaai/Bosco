@@ -25,6 +25,7 @@ export function cueForEvent(event) {
   switch (event.type) {
     case 'strike': return event.style === 'bow' ? 'arrow' : ['magic', 'light'].includes(event.style) ? 'cast' : 'slash';
     case 'hit': return event.critical ? 'critical' : 'impact';
+    case 'projectile-blocked': return 'impact';
     case 'hurt': return event.guarded ? 'guard' : 'hurt';
     case 'dodge': return 'dash';
     case 'echo-burst': case 'trail-progress': case 'garden-progress': return 'echo';

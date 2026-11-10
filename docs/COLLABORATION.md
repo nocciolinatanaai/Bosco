@@ -261,3 +261,10 @@ produzione, spesa o pubblicazione esterna.
 Checkpoint funzionale Giardino: 87 test e build riusciti. Accesso, bussola,
 segnale/ritorno, nemico rettilineo e v2 compatibile v1 implementati. Nuovi
 controlli browser ancora da eseguire. Nessun risultato dedotto dalla build.
+
+
+Checkpoint prima della verifica finale: layout landscape corretto dopo un test
+fallito per sovrapposizione al joystick. Prova dedicata passata sui due viewport,
+zero nuovi buffer WebGL durante tre rivisite a caldo. Poi corretta la copertura
+per frecce/armi fisiche del giocatore, 88 test passati. Rilanciare prova dedicata
+su questa patch e regressione normale prima di segnare il blocco verificato.

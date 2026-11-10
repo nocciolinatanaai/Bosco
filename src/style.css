@@ -267,3 +267,8 @@ footer { z-index: 9; }
 
 #world-interact, #leave-garden { width: 100%; min-height: 44px; margin-top: 6px; padding: 8px; font-size: 11px; border: 1px solid #d1b37a66; background: #24372d; }
 #quest-item { color: #e9d49b; font-size: 11px; }
+
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  #garden-actions { position: fixed; top: 72px; left: 230px; right: 14px; max-width: 520px; display: flex; gap: 8px; }
+  #garden-actions button { flex: 1; margin: 0; min-height: 44px; font-size: 10px; line-height: 1.3; }
+}

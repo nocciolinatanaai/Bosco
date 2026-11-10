@@ -14,7 +14,8 @@
     "test:browser": "npm run build && node scripts/browser-check.mjs",
     "test:audio": "node scripts/audio-check.mjs",
     "test:checkpoints": "npm run build && node scripts/checkpoint-ui-check.mjs",
-    "test:ranger": "npm run build && node scripts/ranger-check.mjs"
+    "test:ranger": "npm run build && node scripts/ranger-check.mjs",
+    "test:garden": "npm run build && node scripts/garden-check.mjs"
   },
   "dependencies": {
     "three": "0.187.0"

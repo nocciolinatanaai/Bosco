@@ -235,7 +235,7 @@ export function startRuntime($) {
     $('leave-garden').hidden = state.area !== 'garden' || state.garden.step >= 3;
     $('leave-garden').disabled = Math.hypot(state.x - GARDEN_ENTRY.x, state.z - GARDEN_ENTRY.z) > 2.2;
     $('quest-item').hidden = state.garden.step < 2;
-    $('quest-item').textContent = state.garden.step === 4 ? '✓ Bussola · segnale riportato' : 'Bussola di spedizione · con te';
+    $('quest-item').textContent = state.garden.step === 4 ? '✓ Segnale riportato' : 'Bussola · con te';
     const traceNear = trace && Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS;
     $('follow-trail').disabled = Boolean(traceNear && (state.stamina < 30 || state.dashCooldown > 0));
     if (trace) $('follow-trail').textContent = traceNear ? 'Risuona con lo scatto · 30 vigore' : 'Raggiungi la prossima traccia';
