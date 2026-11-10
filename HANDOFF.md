@@ -3,6 +3,20 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Blocco corrente: crescita e spazio al pubblico
+
+Base bdd9454. Mandato aggiornato: Codex prosegue verso una base più completa
+(35–40% come stima da rivalutare), coordina integrazione e prepara incarichi
+circoscritti per Claude, con obiezioni e verifiche reciproche. Nessuna risposta
+di Claude ancora ricevuta. ROADMAP_40 e PLAYER_FEEDBACK fissano criteri e margine
+per richieste reali: nessuna percentuale nuova o feedback inventato.
+
+Ranger Tiro di ritorno implementato: impatto evitato con scatto → 4 secondi per
+rispondere con abilità doppia. Otto test nuovi, 77 totali superati; build riuscita
+(689 kB JS / 183 kB gzip, warning ancora presente). Specifica RANGER_EVOLUTION.md.
+Verifica browser del nuovo comportamento e regressione completa ancora pendenti
+al checkpoint. Rapporti versionati precedenti non coprono questo nuovo codice.
+
 ## Stato aggiornato della ricostruzione locale
 
 ### Salvataggi: verifica finale completata

@@ -14,7 +14,8 @@ sviluppa le ipotesi creative; HANDOFF.md descrive ciò che esiste davvero.
 | Esplorazione | Mappa molto grande, ricca di contenuti e scoperte | Una piccola arena e un sentiero nella stessa scena; nessuno streaming del mondo |
 | Personaggi | Più personaggi fra cui scegliere, con abilità diverse | Sei kit, un modello procedurale condiviso; non un cast completo |
 | Classi | Assassini, Maghi, Ranger, Guaritori, Tank e Combattenti | Kit di prova con attacchi, abilità ed equipaggiamenti differenti |
-| Crescita | Evoluzioni importanti, visibili e capaci di cambiare il gioco | Prima risonanza comune: lo scatto diventa offensivo; percorsi di classe mancanti |
+| Richieste giocatori | Lasciare spazio alle proposte del pubblico | Processo in PLAYER_FEEDBACK.md; nessun feedback reale ancora raccolto |
+| Crescita | Evoluzioni importanti, visibili e capaci di cambiare il gioco | Prima risonanza comune: lo scatto diventa offensivo; prima variazione Ranger in sviluppo; altri percorsi mancanti |
 | Collaborazione | Gilde centrali; missioni individuali, contributi asincroni e missioni simultanee | Design presente, nessuna cooperativa online implementata |
 | Partecipanti | Alcune missioni richiedono tutti | Da precisare: squadra iscritta o intera gilda. Proposta attuale: squadra iscritta |
 | Conflitto | Mostri, nemici e gilde rivali | Due echi e un Custode con due attacchi; gilda rivale narrativa ancora da progettare. PvP non deciso |

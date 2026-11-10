@@ -20,7 +20,7 @@ export function createSession(id) {
     impactDamage: boss ? 26 : 12, recoveryDuration: boss ? 1.5 : 1, phase: 'idle', windup: 0, chargeDuration: boss ? 1.15 : .9, recovery: 0, stagger: 0, hitFlash: 0, facing: 0,
     aimX: x, aimZ: z, radius: boss ? 3.6 : 1.8 });
   return { role, x: 0, z: 12, hp: role.hp, maxHp: role.hp, stamina: 100, staminaDelay: 0,
-    cooldown: 0, dashCooldown: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
+    cooldown: 0, dashCooldown: 0, returnShot: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
     evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
     lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null, trail: createTrail(),
@@ -118,7 +118,12 @@ export function dodge(s, dx = s.facing.x, dz = s.facing.z) {
 export function hurt(s, amount, source = null) {
   if (s.status !== 'playing' || !Number.isFinite(amount) || amount <= 0) return 0;
   if (s.invulnerable > 0) {
-    if (s.dodgeRemaining > 0) emit(s, 'evaded');
+    if (s.dodgeRemaining > 0) {
+      emit(s, 'evaded');
+      if (s.evolved && s.role.id === 'ranger') {
+        s.returnShot = 4; emit(s, 'return-shot-ready');
+      }
+    }
     return 0;
   }
   const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 ? .25 : 1)));
@@ -126,7 +131,7 @@ export function hurt(s, amount, source = null) {
   s.hp -= actual; s.invulnerable = .28;
   s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
   emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 });
-  if (s.hp === 0) { s.status = 'defeated'; s.action = null; s.projectiles = []; emit(s, 'defeated'); }
+  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; emit(s, 'defeated'); }
   return actual;
 }
 
@@ -147,13 +152,15 @@ function hit(s, enemy, damage, stagger = 0, critical = false) {
   if (!s.cleared && s.enemies.every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
 }
 
-function projectile(s, action, damage, empowered = false) {
+function projectile(s, action, damage, empowered = false, echo = false) {
   const target = s.enemies.find((e) => e.id === action.targetId && e.hp > 0 && !e.sealed && distance(e, s) <= action.range);
-  if (!target) { emit(s, 'miss'); return; }
-  const item = { id: ++s.sequence, x: s.x, z: s.z, targetId: target.id, speed: empowered ? 23 : 18,
-    life: 1.6, damage, empowered, style: s.role.style };
+  if (!target) { emit(s, 'miss'); return null; }
+  const offset = echo ? .6 : 0;
+  const item = { id: ++s.sequence, x: s.x + action.facing.z * offset, z: s.z - action.facing.x * offset, targetId: target.id, speed: empowered ? 23 : 18,
+    life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style };
   s.projectiles.push(item);
   emit(s, 'projectile', { projectileId: item.id, x: s.x, z: s.z });
+  return item;
 }
 
 function resolve(s, action) {
@@ -170,7 +177,15 @@ function resolve(s, action) {
     if (!targets.length) emit(s, 'miss');
     return;
   }
-  if (s.role.id === 'ranger') { projectile(s, action, s.role.damage, true); return; }
+  if (s.role.id === 'ranger') {
+    const shot = projectile(s, action, s.role.damage, true);
+    if (shot && s.evolved && s.returnShot > 0) {
+      s.returnShot = 0;
+      projectile(s, action, s.role.damage * .65, true, true);
+      emit(s, 'return-shot-fired');
+    }
+    return;
+  }
   let targets = inFront;
   if (s.role.id === 'tank') { s.shield = 1.6; targets = inRange; emit(s, 'guard'); }
   if (s.role.id === 'healer') {
@@ -191,7 +206,7 @@ export function tickCooldowns(s, delta) {
   const dt = clamp(Number.isFinite(delta) ? delta : 0, 0, .05);
   if (s.status !== 'playing' || dt === 0) return 0;
   s.time += dt;
-  for (const key of ['cooldown', 'dashCooldown', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
+  for (const key of ['cooldown', 'dashCooldown', 'returnShot', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
   if (s.staminaDelay === 0) s.stamina = Math.min(100, s.stamina + 20 * dt);
   if (s.dodgeRemaining > 0) {
     movePlayer(s, s.dodgeDirection.x, s.dodgeDirection.z, Math.min(dt, s.dodgeRemaining), 17);
@@ -207,6 +222,7 @@ export function tickCooldowns(s, delta) {
     }
   }
   for (const p of s.projectiles) {
+    if (p.delay > 0) { p.delay = Math.max(0, p.delay - dt); continue; }
     p.life -= dt;
     const target = s.enemies.find((e) => e.id === p.targetId && e.hp > 0);
     if (!target || p.life <= 0) { p.life = 0; continue; }

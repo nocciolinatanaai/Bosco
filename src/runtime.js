@@ -89,7 +89,7 @@ export function startRuntime($) {
     selected = id;
     const role = CLASSES.find((r) => r.id === id);
     document.querySelectorAll('[data-class]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.class === id)));
-    $('class-description').textContent = `${role.skill} — ${role.description}`;
+    $('class-description').textContent = `${role.skill} — ${role.description}${role.id === 'ranger' ? ' Risveglio: schiva un impatto e rispondi con un tiro doppio.' : ''}`;
   }
   document.querySelectorAll('[data-class]').forEach((b) => b.addEventListener('click', () => choose(b.dataset.class)));
   choose(selected); selection.showModal();
@@ -191,6 +191,8 @@ export function startRuntime($) {
         floatText(`−${event.amount}`, state.x, state.z, 'damage');
         if (!motionReduced()) { $('damage-flash').classList.remove('flash'); void $('damage-flash').offsetWidth; $('damage-flash').classList.add('flash'); }
       }
+      if (event.type === 'return-shot-ready') notice('TIRO DI RITORNO · Usa l’abilità entro 4 secondi per scoccare due frecce.', 4);
+      if (event.type === 'return-shot-fired') notice('TIRO DI RITORNO · Due frecce, una sola apertura.', 3);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
@@ -204,7 +206,7 @@ export function startRuntime($) {
       }
       if (event.type === 'evolved') {
         auraMat.opacity = .8; player.scale.setScalar(1.34);
-        notice('PASSO DI RISONANZA · Lo scatto ora colpisce e interrompe. Affronta il Custode.', 7);
+        notice(state.role.id === 'ranger' ? 'TIRO DI RITORNO · Evita un impatto con lo scatto, poi usa l’abilità per rispondere con due frecce.' : 'PASSO DI RISONANZA · Lo scatto ora colpisce e interrompe. Affronta il Custode.', 7);
       }
       if (event.type === 'defeated') { clearControls(); $('result-text').textContent = defeatMessage(state); result.showModal(); setPause(false); }
     }
@@ -231,6 +233,12 @@ export function startRuntime($) {
     $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
     $('skill').disabled = state.cooldown > 0 || state.status !== 'playing' || state.dodgeRemaining > 0 || state.skillBuffer > 0;
     $('skill').style.setProperty('--cooldown', `${Math.max(0, 1 - state.cooldown / state.role.cooldown) * 100}%`);
+    const returnReady = state.evolved && state.role.id === 'ranger' && state.returnShot > 0;
+    $('signature-status').hidden = !returnReady;
+    $('signature-status').textContent = returnReady ? `TIRO DI RITORNO · ${state.returnShot.toFixed(1)} s · usa l’abilità` : '';
+    $('skill').classList.toggle('return-ready', returnReady);
+    $('skill-name').textContent = returnReady ? 'Tiro di ritorno' : state.role.skill;
+    $('skill').setAttribute('aria-label', returnReady ? 'Tiro di ritorno. Usa l’abilità prima dello scadere per scoccare due frecce.' : `${state.role.skill}. Abilità di classe.`);
     $('skill-state').textContent = state.skillBuffer > 0 ? 'IN CODA' : state.cooldown > 0 ? `${state.cooldown.toFixed(1)} s` : 'PRONTA';
     $('dash').disabled = state.stamina < 30 || state.dashCooldown > 0 || state.status !== 'playing';
     $('dash-state').textContent = state.stamina < 30 ? 'POCO VIGORE' : state.dashCooldown > 0 ? `${state.dashCooldown.toFixed(1)} s` : '30 VIGORE';

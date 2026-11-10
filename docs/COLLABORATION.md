@@ -180,3 +180,17 @@ versionati aggiornati, zero errori/richieste esterne nei percorsi completi.
 Test rapido UI separato per la stringa corretta in ebe0d16, ripresa con autosave
 spento e cancellazione annullata; runner riutilizzabile test:checkpoints.
 Nessuna revisione di Tonino, migrazione o pubblicazione di produzione eseguita.
+
+
+## Incarico attivo — direzione e prima evoluzione specifica
+
+Codex, base bdd9454, 10 novembre. Proprietario chiede spazio ai giocatori e
+prosecuzione verso 35–40%, prima della revisione con Claude. La percentuale è
+una stima di prodotto, non un avanzamento misurabile ottenuto con documenti.
+Codex mantiene direzione e integrazione; Claude potrà implementare incarichi
+circoscritti e proporre/contestare, con revisione reciproca. Non è ancora collegato.
+
+Blocco attivo: Ranger, schivata di un impatto → finestra di tiro doppio;
+file combat/runtime/ui/visuals e test dedicati, documenti feedback e roadmap.
+Preservare scatto comune, sei classi, tappe locali e sequenza narrativa.
+Nessun incarico sovrapposto osservato. Nessuna produzione o spesa.

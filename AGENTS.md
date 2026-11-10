@@ -77,6 +77,13 @@ amministrative non sono necessarie per leggere il frontend pubblico.
 - A ogni consegna aggiornare `HANDOFF.md` con file, verifiche, limiti e prossimo passo.
 - Non eseguire contemporaneamente incarichi sugli stessi file o sulle stesse risorse.
 
+## Direzione e ascolto dei giocatori
+
+Il proprietario chiede prosecuzione verso il 35–40% e spazio alle richieste del
+pubblico: leggere ROADMAP_40.md e PLAYER_FEEDBACK.md in docs/. Non dichiarare
+questa stima raggiunta contando commit o test. Codex coordina e integra; Claude
+può implementare e contestare con prove. Nessun collegamento automatico alle chat.
+
 ## Checkpoint continuativi
 
 Il proprietario richiede commit periodici e aggiornamento dei file condivisi per

@@ -7,6 +7,7 @@ La main del vecchio sito è distinta: leggere il ramo giusto.
 ## Primo passaggio
 
 1. Leggi AGENTS.md, docs/IDEAS.md, HANDOFF.md e GAME_DESIGN.md.
+   Nuovo mandato: docs/ROADMAP_40.md e docs/PLAYER_FEEDBACK.md.
 2. Confronta il concept con le catture reali in docs/assets/prototype/.
 3. Leggi anche docs/AUDIO.md, docs/RPG_RESEARCH.md e docs/STORY_BIBLE.md, docs/MEMORY_TRAIL.md, docs/LIORA_PORTRAIT.md e docs/GRAPHICS_QUALITY.md e docs/LOCAL_CHECKPOINTS.md;
    separa prototipo e proposte successive. Leggi docs/PRODUCT_REVIEW.md e docs/CLAUDE_REVIEW.md: servono obiezioni e

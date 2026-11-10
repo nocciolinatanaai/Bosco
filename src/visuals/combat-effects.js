@@ -50,6 +50,7 @@ export function createCombatEffects(scene) {
       if (event.type === 'action-start' && event.kind === 'skill' && state.role.id === 'mage') ring(event.aimX, event.aimZ, 3.2, color, event.windup);
       if (event.type === 'dodge' && !reducedMotion) ring(event.x, event.z, .7, '#9bd7e9', .25);
       if (event.type === 'echo-burst') ring(event.x, event.z, event.radius, '#ffe0a0', .3);
+      if (event.type === 'return-shot-ready') ring(state.x, state.z, 1.4, '#d9f2a5', reducedMotion ? .15 : .4);
       if (event.type === 'evolved') ring(state.x, state.z, 5, '#ffe0a0', .8);
     },
     update(dt, state) {
@@ -64,12 +65,13 @@ export function createCombatEffects(scene) {
         let view = projectiles.get(p.id);
         if (!view) {
           view = new THREE.Group();
-          const material = new THREE.MeshBasicMaterial({ color: state.role.color });
+          const material = new THREE.MeshBasicMaterial({ color: p.echo ? '#ffe3a0' : state.role.color });
           const shaft = new THREE.Mesh(new THREE.CylinderGeometry(.025, .025, p.style === 'bow' ? .85 : .4, 6), material);
           shaft.rotation.x = Math.PI / 2; view.add(shaft);
           const tip = new THREE.Mesh(new THREE.OctahedronGeometry(p.style === 'bow' ? .07 : .14), material.clone());
           tip.position.z = .25; view.add(tip); scene.add(view); projectiles.set(p.id, view);
         }
+        view.visible = !(p.delay > 0);
         view.position.set(p.x, 1.35, p.z);
         const enemy = state.enemies.find((e) => e.id === p.targetId);
         if (enemy) view.rotation.y = Math.atan2(enemy.x - p.x, enemy.z - p.z);
