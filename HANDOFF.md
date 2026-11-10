@@ -5,7 +5,47 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
-### Ultimo intervento: qualità grafica e controlli alla rotazione
+### Checkpoint in corso: pista interattiva e ritratto di Liora
+
+10 novembre 2026, Codex. Prosecuzione autonoma sul ramo condiviso, base e732810
+(qualità grafica già pubblicata). Nessun incarico sovrapposto osservato,
+nessun merge/deploy, spesa o operazione di produzione.
+
+Il sentiero ora ospita tre segni ordinati, visibili dopo il Custode e attivabili
+con lo scatto evoluto da vicino. Percorso illuminato progressivamente e nuova
+pista Cartiglio; conclusione unica, nessuna ricompensa economica o persistenza.
+Pulsante/F per raggiungere il segno col normale movimento; da vicino lo stesso
+pulsante può far risuonare il segno spendendo vigore. Il movimento manuale o la
+pausa interrompono la navigazione. Non è una nuova regione in streaming.
+
+File: trail.js, visuals/memory-trail.js, combat.js, journey.js, runtime.js, ui.js,
+style.css, mappatura audio e test trail/journey/browser. Specifiche e limiti
+in MEMORY_TRAIL.md; aggiornata la distinzione fra storia proposta e prototipo.
+
+Verifiche locali: 60 test superati. Prima prova browser con tracce completata
+su desktop/mobile, inclusi qualità, audio, vittoria, sconfitta e riprova.
+Build dopo l’illustrazione circa 680 kB JS / 180 kB gzip, warning >500 kB
+presente. Dopo la ripresa non è recuperabile l’esito terminale del processo
+finale: sono presenti catture fino alla sconfitta mobile, ma non vengono usate
+come prova di successo completo. Rieseguire il runner con il nuovo rapporto
+persistente test-results/browser-report.json prima di segnare il blocco verificato. Nessuna validazione con persone,
+nessuna prova hardware iPhone. Non descrivere tre segni come un mondo vasto.
+
+Aggiunta successiva nella stessa consegna: ritratto originale generato con
+image_gen, caricato soltanto alla prima memoria, con focus sul titolo e
+fallback al testo. PNG circa 2,4 MB: peso non ancora ottimizzato, richiesta
+assente nella selezione iniziale. Non è un modello 3D. Provenienza e hash in
+public/art/README.md, limiti in LIORA_PORTRAIT.md. Barra Chiudi del pannello
+informazioni resa persistente allo scroll. Nessun asset acquistato o video social.
+
+Checkpoint richiesto dal proprietario: commit/push periodici prima di verifiche
+lunghe, con stato reale in questi file. Aggiunto al runner un rapporto JSON
+atomico con esito per viewport e hash della build/ritratto/runner, per evitare
+che una ripresa perda l’unica evidenza del risultato. Prossimo passo immediato:
+ripetere la verifica finale, registrare il rapporto e condividere il checkpoint
+verificato. Stato parziale esplicito; nessun deploy.
+
+### Intervento precedente: qualità grafica e controlli alla rotazione
 
 10 novembre 2026, Codex. Prosecuzione autonoma richiesta dal proprietario.
 Base 96a6466: audio, ricerca e feedback di sconfitta già pubblicati sul ramo

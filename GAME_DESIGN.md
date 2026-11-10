@@ -257,3 +257,12 @@ sulla cancellazione dei ricordi e arco iniziale. Soltanto il primo frammento
 è nel prototipo; i capitoli successivi non sono contenuti già disponibili.
 Effetti sonori originali opzionali e riepilogo della causa di sconfitta aggiunti
 per rendere più chiaro il combattimento (docs/AUDIO.md).
+
+Il sentiero esistente ora contiene tre tracce attivabili con lo scatto di
+risonanza (docs/MEMORY_TRAIL.md). Una breve pista introduce il marchio Cartiglio.
+Questo prova l’uso del potere fuori dal combattimento: non è una nuova regione,
+una gilda online o la realizzazione del mondo grande.
+
+Primo ritratto illustrato originale di Liora nelle scene di memoria; asset generato
+con image_gen e provenienza versionata (docs/LIORA_PORTRAIT.md). Non è il suo
+modello 3D, il cast finale o la resa già raggiunta per tutti i personaggi.

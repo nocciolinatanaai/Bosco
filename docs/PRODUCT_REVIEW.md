@@ -25,9 +25,9 @@ che il pubblico torni, né che le sei classi siano bilanciate.
 | Prima bozza audio sintetica implementata (AUDIO.md), qualità non validata | Impatti e avvisi ora hanno anche feedback sonoro opzionale | Ascolto su dispositivi reali e revisione dei livelli prima del sound design finale |
 | Boss con sole due mosse, mostri con comportamento quasi uguale | Si può imparare rapidamente tutto il contenuto | Prova umana per capire quando servono nuove decisioni, senza aggiungere subito statistiche |
 | Vittoria automatica verificata soprattutto col Ranger | Non conosciamo il valore relativo dei kit o del kiting | Confronto controllato di tutte le classi e prova reale; nessun nerf basato soltanto sul bot |
-| Ricordo raccontato in una finestra di testo | Liora può restare una spiegazione invece di un personaggio memorabile | Una breve azione/scena che faccia percepire il suo carattere prima del testo |
+| Ricordo raccontato in una finestra di testo | Liora può restare una spiegazione invece di un personaggio memorabile | Pista interattiva e ritratto ora presenti: osservare se fanno percepire il suo carattere, poi rifinire la scena |
 | Evoluzione comune e assenza di sinergie reali | Crescita ancora limitata rispetto alla promessa RPG | Una trasformazione specifica di classe e una sinergia simulata, con prima/dopo confrontabile |
-| Arena e sentiero circoscritti | Non soddisfano ancora la richiesta di mondo grande | Due aree con contenuti diversi e passaggio senza perdita di stato; poi streaming |
+| Arena e sentiero con prima pista interattiva (MEMORY_TRAIL.md), ancora circoscritti | Non soddisfano ancora la richiesta di mondo grande | Due aree con contenuti diversi e passaggio senza perdita di stato; poi streaming |
 | Modalità Leggera/Bilanciata/Alta presenti, ma nessuna prova hardware reale e motore in chunk >500 kB | Non sappiamo tempi di caricamento, fluidità, calore o ergonomia effettivi | Dispositivi concordati, frame time e rete dichiarati; qualità adattabile sulla base dei dati |
 | Nessun backend autorevole o cooperativa | Non esistono ancora gilde giocabili | Due client in staging sintetico, riconnessione e premio unico, prima di annunciarli |
 

@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { activeTrace, TRACE_RADIUS } from './trail.js';
+import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
@@ -20,8 +22,9 @@ export function startRuntime($) {
   $('audio-option').addEventListener('change', () => { void audio.setEnabled($('audio-option').checked); });
   $('audio-volume').addEventListener('input', () => audio.setVolume(Number($('audio-volume').value) / 100));
   window.addEventListener('pagehide', () => { void audio.setPaused(true); });
-  let memoryKind = null, lastGuide = null;
+  let memoryKind = null, lastGuide = null, portraitFailed = false;
   const memory = $('memory');
+  $('liora-portrait').addEventListener('error', () => { portraitFailed = true; $('liora-portrait').hidden = true; $('liora-frame').hidden = true; memory.classList.remove('with-portrait'); });
   let selected = 'fighter', state = null, paused = false, pausedBeforeInfo = false;
   let target = null, approachId = null, heldAttack = false, pointerId = null;
   let stick = { x: 0, y: 0 }, dpad = false, motionOverride = false;
@@ -60,7 +63,7 @@ export function startRuntime($) {
     $('info-title').textContent = title; $('info-body').textContent = body;
     $('input-options').hidden = !controls; info.showModal();
   };
-  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Esc mette in pausa.', true));
+  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
   $('guild').addEventListener('click', () => showInfo('Una storia da costruire insieme', 'Gilde, contributi asincroni e spedizioni cooperative fanno parte del design approvato. Questa prova è esclusivamente individuale: nessun altro giocatore è collegato.'));
   $('store').addEventListener('click', () => showInfo('Store Mythwood', 'Store chiuso durante il prototipo. Nessun prodotto, codice o pagamento attivo. Il catalogo precedente non viene caricato.'));
   $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie o memoria persistente, non invia telemetria e non contatta Supabase. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
@@ -75,7 +78,12 @@ export function startRuntime($) {
   function showMemory(kind) {
     memoryKind = kind; const text = MEMORY[kind];
     $('memory-title').textContent = text.title; $('memory-body').textContent = text.body; $('memory-continue').textContent = text.button;
-    setPause(true); memory.showModal();
+    if (!portraitFailed) {
+      const portrait = $('liora-portrait');
+      if (!portrait.getAttribute('src')) portrait.src = `${import.meta.env.BASE_URL}art/liora-portrait.png`;
+      portrait.hidden = false; $('liora-frame').hidden = false; memory.classList.add('with-portrait');
+    }
+    setPause(true); memory.showModal(); $('memory-title').focus({ preventScroll: true }); memory.scrollTop = 0;
   }
   selection.addEventListener('cancel', (e) => e.preventDefault());
   result.addEventListener('cancel', (e) => e.preventDefault());
@@ -92,7 +100,7 @@ export function startRuntime($) {
     $('quest-toggle').setAttribute('aria-expanded', String(expanded)); $('quest-details').hidden = !expanded;
     document.body.classList.toggle('quest-expanded', expanded);
   };
-  expandQuest(innerWidth > 700);
+  expandQuest(innerWidth > 700 && innerHeight > 560);
   $('quest-toggle').addEventListener('click', () => expandQuest($('quest-toggle').getAttribute('aria-expanded') !== 'true'));
 
   let renderer;
@@ -105,7 +113,7 @@ export function startRuntime($) {
   const art = createArtWorld(renderer), { scene, player, aura, auraMat } = art;
   const camera = new THREE.PerspectiveCamera(55, 1, .1, 160), focus = new THREE.Vector3(0, 1, -2);
   camera.position.set(11, 13, 20); camera.lookAt(focus);
-  const pipeline = createPipeline(renderer, scene, camera), effects = createCombatEffects(scene);
+  const pipeline = createPipeline(renderer, scene, camera), effects = createCombatEffects(scene), trailView = createMemoryTrail(scene);
   const enemyViews = new Map(), labels = new Map(), floats = [];
   const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), ray = new THREE.Raycaster(), pointer = new THREE.Vector2(), hit = new THREE.Vector3();
   const offset = new THREE.Vector3(), desired = new THREE.Vector3(), projected = new THREE.Vector3();
@@ -134,6 +142,10 @@ export function startRuntime($) {
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
+      if (event.type === 'trail-progress') {
+        notice(`${event.count} / 3 · ${event.name}`, 4);
+        if (event.complete) showMemory('trail');
+      }
       if (event.type === 'resonance-ready') showMemory('resonance');
       if (event.type === 'cleared') {
         clearControls(); showMemory('complete');
@@ -150,7 +162,12 @@ export function startRuntime($) {
     if (!state) return;
     const guide = journey(state);
     $('quest-title').textContent = guide.title; $('journey-hint').textContent = guide.hint;
-    $('objective').textContent = state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+    const trace = activeTrace(state);
+    $('follow-trail').hidden = !trace;
+    const traceNear = trace && Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS;
+    $('follow-trail').disabled = Boolean(traceNear && (state.stamina < 30 || state.dashCooldown > 0));
+    if (trace) $('follow-trail').textContent = traceNear ? 'Risuona con lo scatto · 30 vigore' : 'Raggiungi la prossima traccia';
+    $('objective').textContent = state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
     if (guide.id !== lastGuide) {
       lastGuide = guide.id;
       if (!memory.open) notice(guide.hint, 6);
@@ -159,7 +176,7 @@ export function startRuntime($) {
     $('stamina').value = state.stamina; $('stamina-text').textContent = `${Math.floor(state.stamina)} / 100`;
     const current = selectedEnemy(state, 18);
     const inReach = current && Math.hypot(current.x - state.x, current.z - state.z) <= state.role.basicRange * (state.evolved ? 1.2 : 1);
-    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : 'Tocca un nemico per selezionarlo';
+    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
     $('skill').disabled = state.cooldown > 0 || state.status !== 'playing' || state.dodgeRemaining > 0 || state.skillBuffer > 0;
     $('skill').style.setProperty('--cooldown', `${Math.max(0, 1 - state.cooldown / state.role.cooldown) * 100}%`);
     $('skill-state').textContent = state.skillBuffer > 0 ? 'IN CODA' : state.cooldown > 0 ? `${state.cooldown.toFixed(1)} s` : 'PRONTA';
@@ -210,6 +227,12 @@ export function startRuntime($) {
   });
   for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) $('attack').addEventListener(name, () => { heldAttack = false; });
   $('attack').addEventListener('click', (event) => { if (event.detail === 0) primary(); });
+  $('follow-trail').addEventListener('click', () => {
+    if (!active()) return; const trace = activeTrace(state); if (!trace) return;
+    if (Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS) dash();
+    else { clearControls(); target = { x: trace.x, z: trace.z }; }
+    $('world').focus({ preventScroll: true });
+  });
   $('skill').addEventListener('click', skill); $('dash').addEventListener('click', dash);
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
 
@@ -275,6 +298,7 @@ export function startRuntime($) {
       if (event.code === 'KeyQ') skill();
       if (event.code === 'Space') dash();
       if (event.code === 'KeyE') $('evolve').click();
+      if (event.code === 'KeyF' && !$('follow-trail').hidden) $('follow-trail').click();
     }
   });
   document.addEventListener('keyup', (event) => keys.delete(event.code));
@@ -307,7 +331,7 @@ export function startRuntime($) {
     resize();
   }
   $('quality-select').addEventListener('change', () => setGraphics($('quality-select').value));
-  window.addEventListener('resize', () => { clearControls(); setGraphics(graphics.id); });
+  window.addEventListener('resize', () => { clearControls(); if (innerHeight <= 560) expandQuest(false); setGraphics(graphics.id); });
   setGraphics(graphics.id);
   let then = performance.now();
   const fixedStep = 1 / 60;
@@ -375,6 +399,7 @@ export function startRuntime($) {
       desired.set(state.x, 1, state.z - (narrow ? 2 : 3));
       focus.lerp(desired, motionReduced() ? 1 : 1 - Math.exp(-delta * 3)); camera.position.copy(focus).add(offset); camera.lookAt(focus);
     }
+    trailView.update(state, state?.time || 0, motionReduced());
     const visualDelta = active() ? delta : 0;
     effects.update(visualDelta, state);
     for (let i = floats.length - 1; i >= 0; i--) {

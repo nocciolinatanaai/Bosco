@@ -75,6 +75,16 @@ amministrative non sono necessarie per leggere il frontend pubblico.
 - A ogni consegna aggiornare `HANDOFF.md` con file, verifiche, limiti e prossimo passo.
 - Non eseguire contemporaneamente incarichi sugli stessi file o sulle stesse risorse.
 
+## Checkpoint continuativi
+
+Il proprietario richiede commit periodici e aggiornamento dei file condivisi per
+non perdere lavoro o contesto quando una sessione raggiunge un limite. Sul ramo
+di collaborazione: checkpoint a ogni blocco funzionale e prima di verifiche
+lunghe; aggiornare HANDOFF e COLLABORATION, fare commit/push e verificarne l’esito.
+Se il lavoro è parziale, chiamarlo checkpoint e dichiarare esattamente i test
+pendenti. Non attendere la fine dell’intero progetto per condividere i progressi.
+Questo non autorizza merge su main, deploy o scritture su produzione.
+
 ## Verifiche correnti
 
 `npm test`: regole di gioco e PostgreSQL WASM con dati sintetici.

@@ -30,7 +30,8 @@ narrativa a una modifica dei comandi utilizzabile subito.
    per interromperlo. È comune alle sei classi, non sei evoluzioni complete.
 6. La sconfitta del Custode conclude il breve frammento: il guardiano impediva
    alla voce di uscire; una gilda cancellata dalle mappe apre la prossima pista.
-   Il giocatore può riprendere ed esplorare il sentiero orientale già presente.
+   Il giocatore può riprendere ed esplorare il sentiero orientale già presente;
+   tre tracce attivabili con la risonanza ricostruiscono una pista (MEMORY_TRAIL.md).
 
 Testi in src/journey.js; regole in combat.js; finestre/guida in ui.js e runtime.js;
 effetto dell’impulso in visuals/combat-effects.js. Il dialogo non usa HTML remoto.

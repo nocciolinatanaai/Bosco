@@ -108,3 +108,10 @@ Tre modalità grafiche implementate con limiti di risoluzione, ombre e bloom;
 i segnali funzionali restano attivi. La riduzione dei buffer viene verificata
 nel browser; FPS e consumi sui dispositivi reali non sono ancora misurati.
 GRAPHICS_QUALITY.md raccoglie specifiche e prova successiva richiesta.
+
+## Pista di Liora — avanzamento dell’esplorazione
+
+W01/C04 parziali: il sentiero esistente contiene tre tracce in sequenza, potere
+riutilizzato fuori dal combattimento, navigazione assistita interrompibile e
+breve conclusione Cartiglio. Non è streaming o seconda regione. Verificare con
+persone se la scoperta è comprensibile e appagante prima di moltiplicare i segni.

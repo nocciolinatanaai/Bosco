@@ -1,7 +1,8 @@
 # Mythwood — proposta narrativa da discutere
 
 10 novembre 2026, Codex. **Proposta creativa**, da confrontare con Tonino e con
-il proprietario. Solo il frammento di Liora in EPISODE_01.md è già nel prototipo.
+il proprietario. Il frammento di Liora in EPISODE_01.md e la pista in MEMORY_TRAIL.md sono
+già nel prototipo.
 Luoghi, personaggi e capitoli aggiunti qui non sono contenuti implementati.
 
 ## Promessa
@@ -52,12 +53,14 @@ chiarezza vanno provati prima di sviluppare la sequenza completa.
 | Il nome sulla soglia — proposto | Riunire testimonianze e aprire una spedizione dichiaratamente cooperativa | La gilda responsabile teme che ricordare apra di nuovo la frattura | Contributi asincroni e missione di squadra, solo dopo la prova tecnica multi-client |
 
 Ogni frammento deve chiudere una cosa comprensibile e lasciare una domanda
-precisa. La gilda rivale può ostacolare e aiutare in circostanze differenti;
+precisa. La pista giocabile introduce Cartiglio come gilda che certificava mappe;
+ruolo politico e rivalità restano proposte. La gilda rivale può ostacolare e aiutare in circostanze differenti;
 la rivalità narrativa non impone PvP o una classifica.
 
 ## Come tradurlo in sviluppo sostenibile
 
-Prima una scena giocabile e una silhouette di Liora; poi valutare il carattere
+Primo ritratto illustrato integrato nelle memorie (LIORA_PORTRAIT.md);
+resta da validare insieme alla scena e al futuro modello di Liora; poi valutare il carattere
 con azioni e dialoghi brevi. Nessuna promessa di cast interamente doppiato o
 ramificazioni estese. Distinguere personaggio da classe: sei ruoli di riferimento
 non obbligano a sei persone per una missione e non sostituiscono le biografie.

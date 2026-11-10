@@ -31,7 +31,8 @@ Libera i due echi, accogli il ricordo e prova il nuovo scatto offensivo contro
 il Custode. Frattura segna il tuo punto; Onda richiede di allontanarsi dal boss
 o interromperlo. Il risveglio avviene prima del boss, non dopo la vittoria finale.
 Il sentiero orientale è un'estensione della stessa scena: non è ancora streaming
-fra regioni. Esc o Pausa fermano il combattimento. Effetti sonori opzionali alla selezione;
+fra regioni. Dopo il Custode, segui le tre tracce luminose e falle risuonare
+con lo scatto; pulsante nella missione o F aiutano a raggiungerle. Esc o Pausa fermano il combattimento. Effetti sonori opzionali alla selezione;
 volume, mute e qualità grafica in Comandi e audio. La modalità Leggera mantiene
 i segnali del combattimento e riduce il carico del rendering. Dettagli in [docs/COMBAT_UX.md](docs/COMBAT_UX.md) e [docs/EPISODE_01.md](docs/EPISODE_01.md).
 

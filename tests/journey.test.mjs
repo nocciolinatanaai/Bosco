@@ -10,6 +10,6 @@ test('guida segue azioni reali, risveglio e conclusione senza bloccare controlli
   s.enemies[0].hp = 0; assert.equal(journey(s).id, 'echoes');
   s.enemies[1].hp = 0; assert.equal(journey(s).id, 'resonance');
   evolve(s); assert.equal(journey(s).id, 'guardian'); s.cleared = true;
-  assert.equal(journey(s).id, 'complete'); assert.ok(MEMORY.resonance.body.includes('Liora'));
+  assert.equal(journey(s).id, 'trail'); s.trail.complete = true; assert.equal(journey(s).id, 'complete'); assert.ok(MEMORY.resonance.body.includes('Liora'));
   assert.equal(journey(createSession('fighter')).id, 'move');
 });

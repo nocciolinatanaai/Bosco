@@ -129,3 +129,22 @@ Avanzamento autonomo successivo: grafica configurabile (GRAPHICS_QUALITY.md).
 Profili espliciti, nessun adattamento automatico o valore FPS dichiarato.
 Nessuna modifica concorrente di Tonino osservata; il ramo remoto è stato
 recuperato senza sostituire la main o il sito pubblicato.
+
+Avanzamento successivo: pista giocabile di Liora sul sentiero esistente.
+MEMORY_TRAIL.md descrive sequenza, confini e prove. Il nome Cartiglio è introdotto
+come indizio nel prototipo; gilda rivale e cooperativa non sono implementate.
+Tutti i cambiamenti restano nel ramo di collaborazione, senza deploy.
+
+Primo ritratto illustrato di Liora generato e integrato nelle memorie: provenienza
+in public/art/README.md e limiti in LIORA_PORTRAIT.md. Non sostituisce il futuro
+modello 3D. Confrontare stile e leggibilità; non considerarlo approvato dal
+proprietario per il solo fatto che Codex lo ha introdotto autonomamente.
+
+## Checkpoint prima dei limiti di sessione
+
+Richiesta esplicita del proprietario: commit e aggiornamento periodico dei file
+condivisi. Codex salva questo blocco come checkpoint, dichiarando la verifica
+browser finale da ripetere dopo la ripresa. Un nuovo rapporto JSON atomico nel
+runner conserva esiti per viewport e hash anche se si perde l’output del processo.
+Aggiornare successivamente questo registro con il risultato effettivo; non
+inferire un test superato dalla sola presenza di screenshot.

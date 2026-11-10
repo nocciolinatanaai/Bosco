@@ -1,4 +1,5 @@
 import { CLASSES } from './roles.js';
+import { createTrail, resonateTrail } from './trail.js';
 import { prepareEnemyAttack } from './enemy-attacks.js';
 
 const clamp = (n, low, high) => Math.min(high, Math.max(low, n));
@@ -22,7 +23,7 @@ export function createSession(id) {
     cooldown: 0, dashCooldown: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
     evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
-    lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null,
+    lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null, trail: createTrail(),
     time: 0, sequence: 0, events: [], targetId: null, projectiles: [],
     enemies: [enemy('shade-a', 'Eco errante', -5, 2, 52, false, 1.3), enemy('shade-b', 'Eco corazzato', 6, -1, 65, false, 1.8),
       enemy('guardian', 'Il Custode Vuoto', 0, -9, 280, true, 2.2)] };
@@ -108,6 +109,8 @@ export function dodge(s, dx = s.facing.x, dz = s.facing.z) {
     emit(s, 'echo-burst', { x: s.x, z: s.z, radius: 3.2 });
     for (const enemy of s.enemies) if (!enemy.sealed && distance(s, enemy) <= 3.2) hit(s, enemy, 18, .35);
   }
+  const trace = resonateTrail(s);
+  if (trace) emit(s, 'trail-progress', trace);
   emit(s, 'dodge', { x: s.x, z: s.z, direction: { ...s.dodgeDirection } });
   return true;
 }
