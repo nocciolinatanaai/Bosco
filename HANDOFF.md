@@ -3,11 +3,191 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Stato aggiornato della ricostruzione locale
+
+### Ultimo intervento: pubblicazione della base condivisa
+
+10 novembre 2026, Codex. Nuovo mandato esplicito del proprietario: caricare
+codice, documenti e tutte le idee nella repository condivisa e proseguire
+in autonomia con valutazioni e miglioramenti motivati.
+
+Destinazione: ramo mythwood/collaboration-base in nocciolinatanaai/Bosco,
+separato da main, verificata ancora sul commit ac9039e. Preparati START_HERE,
+IDEAS e PRODUCT_REVIEW, collegati da README e prompt di rientro. Catture reali
+del prototipo in docs/assets/prototype, separate dal concept. Il vecchio kit
+social resta ritirato; anche lo script di cattura ora si arresta prima di avviare
+un browser. Aggiunto workflow GitHub per test/build, senza deploy.
+
+Controllo preliminare di 63 file testuali prima delle nuove aggiunte: nessuna
+corrispondenza ai pattern di chiavi private, token provider/GitHub/AWS o JWT.
+Non è una certificazione di assenza di segreti. node_modules, dist, cache,
+.env, registrazioni e test-results sono esclusi da Git; nessun video ritirato
+viene caricato. Il pacchetto della precedente consegna resta storico.
+
+Stato del caricamento: preparazione locale; registrare commit e riferimento
+remoto verificato prima di dichiarare pubblicazione. I 45 test e le prove browser
+dell’ultima build sono descritti sotto. CI remota non ancora osservata.
+
+Nessun merge/deploy, SQL online, spesa o messaggio social. START_HERE invita
+Tonino a leggere e rispondere in TONINO_REVIEW.md; nessuna risposta ricevuta.
+
+### Intervento precedente: due attacchi del Custode e base di revisione
+
+10 novembre 2026, Codex. Mandato: proseguire e preparare una base per il rientro
+previsto di Claude. Stato iniziale: modifiche locali dopo a395223 mantenute.
+Nessun nuovo commit, push, deploy, SQL online, acquisto o pubblicazione social.
+
+Implementate Frattura e Onda del sigillo: centro mirato al giocatore oppure al
+Custode, preparazioni/raggi/danni/recuperi distinti e alternanza deterministica.
+Cerchi unitari scalati al raggio reale; Onda ha doppio contorno, posa a due braccia,
+nome e istruzione HUD. Scatto evoluto può interrompere entrambe da vicino.
+Specifiche in docs/GUARDIAN.md. File: enemy-attacks.js, combat.js, telegraph.js,
+environment.js, actors.js, runtime.js e combat-effects.js; guardian.test.mjs e
+runner browser. Nessun cambiamento al sigillo o alla sequenza dell’episodio.
+
+Verifiche: 45 test superati; build riuscita, circa 664 kB JS minificati / 174 kB
+gzip. Warning chunk >500 kB aperto. Browser finale superato: desktop 1440×900,
+mobile 390×844 e disposizione landscape 844×390. Su entrambe le dimensioni
+verificate sequenza narrativa, Frattura, Onda e vittoria sul Custode con Ranger,
+oltre a controlli/pausa; nessun errore JS, richiesta esterna o dato persistente
+osservato. Non è un collaudo del bilanciamento o di hardware iPhone.
+
+Pacchetto aggiornato: /workspace/artifacts/mythwood-guardian-review/ contiene
+mythwood-guardian-handoff.zip (sorgenti, test e file comuni), build, manifest
+con hash e catture delle due mosse. Il pacchetto dell’episodio precedente resta
+una consegna storica; usare questa per la revisione del Custode.
+
+Preparato docs/CLAUDE_REVIEW.md: obiezioni richieste su storia, trasformazione,
+boss, classi, grafica e inventario legacy. Tonino dovrebbe rispondere in
+TONINO_REVIEW.md prima di incarichi sovrapposti. Il documento è una richiesta,
+non una revisione ricevuta; non esiste collegamento automatico fra le chat.
+Aggiornati AGENTS, design, backlog, collaborazione, episodio e prompt di rientro.
+
+### Intervento precedente: guida, ricordo e prima evoluzione giocabile
+
+10 novembre 2026, Codex. Mandato: proseguire i prossimi step e aggiornare i file
+comuni. Checkout a partire dal commit a395223 con modifiche locali preesistenti
+preservate; nessun nuovo commit, push, deploy, SQL di produzione o spesa.
+
+Implementato: guida per movimento/attacco/schivata/apertura basata sulle azioni,
+Custode inizialmente sigillato e immune, ricordo di Liora dopo i due echi,
+risveglio unico e scatto con impulso offensivo al punto di partenza; subito dopo
+il Custode diventa attivo. Breve conclusione narrativa alla sua sconfitta. Trama
+proposta, non canone approvato. Specifiche in docs/EPISODE_01.md. HUD aggiornato
+con indicazione di portata: nome visibile non significa attacco già in raggio.
+
+File: src/journey.js, combat.js, game.js, runtime.js, ui.js, style.css e
+visuals/combat-effects.js; test game/journey e runner browser. Aggiornati AGENTS,
+README, GAME_DESIGN, BACKLOG, COLLABORATION, COMBAT_UX e prompt di rientro Claude.
+Verifiche della logica: 39 test superati. Build riuscita, circa 663 kB JS
+minificati / 174 kB gzip; warning chunk >500 kB presente. Browser finale
+superato: desktop 1440×900 e mobile 390×844, disposizione landscape 844×390.
+Percorso reale con Ranger fino alla vittoria sul Custode e chiusura della scena,
+oltre a controlli touch, pausa, assenza di richieste esterne e persistenza.
+Nessun errore JS osservato. Non è una prova di bilanciamento delle sei classi
+o di fluidità su hardware iPhone.
+
+Catture e build in /workspace/artifacts/mythwood-episode-01/; pacchetto sorgente
+mythwood-episode-handoff.zip include i file comuni aggiornati, codice e test.
+La prima prova della conclusione è scaduta perché il percorso automatico si
+fermava fuori portata: runner corretto e HUD reso esplicito. Nessun valore di
+salute/danno del Custode è stato cambiato per ottenere la vittoria del test.
+
+Prossimo passo: diversificare gli attacchi del Custode e validare comprensione
+e uso dello scatto con persone. Mancano audio, resa artistica finale, mondo
+vasto, backend e cooperazione. Nessuno scambio diretto con Tonino ricevuto;
+file locali aggiornati non implicano sincronizzazione con il suo checkout.
+
+### Intervento precedente: combattimento, animazioni e UX
+
+Mandato del proprietario: gameplay, animazioni dei combattimenti, comandi e UX.
+Codex ha lavorato da solo nel checkout esistente, dopo il commit locale a395223;
+le modifiche di codice preesistenti sono state mantenute. Nessun contatto con
+Tonino simulato, nessun acquisto, commit aggiuntivo, push, deploy o operazione SQL.
+
+Regole in src/combat.js e roles.js; input in controls.js; DOM in ui.js e runtime
+in runtime.js. Attacco base con combo a tre colpi, preparazione/impatto/recupero,
+abilità separate e accodabili durante il colpo base, proiettili con viaggio,
+scatto con vigore e invulnerabilità limitata. Nemici con mira fissata alla carica,
+cerchio del raggio effettivo, recupero e interruzione. Pose articolate per lama,
+doppie lame, scudo, arco e magia; effetti temporanei limitati e ripuliti.
+
+Joystick analogico con cattura, comandi simultanei a due dita, alternativa con
+frecce, movimento rispetto alla camera, pausa automatica e azzeramento dei
+comandi su interruzioni. Vita/vigore, bersaglio, cooldown numerici e fasi boss;
+missione comprimibile, impostazione movimento ridotto, sconfitta/riprova.
+Corretto un problema osservato nei test: pannelli informativi consecutivi
+potevano preservare erroneamente la pausa. Corrette etichette che debordavano
+dai pulsanti in landscape. Dettagli, tempi e limiti in docs/COMBAT_UX.md.
+
+Verifiche: npm test, 34 test superati, zero fallimenti. Build riuscita; chunk
+JS circa 659 kB minificati / 172 kB gzip, warning oltre 500 kB ancora presente.
+Browser finale superato: desktop 1440×900, mobile 390×844 con due dita e
+landscape 844×390. Nessun errore JS, richiesta esterna o dato persistente nei
+controlli. Catture in test-results/ e copia con ZIP build e hash in
+/workspace/artifacts/mythwood-combat-study/.
+Chromium usa rendering software: nessuna misura di fluidità o prova Safari su
+iPhone fisico, nessun test umano di divertimento/bilanciamento.
+
+La scena conserva lo studio visivo precedente: arcate, vegetazione, portale,
+materiali originali procedurali e illuminazione/bloom. La resa è ancora distante
+dal concept; queste pose non sono animazioni artistiche definitive. Kit social
+precedente ritirato, marcato DO NOT PUBLISH: non riutilizzarlo. Nessun nuovo reel.
+Asset ambientCG non scaricato: dominio acg-download.struffelproductions.com
+ancora non abilitato nell’attuale policy osservata. Mappe correnti procedurali.
+
+Il checkout avvia ora un prototipo Vite/Three.js da src/, non il vecchio
+caricatore Supabase. Quel caricatore è conservato come testo in legacy/.
+Sei classi, movimento desktop/touch, abilità, attacchi anticipati, tre nemici,
+pausa e primo risveglio. Nessun multiplayer, grande mondo in streaming, backend,
+account, persistenza, telemetria o pagamento. Geometrie segnaposto: non è la
+qualità visiva del mockup. Nessuna modifica al servizio online.
+
+La suite npm test include regole del prototipo e PostgreSQL WASM con pgcrypto.
+Riprodotto il bypass NULL del login originale; proposta SQL locale testata in
+database/proposals/, non eseguita in produzione. **Ritirato PAY-01**: la diagnosi
+FOUND era errata e i test del codice acquisti originale la smentiscono.
+
+Nuovi documenti: SECURITY.md, docs/EU_READINESS.md e docs/PEER_REVIEW.md.
+Aggiornamento rete: raggiunte fonti UE/Garante, AI Act consolidato al 27 luglio
+2026 e direttiva consumatori consolidata al 27 settembre 2026; lettura mirata
+registrata in EU_READINESS.md e docs/research/. Applicabilità e attuazione italiana
+restano da verificare: nessuna attestazione di conformità. Domande di revisione
+preparate, nessuna risposta di Tonino ricevuta.
+Concept approvato conservato in docs/assets/, distinto dalle catture reali.
+
+Ultima consegna: docs/CLAUDE_RESTART_PROMPT.md contiene il prompt di rientro;
+docs/SOCIAL_CONNECTIONS.md descrive il riuso delle API Meta/TikTok già usate da
+Tonino secondo il proprietario. App, account esatti, scope, audit, refresh e
+scheduler restano da recuperare. Le regole TikTok lette limitano Direct Post
+non approvato e utility interne: non promettere pubblicazione pubblica automatica
+senza verificare l'integrazione effettiva. Nessun token social presente qui.
+
+Storico, RITIRATO: primo kit editoriale in social/launch-kit/ e una bozza video
+verticale locale di 16,2 s in /workspace/artifacts/mythwood-social-kit/.
+Concept etichettato e cattura periodica reale del prototipo, senza musica terza.
+Non pubblicare né rigenerare questo kit. Nessun post o commento inviato.
+
+Tutte le modifiche successive ad a395223 sono locali, non committate né inviate.
+Avvio e verifiche aggiornati in README.md. Non usare le istruzioni storiche di
+hosting statico per eseguire i moduli npm non compilati.
+
+Esito storico della prima ricostruzione (superato dalle verifiche sopra): npm test riportava 20 test superati e zero fallimenti;
+browser desktop 1440×900 e mobile 390×844 superati con Chromium software,
+incluse assenza di richieste remote/persistenza e conservazione della pausa.
+npm run build riuscito; avviso chunk >500 kB, ancora da ottimizzare. npm audit
+riporta zero vulnerabilità note nelle dipendenze al momento della verifica.
+Non sono prove di prestazioni hardware reali né certificazioni di sicurezza.
+
 ## Mandato corrente
 
 Il proprietario ha autorizzato documenti di collaborazione e preparazione del
-progetto e, successivamente, il loro commit locale. Questa consegna non autorizza
-modifiche al gioco, SQL di produzione, push, pubblicazione social, deploy o spese.
+progetto e, successivamente, il loro commit locale. Ha poi richiesto la riscrittura
+del gioco e dello store come Mythwood. Preparazione locale autorizzata; nessun
+mandato operativo per SQL di produzione, push, deploy o spese. Aggiornamento:
+autorizzati post e commenti organici autonomi sui canali Instagram/TikTok del
+progetto, senza approvazione per contenuto; account dichiarati professionali.
+Nessuno strumento di pubblicazione collegato e nessuna pubblicazione effettuata.
 
 Il proprietario vuole affiancare Codex a Tonino per dare al gioco un'identità
 precisa e una qualità visiva e narrativa migliore. Ha approvato la preparazione
@@ -24,6 +204,10 @@ del percorso; la proposta creativa non equivale all'approvazione di ogni dettagl
 - Claude aggiornava direttamente Supabase. Non è nota una copia completa versionata.
 - Non esiste un collegamento diretto tra questa chat e la sessione Claude.
 - Il limite settimanale Claude ha impedito l'accesso precedente; stato attuale ignoto.
+- Si può sviluppare mentre Claude è bloccato, ma non simulare uno scambio con
+  Tonino: domande e consegne vanno conservate finché potrà rispondere.
+- Anteprima iPhone: nessun URL HTTPS pubblico del nuovo prototipo è stato creato.
+  Test viewport Chromium mobile non equivalgono a Safari/iPhone reali.
 
 ## Materiale preparato
 
@@ -33,6 +217,8 @@ del percorso; la proposta creativa non equivale all'approvazione di ogni dettagl
 - `docs/BACKLOG.md`: lavoro ordinato con criteri di accettazione.
 - `docs/COLLABORATION.md`: consegne, decisioni e messaggio per Tonino.
 - `docs/RECOVERY.md`: recupero del sorgente e percorso verso staging riproducibile.
+- `docs/SOCIAL_GAMEPLAY.md`: scene da catturare, qualità, metriche e piano social.
+- `docs/REWRITE_AND_STORE.md`: sostituzione del gioco e allineamento dello store.
 
 I documenti vengono inclusi nel commit locale di questa consegna; non è stato
 autorizzato un push a GitHub. Un altro agente non può vederli dal proprio checkout
@@ -48,9 +234,32 @@ completo del gameplay, login, acquisti o progressione reale.
 
 Analizzate esportazioni: 210 funzioni public e relativi permessi; 65 tabelle,
 467 colonne, 113 vincoli, 8 viste e una policy nei due schemi esaminati.
-Nessun test offensivo o mutazione di dati è stato eseguito.
+Nessun test su account reali o mutazione di dati di produzione è stato eseguito.
 
 ## Prossima consegna consigliata
+
+Ultime decisioni: Mythwood è il nome confermato per gioco, sito e store. Il
+proprietario richiede sostituzione completa del vecchio codice e conferma che
+non ci sono acquisti reali pregressi; non dedurre per questo assenza di giocatori,
+dati o automazioni. Evoluzioni centrali: aspetto, abilità e significato narrativo.
+Nuovo catalogo, prezzi e provider non ancora decisi. Nessun prodotto esterno
+modificato. Il client locale è stato sostituito nella successiva ricostruzione
+descritta all'inizio del documento; non il client online.
+
+Aggiornamento del proprietario dopo il primo commit: gilde e collaborazione
+sono centrali, con missioni personali, contributi in orari diversi e missioni
+simultanee che richiedono tutti. Più personaggi con abilità differenti, ispirati
+alla fantasia di crescita di Solo Leveling senza copiarlo. Aggiornati design,
+registro decisioni e backlog; queste integrazioni sono locali e non ancora
+committate. Aggiornamento successivo: il proprietario indica Assassini, Maghi,
+Ranger, Guaritori, Tank e Combattenti come riferimenti, oltre a mostri e gilde rivali. Superata la
+proposta di tre archetipi. Personaggi originali, abilità, squadra 2–4, tipo di
+rivalità e storia degli echi restano proposte. Il proprietario ha poi approvato
+la direzione visiva del mockup e richiesto un mondo vasto esplorabile e gameplay
+accattivante per i social. Registrati criteri per scena giocabile, streaming delle
+aree e catture reali; nessun gameplay nuovo è stato implementato o pubblicato.
+Le modifiche successive al commit a395223 restano locali. Chiarire se
+"tutti" significhi squadra iscritta oppure intera gilda.
 
 Tonino: leggere questi documenti; descrivere come aggiornava Supabase e quali
 attività/processi sono già in esecuzione; fornire sorgente di `riscatta`, inventario

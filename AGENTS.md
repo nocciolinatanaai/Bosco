@@ -13,6 +13,11 @@ Leggere, nell'ordine:
 3. `docs/TECHNICAL_BASELINE.md`: architettura, evidenze e rischi.
 4. `docs/BACKLOG.md`: attività e criteri di completamento.
 5. `docs/COLLABORATION.md`: processo e registro decisioni.
+6. Per il gameplay corrente: `docs/COMBAT_UX.md` e `docs/EPISODE_01.md`.
+   Preservare la sequenza echi → ricordo → evoluzione → Custode; motivare
+   cambiamenti e aggiornare i test. Il testo di Liora resta una proposta narrativa.
+7. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
+   `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
 ## Autonomia e confini
 
@@ -21,11 +26,17 @@ Leggere, nell'ordine:
 - Distinguere decisioni del proprietario, proposte, fatti osservati e ipotesi.
 - Non inventare ricerche, risultati di test, metriche social o feedback utenti.
 - Non aggiungere sistemi senza spiegare il beneficio per l'esperienza centrale.
-- Non creare commit, push, merge, deploy o pubblicazioni senza autorizzazione.
-- Non scrivere su Supabase di produzione, pubblicare sui social, spendere denaro
-  o cambiare account e credenziali senza autorizzazione specifica per l'azione.
-- L'autorizzazione corrente riguarda i documenti di collaborazione e design e
-  il loro commit locale. Non autorizza push, correzioni del gioco o del database.
+- Non creare commit, push, merge o deploy senza autorizzazione. Il proprietario
+  ha dato autorizzazione continuativa a post e commenti organici sui canali
+  Instagram e TikTok del progetto: non richiedere approvazione per ogni contenuto.
+  Devono prima essere identificati gli account e disponibili strumenti/accessi
+  supportati. Non riguarda account terzi, messaggi privati, inserzioni o spese.
+- Non scrivere su Supabase di produzione, spendere denaro o cambiare account e
+  credenziali senza autorizzazione specifica per l'azione.
+- Il proprietario ha autorizzato documenti e loro commit locale e, successivamente,
+  richiesto la riscrittura del gioco e dello store sotto il nome Mythwood.
+  Preparare e verificare il nuovo codice localmente; push, deploy, cancellazioni
+  di dati e aggiornamenti agli account/store esterni richiedono un mandato operativo.
 
 ## Ambiente e protezione dei dati
 
@@ -33,13 +44,16 @@ Usare il checkout esistente: il task Cloud è già isolato. Non creare worktree
 salvo richiesta esplicita. Controllare `git status` prima e dopo il lavoro e
 preservare modifiche preesistenti.
 
-Il checkout contiene un caricatore statico. Avvio dalla radice del repository:
+Il checkout ora contiene un prototipo locale Vite/Three.js. Il precedente
+caricatore è conservato solo come testo in legacy/index.html.txt. Avvio:
 
 ```sh
-python3 -m http.server 8000 --bind 127.0.0.1 --directory .
+npm ci --ignore-scripts
+npm run dev
 ```
 
-Aprire la pagina può inviare telemetria e chiamare funzioni che scrivono dati.
+Il nuovo client non contatta Supabase; le vecchie versioni possono invece
+inviare telemetria e chiamare funzioni che scrivono dati.
 `?test=1` non rende l'applicazione isolata. Per test senza effetti su produzione,
 intercettare tutte le richieste oppure usare uno staging indipendente.
 Non assumere che una funzione chiamata `state` o `get` sia priva di effetti.
@@ -57,5 +71,24 @@ amministrative non sono necessarie per leggere il frontend pubblico.
 - Per sicurezza e migrazioni usare dati sintetici in ambiente isolato.
 - A ogni consegna aggiornare `HANDOFF.md` con file, verifiche, limiti e prossimo passo.
 - Non eseguire contemporaneamente incarichi sugli stessi file o sulle stesse risorse.
+
+## Verifiche correnti
+
+`npm test`: regole di gioco e PostgreSQL WASM con dati sintetici.
+`npm run build`: build in dist/. `npm run test:browser`: build e Chromium con
+isolamento delle richieste. In Cloud: impostare MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium;
+altrove installare il browser Playwright con `npx playwright install chromium`.
+Leggere SECURITY.md, docs/EU_READINESS.md e docs/PEER_REVIEW.md prima di abilitare
+account, pagamenti o servizi pubblici. Non chiamare il progetto conforme o sicuro
+in assoluto sulla base di questi controlli.
+
+## Aggiornamento del mandato — repository condivisa
+
+Il 10 novembre 2026 il proprietario ha autorizzato il caricamento di codice,
+documenti e idee nella repository condivisa e la prosecuzione autonoma dei
+miglioramenti. Commit e push sul ramo di collaborazione Mythwood sono quindi
+autorizzati. Conservare la distinzione fra sviluppo condiviso e rilascio: merge
+su main, deploy, SQL di produzione, spese e servizi esterni non sono inclusi.
+Leggere docs/IDEAS.md e docs/PRODUCT_REVIEW.md; proseguire con prove e motivazioni.
 
 Le regole del task corrente del proprietario prevalgono su questo documento.

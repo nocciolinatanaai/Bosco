@@ -1,4 +1,7 @@
-# Baseline tecnica e revisione
+# Baseline tecnica legacy e revisione
+
+Questa sezione descrive la versione precedente. Per il nuovo prototipo locale
+vedere README.md e SECURITY.md. L'audit PAY-01 è stato smentito dai test.
 
 ## Architettura osservata
 
@@ -43,7 +46,7 @@ superare la RLS: l'autorizzazione deve essere corretta nel percorso RPC.
 |---|---|---|
 | SEC-01 | Login con password SQL NULL può superare il ramo di rifiuto | `login`: confronto non sicuro rispetto a NULL; funzione eseguibile da anon. Non provato su account reali. |
 | SEC-02 | Device usato come credenziale | Login restituisce device; funzioni come set_password/delete_me lo accettano senza nuova prova d'identità. Proteggerlo come segreto. |
-| PAY-01 | FOUND sovrascritto nel percorso di credito oro | `credit_purchase`: SELECT aggregata cambia FOUND prima del ramo update/insert del codice. Nessun trigger esportato lo compensa. Test isolato necessario. |
+| PAY-01 | Ritirato: diagnosi precedente errata | L'assegnazione con sottoquery non modifica FOUND. Test del codice originale confermano registrazione oro e retry idempotente; vedere SECURITY.md. |
 | ADM-01 | Tentativi amministrativi possono essere annullati | Inserimento in admin_fail seguito da eccezione nel chiamante: rollback transazionale. Verifica isolata necessaria. |
 | GAME-01 | Mercato rifiuta creature oltre livello 5 | train_creature e creature_levels arrivano a 50; market_listings.level accetta solo 2–5. La transazione dovrebbe annullare la rimozione dall'inventario. |
 | DATA-01 | Cancellazione non copre tutti i riferimenti | delete_me cerca colonne device; restano riferimenti seller/buyer/owner/from_device/to_device/by_device/from_dev e storici. Definire cancellazione o anonimizzazione. |
@@ -68,7 +71,8 @@ come direttamente pubbliche. Altre funzioni admin usano controllo del segreto.
 - Pagina privacy isolata: heading presente, splash ancora presente.
 - Nessun test reale di autenticazione, acquisti, cancellazione o gameplay completo.
 - Non esiste una suite automatica versionata; i controlli temporanei non sono
-  una suite recuperabile da Git.
+  una suite recuperabile da Git nella baseline. La nuova implementazione include
+  test ripetibili in tests/ e scripts/browser-check.mjs.
 
 ## Evidenze ricevute e limiti
 
@@ -81,3 +85,16 @@ redigere eventuali segreti; le esportazioni non contengono intenzionalmente righ
 Mancano Edge Function, indici completi, ACL di schemi/tabelle/viste/sequenze,
 configurazione Auth/Storage/Realtime, estensioni, cron, backup e procedura deploy.
 Il frontend è recuperabile; il progetto non è ancora ripristinabile integralmente.
+
+## Aggiornamento del client locale — episodio iniziale
+
+src/journey.js contiene guida e testi del frammento; combat.js mantiene i vincoli
+di progressione (Custode sigillato, echi, risveglio unico e scatto offensivo).
+Le finestre narrative fermano la simulazione e non ricevono contenuto remoto.
+Questi vincoli sono lato client: non sono una protezione anti-cheat o un backend.
+Nessun cambiamento alla baseline Supabase o alle valutazioni SQL sopra riportate.
+
+Il client locale ora separa i profili degli attacchi nemici (enemy-attacks.js)
+dalla geometria del segnale (visuals/telegraph.js). Il raggio visualizzato viene
+scalato dal valore usato dalla simulazione, senza ricreare le mesh a ogni cambio
+mossa. Frattura e Onda sono descritte in GUARDIAN.md; non cambiano la baseline SQL.

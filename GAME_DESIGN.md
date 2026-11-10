@@ -1,7 +1,13 @@
-# Direzione di gioco — proposta v0.1
+# Mythwood — direzione di gioco
 
-Stato: proposta di lavoro, non design approvato per intero.
+Stato: direzione visiva e mondo vasto approvati; dettagli narrativi e meccaniche
+restano proposte da verificare.
 Data: 10 novembre 2026, Europe/Rome.
+
+Nome confermato dal proprietario: **Mythwood**, coerente con `mythwood.it`.
+"Echi del Varco" identifica il concept visivo iniziale, non un secondo brand.
+Il proprietario richiede una riscrittura che sostituisca completamente il codice
+del vecchio gioco e un nuovo store coerente. Vedere `docs/REWRITE_AND_STORE.md`.
 
 ## Obiettivo concordato
 
@@ -28,7 +34,7 @@ circa 35 giorni e 30 euro residui, da riconciliare con le spese effettive.
 
 ## Ipotesi creativa: il cacciatore dei falliti
 
-Titolo descrittivo provvisorio, non nome commerciale scelto.
+Premessa narrativa provvisoria di Mythwood, non un nome commerciale alternativo.
 
 Sei un recuperatore di ultimo rango. Entri nelle fratture dopo le squadre degli
 eroi per raccogliere ciò che resta. Scopri di poter percepire gli echi delle
@@ -52,10 +58,89 @@ Tonino: il suo ruolo come agente autore è distinto dal protagonista del gioco.
 Rifugio e preparazione → spedizione breve → incontro leggibile → recupero di
 un eco → scelta di potere o conseguenza narrativa → ritorno con trasformazione.
 
-Per il primo prototipo: singolo giocatore, una zona, un personaggio secondario,
-due nemici base e un incontro finale. Sono limiti di produzione proposti.
-Mercato, gilde, PvP e monetizzazione non sono prerequisiti di questo episodio.
+Decisione del proprietario: missioni individuali e collaborazione di gilda sono
+entrambe centrali. Alcune missioni richiedono una squadra presente insieme;
+altre si completano da soli o facendo avanzare un obiettivo comune in orari diversi.
+
+Per la prima prova proporre una zona, una selezione iniziale di personaggi e un obiettivo
+che colleghi missione personale, contributo asincrono e incontro cooperativo.
+Dimensione proposta della squadra: 2–4 giocatori; da verificare, non approvata.
+Mercato, PvP e monetizzazione non sono prerequisiti di questo episodio.
 Non rimuovere le funzioni esistenti dalla produzione per applicare questi limiti.
+
+## Personaggi e collaborazione
+
+Decisione del proprietario: più personaggi selezionabili con abilità diverse;
+ispirazione a Solo Leveling senza copiarne personaggi, poteri distintivi o aspetto.
+La sensazione ricercata è crescita da sottovalutato a potente, con trasformazioni
+leggibili. Il cast e la storia degli echi restano proposte.
+
+Archetipi indicati dal proprietario come riferimento: Assassino, Mago, Ranger,
+Guaritore, Tank e Combattente. Sostituiscono la precedente proposta Custode/Tessitore/Predatore come
+base della discussione. Non sono personaggi già realizzati né nomi definitivi.
+
+| Classe di riferimento | Capacità proposta | Sinergia proposta |
+|---|---|---|
+| Assassino | Mobilità, inganno e colpi sulle vulnerabilità | Sfrutta aperture, posizione e controllo dei compagni |
+| Mago | Zone elementali, controllo e danno ad area | Modifica il campo e prepara combinazioni |
+| Ranger | Distanza, trappole e marcatura | Individua priorità e interrompe minacce |
+| Guaritore | Cura attiva, purificazione e protezione | Premia tempismo e prevenzione, partecipa anche all'offensiva |
+| Tank | Intercettazione, tenuta della posizione e gestione della pressione | Protegge i compagni e orienta gli attacchi nemici |
+| Combattente | Offensiva continuativa in mischia, parate e contrattacchi | Tiene impegnato il bersaglio e spezza le difese |
+
+Ogni personaggio deve affrontare contenuti personali; la cooperazione aggiunge
+azioni e tattiche. Non imporre una classe specifica come requisito per giocare.
+Definire per ciascuno motivazione, limite, silhouette, animazione distintiva e
+prima trasformazione. Distinguere classe da personaggio: una classe definisce
+il ruolo, il personaggio ha biografia, carattere e arco propri. Proporre un
+personaggio originale per ciascuna delle sei classi; non è deciso che ogni
+squadra debba contenerle tutte. Il Guaritore deve avere strumenti utili in solo.
+Tank e Combattente devono differire per azioni e feedback, non solo statistiche:
+il primo controlla pressione e spazio, il secondo mantiene l'offensiva. L'Assassino
+privilegia riposizionamento e finestre di danno. Sei classi sono la direzione del
+cast; ordine e ampiezza dell'implementazione vanno pianificati, senza promettere
+sei kit completi nel primo prototipo né imporre squadre da sei.
+
+## Nemici e gilde rivali
+
+Il proprietario richiede di considerare mostri, nemici e gilde rivali nella
+costruzione del mondo. Sono livelli diversi di conflitto, non semplici varianti
+di statistiche. Proposta da sviluppare:
+- Mostri comuni insegnano posizionamento, interruzioni e gestione del pericolo.
+- Élite e boss combinano quei comportamenti e richiedono decisioni coordinate.
+- Una gilda rivale ricorrente ha obiettivi, personaggi e un metodo riconoscibile;
+  può contendere una spedizione o una scoperta e avere ragioni comprensibili.
+
+La rivalità narrativa non implica PvP obbligatorio. Distinguere gilde NPC e gilde
+di giocatori: competizione, classifiche e PvP non sono ancora approvati. Prima
+proposta: una gilda NPC rivale e un piccolo gruppo di nemici con attacchi leggibili,
+evitando un grande bestiario privo di differenze nel comportamento.
+
+## Evoluzioni
+
+Priorità esplicita del proprietario. Ogni evoluzione significativa deve cambiare
+aspetto, azioni e significato narrativo, con una prova personale e un'occasione
+immediata per usare la capacità acquisita. Aumenti numerici da soli non bastano.
+Prototipare un'evoluzione completa prima di moltiplicare percorsi per sei classi.
+Le specializzazioni alternative sono proposte: Ranger legato a una creatura o
+a marchi/trappole; Tank protettore oppure assorbimento e restituzione degli urti.
+Progressione e accesso alle evoluzioni non sono stati approvati come monetizzazione.
+
+Esempio di arco condiviso, ancora da approvare:
+1. Una spedizione personale recupera il ricordo di un disperso.
+2. I membri della gilda ricostruiscono una mappa con contributi in orari diversi.
+3. Una missione dichiarata cooperativa richiede più partecipanti presenti insieme.
+4. Il successo cambia il rifugio e apre una scena narrativa per tutti i membri.
+
+"Richiede tutti" va precisato come requisito della squadra della missione oppure
+di tutti i membri della gilda. Proposta: richiedere la squadra iscritta, evitando
+che un membro assente blocchi l'intera gilda. Nessuna decisione definitiva su questo punto.
+Prevedere regole per disconnessioni, ripresa, ricompense e partecipazione tardiva;
+non consumare risorse definitivamente prima che la spedizione inizi correttamente.
+
+Presenza Realtime e bonus di gilda esistenti non dimostrano una cooperativa
+sincronizzata. Prima di prometterla, provare stato autorevole lato server,
+riconnessione, deduplicazione delle azioni e assegnazione delle ricompense.
 
 ## Primi dieci minuti: storyboard proposto
 
@@ -81,6 +166,18 @@ Non dare per scelto l'action solo in base al riferimento Solo Leveling.
 
 ## Direzione artistica proposta
 
+Aggiornamento approvato dal proprietario: il mockup "Echi del Varco" centra
+la direzione desiderata. Riferimento: squadra contro un guardiano in rovine
+urbane, frattura dorata, vegetazione cristallina, ombre blu/viola, personaggi
+stilizzati dettagliati e interfaccia leggibile. L'immagine è un concept generato,
+non un render del motore né una promessa di prestazioni o fedeltà grafica.
+Il nome definitivo è Mythwood; la trama degli echi resta una proposta.
+
+Una copia del concept generato è in `docs/assets/mythwood-visual-concept.png`.
+Provenienza: generazione image_gen richiesta dal proprietario durante questa
+sessione. SHA-256: b000b541f5da79a6aafc38fca074c32d62c943429d6b0cc919730c6646a650e2.
+Non viene usata come sfondo per fingere che il prototipo abbia quella resa.
+
 Rovine urbane stilizzate, silhouette forti, ombre colorate e accenti luminosi.
 Contrasto fra equipaggiamento povero iniziale e trasformazione successiva.
 Preparare due trattamenti della stessa scena, uno 2,5D e uno 3D stilizzato.
@@ -95,6 +192,22 @@ telefono di riferimento concordato, 60 FPS su PC di riferimento, caricamento
 iniziale interattivo entro 10 secondi su connessione e cache dichiarate.
 Effetti e qualità devono essere adattabili; non sacrificare la risposta ai comandi.
 
+## Mondo vasto ed esplorazione
+
+Decisione del proprietario: grande mappa esplorabile, con un'esperienza che
+continui oltre una breve sequenza di missioni. Proposta architetturale: regioni
+collegate e caricamento progressivo delle aree vicine; spedizioni cooperative
+in istanze quando utile. Dimensioni, densità e continuità tecnica vanno provate.
+
+Proposta di progressione geografica: città-rifugio delle gilde, quartieri
+abbandonati, foreste alterate, rovine e territori oltre le fratture. Ogni regione
+deve giustificarsi con incontri, scoperte, personaggi e conseguenze proprie.
+Non usare una superficie vuota o ripetitiva come misura della durata del gioco.
+
+Prima prova: una porzione rappresentativa giocabile e il passaggio a una seconda
+area caricata progressivamente, senza perdere stato o duplicare ricompense.
+Questo è un passo verso il mondo richiesto, non una sostituzione dell'obiettivo.
+
 ## Pubblico e aggiornamenti
 
 Primo risultato visibile entro 2–3 giorni di lavoro effettivo dall'avvio creativo;
@@ -104,6 +217,12 @@ consentono. Non sono date di rilascio confermate.
 Ogni aggiornamento deve mostrare un progresso di gioco e, quando utile, una
 decisione dell'agente. Invitare il pubblico a scelte circoscritte con conseguenze
 realizzabili. Non promettere che l'idea più votata venga sempre implementata.
+Il proprietario vuole promozione con gameplay che attiri. Vedere
+`docs/SOCIAL_GAMEPLAY.md`: priorità a scene reali catturate dal gioco, distinguendo
+sempre concept, prototipo e versione pubblica. Il proprietario ha autorizzato
+post e commenti organici autonomi sui canali Instagram/TikTok del progetto;
+strumenti e identificativi degli account non sono ancora collegati. Spese e
+inserzioni non sono autorizzate da questo mandato.
 
 Prima di una campagna valutare: persone che capiscono l'obiettivo, completano
 l'episodio, descrivono una scena memorabile e desiderano un seguito. Separare
@@ -112,8 +231,22 @@ conversioni né attribuire causalità a pochi dati.
 
 ## Decisioni da prendere dopo le prime prove
 
-- Identità finale del mondo e nome del gioco.
+- Identità finale del mondo; il nome del gioco è Mythwood.
 - Sistema di combattimento e modalità di controllo.
 - Stile visivo e dispositivi di riferimento.
 - Ruolo narrativo di Tonino e continuità con i giocatori attuali.
 - Eventuale riuso delle economie e dei personaggi esistenti.
+- Dimensione delle squadre e significato preciso delle missioni che richiedono tutti.
+
+## Prova locale aggiornata: un’azione cambia prima del boss
+
+La versione descritta in docs/EPISODE_01.md implementa guida progressiva,
+recupero del ricordo di Liora (personaggio proposto), risveglio fra echi e Custode,
+e scatto con impulso offensivo. È una prova del ciclo narrativo/meccanico, non
+approvazione definitiva di trama, cast o bilanciamento. Il frammento si conclude
+con il Custode e lascia una pista verso una gilda cancellata dalle mappe.
+
+Il Custode ora alterna Frattura sul punto mirato e Onda sul proprio centro,
+con preparazioni e aperture diverse (docs/GUARDIAN.md). L’obiettivo della prova
+è far scegliere fra spostamento, allontanamento e interruzione; soddisfazione
+e bilanciamento non sono ancora misurati con persone.

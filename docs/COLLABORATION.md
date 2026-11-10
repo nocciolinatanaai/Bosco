@@ -43,6 +43,21 @@ decisione e prossimo tentativo. Il mancato miglioramento deve cambiare il piano.
 | D05 | Proposta | Cacciatore dei falliti, echi e progressione narrativa. Da verificare con concept e prototipo. |
 | D06 | Aperta | Turni oppure action; 2,5D oppure 3D; ruolo di Tonino; nome finale. |
 | D07 | Proposta tecnica | Staging isolato e sorgente versionato prima di nuove modifiche backend. |
+| D08 | Confermato dal proprietario | Missioni personali, cooperazione asincrona e spedizioni simultanee; gilde centrali. Alcune missioni richiedono tutti: perimetro della squadra da precisare. |
+| D09 | Confermato dal proprietario | Più personaggi con abilità diverse; ispirazione a Solo Leveling senza copia. Tre archetipi e relativi nomi restano proposte. |
+| D10 | Indicazione del proprietario | Riferimenti di classe: Assassini, Maghi, Ranger e Guaritori; considerare mostri, nemici e gilde rivali. Superata la precedente proposta di tre archetipi; abilità, cast e forma della rivalità restano da progettare. |
+| D11 | Indicazione del proprietario | Aggiungere Tank e Combattenti: sei classi di riferimento complessive. Non implica sei partecipanti obbligatori né sei kit completi al primo rilascio. |
+| D12 | Approvato dal proprietario | Direzione visiva del mockup Echi del Varco e grande mappa esplorabile. Concept generato, non gameplay realizzato; nome e trama non definitivamente scelti. |
+| D13 | Indicazione del proprietario | Promuovere con gameplay accattivante. Preparare catture reali e piano; account, spese e pubblicazioni operative non ancora definiti. |
+| D14 | Confermato dal proprietario | Evoluzioni importanti; progettare trasformazione visiva e di abilità collegata alla storia. Percorsi specifici ancora proposti. |
+| D15 | Confermato dal proprietario | Mythwood come nome di gioco e sito; riscrivere e sostituire completamente il vecchio codice, includendo lo store. Superata la voce D06 sul nome aperto. |
+| D16 | Dichiarato dal proprietario | Nessun acquisto reale nel vecchio store. Non implica assenza di utenti o dati; catalogo, provider e prezzi nuovi da definire. |
+| D17 | Mandato del proprietario | Ricostruire, interrogarsi reciprocamente, debuggare e affrontare sicurezza e requisiti europei. Confronto diretto con Tonino non ancora disponibile; domande in PEER_REVIEW.md. |
+| D18 | Correzione verificata | Ritirata diagnosi PAY-01: assegnazione con sottoquery non altera FOUND. Mantenere test del codice originale, senza patch non necessaria. |
+| D19 | Autorizzazione continuativa del proprietario | Post e commenti organici autonomi su Instagram/TikTok del progetto; account dichiarati professionali. Mancano identificativi e accessi tramite strumenti supportati. Non chiedere approvazione per ogni post; nessun mandato a spese, ads o messaggi privati. |
+| D20 | Confermato dal proprietario | Avvio e prosecuzione dei lavori autorizzati anche prima del rientro di Claude. Tonino usava API Meta e TikTok: recuperare integrazioni esistenti prima di scegliere altri servizi. |
+| D22 | Implementazione locale richiesta | Studio di combattimento action, animazioni e UX; regole e prove in COMBAT_UX.md. Non equivale ad approvazione finale del sistema o della resa. |
+| D21 | Feedback e indirizzo del proprietario | Primo reel respinto per grafica/ambientazione/design inadeguati. Kit ritirato: non pubblicare. Prima una piccola scena 3D più curata e confrontabile con il concept; niente nuovi reel basati sui segnaposto. |
 
 ## Messaggio da dare a Tonino
 
@@ -70,3 +85,29 @@ Decisioni nuove (approvate o proposte):
 Budget effettivamente usato:
 Prossimo incarico:
 ```
+
+## Consegna Codex — episodio iniziale, 10 novembre 2026
+
+Mandato: procedere con i prossimi step e aggiornare i file comuni. Implementato
+localmente il percorso echi → ricordo → evoluzione → Custode; Liora e gilda
+scomparsa restano proposte narrative. Leggere EPISODE_01.md e HANDOFF.md per
+regole, test, limiti e revisione richiesta. Nessuna risposta di Tonino ricevuta;
+nessun push/deploy o spesa. Le modifiche comuni sono nel checkout: non presumere
+che un’altra sessione le abbia già ricevute da GitHub.
+
+## Preparazione al rientro — Custode e revisione
+
+Codex ha implementato due attacchi del Custode e segnali coerenti col raggio.
+La richiesta di confronto per Tonino è in CLAUDE_REVIEW.md; la risposta prevista
+è TONINO_REVIEW.md. Nessuna risposta ancora ricevuta, nessun file assegnato a
+un agente che non è collegato. Lavoro locale sequenziale, nessun push o deploy.
+
+## Mandato aggiornato: repository condivisa
+
+Il proprietario chiede di caricare codice, documenti e idee nella repository e
+proseguire in autonomia. Codex prepara il ramo mythwood/collaboration-base,
+separato dalla main del sito. START_HERE.md è l’ingresso per Tonino; IDEAS.md
+raccoglie le richieste e PRODUCT_REVIEW.md distingue risultati e limiti.
+Commit e push del ramo sono autorizzati; merge, deploy e operazioni esterne
+restano distinti. Pubblicazione confermata solo dopo la verifica del riferimento
+remoto. Non dichiarare che Tonino abbia letto o risposto in assenza di evidenza.

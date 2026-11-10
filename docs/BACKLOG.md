@@ -10,7 +10,15 @@ Assegnare un proprietario e registrare l'inizio prima di modificare file condivi
 | S01 | P0 | Correggere e verificare login | Test NULL, vuoto, errato, valido, utente inesistente e rate limit in staging; nessun device restituito su errore. |
 | C01 | P0 creativo | Ricerca comparativa | 3–5 riferimenti pertinenti, fonti, elementi osservati, costi e applicabilità; nessuna metrica inventata. |
 | C02 | P0 creativo | Due trattamenti della stessa scena | Confronto visivo su telefono e PC, licenze/costi dichiarati, direzione scelta e motivazione. |
-| C03 | P0 creativo | Prova del ciclo centrale | Un incontro e un potere trasformativo; confronto turni/action limitato; nessun nuovo sistema accessorio. |
+| C03 | P0 creativo | Prova del ciclo centrale | Un incontro e un potere trasformativo; confronto turni/action limitato; verificare una sinergia fra personaggi. |
+| C05 | P0 creativo | Cast e classi | Un personaggio originale proposto per Assassino, Mago, Ranger, Guaritore, Tank e Combattente; motivazione, silhouette, abilità e crescita; verificare autonomia in solo e complementarità. Definire l'ordine di prototipazione senza imporre squadre da sei. |
+| C06 | P1 creativo | Antagonisti e bestiario iniziale | Una gilda rivale proposta con motivazioni e personaggi; nemici con comportamenti distinti e un boss leggibile. Separare rivalità narrativa da PvP, ancora non deciso. |
+| W01 | P0 tecnico-creativo | Scena nel mondo esplorabile | Tradurre il mockup approvato in una scena giocabile; provare passaggio fra due aree, prestazioni sui dispositivi dichiarati e densità degli incontri. |
+| EV01 | P0 creativo | Prima evoluzione | Una trasformazione con aspetto, abilità, prova narrativa e sinergia; verificare prima/dopo giocabile. |
+| RW01 | P0 tecnico | Nuova base Mythwood | Sorgente completo versionabile, staging isolato e baseline vecchia recuperabile; sostituzione del codice senza riattivare percorsi legacy. |
+| ST01 | P1 prodotto-tecnico | Nuovo store Mythwood | Catalogo deciso, flusso verificato, consegna idempotente e nessun link ai vecchi prodotti; operazioni esterne solo con mandato. |
+| CO01 | P0 tecnico | Prova cooperativa isolata | Due client con stato server coerente, riconnessione senza duplicazioni e ricompensa assegnata una volta. Non basta la presenza Realtime. |
+| CO02 | P1 | Primo arco di gilda | Missione personale, contributi asincroni e spedizione simultanea collegati; chiarire requisito partecipanti e assenze. |
 | S02 | P1 | Revisionare credenziale device e collegamento account | Mappa accessi, flussi recupero/revoca e abusi; piano migrazione compatibile con utenti esistenti. |
 | P01 | P1 | Correggere accredito e idempotenza | Test codice nuovo, già usato, concorrente, normale/oro/misto, limiti e retry; verificare Edge Function. |
 | D01 | P1 | Definire cancellazione/anonimizzazione | Inventario riferimenti e test che coprano tutte le tabelle coinvolte; allineare informativa e messaggi. |
@@ -22,6 +30,20 @@ Assegnare un proprietario e registrare l'inizio prima di modificare file condivi
 | G02 | P2 | Regola boss | Chiarire limite giornaliero/settimanale e implementare testo e contatore coerenti. |
 | T01 | P2 | Test concorrenza economica | Nessun saldo effettivo sottozero o premio duplicato nelle operazioni scelte. |
 | M01 | Dopo C02/C03 | Primi contenuti social | Video del risultato reale, promessa verificabile, invito a provare; pubblicazione solo se autorizzata. |
+| M02 | Dopo W01/CO01 | Tre catture verticali | Abilità, cooperazione e scoperta registrate dalla build; bozze testo/account e risultati attesi, secondo SOCIAL_GAMEPLAY.md. |
+| EU01 | Prima dei servizi pubblici | Requisiti UE/Italia | Fonti ufficiali aggiornate, applicabilità, operatore e responsabilità documentati; non dichiarare conformità da una checklist. |
+
+## Risultati della prima ricostruzione locale
+
+- RW01 parziale: prototipo Vite/Three.js con lockfile; vecchio caricatore fuori
+  dal percorso di avvio. Recupero completo del vecchio sistema ancora mancante.
+- S01: bypass riprodotto su PostgreSQL isolato e patch locale testata; non applicata online.
+- C03/C05/EV01 parziali: sei kit numerici, prima arena, nemici e risveglio; modelli
+  e feedback ancora provvisori. Non equivalgono al cast o all'evoluzione finale.
+- P01: diagnosi FOUND ritirata; test del codice originale superati. Edge Function
+  e percorso completo pagamenti restano da revisionare.
+- CO01/CO02, mondo vasto/streaming, grafica del concept e store: non implementati.
+- EU01: registro predisposto, verifica aggiornata delle fonti ancora necessaria.
 
 ## Cadenza proposta
 
@@ -46,3 +68,28 @@ Una consegna deve includere risultato, file, verifiche, limiti e rischio residuo
 "Implementato" non significa "rilasciato"; "simulato" non significa "collaudato
 in produzione". Le attività creative richiedono un artefatto valutabile, non
 soltanto una lista di idee.
+
+## Studio combattimento e UX — 10 novembre
+
+C03/C05 parziali: aggiunti attacco base/abilità distinti, combo, proiettili,
+schivata a vigore, cariche fissate e interruzioni. Pose per tipo di arma,
+joystick a due dita e HUD separato; dettagli in COMBAT_UX.md. Il confronto fra
+sistemi, sinergie cooperative, bilanciamento umano, audio e animazioni finali
+restano aperti. Prossima prova: una persona capisce e usa carica/scatto/apertura
+senza spiegazioni; poi misurazione su dispositivi reali.
+
+## Episodio iniziale — avanzamento successivo del 10 novembre
+
+C04/EV01 parziali: guida in base alle azioni, breve memoria narrativa proposta,
+risveglio prima del boss e scatto che acquista danno/interruzione. Custode sigillato
+fino alla trasformazione; conclusione narrativa alla vittoria. Il percorso è
+specificato in EPISODE_01.md. Non completati: validazione umana, evoluzioni di
+classe, audio, attacchi distinti del boss, grande mondo e cooperazione. Prossimo
+incarico: due comportamenti leggibili del Custode, poi prova con giocatori.
+
+## Custode e base per revisione — 10 novembre
+
+C06 parziale: implementate Frattura e Onda con tempi, centri, pose e segnali
+distinti. La geometria del cerchio segue il raggio della mossa. Restano prova
+umana, audio e bilanciamento. Prossimo incarico: revisione concreta di Tonino
+secondo CLAUDE_REVIEW.md; nessuna sua risposta è ancora presente.

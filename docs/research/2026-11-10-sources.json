@@ -1,0 +1,122 @@
+{
+  "scope": "Accesso e lettura mirata; non revisione integrale né attestazione di conformità.",
+  "sources": [
+    {
+      "id": "ai_act",
+      "source": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/ita",
+      "final_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/ita",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:35.323321+00:00",
+      "sha256_response": "1b7e9c71523dc24113bc73715efe00a384fc2717a3bbf154c4b58ea43ebfe4ea",
+      "text_characters": 646451,
+      "opening_text": "Regolamento - UE - 2024/1689 - EN - EUR-Lex × Skip to main content Log in My EUR-Lex My EUR-Lex Sign in Register My recent searches (0) English English Select y"
+    },
+    {
+      "id": "ai_act_consolidated",
+      "source": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:02024R1689-20260727",
+      "final_url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:02024R1689-20260727",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:28:10.156099+00:00",
+      "sha256_response": "a6d8c641fd956467262e07419affa3368faf23ea4ea685306739fce1da916e95",
+      "text_characters": 420779,
+      "opening_text": "TESTO consolidato: 32024R1689 — IT — 27.07.2026 02024R1689 — IT — 27.07.2026 — 001.001 Il presente testo è un semplice strumento di documentazione e non produce"
+    },
+    {
+      "id": "ai_transparency",
+      "source": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "final_url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:36.264110+00:00",
+      "sha256_response": "0b33c48c4c364269c65146fd3b8ab12e3e15b1c57d90303d6cb6b8fe7e0abe9d",
+      "text_characters": 18131,
+      "opening_text": "AI Act | Shaping Europe’s digital future Skip to main content en Select your language Close bg български es español cs čeština da dansk de Deutsch et eesti el ε"
+    },
+    {
+      "id": "consumer_consolidated",
+      "source": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:02011L0083-20260927",
+      "final_url": "https://eur-lex.europa.eu/legal-content/IT/TXT/HTML/?uri=CELEX:02011L0083-20260927",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:28:09.868898+00:00",
+      "sha256_response": "352bff04bb30c7ea5a60aa10522ec9da3ad25a8e41696ed2120b939ce64f7080",
+      "text_characters": 108879,
+      "opening_text": "TESTO consolidato: 32011L0083 — IT — 27.09.2026 02011L0083 — IT — 27.09.2026 — 003.001 Il presente testo è un semplice strumento di documentazione e non produce"
+    },
+    {
+      "id": "consumer_rights",
+      "source": "https://eur-lex.europa.eu/eli/dir/2011/83/oj/ita",
+      "final_url": "https://eur-lex.europa.eu/eli/dir/2011/83/oj/ita",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:35.324855+00:00",
+      "sha256_response": "9c461ab955c3c02990cc86c1f12a60752303ba004007d885fa0f4e243ce9bcdb",
+      "text_characters": 121538,
+      "opening_text": "Direttiva - 2011/83 - EN - EUR-Lex × Skip to main content Log in My EUR-Lex My EUR-Lex Sign in Register My recent searches (0) English English Select your langu"
+    },
+    {
+      "id": "cookies",
+      "source": "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9677876",
+      "final_url": "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9677876",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:35.326532+00:00",
+      "sha256_response": "3958ceb84cdaf5066351b9a7d2c1972977a6aa6296dd074117671ff9ee9f1b88",
+      "text_characters": 118616,
+      "opening_text": "Linee guida cookie e altri strumenti di tracciamento - 10 giugno 2021... - Garante Privacy Salta direttamente al contenuto Navigazione Salta al contenuto Seguic"
+    },
+    {
+      "id": "dsa",
+      "source": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj/ita",
+      "final_url": "https://eur-lex.europa.eu/eli/reg/2022/2065/oj/ita",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:35.324174+00:00",
+      "sha256_response": "57306a7ed750532a46958a1c0809c418813211b7083aa5e6e868b419d983b474",
+      "text_characters": 466994,
+      "opening_text": "Regolamento - 2022/2065 - EN - EUR-Lex × Skip to main content Log in My EUR-Lex My EUR-Lex Sign in Register My recent searches (0) English English Select your l"
+    },
+    {
+      "id": "games_current",
+      "source": "https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/coordinated-actions/social-media-online-games-and-search-engines_en",
+      "final_url": "https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/coordinated-actions/social-media-online-games-and-search-engines_en",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:28:09.754366+00:00",
+      "sha256_response": "29c1d41680e74796d626291be3eb197d28b035c06e90e9c9d0574a9adf51de15",
+      "text_characters": 24473,
+      "opening_text": "Social media, online games and search engines - European Commission Skip to main content en Select your language Close bg български es español cs čeština da dan"
+    },
+    {
+      "id": "gdpr",
+      "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/ita",
+      "final_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/ita",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:35.322265+00:00",
+      "sha256_response": "b7183e22c85c27a798a5012b7b8176b3f41f62c58901fc529e0e1a1bf4f4ca5b",
+      "text_characters": 387705,
+      "opening_text": "Regolamento - 2016/679 - EN - GDPR - EUR-Lex × Skip to main content Log in My EUR-Lex My EUR-Lex Sign in Register My recent searches (0) English English Select "
+    },
+    {
+      "id": "kenney",
+      "source": "https://kenney.nl/assets",
+      "final_url": "https://kenney.nl/assets",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:36.419729+00:00",
+      "sha256_response": "f88151ff84e45d2787ae6e90e604e1a7e0e6162d4afc25518fd628cc68c1c787",
+      "text_characters": 901,
+      "opening_text": "Assets · Kenney Get Kenney Game Assets All-in-1 to download everything at once, plus free updates! Games Tools Assets Starter Kits Donate × Games Tools Assets S"
+    },
+    {
+      "id": "postgres_found",
+      "source": "https://www.postgresql.org/docs/current/plpgsql-statements.html",
+      "final_url": "https://www.postgresql.org/docs/current/plpgsql-statements.html",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-10T01:26:36.514905+00:00",
+      "sha256_response": "36c18b5db9bb2c439bd60becaaeb1e9a66bbab8fdcabcb14b57bea4183050412",
+      "text_characters": 22583,
+      "opening_text": "PostgreSQL: Documentation: 18: 41.5. Basic Statements Home About Download Documentation Community Developers Support Donate Your account October 15, 2026: Postg"
+    }
+  ],
+  "navigation_failures": [
+    {
+      "source": "https://commission.europa.eu/live-work-travel-eu/consumer-rights-and-complaints/enforcement-consumer-protection/coordinated-actions/social-media-and-online-games_en",
+      "http_status": 404,
+      "resolution": "Risolto seguendo il collegamento dalla pagina ufficiale coordinated-actions."
+    }
+  ]
+}
