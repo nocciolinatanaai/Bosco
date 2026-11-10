@@ -229,3 +229,19 @@ provenienza e brief di traduzione 3D in CHARACTER_DARIA.md. Non è nel gioco e
 non sostituisce il modello: incarico concreto proposto a Claude, ancora non
 accettato. Nessun asset esterno acquistato. La regressione completa resta attiva;
 questa aggiunta documentale non cambia la build sotto test.
+
+
+Seconda area: brief proposto in QUEST_02.md, con obiettivo di recupero/ritorno,
+nuovo comportamento nemico, percorsi e vincoli di salvataggio. Nessun codice di
+area implementato o assegnato; modifica narrativa documentale durante i test.
+
+
+## Chiusura verificata del blocco
+
+Regressione completa a tempo normale conclusa con exit 0 su desktop/mobile,
+layout landscape e storage fallback. Nessun errore JS o richiesta esterna.
+Rapporto browser-latest.json aggiornato su sorgenti ce238c0, insieme al rapporto
+Ranger dedicato già condiviso. 77 test e build riusciti, warning bundle aperto.
+Concept Daria e design seconda area sono proposte separate dalla build.
+Pronti handoff/prompt/criteri di incarico, nessuna risposta Claude ricevuta.
+Il traguardo 35–40% resta un obiettivo: non è stato dichiarato raggiunto.

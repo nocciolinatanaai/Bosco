@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAtUtc": "2026-11-10T13:38:04.671Z",
+  "startedAtUtc": "2026-11-10T14:23:41.301Z",
   "runs": [
     {
       "name": "desktop",
@@ -29,7 +29,7 @@
       "persistentEntries": 0
     }
   ],
-  "buildEntrySha256": "b67fecbb343a00773d8e695e924af94a6f7f0f62f00d5dc779bfd8eb000fc2e6",
+  "buildEntrySha256": "83983f49c0744b174207496940718dd94d8c19e4f4e279ec914b3a3b9a1c77e2",
   "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
   "runnerSha256": "38d128b38ba75f5c1e6c44fda1c8861a2e0e0415f5c2da510d24da5d2c3b56e6",
   "storageFallbacks": [
@@ -44,7 +44,7 @@
       "errors": 0
     }
   ],
-  "finishedAtUtc": "2026-11-10T13:46:34.192Z",
-  "checkedSourceCommit": "2b832e81cb5562001f9b3a2ee936561b4ca37a5f",
-  "renderer": "Chromium SwiftShader software; not physical iPhone"
+  "finishedAtUtc": "2026-11-10T14:32:01.870Z",
+  "checkedSourceCommit": "ce238c0f6d03dedfd42f73d0928d681b3cdd9563",
+  "renderer": "Chromium SwiftShader software at normal time; not physical iPhone"
 }

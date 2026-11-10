@@ -37,3 +37,8 @@ Per ogni incarico: commit di partenza, risultato atteso, file assegnati, vincoli
 test e consegna scritta. Non modificare contemporaneamente gli stessi file.
 Per il rientro: START_HERE.md e CLAUDE_REVIEW.md; nessuna sessione Claude è
 attualmente collegata e nessuna sua revisione è stata ricevuta.
+
+
+Brief successivi pronti per la discussione: CHARACTER_DARIA.md per la traduzione
+artistica del primo Ranger, QUEST_02.md per seconda area e ritorno. Sono proposte,
+non blocchi già completati; nomi e dettagli restano modificabili dai feedback.

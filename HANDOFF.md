@@ -3,6 +3,29 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Stato finale del blocco — Ranger e mandato aggiornato
+
+77 test superati e build riuscita (689 kB JS / 183 kB gzip, warning >500 kB
+ancora aperto). Prova Ranger dedicata superata su desktop/mobile con clock
+controllato; regressione completa a tempo normale superata su desktop 1440×900
+e mobile 390×844, landscape e fallback storage inclusi. Zero errori browser e
+richieste esterne nei percorsi completi. Exit 0 e hash in browser-latest.json,
+sorgenti ce238c0; ranger-latest.json mantiene commit applicativo edd2d59 e hash
+del runner dedicato. Le aggiunte artistiche/documentali successive non cambiano
+questa build. Le note di prove pendenti sotto sono storia dei checkpoint.
+
+Implementato: Tiro di ritorno del Ranger e miglioramento focus dopo menu.
+Preparato: processo richieste giocatori, piano verso il 35–40%, prompt e ruolo
+Claude aggiornati, concept/brief Daria e proposta seconda area QUEST_02.md.
+Non implementato: modello Daria, seconda area, cooperativa o nuovo backend.
+Non dichiarare raggiunto il 35–40% dell'intero progetto. Nessuna revisione di
+Claude o prova umana ricevuta; nessun deploy, SQL di produzione o acquisto.
+
+Prossimi passi: tradurre un personaggio in qualità visiva giocabile con catture
+confrontabili; verificare comprensione del primo incontro con PLAYTEST_01;
+poi implementare seconda area con ripresa coerente. Conservare capacità per le
+richieste reali dei giocatori. Non trasformare i brief in feature già disponibili.
+
 ## Riferimento artistico e incarico preparato
 
 Tavola originale Daria generata con image_gen, proposta di primo personaggio

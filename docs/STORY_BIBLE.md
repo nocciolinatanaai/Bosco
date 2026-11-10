@@ -68,3 +68,9 @@ non obbligano a sei persone per una missione e non sostituiscono le biografie.
 Per il pubblico: mostrare il gesto nuovo, la conseguenza visibile e una domanda
 circoscritta; raccontare come cambia la scelta in seguito alla prova. Non
 annunciare come disponibile un capitolo che esiste soltanto in questa tabella.
+
+
+Proposta successiva più concreta: QUEST_02.md, Giardino dei nomi. Recupero di
+uno strumento, rischio/aggiramento e ritorno, distinto dalla pista già giocabile.
+Non implementato. Daria è una proposta separata di Ranger in CHARACTER_DARIA.md,
+non una nuova persona già selezionabile o una sostituzione delle altre classi.

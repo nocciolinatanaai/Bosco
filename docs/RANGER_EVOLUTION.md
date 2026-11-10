@@ -40,3 +40,10 @@ usa input tastiera/touch e avanza il clock del browser a passi di 100 ms
 Verifica anche focus dopo menu e ingombri landscape. Nessuna cattura in questo
 runner: il clock simulato interferisce con la stabilizzazione screenshot.
 La regressione e le catture normali restano nel runner test:browser.
+
+
+Esito finale: 77 test superati, prova dedicata desktop/mobile superata, regressione
+completa a tempo normale superata. Rapporti in verification/ranger-latest.json
+e browser-latest.json, con commit/hash distinti. Nessun esito hardware o umano.
+La proposta visiva del personaggio è in CHARACTER_DARIA.md: il modello attuale
+non la realizza ancora. Non confondere concept e cambiamento effettivo del client.

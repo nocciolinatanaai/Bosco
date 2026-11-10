@@ -126,6 +126,12 @@ Non equivale a persistenza online, anti-cheat o progressione fra dispositivi.
 ## Prima crescita specifica e ascolto del pubblico
 
 EV01 parziale: Ranger Tiro di ritorno implementato, otto test nuovi (77 totali)
-e build riusciti. Prova browser dedicata e regressione ancora pendenti.
+e build riusciti. Prova browser dedicata superata su desktop/mobile a clock controllato;
+regressione completa a tempo normale superata (sorgenti ce238c0).
 PLAYER_FEEDBACK.md riserva capacità alle richieste reali; ROADMAP_40.md raccoglie
 risultati da costruire prima di rivalutare l'avanzamento complessivo.
+
+
+Proposte successive, non implementate: CHARACTER_DARIA.md (modello e animazioni)
+e QUEST_02.md (seconda area con recupero e ritorno). Restano arte, cooperativa,
+backend, store e validazione umana: il 35–40% complessivo non è dichiarato raggiunto.
