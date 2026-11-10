@@ -111,3 +111,8 @@ raccoglie le richieste e PRODUCT_REVIEW.md distingue risultati e limiti.
 Commit e push del ramo sono autorizzati; merge, deploy e operazioni esterne
 restano distinti. Pubblicazione confermata solo dopo la verifica del riferimento
 remoto. Non dichiarare che Tonino abbia letto o risposto in assenza di evidenza.
+
+Pubblicazione verificata: base bdfd5f9 caricata su
+origin/mythwood/collaboration-base; main resta ac9039e. Le istruzioni di revisione
+sono ora nel ramo remoto. Questo prova la disponibilità dei file, non la lettura
+di Tonino. Test locali 45/45 e build riuscita; stato CI remoto non osservato.

@@ -24,9 +24,17 @@ Non è una certificazione di assenza di segreti. node_modules, dist, cache,
 .env, registrazioni e test-results sono esclusi da Git; nessun video ritirato
 viene caricato. Il pacchetto della precedente consegna resta storico.
 
-Stato del caricamento: preparazione locale; registrare commit e riferimento
-remoto verificato prima di dichiarare pubblicazione. I 45 test e le prove browser
-dell’ultima build sono descritti sotto. CI remota non ancora osservata.
+Caricamento confermato: commit base bdfd5f90202c4e62740e27ba9b40cccad43dd97d
+pubblicato su origin/mythwood/collaboration-base; riferimento remoto verificato
+con git ls-remote. main resta ac9039ea91983a9586b01eeab4a60a02b5e88b54.
+Questo aggiornamento di consegna è un commit documentale successivo alla base.
+
+Verifica locale ripetuta: 45 test superati, build riuscita con lo stesso bundle
+applicativo dell’ultima prova browser; warning >500 kB presente. Blocco della
+vecchia cattura social e struttura YAML del workflow verificati. Controllo finale
+su 68 file testuali nello staging: nessun pattern sospetto fra quelli cercati.
+CI remota non osservata: CLI GitHub non autenticato/API rifiutata, pur con
+trasporto Git funzionante. Non dedurre da questo né successo né fallimento CI.
 
 Nessun merge/deploy, SQL online, spesa o messaggio social. START_HERE invita
 Tonino a leggere e rispondere in TONINO_REVIEW.md; nessuna risposta ricevuta.

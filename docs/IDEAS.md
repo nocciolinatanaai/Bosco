@@ -24,7 +24,7 @@ sviluppa le ipotesi creative; HANDOFF.md descrive ciò che esiste davvero.
 | Store | Sostituire quello vecchio; nessun acquisto reale secondo il proprietario | Chiuso nel prototipo. Nuovo catalogo, provider e prezzi non decisi; nessuna assenza di dati utenti dedotta |
 | Sicurezza e regole | Debuggare, chiudere falle, considerare regole europee | Audit e test isolati, proposta login non applicata; nessuna attestazione di sicurezza o conformità |
 | Due agenti | Codex e Tonino devono contestarsi, scambiare idee e verificare il codice | File di collaborazione e revisione pronti. Nessuna risposta di Tonino ricevuta finora |
-| Repository | Caricare codice e documenti nella repo condivisa, includendo le idee | Autorizzato dal proprietario in questa consegna; ramo di collaborazione separato dal sito pubblicato |
+| Repository | Caricare codice e documenti nella repo condivisa, includendo le idee | Pubblicato nel ramo mythwood/collaboration-base, separato dal sito pubblicato |
 
 Il proprietario ha autorizzato a continuare autonomamente e a cambiare ciò che
 non funziona. Questo richiede prove e decisioni motivate; non equivale a spendere,
