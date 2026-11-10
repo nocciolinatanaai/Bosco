@@ -23,8 +23,8 @@ CONTENT_SCOPE.md propone per il primo arco sei personaggi, tre NPC, otto tipi
 di nemico e dieci missioni. Solo i sei ruoli sono già concordati; gli altri
 numeri sono obiettivi adattabili, non contenuti completati. Caption con cinque
 hashtag in social/RESTART_CAPTION.md per pubblicazione manuale del proprietario.
-TRAILER_BRIEF.md contiene solo appunti per il successivo incarico: nessun video
-prodotto o pubblicato. Vecchio kit ritirato. Nessun acquisto/deploy/produzione.
+Il successivo incarico trailer è stato completato: vedere il blocco qui sotto.
+Vecchio kit ritirato. Nessun acquisto/deploy/produzione.
 
 ## Mandato e collaborazione
 
@@ -178,9 +178,21 @@ Cronologia decisioni in COLLABORATION.md. La precedente consegna cumulativa è
 conservata in docs/history/HANDOFF-2026-11-10-before-garden-consolidation.md;
 contiene note e autorizzazioni storiche superate, non istruzioni correnti.
 
-## In corso — trailer concept richiesto dal proprietario
+## Trailer cinematografico «Ricordali» — consegna
 
-Nuovo mandato: teaser anche cinematografico, non necessariamente gameplay.
-Quattro scene originali AI in docs/assets/trailers/source; nuovo render in
-scripts/render-cinematic-trailer.py. Musica originale sintetizzata localmente.
-Checkpoint prima del render: video e controlli ancora pendenti, non pubblicato.
+Il proprietario ha richiesto anche uno stile film, senza obbligo di gameplay.
+Teaser MP4 di 24 s, verticale 1080×1920/30 fps, H.264/AAC stereo, faststart;
+versione 720×1280 più leggera e copertina in docs/assets/trailers/.
+Quattro illustrazioni AI originali: città, Liora, Daria e Custode. Camera animata,
+particelle, dissolvenze e musica originale sintetizzata; non animazione completa
+dei personaggi. Etichette concept/immagini AI e caption esplicita distinguono
+la direzione desiderata dalla grafica corrente del gioco.
+
+Script autonomo scripts/render-cinematic-trailer.py; font di sistema e numpy,
+nessun riuso del kit ritirato, nessuna dipendenza dal runtime del gioco.
+Fonti/hash in SOURCES.json, controlli in MEDIA_REPORT.json, brief e caption in
+docs/social/. Decodifica completa senza errori; audio misurato -14,24 LUFS,
+-1,96 dBTP. Fotogrammi rappresentativi ispezionati; nessuna prova reale iPhone
+o giudizio umano sull'audio. Test gameplay non ripetuti: codice invariato.
+Checkpoint sorgenti 2e24a4e; consegna nel commit successivo. Nessun post inviato,
+nessun deploy, nessuna risposta di Claude presunta.

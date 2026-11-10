@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-10",
+  "tool": "image_gen",
+  "nature": "AI-generated cinematic concept illustrations; animated camera and overlays, not gameplay",
+  "shared_prompt_direction": "One vertical 9:16 frame, mature painterly 3D animated feature-film aesthetic, dark teal and warm gold, no text/UI/logos, fully clothed adult fictional characters. No specific artist or franchise requested.",
+  "images": [
+    {
+      "file": "docs/assets/trailers/source/city.png",
+      "generation_file": "exec-7bc884e3-9acb-4013-ae3f-1732f48da33e.png",
+      "sha256": "20428bc86954f8d3ec63b9aba5ddc425bd80003b50a92bb9b6bd7080262878ea",
+      "references": [
+        "docs/assets/mythwood-visual-concept.png"
+      ],
+      "prompt_summary": "Vertical cinematic gothic forest city, violet crystals, gold rift, small adult Daria with terracotta cape; no UI or text."
+    },
+    {
+      "file": "docs/assets/trailers/source/liora.png",
+      "generation_file": "exec-23668ac2-8f32-4f0b-a4b6-dfa21d20ae49.png",
+      "sha256": "91260c26b2085e9560fc3233815a29e77f7b456f840a3436fe2df7e4cdf96303",
+      "references": [
+        "public/art/liora-portrait.png",
+        "docs/assets/mythwood-visual-concept.png"
+      ],
+      "prompt_summary": "Adult Liora, brown curls, amber eyes, blue expedition coat and brass compass, lower coat dissolving into golden memory motes, ruined arch, teal fog."
+    },
+    {
+      "file": "docs/assets/trailers/source/ranger.png",
+      "generation_file": "exec-a7477edb-f267-4fab-8ee7-99f9779b2b1d.png",
+      "sha256": "d532f1d205fa14679015a94a66bd6b15784b8bb987e97ffd897a0a49bcb972c1",
+      "references": [
+        "docs/assets/daria-ranger-concept.png",
+        "source/city.png"
+      ],
+      "prompt_summary": "Adult olive-skinned ranger Daria, dark braid, terracotta cape, sage scarf, petrol jacket, draws one golden arrow on brass recurve bow, dynamic cinematic frame."
+    },
+    {
+      "file": "docs/assets/trailers/source/guardian.png",
+      "generation_file": "exec-9e44f092-460c-4f8a-92f4-0e7ca896cbb5.png",
+      "sha256": "25711b8397a400b9f49f0e316e29e101be9d7b62d4e64cd68f2f82797e0ce39a",
+      "references": [
+        "source/city.png"
+      ],
+      "prompt_summary": "Colossal white stone and root guardian, gold fractures and floating halo, gold rift, violet flora, small ranger foreground; epic low camera."
+    }
+  ],
+  "audio": "Original seeded additive synthesis in scripts/render-cinematic-trailer.py, no external recordings",
+  "source_commit": "2e24a4e"
+}

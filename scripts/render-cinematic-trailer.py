@@ -72,10 +72,9 @@ for i,(name,duration,lines) in enumerate(shots):
     # High-resolution input prevents camera rounding jitter. Every source remains untouched.
     z=f'1.015+0.055*on/{frames}' if i%2==0 else f'1.085-0.055*on/{frames}'
     filters=[f'scale=1440:2560:force_original_aspect_ratio=increase,crop=1440:2560',f"zoompan=z='{z}':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d={frames}:s=1080x1920:fps=30",'setsar=1', 'format=yuv420p']
-    # Safe-area gradients, sparse moving embers and subtle film texture.
+    # Safe-area contrast panels, sparse moving embers and subtle film texture.
     filters+=['drawbox=x=0:y=0:w=iw:h=180:color=0x07131f@0.3:t=fill','drawbox=x=0:y=1350:w=iw:h=570:color=0x07131f@0.44:t=fill']
     for p in range(14):
-        filters.append(f"drawbox=x='0':y='0':w=0:h=0:color=black@0:t=fill") if False else None
         filters.append(f"drawtext=fontfile={SANS}:text=·:fontsize={16+p%3*7}:fontcolor=0xffcc78@0.45:x='mod({p*83}+24*sin(t+{p}),1080)':y='1920-mod(t*{42+p*3}+{p*139},1940)'")
     filters.append(draw('CONCEPT TRAILER',118,28,'0xffe7be',font=SANS))
     if lines:

@@ -346,3 +346,14 @@ non necessariamente gameplay. Questo aggiorna il precedente brief. Codex lavora
 su quattro illustrazioni AI originali, montaggio verticale e musica sintetizzata
 originale. Nuovo script render-cinematic-trailer.py; vecchio kit ritirato intatto.
 Render e controlli multimediali pendenti; nessuna pubblicazione/deploy.
+
+
+## Teaser concluso — file liberi
+
+Consegna di 24 secondi, concept AI animato con musica originale. Sorgenti
+condivise in 2e24a4e, MP4/copertina/caption e rapporto nel commit successivo.
+Decodifica completa senza errori, 1080×1920/30 fps H.264/AAC, -14,24 LUFS e
+-1,96 dBTP misurati; camera/testi verificati su fotogrammi. Nessun test iPhone
+reale, ascolto umano o risultato social dichiarato. Solo media/docs modificati,
+nessuna pubblicazione o deploy. Il brief gameplay precedente è superato dalla
+richiesta esplicita di un concept anche cinematografico.

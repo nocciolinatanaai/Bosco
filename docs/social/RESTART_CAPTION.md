@@ -33,3 +33,7 @@ indicando correttamente lo stato provvisorio. Nessuna promessa di gilde già att
 Il proprietario ha chiesto il trailer come incarico successivo, non in questo
 blocco. Il vecchio kit resta ritirato. Il futuro trailer dovrà usare gameplay
 reale recente, con concept separati e riconoscibili; nessuna pubblicazione qui.
+
+
+Per il teaser cinematografico prodotto successivamente usare CINEMATIC_CAPTION.md,
+che specifica immagini AI animate e direzione artistica, non gameplay.
