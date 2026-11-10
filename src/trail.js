@@ -6,7 +6,7 @@ export const MEMORY_TRACES = Object.freeze([
 export const TRACE_RADIUS = 2.3;
 export const createTrail = () => ({ found: [], complete: false });
 export function activeTrace(state) {
-  if (state.status !== 'playing' || !state.evolved || !state.cleared || state.trail.complete) return null;
+  if (state.area === 'garden' || state.status !== 'playing' || !state.evolved || !state.cleared || state.trail.complete) return null;
   return MEMORY_TRACES[state.trail.found.length] || null;
 }
 export function resonateTrail(state) {

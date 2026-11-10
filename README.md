@@ -93,3 +93,9 @@ Il proprietario ha autorizzato commit e push della base sul ramo
 `mythwood/collaboration-base`. La main del vecchio sito resta separata; questo
 ramo non è un deploy. Il workflow CI esegue test e build, senza pubblicare.
 I risultati della CI remota vanno controllati: una prova locale non li sostituisce.
+
+
+Seconda area in verifica: dopo tre tracce, Entra nel giardino/F. Recupera la
+bussola e riporta il segnale alla soglia; puoi aggirare la sentinella. Le colonne
+fermano il suo raggio. Checkpoint v2 compatibili in lettura con v1. Stato delle
+verifiche e limiti in HANDOFF e docs/QUEST_02.md.

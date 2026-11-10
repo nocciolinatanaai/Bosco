@@ -45,7 +45,12 @@ export function createCombatEffects(scene) {
         add(mesh, .2, (age) => { mat.opacity = .8 * (1 - age / .2); });
       }
       if (event.type === 'skill-impact') ring(event.x, event.z, event.role === 'mage' ? 3.2 : event.range, color);
-      if (event.type === 'enemy-impact') ring(event.x, event.z, event.radius, event.kind === 'nova' ? '#c5a5ff' : '#f48477', reducedMotion ? .15 : .35);
+      if (event.type === 'enemy-impact' && event.kind === 'beam') {
+        const mesh = new THREE.Mesh(new THREE.BoxGeometry(event.width, .04, event.length), new THREE.MeshBasicMaterial({ color: '#ffe0a2', transparent: true, opacity: .8, depthWrite: false }));
+        mesh.position.set(event.x + event.dx * event.length / 2, .12, event.z + event.dz * event.length / 2); mesh.rotation.y = Math.atan2(event.dx, event.dz);
+        add(mesh, .2, age => { mesh.material.opacity = .8 * (1 - age / .2); });
+      }
+      if (event.type === 'enemy-impact' && event.kind !== 'beam') ring(event.x, event.z, event.radius, event.kind === 'nova' ? '#c5a5ff' : '#f48477', reducedMotion ? .15 : .35);
       if (event.type === 'hit' && !reducedMotion) sparks(event.x, event.z, event.critical ? '#fff3cb' : color);
       if (event.type === 'action-start' && event.kind === 'skill' && state.role.id === 'mage') ring(event.aimX, event.aimZ, 3.2, color, event.windup);
       if (event.type === 'dodge' && !reducedMotion) ring(event.x, event.z, .7, '#9bd7e9', .25);

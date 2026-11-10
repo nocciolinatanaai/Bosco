@@ -245,3 +245,19 @@ Ranger dedicato già condiviso. 77 test e build riusciti, warning bundle aperto.
 Concept Daria e design seconda area sono proposte separate dalla build.
 Pronti handoff/prompt/criteri di incarico, nessuna risposta Claude ricevuta.
 Il traguardo 35–40% resta un obiettivo: non è stato dichiarato raggiunto.
+
+## Incarico attivo — Giardino dei nomi
+
+Codex, base 47f1140. Ramo remoto controllato e allineato; nessuna revisione o
+assegnazione sovrapposta di Claude registrata. Implementazione seconda area:
+garden.js, simulazione combattimento, checkpoint v2 compatibili v1, visuali,
+runtime/UI, test dedicati e specifiche. Accesso dopo tre tracce, bussola/segnale/
+ritorno, sentinella rettilinea con coperture reali. Arte di Daria separata da
+questo incarico. Geometria creata al primo ingresso e conservata, non streaming.
+Commit/push ai blocchi funzionali e prima della regressione lunga. Nessuna
+produzione, spesa o pubblicazione esterna.
+
+
+Checkpoint funzionale Giardino: 87 test e build riusciti. Accesso, bussola,
+segnale/ritorno, nemico rettilineo e v2 compatibile v1 implementati. Nuovi
+controlli browser ancora da eseguire. Nessun risultato dedotto dalla build.

@@ -27,7 +27,7 @@ export function cueForEvent(event) {
     case 'hit': return event.critical ? 'critical' : 'impact';
     case 'hurt': return event.guarded ? 'guard' : 'hurt';
     case 'dodge': return 'dash';
-    case 'echo-burst': case 'trail-progress': return 'echo';
+    case 'echo-burst': case 'trail-progress': case 'garden-progress': return 'echo';
     case 'heal': return event.amount > 0 ? 'heal' : null;
     case 'enemy-windup': return !event.boss ? 'warning' : event.kind === 'nova' ? 'nova' : 'fracture';
     case 'enemy-impact': return 'shock';

@@ -5,9 +5,13 @@ Comandi. Non serve un account e non viene inviato al server. Lo scopo è poter
 interrompere la prova senza ripetere tutte le tappe già concluse.
 
 Un solo slot per origine/browser: `mythwood.checkpoint.v1` in localStorage.
-I cinque campi sono `version: 1`, `autoSave` booleano, `role` fra le sei classi,
-`stage` e `traces` (intero 0–3). Nessun identificativo, data, posizione arbitraria,
-credenziale, inventario, salute o stato parziale del combattimento. Le preferenze
+Il nome della chiave resta stabile; il formato corrente è v2. I sei campi sono
+`version: 2`, `autoSave`, `role`, `stage`, `traces` e `garden`. Quest’ultimo
+contiene solo `step` (0–4), `area` (plaza/garden) e `sentryDefeated` booleano.
+I file v1 vengono normalizzati in memoria senza scrivere: un successivo
+salvataggio o cambio della preferenza scrive v2. Versioni ignote restano
+illeggibili ma non vengono cancellate automaticamente. Nessun identificativo, data, posizione arbitraria,
+credenziale, inventario economico, salute o stato parziale del combattimento. Le preferenze
 audio e qualità grafica continuano a durare solo nella sessione.
 
 | Tappa | Ripresa |
@@ -16,7 +20,10 @@ audio e qualità grafica continuano a durare solo nella sessione.
 | `awakened` | Ricordo accolto, echi liberati, Custode da affrontare |
 | `guardian` | Custode sconfitto, accesso al sentiero, 0–3 tracce conservate |
 
-Salvataggio all'avvio e dopo risveglio, vittoria o ogni traccia. La ripresa
+Salvataggio all’avvio, risveglio, vittoria, tracce e transizioni del giardino.
+Nel giardino si conservano ingresso, bussola, segnale, ritorno e sentinella
+sconfitta; la ripresa ricrea l’ingresso sicuro e un eventuale combattimento
+non concluso. La bussola è uno stato di missione, non un oggetto duplicabile. La ripresa
 restituisce vita e vigore pieni, senza azioni/proiettili/recuperi precedenti;
 il combattimento interrotto ricomincia. I dialoghi delle tappe concluse non si
 ripetono. Dopo la vittoria la posizione riparte dal sentiero o dall'ultima traccia.
@@ -37,10 +44,11 @@ non una transazione atomica né una garanzia contro scritture simultanee.
 
 I dati locali possono essere alterati dal giocatore. Nessun valore di questo
 slot deve diventare autorità per economia, premi o multiplayer futuri. Non c'è
-sincronizzazione cloud, esportazione o migrazione di versioni ancora implementata.
+sincronizzazione cloud o esportazione. Il vecchio client v1 non legge v2:
+un rollback del client non è una migrazione inversa del salvataggio.
 Cancellare i dati del browser o cambiare origine/dispositivo perde lo slot.
 
-Verifica: nove test di dominio/storage in checkpoints.test.mjs; il runner browser
+Verifica: test di dominio/storage in checkpoints.test.mjs; il runner browser
 include opt-in, avanzamento, ricarica/ripresa, disattivazione persistita,
 cancellazione selettiva, corruzione e API bloccata. Esecuzione completata su desktop/mobile simulato per sorgenti 2b832e8:
 rapporto in verification/browser-latest.json. Non è un collaudo iPhone reale.
@@ -50,3 +58,8 @@ Prova UI rapida ripetibile: `npm run test:checkpoints` (in Cloud aggiungere
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium). Usa una tappa sintetica con due tracce,
 verifica annullamento della cancellazione e ripresa con autosalvataggio spento
 su due viewport. Non sostituisce il percorso completo di test:browser.
+
+
+Blocco Giardino: nuovi test per migrazione v1 senza scritture e v2 sulle sei
+classi. Leggere HANDOFF per distinguere la nuova verifica browser da quelle
+precedenti, i cui rapporti indicano il proprio commit.

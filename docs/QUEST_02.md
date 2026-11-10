@@ -1,8 +1,8 @@
 # Prossima area proposta — Il giardino dei nomi
 
-Design Codex del 10 novembre 2026. **Non implementato**, non canone approvato.
-Da discutere con Claude e correggere dopo prove reali. Non è una regione già
-accessibile e non aumenta da solo la percentuale di completamento.
+Design Codex del 10 novembre 2026. Prima implementazione locale in verifica:
+accesso dopo tre tracce, bussola, segnale/ritorno e sentinella rettilinea. Trama
+non approvata come canone; prova umana non svolta. Verifiche correnti in HANDOFF.
 
 ## Obiettivo e chiusura
 
@@ -25,7 +25,7 @@ che si ricongiungono al piedistallo e una via di ritorno. Non promettere chilome
 prima di aver verificato densità e orientamento.
 
 - Via centrale più breve, esposta alla sentinella; colonne come copertura visibile.
-- Via laterale più lunga, aggira parte del pericolo e contiene una nota ambientale.
+- Via laterale più lunga, aggira parte del pericolo e lascia spazio a una nota ambientale ancora da implementare.
 - Piedistallo riconoscibile per sagoma, ago luminoso e suono opzionale.
 
 Nemico proposto: sentinella Cartiglio che cambia postazione e prepara un attacco
@@ -54,8 +54,7 @@ Ogni passaggio deve essere idempotente. Separare stato dell'area da cleared del
 primo Custode: nuovi nemici non devono riaprire il vecchio episodio o duplicarne
 l'evoluzione. Nessuna perdita definitiva dell'oggetto alla disconnessione.
 
-Il salvataggio attuale v1 non descrive questi stati. Progettare una versione con
-migrazione esplicita e compatibilità delle tappe già esistenti; non reinterpretare
+Il formato v2 descrive questi stati e legge v1 senza scritture automatiche; non reinterpretare
 silenziosamente traces e non cancellare dati illeggibili. La ripresa deve ricreare
 un punto sicuro e conservare l'oggetto una volta, senza mantenere un combattimento
 parziale. I dati client restano non autorevoli per qualsiasi economia futura.
@@ -72,5 +71,6 @@ assenza di premi duplicati; poi regressione del primo episodio e prova umana.
 Chiedere al giocatore cosa cercava e quale indizio ha usato, senza spiegarglielo
 prima. Correggere almeno i problemi bloccanti prima di allargare la mappa.
 
-Prima dell'incarico registrare proprietario e file in COLLABORATION. È una proposta
-per il successivo sviluppo, non un lavoro già assegnato o svolto da Claude.
+Incarico Codex registrato in COLLABORATION. La geometria viene creata al primo
+ingresso e conservata per il riuso: non è streaming di file o del mondo.
+Nessun lavoro svolto o revisione di Claude presunti.

@@ -1,4 +1,5 @@
-import { createTelegraph } from './telegraph.js';
+import { createGardenWorld, createGardenSentry } from './garden.js';
+import { createBeamTelegraph, createTelegraph } from './telegraph.js';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -103,6 +104,8 @@ export function createArtWorld(renderer) {
   scene.environment = environment.texture; scene.environmentIntensity = .3;
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
+  const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
+  let gardenWorld = null, area = 'plaza';
   const rand = random(215);
   scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .6));
   const sun = new THREE.DirectionalLight('#b3c9e4', 2);
@@ -226,16 +229,16 @@ export function createArtWorld(renderer) {
     rune.rotation.y = a;
   }
   for (let i = 0; i < 7; i++) block(source, m.paving, [2.9, .12, 2.6], [20 + i * 3, 0, 7]);
-  scene.add(batchArchitecture(source));
-  const p = portal(scene, m);
+  plazaRoot.add(batchArchitecture(source));
+  const p = portal(plazaRoot, m);
   const actor = createAdventurer(m); scene.add(actor.root);
   const auraMat = new THREE.MeshBasicMaterial({ color: '#edc58c', transparent: true, opacity: .18, side: THREE.DoubleSide, depthWrite: false });
   const aura = piece(actor.root, new THREE.RingGeometry(.62, .68, 64), auraMat, 0, .13, 0); aura.rotation.x = -Math.PI / 2;
-  const floorRing = piece(scene, new THREE.RingGeometry(5.1, 5.13, 100), m.luminous, 0, .08, -9); floorRing.rotation.x = -Math.PI / 2;
+  const floorRing = piece(plazaRoot, new THREE.RingGeometry(5.1, 5.13, 100), m.luminous, 0, .08, -9); floorRing.rotation.x = -Math.PI / 2;
   const fireflies = new THREE.BufferGeometry(), positions = new Float32Array(110 * 3);
   for (let i = 0; i < 110; i++) { positions[i * 3] = (rand() - .5) * 26; positions[i * 3 + 1] = .5 + rand() * 9; positions[i * 3 + 2] = -21 + rand() * 32; }
   fireflies.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const dust = new THREE.Points(fireflies, new THREE.PointsMaterial({ color: '#ffd0a0', size: .055, transparent: true, opacity: .8, depthWrite: false })); scene.add(dust);
+  const dust = new THREE.Points(fireflies, new THREE.PointsMaterial({ color: '#ffd0a0', size: .055, transparent: true, opacity: .8, depthWrite: false })); plazaRoot.add(dust);
   return {
     scene, materials: m, player: actor.root, body: actor.body, weapon: actor.weapon, aura, auraMat,
     portalRing: p.rings,
@@ -247,9 +250,16 @@ export function createArtWorld(renderer) {
       }
       sun.shadow.needsUpdate = true;
     },
+    setArea(id) {
+      if (id === area) return; area = id;
+      if (id === 'garden' && !gardenWorld) gardenWorld = createGardenWorld(scene, m);
+      plazaRoot.visible = id !== 'garden'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
+      scene.background.set(id === 'garden' ? '#152e32' : '#1a273d'); scene.fog.color.set(id === 'garden' ? '#24483f' : '#29394d');
+    },
+    updateGarden(state, reducedMotion) { if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
     addEnemy(enemy) {
-      const group = createGuardian(m, enemy.boss); group.position.set(enemy.x, 0, enemy.z); scene.add(group);
-      const marker = createTelegraph(); scene.add(marker);
+      const group = enemy.type === 'sentry' ? createGardenSentry(m) : createGuardian(m, enemy.boss); group.position.set(enemy.x, 0, enemy.z); scene.add(group);
+      const marker = enemy.type === 'sentry' ? createBeamTelegraph() : createTelegraph(); scene.add(marker);
       return { group, marker };
     },
     animate(time, reducedMotion) {

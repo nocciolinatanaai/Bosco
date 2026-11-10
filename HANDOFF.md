@@ -3,7 +3,23 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
-## Stato finale del blocco — Ranger e mandato aggiornato
+## Checkpoint corrente — Giardino dei nomi in verifica
+
+Base 47f1140; remoto controllato e allineato. Seconda area locale implementata:
+accesso dopo la pista, bussola, segnale e ritorno. Sentinella rettilinea con
+coperture calcolate nella simulazione e stessa geometria di avviso; non richiede
+uccisione per completare. Tutte le classi mantengono i propri kit. Scene separate,
+geometria del giardino creata al primo ingresso e conservata, non streaming.
+
+Salvataggi v2 sulla chiave storica v1: lettura v1 compatibile senza scritture;
+nuove tappe/area e sentinella sconfitta conservate. Nessun dato economico o account.
+87 test superati, build riuscita (702 kB JS / 187 kB gzip; warning aperto).
+Prova browser della nuova area e regressione completa ancora pendenti a questo
+checkpoint. I rapporti versionati precedenti non coprono questo nuovo codice.
+File garden.js, visuali, combat/runtime/ui, checkpoint e test dedicati.
+Nessuna revisione Claude osservata, produzione/deploy o spesa.
+
+## Stato finale del blocco precedente — Ranger e mandato aggiornato
 
 77 test superati e build riuscita (689 kB JS / 183 kB gzip, warning >500 kB
 ancora aperto). Prova Ranger dedicata superata su desktop/mobile con clock

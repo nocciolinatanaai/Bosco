@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, interactGarden, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
 import { createCheckpointStore, restoreCheckpoint, checkpointLabel, checkpointFromSession } from './checkpoints.js';
+import { gardenObjective, GARDEN_ENTRY, inArea } from './garden.js';
 import { activeTrace, TRACE_RADIUS } from './trail.js';
 import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
@@ -114,10 +115,10 @@ export function startRuntime($) {
     $('info-title').textContent = title; $('info-body').textContent = body;
     $('input-options').hidden = !controls; info.showModal();
   };
-  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Il Ranger risvegliato può schivare un impatto all’ultimo istante e usare l’abilità entro 4 secondi per un tiro doppio. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
+  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Il Ranger risvegliato può schivare un impatto all’ultimo istante e usare l’abilità entro 4 secondi per un tiro doppio. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva oppure interagisce con il passaggio e gli oggetti del giardino; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
   $('guild').addEventListener('click', () => showInfo('Una storia da costruire insieme', 'Gilde, contributi asincroni e spedizioni cooperative fanno parte del design approvato. Questa prova è esclusivamente individuale: nessun altro giocatore è collegato.'));
   $('store').addEventListener('click', () => showInfo('Store Mythwood', 'Store chiuso durante il prototipo. Nessun prodotto, codice o pagamento attivo. Il catalogo precedente non viene caricato.'));
-  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
+  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe, stato della missione nel giardino e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
   $('close-info').addEventListener('click', () => { info.close(); setPause(pausedBeforeInfo); });
   info.addEventListener('cancel', () => setPause(pausedBeforeInfo));
   memory.addEventListener('cancel', e => e.preventDefault());
@@ -181,7 +182,7 @@ export function startRuntime($) {
   function consumeEvents() {
     if (!state) return;
     for (const event of drainEvents(state)) {
-      if (['evolved', 'cleared', 'trail-progress'].includes(event.type)) saveProgress();
+      if (['evolved', 'cleared', 'trail-progress', 'garden-progress'].includes(event.type)) saveProgress();
       effects.event(event, state, motionReduced());
       if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
       else audio.event(event);
@@ -196,6 +197,13 @@ export function startRuntime($) {
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
+      if (event.type === 'garden-progress') {
+        if (['enter', 'leave'].includes(event.interaction)) { syncEnemyViews(); switchArea(); }
+        const messages = { enter: 'Giardino dei nomi · Recupera la bussola. Puoi aggirare la sentinella.', compass: 'Bussola recuperata · Riportala alla soglia.', signal: 'L’ago punta dentro la frattura. Qualcuno sta correggendo la rotta.', leave: 'Sei tornato al sentiero.', sentry: 'Sentinella disattivata · Il percorso è libero.' };
+        notice(messages[event.interaction], 6);
+        if (event.completed) showMemory('garden');
+      }
+      if (event.type === 'enemy-windup' && event.kind === 'beam') notice('LINEA DI SIGILLO · Spostati di lato o riparati dietro una colonna.', 2);
       if (event.type === 'trail-progress') {
         notice(`${event.count} / 3 · ${event.name}`, 4);
         if (event.complete) showMemory('trail');
@@ -218,10 +226,20 @@ export function startRuntime($) {
     $('quest-title').textContent = guide.title; $('journey-hint').textContent = guide.hint;
     const trace = activeTrace(state);
     $('follow-trail').hidden = !trace;
+    const objective = gardenObjective(state);
+    $('world-interact').hidden = !objective;
+    if (objective) {
+      const distance = Math.hypot(state.x - objective.x, state.z - objective.z);
+      $('world-interact').textContent = distance <= 2.2 ? objective.label : `${objective.approach} · ${Math.ceil(distance)} m`;
+    }
+    $('leave-garden').hidden = state.area !== 'garden' || state.garden.step >= 3;
+    $('leave-garden').disabled = Math.hypot(state.x - GARDEN_ENTRY.x, state.z - GARDEN_ENTRY.z) > 2.2;
+    $('quest-item').hidden = state.garden.step < 2;
+    $('quest-item').textContent = state.garden.step === 4 ? '✓ Bussola · segnale riportato' : 'Bussola di spedizione · con te';
     const traceNear = trace && Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS;
     $('follow-trail').disabled = Boolean(traceNear && (state.stamina < 30 || state.dashCooldown > 0));
     if (trace) $('follow-trail').textContent = traceNear ? 'Risuona con lo scatto · 30 vigore' : 'Raggiungi la prossima traccia';
-    $('objective').textContent = state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+    $('objective').textContent = state.garden.step > 0 ? 'La bussola è uno strumento di spedizione. Riporta il segnale: Liora potrà capire se la rotta viene ancora corretta.' : state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
     if (guide.id !== lastGuide) {
       lastGuide = guide.id;
       if (!memory.open) notice(guide.hint, 6);
@@ -247,7 +265,7 @@ export function startRuntime($) {
     $('combo-label').textContent = state.action?.kind === 'basic' ? `COLPO ${state.action.combo} / 3` : 'TIENI PREMUTO';
     $('attack').style.setProperty('--swing', `${state.action?.kind === 'basic' ? state.action.elapsed / state.action.duration * 100 : 0}%`);
     $('region').textContent = `◇ ${state.region}`;
-    const boss = state.enemies.find((e) => e.boss); $('boss').hidden = boss.hp <= 0 || boss.sealed; $('boss-hp').value = boss.hp;
+    const boss = state.enemies.find((e) => e.boss); $('boss').hidden = state.area === 'garden' || boss.hp <= 0 || boss.sealed; $('boss-hp').value = boss.hp;
     $('boss-intent').textContent = boss.phase === 'windup' ? `${boss.attackKind === 'nova' ? 'ONDA · ALLONTANATI' : 'FRATTURA · SPOSTATI'} · ${boss.windup.toFixed(1)} s` : boss.phase === 'recovery' || boss.phase === 'stagger' ? `APERTURA · ${boss.recovery.toFixed(1)} s` : 'OSSERVA IL SUO ATTACCO';
     $('boss').classList.toggle('charging', boss.phase === 'windup');
     $('evolve').hidden = state.evolved || !canEvolve(state);
@@ -294,8 +312,34 @@ export function startRuntime($) {
     else { clearControls(); target = { x: trace.x, z: trace.z }; }
     $('world').focus({ preventScroll: true });
   });
+  $('world-interact').addEventListener('click', () => {
+    if (!active()) return; const objective = gardenObjective(state); if (!objective) return;
+    clearControls();
+    if (Math.hypot(state.x - objective.x, state.z - objective.z) <= 2.2) { interactGarden(state, objective.id); consumeEvents(); updateUI(); }
+    else target = { x: objective.x, z: objective.z };
+    $('world').focus({ preventScroll: true });
+  });
+  $('leave-garden').addEventListener('click', () => { if (active()) { clearControls(); interactGarden(state, 'leave'); consumeEvents(); updateUI(); } });
   $('skill').addEventListener('click', skill); $('dash').addEventListener('click', dash);
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
+
+  function syncEnemyViews() {
+    for (const enemy of state.enemies) {
+      if (enemyViews.has(enemy.id)) continue;
+      const view = art.addEnemy(enemy); view.group.userData.enemyId = enemy.id; enemyViews.set(enemy.id, view);
+      {
+        const label = document.createElement('div'); label.className = 'enemy-label';
+        const name = document.createElement('span'); name.textContent = enemy.sealed ? 'Custode · sigillato' : enemy.name;
+        const hp = document.createElement('progress'); hp.max = enemy.maxHp; hp.value = enemy.hp;
+        label.append(name, hp); $('world-labels').append(label); labels.set(enemy.id, label);
+      }
+    }
+  }
+  function switchArea() {
+    art.setArea(state.area); effects.clear();
+    focus.set(state.x, 1, state.z - (innerWidth < 700 ? 2 : 3));
+    camera.position.copy(focus).add(new THREE.Vector3(innerWidth < 700 ? 1 : 8, innerWidth < 700 ? 14 : 9, innerWidth < 700 ? 20 : 13)); camera.lookAt(focus);
+  }
 
   function beginSession(restoredState = null, replaceSave = false) {
     clearControls(); effects.clear(); audio.stop();
@@ -308,15 +352,7 @@ export function startRuntime($) {
     enemyViews.clear(); labels.clear(); $('world-labels').replaceChildren(); floats.length = 0;
     state = restoredState || createSession(selected); lastGuide = null; uiAt = -1; player.userData.setClass(state.role); auraMat.opacity = state.evolved ? .8 : .18;
     player.scale.setScalar(state.evolved ? 1.34 : 1.2); player.position.set(state.x, 0, state.z); player.rotation.y = Math.PI;
-    for (const enemy of state.enemies) {
-      const view = art.addEnemy(enemy); view.group.userData.enemyId = enemy.id; enemyViews.set(enemy.id, view);
-      {
-        const label = document.createElement('div'); label.className = 'enemy-label';
-        const name = document.createElement('span'); name.textContent = enemy.sealed ? 'Custode · sigillato' : enemy.name;
-        const hp = document.createElement('progress'); hp.max = enemy.maxHp; hp.value = enemy.hp;
-        label.append(name, hp); $('world-labels').append(label); labels.set(enemy.id, label);
-      }
-    }
+    syncEnemyViews(); switchArea();
     for (const id of ['hud', 'actions', 'touch-controls', 'control-hint']) $(id).hidden = false;
     $('role-name').textContent = state.role.name; $('skill-name').textContent = state.role.skill;
     $('skill').setAttribute('aria-label', `${state.role.skill}. Abilità di classe.`); $('skill').title = state.role.skill;
@@ -345,7 +381,7 @@ export function startRuntime($) {
     const bounds = $('world').getBoundingClientRect();
     pointer.set((event.clientX - bounds.left) / bounds.width * 2 - 1, -(event.clientY - bounds.top) / bounds.height * 2 + 1);
     ray.setFromCamera(pointer, camera);
-    const candidates = state.enemies.filter((e) => e.hp > 0 && !e.sealed).map((e) => enemyViews.get(e.id).group);
+    const candidates = state.enemies.filter((e) => inArea(state, e) && e.hp > 0 && !e.sealed).map((e) => enemyViews.get(e.id).group);
     const intersects = ray.intersectObjects(candidates, true);
     if (intersects.length) {
       let root = intersects[0].object;
@@ -371,7 +407,7 @@ export function startRuntime($) {
       if (event.code === 'KeyQ') skill();
       if (event.code === 'Space') dash();
       if (event.code === 'KeyE') $('evolve').click();
-      if (event.code === 'KeyF' && !$('follow-trail').hidden) $('follow-trail').click();
+      if (event.code === 'KeyF') { if (!$('follow-trail').hidden) $('follow-trail').click(); else if (!$('world-interact').hidden) $('world-interact').click(); }
     }
   });
   document.addEventListener('keyup', (event) => keys.delete(event.code));
@@ -441,8 +477,8 @@ export function startRuntime($) {
         if ((heldAttack || keys.has('KeyJ')) && !state.action) attack(state);
         consumeEvents();
       }
-      state.region = state.x > 24 ? 'Il sentiero delle memorie' : 'Piazza del ritorno';
-      if (state.x > 24 && !state.explored) { state.explored = true; notice('Hai trovato il sentiero delle memorie.', 3); }
+      state.region = state.area === 'garden' ? 'Giardino dei nomi' : state.x > 24 ? 'Il sentiero delle memorie' : 'Piazza del ritorno';
+      if (state.area !== 'garden' && state.x > 24 && !state.explored) { state.explored = true; notice('Hai trovato il sentiero delle memorie.', 3); }
       if (state.time - uiAt > .08) { updateUI(); uiAt = state.time; }
     }
     if (state) {
@@ -456,14 +492,14 @@ export function startRuntime($) {
       const current = selectedEnemy(state, 18); targetRing.visible = Boolean(current && state.status === 'playing');
       if (current) { targetRing.position.set(current.x, .13, current.z); targetRing.scale.setScalar(current.boss ? 1.5 : .9); }
       for (const enemy of state.enemies) {
-        const view = enemyViews.get(enemy.id); view.group.visible = enemy.hp > 0;
+        const view = enemyViews.get(enemy.id); view.group.visible = inArea(state, enemy) && enemy.hp > 0;
         view.group.position.set(enemy.x, 0, enemy.z); view.group.rotation.y = enemy.facing;
         view.group.userData.animate(state.time, enemy.windup, enemy.phase === 'pursuit', motionReduced(), enemy);
-        updateTelegraph(view.marker, enemy);
+        updateTelegraph(view.marker, enemy); if (!inArea(state, enemy)) view.marker.visible = false;
         const label = labels.get(enemy.id);
         if (label) {
           projected.set(enemy.x, 2.45, enemy.z).project(camera);
-          label.hidden = enemy.hp <= 0 || projected.z > 1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1 || Math.hypot(enemy.x - state.x, enemy.z - state.z) > 12;
+          label.hidden = !inArea(state, enemy) || enemy.hp <= 0 || projected.z > 1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1 || Math.hypot(enemy.x - state.x, enemy.z - state.z) > 12;
           label.style.transform = `translate(${(projected.x * .5 + .5) * innerWidth}px, ${(-projected.y * .5 + .5) * innerHeight}px) translate(-50%, -100%)`;
         }
       }
@@ -472,6 +508,7 @@ export function startRuntime($) {
       desired.set(state.x, 1, state.z - (narrow ? 2 : 3));
       focus.lerp(desired, motionReduced() ? 1 : 1 - Math.exp(-delta * 3)); camera.position.copy(focus).add(offset); camera.lookAt(focus);
     }
+    art.updateGarden(state || { area: 'plaza' }, motionReduced());
     trailView.update(state, state?.time || 0, motionReduced());
     const visualDelta = active() ? delta : 0;
     effects.update(visualDelta, state);

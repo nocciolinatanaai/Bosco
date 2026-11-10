@@ -16,6 +16,15 @@ export function createTelegraph() {
 
 // Unit geometry scales to the exact damage radius, including attack changes.
 export function updateTelegraph(marker, enemy) {
+  if (marker.userData.beam) {
+    marker.visible = enemy.hp > 0 && enemy.phase === 'windup';
+    marker.position.set(enemy.x, .09, enemy.z); marker.rotation.y = Math.atan2(enemy.beamDX, enemy.beamDZ);
+    const line = marker.userData.line, fill = marker.userData.fill;
+    line.scale.set(enemy.beamWidth, 1, enemy.beamLength); line.position.z = enemy.beamLength / 2;
+    const progress = Math.max(.01, Math.min(1, 1 - enemy.windup / enemy.chargeDuration));
+    fill.scale.set(enemy.beamWidth * .6, 1, enemy.beamLength * progress); fill.position.z = enemy.beamLength * progress / 2;
+    fill.material.opacity = .35 + progress * .45; return;
+  }
   const nova = enemy.attackKind === 'nova';
   const progress = enemy.sealed ? 0 : Math.min(1, Math.max(0, 1 - enemy.windup / enemy.chargeDuration));
   marker.visible = enemy.hp > 0 && (enemy.sealed || enemy.phase === 'windup');
@@ -26,4 +35,13 @@ export function updateTelegraph(marker, enemy) {
   marker.userData.chargeFill.scale.setScalar(Math.max(.01, progress));
   marker.userData.chargeFill.material.color.set(nova ? '#c5a5ff' : '#ff9575');
   marker.userData.novaRing.visible = nova && !enemy.sealed;
+}
+
+
+export function createBeamTelegraph() {
+  const marker = new THREE.Group(); marker.userData.beam = true;
+  const material = new THREE.MeshBasicMaterial({ color: '#d1b37a', transparent: true, opacity: .25, depthWrite: false });
+  const line = new THREE.Mesh(new THREE.BoxGeometry(1, .025, 1), material); marker.add(line);
+  const fill = new THREE.Mesh(new THREE.BoxGeometry(1, .03, 1), material.clone()); marker.add(fill);
+  marker.userData.line = line; marker.userData.fill = fill; return marker;
 }

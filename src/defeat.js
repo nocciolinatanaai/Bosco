@@ -1,4 +1,5 @@
 const hints = Object.freeze({
+  beam: 'La sentinella fissa una linea: spostati di lato o riparati dietro una colonna prima dell’impatto.',
   fracture: 'Frattura fissa il punto dove eri: esci dal cerchio prima dell’impatto, poi rientra durante il recupero.',
   nova: 'Onda parte dal Custode: allontanati oltre il cerchio, oppure interrompila con lo scatto evoluto da vicino.',
   strike: 'L’eco fissa il tuo punto mentre carica: spostati e colpisci quando ha finito.',
