@@ -2,7 +2,8 @@
 
 Concept originale del 10 novembre 2026, generato con image_gen da Codex nel
 mandato di sviluppo autonomo. **Proposta creativa**, non personaggio approvato,
-modello 3D o cattura del gioco. File: assets/daria-ranger-concept.png.
+modello 3D o cattura del gioco. Prima traduzione procedurale ora implementata
+in src/visuals/ranger.js, in verifica; non è una scultura finale. File: assets/daria-ranger-concept.png.
 
 La tavola mostra base, risonanza, retro e dettagli dell'equipaggiamento. È un
 riferimento artistico a tre quarti, non una tavola ortografica pronta per rigging.
@@ -33,7 +34,7 @@ La risonanza mantiene la persona e il suo equipaggiamento: prolunga l'arco con
 lamine luminose e rivela un segno d'oro sulla fibbia del mantello. Il tiro doppio
 è l'interpretazione Ranger del ricordo di ritirata: cogliere l'impegno del nemico
 e rispondere dall'apertura. Il contrattacco è già nella logica; questo aspetto
-artistico non è ancora nel modello giocabile.
+è ora prototipato nel modello procedurale, ancora da valutare visivamente.
 
 Le due frecce illustrate sono una sintesi grafica. Nella simulazione la seconda
 parte 140 ms dopo la prima e infligge il 65% del danno base: non cambiare le

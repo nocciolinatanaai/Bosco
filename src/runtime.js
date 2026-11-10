@@ -487,7 +487,7 @@ export function startRuntime($) {
       const angle = Math.atan2(facing.x, facing.z), difference = Math.atan2(Math.sin(angle - player.rotation.y), Math.cos(angle - player.rotation.y));
       if (active()) player.rotation.y += difference * (1 - Math.exp(-delta * 18));
       const action = state.action;
-      player.userData.animate(state.time, moving, action ? Math.min(1, action.elapsed / action.duration) : 0, motionReduced(), { action, dodge: state.dodgeRemaining, style: state.role.style });
+      player.userData.animate(state.time, moving, action ? Math.min(1, action.elapsed / action.duration) : 0, motionReduced(), { action, dodge: state.dodgeRemaining, style: state.role.style, evolved: state.evolved, returnShot: state.returnShot });
       barrier.visible = state.shield > 0; barrier.position.set(state.x, 1.4, state.z);
       const current = selectedEnemy(state, 18); targetRing.visible = Boolean(current && state.status === 'playing');
       if (current) { targetRing.position.set(current.x, .13, current.z); targetRing.scale.setScalar(current.boss ? 1.5 : .9); }

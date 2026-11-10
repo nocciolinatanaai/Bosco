@@ -298,3 +298,19 @@ in docs/history con avviso di contesto storico. Nessuna informazione cancellata
 per simulare avanzamento. Nessuna risposta di Claude o prova umana ricevuta,
 nessun deploy/produzione/spesa. Prossimo incarico proposto: personaggio rifinito,
 prove con giocatori, poi cooperazione autorevole in staging.
+
+## Incarico attivo — Ranger originale e piano contenuti
+
+Codex, base 8abd192. Remoto allineato; nessun incarico accettato di Claude
+registrato sui file. Proposta quantitativa primo arco in CONTENT_SCOPE, caption
+manuale pronta in social/RESTART_CAPTION. Trailer richiesto come incarico
+successivo, non prodotto/pubblicato ora. Lavoro attivo: primo modello Ranger
+originale da concept, pose arco e risonanza, integrazione visuali e verifiche.
+Geometria procedurale originale, non conversione automatica del PNG o asset finale.
+File actors/ranger/runtime visuali e test. Preservare sei kit e logica di gioco.
+
+
+Checkpoint Ranger: prima geometria originale separata dal corpo condiviso,
+pose/corda, mantello e arco risonante integrati. 93 test e build passano;
+verifica visiva e browser ancora pendenti. Nessun risultato artistico dedotto
+dal conteggio di triangoli. Caption/manuale e scope sono proposte condivise.

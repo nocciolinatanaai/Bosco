@@ -1,3 +1,4 @@
+import { createRangerActor } from './ranger.js';
 import * as THREE from 'three';
 import { block, curve, ellipsoid, link, piece } from './geometry.js';
 
@@ -29,7 +30,7 @@ function cape(parent, material) {
   return mesh;
 }
 
-export function createAdventurer(m) {
+export function createGenericAdventurer(m) {
   const root = new THREE.Group(); root.name = 'Mythwood-original-adventurer';
   const cloth = m.cloth.clone();
   const torso = joint(root, [0, 1.15, 0]);
@@ -160,6 +161,21 @@ export function createAdventurer(m) {
     }
   };
   return { root, body: cloth, weapon };
+}
+
+export function createAdventurer(m) {
+  const generic = createGenericAdventurer(m), ranger = createRangerActor();
+  const root = new THREE.Group(); root.name = 'Mythwood-original-adventurer';
+  generic.root.name = 'prototype-shared-body'; generic.root.rotation.y = 0;
+  root.add(generic.root, ranger.root); ranger.root.visible = false;
+  let active = generic;
+  root.userData.setClass = role => {
+    generic.root.userData.setClass(role);
+    generic.root.visible = role.id !== 'ranger'; ranger.root.visible = role.id === 'ranger';
+    active = role.id === 'ranger' ? ranger : generic;
+  };
+  root.userData.animate = (time, moving, attack, reducedMotion, combat) => active.root.userData.animate(time, moving, attack, reducedMotion, combat);
+  return { root, body: generic.body, weapon: generic.weapon };
 }
 
 export function createGuardian(m, boss = true) {

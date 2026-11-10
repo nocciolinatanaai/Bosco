@@ -5,6 +5,22 @@ Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 Ultimo commit applicativo: **45f89ba**. Verificare sempre git log/status e remoto
 prima di continuare. Main e servizio precedente restano separati.
 
+## Blocco corrente — primo Ranger originale in verifica
+
+Base 8abd192. Quantità proposte primo arco in CONTENT_SCOPE.md: sei personaggi,
+tre NPC, otto tipi di nemico e dieci missioni, non ancora approvate/realizzate.
+Caption pronta in social/RESTART_CAPTION.md; pubblicazione manuale richiesta dal
+proprietario, nessun post o trailer prodotto in questo blocco.
+
+Prima traduzione procedurale del concept Daria integrata per il Ranger: corpo
+proprio, abiti, treccia, mantello, faretra, arco/corda e risonanza. Altri kit e
+regole preservati. 7.066 triangoli totali di mesh, 41 mesh dopo raggruppamento,
+12 materiali: conteggio del modello, non FPS o draw call della scena completa.
+93 test superati; build riuscita. Verifiche visive/browser ancora pendenti:
+i rapporti precedenti sotto non coprono questo modello. Arte ancora provvisoria,
+nessuna conversione automatica del PNG o scultura finale. Nessun incarico Claude
+sovrapposto registrato; nessuna spesa/deploy/produzione.
+
 ## Mandato e collaborazione
 
 Il proprietario autorizza sviluppo autonomo, commit/push periodici sul ramo
