@@ -79,3 +79,23 @@ Generazione originale: tre viste di Ranger adulta, abiti pratici, mantello
 terracotta, sciarpa salvia, arco normale/risonante; niente immagini di terzi
 fornite al generatore. Direzione cromatica riferita al concept Mythwood approvato.
 Nessun asset esterno comprato. Non implica approvazione del nome o del cast.
+
+
+## Prima traduzione procedurale — checkpoint Codex
+
+Codex ha integrato un corpo originale separato per il Ranger, con treccia,
+giacca, sciarpa, mantello, faretra/taccuino, arco e corda che segue il windup.
+Il corpo condiviso rimane per gli altri cinque ruoli; il cambio classe riutilizza
+i due modelli e ne rende visibile uno soltanto. Arco risonante dopo risveglio,
+freccia incoccata solo durante preparazione e stoffe statiche con effetti ridotti.
+Geometria raggruppata per materiale in spazio locale dei giunti.
+
+8.524 triangoli di mesh totali (incluse parti nascoste), 44 mesh, 14 materiali.
+Non sono draw call dell'intera scena o risultati FPS. Quattro pose confrontate
+con corpo precedente e stessa luce/camera tramite npm run test:character.
+È uno studio 3D reale ma separato dalla camera del gioco. Sorgenti originali in
+visuals/ranger.js; nessun asset acquistato o PNG trasformato automaticamente.
+
+La resa resta semplificata, soprattutto volto, mani e pieghe: non equivale alla
+qualità del concept né a un personaggio finale. Claude potrà proporre una
+modellazione migliore a partire da questa base, con confronto e test pertinenti.

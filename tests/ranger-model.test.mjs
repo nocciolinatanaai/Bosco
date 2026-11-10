@@ -61,3 +61,12 @@ test('pose non modificano la simulazione e non allocano nuovi nodi/geometrie/mat
   const after = []; root.traverse(n => after.push([n, n.geometry, n.material])); assert.deepEqual(after, before);
   assert.equal(combat.returnShot, 4); assert.equal(combat.action.elapsed, .2);
 });
+
+
+test('superficie della giacca ha facce e normali rivolte verso l’esterno', () => {
+  const {root,body}=createRangerActor(),torso=root.getObjectByName('daria-torso');
+  const mesh=torso.children.flatMap(n=>n.children).find(n=>n.isMesh && n.material===body);
+  assert.ok(mesh); const p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal;let samples=0;
+  for(let i=0;i<p.count;i++) if(p.getZ(i)>.12 && Math.abs(p.getX(i))<.12){assert.ok(n.getZ(i)>.4);samples++;}
+  assert.ok(samples>10);
+});

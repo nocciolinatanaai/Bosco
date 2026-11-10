@@ -10,6 +10,18 @@ function pack(node) {
   for (const child of [...node.children]) if (child.isMesh && !child.userData.dynamic) source.add(child);
   if (source.children.length) node.add(batchArchitecture(source));
 }
+function loft(parent, material, bands, segments = 20) {
+  const points = [], indices = [];
+  for (const [y, rx, rz] of bands) for (let i = 0; i <= segments; i++) {
+    const angle = i / segments * Math.PI * 2; points.push(Math.sin(angle) * rx, y, Math.cos(angle) * rz);
+  }
+  for (let row = 0; row < bands.length - 1; row++) for (let i = 0; i < segments; i++) {
+    const a = row * (segments + 1) + i, b = a + segments + 1;
+    indices.push(a, a + 1, b, a + 1, b + 1, b);
+  }
+  const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+  geometry.setIndex(indices); geometry.computeVertexNormals(); return piece(parent, geometry, material);
+}
 function cloth(parent, material, width, height, position, tilt = 0) {
   const geometry = new THREE.PlaneGeometry(width, height, 6, 8), vertices = geometry.attributes.position;
   for (let i = 0; i < vertices.count; i++) {
@@ -30,20 +42,18 @@ export function createRangerActor() {
     cape: new THREE.MeshStandardMaterial({ color: '#a95438', roughness: 1, side: THREE.DoubleSide }),
     scarf: new THREE.MeshStandardMaterial({ color: '#849066', roughness: 1, side: THREE.DoubleSide }),
     brass: new THREE.MeshStandardMaterial({ color: '#b99a60', roughness: .42, metalness: .65 }),
-    paper: standard('#c9ae79'), wood: standard('#59402b'),
+    paper: standard('#c9ae79'), eyes: standard('#e4ddc9'), lips: standard('#7b463d'), wood: standard('#59402b'),
   };
   const root = new THREE.Group(); root.name = 'Daria-ranger-prototype';
   const torso = joint(root, 'daria-torso', [0, 1.24, 0]);
-  ellipsoid(torso, m.jacket, [.29, .4, .175], [0, .2, 0], 12);
+  loft(torso, m.jacket, [[-.12,.23,.15],[.02,.24,.16],[.2,.265,.17],[.4,.28,.15],[.5,.22,.12],[.57,.1,.085]]);
   for (const side of [-1, 1]) {
-    block(torso, m.jacket, [.24, .32, .09], [side * .14, .19, .15], side * .08);
-    link(torso, m.brass, [side * .02, -.13, .18], [side * .025, .44, .15], .012, .012, 5);
-    block(torso, m.boot, [.16, .12, .04], [side * .16, .02, .2]);
-    block(torso, m.brass, [.12, .018, .012], [side * .16, .08, .225]);
+    link(torso, m.brass, [side * .015, -.1, .16], [side * .025, .4, .155], .006, .006, 5);
+    block(torso, m.boot, [.12, .08, .025], [side * .14, .03, .16]);
   }
-  ellipsoid(root, m.trousers, [.26, .19, .18], [0, 1.1, 0], 12);
-  block(root, m.boot, [.54, .075, .36], [0, 1.18, 0]);
-  block(root, m.brass, [.09, .085, .04], [0, 1.18, .2]);
+  loft(root, m.trousers, [[.96,.17,.12],[1.05,.24,.16],[1.15,.24,.16],[1.2,.21,.15]]);
+  loft(root, m.boot, [[1.16,.246,.165],[1.21,.235,.165]]);
+  block(root, m.brass, [.085, .07, .025], [0, 1.18, .18]);
   const notebook = joint(root, 'daria-map-notebook', [.3, 1.03, .09]); notebook.rotation.z = -.2;
   block(notebook, m.boot, [.2, .26, .05], [0, 0, 0]);
   block(notebook, m.paper, [.17, .22, .012], [0, 0, .032]);
@@ -56,11 +66,13 @@ export function createRangerActor() {
     const knee = joint(leg, `daria-knee-${side}`, [0, -.47, .025]); knees.push(knee);
     ellipsoid(knee, m.boot, [.105, .1, .08], [0, 0, .06], 10);
     link(knee, m.boot, [0, -.02, 0], [0, -.44, 0], .095, .08, 10);
-    ellipsoid(knee, m.boot, [.105, .085, .2], [0, -.48, .085], 12);
+    const bootShape = new THREE.Shape(); bootShape.moveTo(-.075,-.07); bootShape.lineTo(.075,-.07);
+    bootShape.lineTo(.1,.15); bootShape.quadraticCurveTo(.1,.23,0,.23); bootShape.quadraticCurveTo(-.1,.23,-.1,.15); bootShape.closePath();
+    const boot = piece(knee,new THREE.ExtrudeGeometry(bootShape,{depth:.1,bevelEnabled:true,bevelSize:.015,bevelThickness:.01,bevelSegments:1,steps:1}),m.boot,0,-.48,0); boot.rotation.x=Math.PI/2;
     for (let n = 0; n < 4; n++) link(knee, m.paper, [-.04, -.15 - n * .06, .09], [.04, -.19 - n * .06, .09], .006, .006, 4);
     pack(leg); pack(knee);
     const arm = joint(torso, `daria-arm-${side}`, [side * .32, .45, 0]); arms.push(arm);
-    ellipsoid(arm, m.jacket, [.135, .16, .145], [0, -.04, 0], 10);
+    ellipsoid(arm, m.jacket, [.105, .13, .115], [0, -.04, 0], 10);
     link(arm, m.jacket, [0, -.05, 0], [side * .02, -.33, 0], .09, .075, 10);
     const elbow = joint(arm, `daria-elbow-${side}`, [side * .02, -.33, 0]); elbows.push(elbow);
     link(elbow, m.skin, [0, 0, 0], [0, -.33, .035], .065, .06, 10);
@@ -71,18 +83,24 @@ export function createRangerActor() {
   }
   const head = joint(torso, 'daria-head', [0, .73, 0]);
   link(torso, m.skin, [0, .51, 0], [0, .73, 0], .085, .09, 10);
-  ellipsoid(head, m.skin, [.18, .235, .16], [0, .025, .015], 20);
-  ellipsoid(head, m.skin, [.032, .055, .055], [0, .015, .165], 12);
+  ellipsoid(head, m.skin, [.16, .215, .15], [0, .025, .015], 20);
+  ellipsoid(head, m.skin, [.019, .033, .028], [0, .015, .164], 12);
   for (const side of [-1, 1]) {
-    ellipsoid(head, m.dark, [.042, .013, .012], [side * .07, .06, .156], 10);
+    ellipsoid(head, m.eyes, [.037, .019, .01], [side * .063, .06, .151], 12);
+    ellipsoid(head, m.hair, [.015, .017, .008], [side * .063, .06, .16], 10);
+    ellipsoid(head, m.dark, [.007, .012, .004], [side * .063, .06, .168], 8);
+    ellipsoid(head, m.eyes, [.004, .005, .003], [side * .063 - .004, .067, .172], 8);
     link(head, m.hair, [side * .04, .1, .15], [side * .11, .115, .14], .009, .011, 5);
-    ellipsoid(head, m.skin, [.032, .06, .03], [side * .18, .015, 0], 10);
+    ellipsoid(head, m.skin, [.032, .06, .03], [side * .16, .015, 0], 10);
   }
-  link(head, m.boot, [-.043, -.07, .155], [.043, -.07, .155], .006, .006, 5);
-  ellipsoid(head, m.hair, [.19, .15, .165], [0, .18, -.025], 16);
-  for (let lock = 0; lock < 7; lock++) {
-    const x = -.16 + lock * .045;
-    curve(head, m.hair, [[x, .24, .015], [x - .035, .15, .14], [x - .065, .04 + lock * .012, .16]], .023, 7);
+  link(head, m.lips, [-.032, -.065, .15], [.032, -.065, .15], .004, .005, 6);
+  ellipsoid(head, m.hair, [.171, .13, .155], [0, .18, -.025], 16);
+  for (let lock = 0; lock < 6; lock++) {
+    const x = -.14 + lock * .045;
+    const shape = new THREE.Shape(); shape.moveTo(x-.035,.24); shape.quadraticCurveTo(x-.06,.14,x-.065,.035+lock*.012);
+    shape.quadraticCurveTo(x+.015,.11,x+.035,.22); shape.closePath();
+    const hair = piece(head,new THREE.ExtrudeGeometry(shape,{depth:.025,bevelEnabled:true,bevelSize:.009,bevelThickness:.01,bevelSegments:1,steps:1}),m.hair,0,0,.1);
+    hair.rotation.y=-.12;
   }
   const braid = joint(torso, 'daria-braid', [.16, .75, -.11]);
   for (let i = 0; i < 9; i++) {
@@ -114,6 +132,10 @@ export function createRangerActor() {
   const glow = new THREE.MeshBasicMaterial({ color: '#ffd384', transparent: true, opacity: .8 });
   for (const side of [-1, 1]) curve(echo, glow, [[0, side * .5, .18], [side * .15, side * .8, .28], [side * .04, side * 1.03, .06]], .018, 12);
   pack(echo); echo.visible = false;
+  const arrow = joint(bow, 'daria-nocked-arrow', [0,0,.25]);
+  link(arrow,m.wood,[0,0,-.25],[0,0,.65],.008,.008,5);
+  const tip = piece(arrow,new THREE.ConeGeometry(.025,.1,5),m.brass,0,0,.69);tip.rotation.x=Math.PI/2;
+  arrow.visible=false; pack(arrow);
   for (const node of [head, braid, notebook, quiver, bow, torso, root]) pack(node);
 
   const fabrics = [cape, scarf];
@@ -132,6 +154,8 @@ export function createRangerActor() {
       arms[1].rotation.set(-1.35, -.5 * draw, -.1); elbows[1].rotation.x = -.35 - draw * .95;
     }
     if (combat.dodge > 0) { legs[0].rotation.x = .6; legs[1].rotation.x = -.6; }
+    bow.rotation.x = action ? 1.5 : .27;
+    arrow.visible = Boolean(action && drawing); arrow.position.z = .27 - .32 * draw;
     stringGeometry.attributes.position.setXYZ(1, 0, 0, .02 - .32 * draw); stringGeometry.attributes.position.needsUpdate = true;
     echo.visible = Boolean(combat.evolved); glow.opacity = combat.returnShot > 0 ? .95 : .65;
     braid.rotation.z = reducedMotion ? 0 : Math.sin(time * 3) * (moving ? .06 : .015);

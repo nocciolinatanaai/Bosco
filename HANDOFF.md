@@ -14,9 +14,11 @@ proprietario, nessun post o trailer prodotto in questo blocco.
 
 Prima traduzione procedurale del concept Daria integrata per il Ranger: corpo
 proprio, abiti, treccia, mantello, faretra, arco/corda e risonanza. Altri kit e
-regole preservati. 7.066 triangoli totali di mesh, 41 mesh dopo raggruppamento,
-12 materiali: conteggio del modello, non FPS o draw call della scena completa.
-93 test superati; build riuscita. Verifiche visive/browser ancora pendenti:
+regole preservati. 8.524 triangoli totali di mesh, 44 mesh dopo raggruppamento,
+14 materiali: conteggio del modello, non FPS o draw call della scena completa.
+94 test superati; build da ripetere dopo la rifinitura. Studio geometria a quattro pose completato: corpo, corda, risonanza e retro.
+Vista di authoring, non camera del gioco; resa stilizzata ancora distante dal
+concept illustrato. Verifica browser integrata ancora pendente:
 i rapporti precedenti sotto non coprono questo modello. Arte ancora provvisoria,
 nessuna conversione automatica del PNG o scultura finale. Nessun incarico Claude
 sovrapposto registrato; nessuna spesa/deploy/produzione.

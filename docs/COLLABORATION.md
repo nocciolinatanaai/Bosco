@@ -314,3 +314,10 @@ Checkpoint Ranger: prima geometria originale separata dal corpo condiviso,
 pose/corda, mantello e arco risonante integrati. 93 test e build passano;
 verifica visiva e browser ancora pendenti. Nessun risultato artistico dedotto
 dal conteggio di triangoli. Caption/manuale e scope sono proposte condivise.
+
+
+Rifinitura e studio nativo: 94 test passati; corrette forme del volto, superficie
+della giacca e orientamento arco durante il tiro. Quattro pose renderizzate con
+stessa camera/luci per confronto col modello precedente, zero errori/richieste
+esterne. Non è una cattura gameplay o qualità finale. Checkpoint prima della
+regressione integrata; caption e quantità restano proposte pubblicabili come stato/direzione.
