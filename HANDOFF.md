@@ -3,6 +3,16 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Riferimento artistico e incarico preparato
+
+Tavola originale Daria generata con image_gen, proposta di primo personaggio
+Ranger: mantello terracotta, sciarpa salvia, faretra e arco normale/risonante.
+PNG in docs/assets, hash e brief di traduzione in CHARACTER_DARIA.md. Nome e
+personaggio non approvati; nessun nuovo modello 3D o asset caricato nel gioco.
+Proposto a Claude un incarico con catture confrontabili, animazioni e risorse
+misurate; nessuna sua accettazione ricevuta. Nessun acquisto esterno.
+Aggiunta durante la regressione lunga: non cambia la build sotto verifica.
+
 ## Ranger: prova dedicata completata, regressione in avvio
 
 Il runner dedicato è ora passato su desktop 1440×900 e mobile 390×844,

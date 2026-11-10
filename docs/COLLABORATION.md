@@ -219,3 +219,13 @@ Clock controllato; niente catture in questo runner. Rapporto ranger-latest.json,
 applicazione edd2d59 e runner identificato dall'hash. 77 test passati. Il prompt
 Claude è riscritto sul mandato attuale. Checkpoint prima della regressione lunga:
 full browser a tempo normale ancora pendente, nessun 35–40% dichiarato raggiunto.
+
+
+## Proposta artistica del primo Ranger
+
+Codex ha generato una tavola originale di Daria (nome/cast proposti, non
+approvati), con base/risonanza/retro. File docs/assets/daria-ranger-concept.png,
+provenienza e brief di traduzione 3D in CHARACTER_DARIA.md. Non è nel gioco e
+non sostituisce il modello: incarico concreto proposto a Claude, ancora non
+accettato. Nessun asset esterno acquistato. La regressione completa resta attiva;
+questa aggiunta documentale non cambia la build sotto test.
