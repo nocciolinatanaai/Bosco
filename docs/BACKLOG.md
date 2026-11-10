@@ -142,4 +142,4 @@ backend, store e validazione umana: il 35–40% complessivo non è dichiarato ra
 W01/C04 parziali: due aree locali, missione di recupero/segnale/ritorno,
 sentinella rettilinea con coperture e salvataggi v2 compatibili v1. 88 test,
 build e prova UI dedicata desktop/mobile passati su 47b9f36. Regressione completa
-in corso. Nessuno streaming, prova umana o modello Daria implementati.
+passata sui due viewport (3412915); ultimo ritocco UI/ripresa verificato su 45f89ba. Nessuno streaming, prova umana o modello Daria implementati.

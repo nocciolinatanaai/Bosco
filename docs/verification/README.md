@@ -39,3 +39,9 @@ garden-latest.json: percorso UI a tempo normale, migrazione v1→v2, bussola,
 ricarica, segnale e ritorno; viewport mobile DPR 1, modalità Leggera. Contatore
 WebGL createBuffer durante tre rivisite a caldo: non misura tutte le allocazioni
 GPU, picco di memoria o FPS. Nessuna prova su telefono reale.
+
+
+Checkpoint Giardino concluso: regressione normale 3412915, percorso Giardino
+47b9f36, ultimo testo UI e ripresa sentinella sconfitta 45f89ba. Il test rapido
+ora controlla anche v2 con bussola conservata e sentinella assente, senza scritture
+quando l'autosalvataggio è spento. La matrice corrente è in HANDOFF.md.

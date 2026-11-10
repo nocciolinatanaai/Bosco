@@ -29,8 +29,8 @@ superato perché il documento precedente lo riporta.
 
 | Tema | Stato attuale / ipotesi Codex | Risposta utile richiesta |
 |---|---|---|
-| Scopo e storia | Recuperare chi è stato abbandonato; Liora e gilda cancellata sono proposte | Quale motivazione rende il giocatore curioso? Contesta un passaggio preciso e riscrivilo, senza espandere il mondo intero |
-| Crescita | Lo scatto acquista danno/interruzione prima del boss | La trasformazione cambia la decisione o soltanto la forza? Proponi una variante realizzabile e una prova prima/dopo |
+| Scopo e storia | Recuperare chi è stato abbandonato; Liora, tracce e Giardino sono proposte giocabili | Quale motivazione rende il giocatore curioso? Contesta un passaggio preciso e riscrivilo, senza espandere il mondo intero |
+| Crescita | Scatto offensivo e Tiro di ritorno specifico del Ranger verificati | La trasformazione cambia la decisione o soltanto la forza? Proponi una variante realizzabile e una prova prima/dopo |
 | Boss | Frattura mirata e Onda centrata, con segnali e recuperi distinti | Dove c’è ambiguità o una strategia dominante? Indica riproduzione e modifica minima |
 | Classi | Sei kit, modello di base comune; sinergie online non presenti | Definisci un primo personaggio originale e una sinergia da provare in simulazione, senza promettere cooperativa già pronta |
 | Grafica | Concept approvato; scena procedurale ancora distante | Scegli un miglioramento visivo circoscritto, con riferimento, provenienza/licenza, costo e artefatto confrontabile |

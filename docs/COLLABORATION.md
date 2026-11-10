@@ -283,3 +283,18 @@ Checkpoint documentazione/ultimo testo UI: in assenza di nemici il giardino ora
 mostra l'obiettivo corretto. Test rapido v2 sentinella sconfitta/bussola preparato;
 88 test passati. Regressione normale in corso sulla build precedente, smoke del
 ritocco da eseguire dopo. Non ricompilare dist mentre il runner la sta servendo.
+
+
+## Consegna Giardino verificata e consolidata
+
+88 test, build, percorso dedicato e regressione normale superati. Regressione
+3412915 passata su entrambi i viewport, recuperata dal rapporto persistente dopo
+una segnalazione di avvio ambiente; processo rimasto attivo, exit 0 confermato.
+Ultimo testo guida e ripresa sentinella sconfitta/bussola su 45f89ba verificati
+separatamente dal runner checkpoint. Tutti i rapporti indicano il proprio commit.
+
+HANDOFF riscritto come fotografia corrente; vecchia consegna cumulativa conservata
+in docs/history con avviso di contesto storico. Nessuna informazione cancellata
+per simulare avanzamento. Nessuna risposta di Claude o prova umana ricevuta,
+nessun deploy/produzione/spesa. Prossimo incarico proposto: personaggio rifinito,
+prove con giocatori, poi cooperazione autorevole in staging.
