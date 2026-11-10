@@ -338,3 +338,11 @@ catture aggiornati, senza attribuire risultati hardware o qualità finale.
 Caption/hashtag per pubblicazione manuale e quantità proposte condivisi; brief
 trailer futuro, nessun video/post prodotto da Codex. Nessuna risposta Claude
 ricevuta o incarico accettato presunto. File liberi per revisione registrata.
+
+## Teaser cinematografico — incarico attivo
+
+Il proprietario richiede ora un trailer accattivante anche in stile film,
+non necessariamente gameplay. Questo aggiorna il precedente brief. Codex lavora
+su quattro illustrazioni AI originali, montaggio verticale e musica sintetizzata
+originale. Nuovo script render-cinematic-trailer.py; vecchio kit ritirato intatto.
+Render e controlli multimediali pendenti; nessuna pubblicazione/deploy.

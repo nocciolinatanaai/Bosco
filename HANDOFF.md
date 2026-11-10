@@ -177,3 +177,10 @@ di attività che si sovrappongono; preservare modifiche locali e remote.
 Cronologia decisioni in COLLABORATION.md. La precedente consegna cumulativa è
 conservata in docs/history/HANDOFF-2026-11-10-before-garden-consolidation.md;
 contiene note e autorizzazioni storiche superate, non istruzioni correnti.
+
+## In corso — trailer concept richiesto dal proprietario
+
+Nuovo mandato: teaser anche cinematografico, non necessariamente gameplay.
+Quattro scene originali AI in docs/assets/trailers/source; nuovo render in
+scripts/render-cinematic-trailer.py. Musica originale sintetizzata localmente.
+Checkpoint prima del render: video e controlli ancora pendenti, non pubblicato.
