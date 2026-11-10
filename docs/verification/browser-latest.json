@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-10T12:55:44.056Z",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 1,
+      "persistentEntries": 0
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 1,
+      "persistentEntries": 0
+    }
+  ],
+  "buildEntrySha256": "e639d046d5bc9a6d97a5a5fad78fe80b18788eefe8bcc2d634b146d87342728a",
+  "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
+  "runnerSha256": "f2c6de0a56fc868894583f1a69ef6854bb3ea0e89c5989de4aec118abeb2f86b",
+  "finishedAtUtc": "2026-11-10T13:03:02.181Z",
+  "checkedSourceCommit": "e245bf83a3083c704eb1bb836f9f95101d2a5168",
+  "renderer": "Chromium SwiftShader software; not physical iPhone"
+}

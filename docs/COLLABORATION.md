@@ -148,3 +148,10 @@ browser finale da ripetere dopo la ripresa. Un nuovo rapporto JSON atomico nel
 runner conserva esiti per viewport e hash anche se si perde l’output del processo.
 Aggiornare successivamente questo registro con il risultato effettivo; non
 inferire un test superato dalla sola presenza di screenshot.
+
+Checkpoint sorgenti pubblicato: e245bf8. Dopo la ripresa, verifica finale
+rieseguita con esito positivo su desktop/mobile, 60 test locali superati e
+rapporto persistente disponibile in docs/verification/. Le catture aggiornate
+non sostituiscono il rapporto e non dimostrano prestazioni hardware. Questa
+consegna documentale registra il risultato; nessun merge/deploy o risposta di
+Tonino ricevuta. I checkpoint successivi seguono la regola richiesta dal proprietario.

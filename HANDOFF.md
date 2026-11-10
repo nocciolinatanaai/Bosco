@@ -5,7 +5,7 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
-### Checkpoint in corso: pista interattiva e ritratto di Liora
+### Checkpoint verificato: pista interattiva e ritratto di Liora
 
 10 novembre 2026, Codex. Prosecuzione autonoma sul ramo condiviso, base e732810
 (qualità grafica già pubblicata). Nessun incarico sovrapposto osservato,
@@ -22,14 +22,20 @@ File: trail.js, visuals/memory-trail.js, combat.js, journey.js, runtime.js, ui.j
 style.css, mappatura audio e test trail/journey/browser. Specifiche e limiti
 in MEMORY_TRAIL.md; aggiornata la distinzione fra storia proposta e prototipo.
 
-Verifiche locali: 60 test superati. Prima prova browser con tracce completata
-su desktop/mobile, inclusi qualità, audio, vittoria, sconfitta e riprova.
-Build dopo l’illustrazione circa 680 kB JS / 180 kB gzip, warning >500 kB
-presente. Dopo la ripresa non è recuperabile l’esito terminale del processo
-finale: sono presenti catture fino alla sconfitta mobile, ma non vengono usate
-come prova di successo completo. Rieseguire il runner con il nuovo rapporto
-persistente test-results/browser-report.json prima di segnare il blocco verificato. Nessuna validazione con persone,
-nessuna prova hardware iPhone. Non descrivere tre segni come un mondo vasto.
+Verifiche finali recuperabili: 60 test superati, zero fallimenti; build circa
+680 kB JS / 180 kB gzip, warning >500 kB presente. Browser finale superato
+su desktop 1440×900 e mobile 390×844 a 2×, layout landscape 844×390. Percorso
+completo: echi, memoria, risveglio, Frattura/Onda, vittoria, tre tracce, nuova
+scena Cartiglio, sconfitta e riprova. Audio, tre qualità grafiche, caricamento
+ritratto su richiesta, focus titolo e Chiudi dopo scroll verificati. Fallback
+UI del ritratto simulato sul viewport mobile, non un test di guasti di rete.
+
+Rapporti versionati in docs/verification/: browser-latest.json con hash della
+build/runner/ritratto e commit sorgente e245bf8; unit-latest.json, audio-latest.json (17 cue native ricontrollate) e buffer
+reali delle tre modalità. Nuove catture in docs/assets/prototype/. Il processo precedente
+non era recuperabile dopo la ripresa: il runner è stato rieseguito e ora scrive
+esiti atomici su file. Exit code finale 0; nessun risultato dedotto dagli screenshot.
+Non dichiarare validazione con persone, FPS o collaudo Safari/iPhone fisico.
 
 Aggiunta successiva nella stessa consegna: ritratto originale generato con
 image_gen, caricato soltanto alla prima memoria, con focus sul titolo e
@@ -41,9 +47,9 @@ informazioni resa persistente allo scroll. Nessun asset acquistato o video socia
 Checkpoint richiesto dal proprietario: commit/push periodici prima di verifiche
 lunghe, con stato reale in questi file. Aggiunto al runner un rapporto JSON
 atomico con esito per viewport e hash della build/ritratto/runner, per evitare
-che una ripresa perda l’unica evidenza del risultato. Prossimo passo immediato:
-ripetere la verifica finale, registrare il rapporto e condividere il checkpoint
-verificato. Stato parziale esplicito; nessun deploy.
+che una ripresa perda l’unica evidenza del risultato. Verifica finale ora completata e rapporti condivisi. Prossimi passi: revisione
+di leggibilità e motivazioni di Liora con Tonino, ottimizzazione del peso del
+ritratto e prova su dispositivi reali; poi valutare la seconda area. Nessun deploy.
 
 ### Intervento precedente: qualità grafica e controlli alla rotazione
 

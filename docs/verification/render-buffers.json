@@ -1,0 +1,42 @@
+{
+  "desktop": [
+    {
+      "mode": "high",
+      "width": 1440,
+      "height": 900,
+      "ratio": 1
+    },
+    {
+      "mode": "light",
+      "width": 1440,
+      "height": 900,
+      "ratio": 1
+    },
+    {
+      "mode": "balanced",
+      "width": 1440,
+      "height": 900,
+      "ratio": 1
+    }
+  ],
+  "mobile": [
+    {
+      "mode": "high",
+      "width": 682,
+      "height": 1477,
+      "ratio": 2
+    },
+    {
+      "mode": "light",
+      "width": 390,
+      "height": 844,
+      "ratio": 2
+    },
+    {
+      "mode": "balanced",
+      "width": 526,
+      "height": 1139,
+      "ratio": 2
+    }
+  ]
+}
