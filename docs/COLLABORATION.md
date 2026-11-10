@@ -327,3 +327,14 @@ Studio visivo condiviso con hash/sorgenti 864f97f e 94 test superati. Immagini
 chiaramente etichettate come authoring, non gameplay e non confronto con Bosco
 pubblicato. Regressione integrata in corso; nessuna qualità finale o risultato
 umano dedotti. Contenuti quantitativi indicati come proposta, non promessa.
+
+
+## Blocco Ranger originale concluso
+
+864f97f: 94 test, build, studio a quattro pose, regressione completa e Giardino
+con nuovo corpo passati su desktop/mobile. Zero errori/richieste esterne nei
+percorsi; rivisite a caldo senza nuove createBuffer osservate. Rapporti e
+catture aggiornati, senza attribuire risultati hardware o qualità finale.
+Caption/hashtag per pubblicazione manuale e quantità proposte condivisi; brief
+trailer futuro, nessun video/post prodotto da Codex. Nessuna risposta Claude
+ricevuta o incarico accettato presunto. File liberi per revisione registrata.

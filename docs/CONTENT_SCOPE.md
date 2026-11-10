@@ -6,7 +6,7 @@ I sei ruoli sono concordati; gli altri numeri restano adattabili ai feedback.
 
 | Categoria | Obiettivo proposto | Presente nel prototipo |
 | --- | --- | --- |
-| Personaggi giocabili | 6, uno per Tank/Combattente/Assassino/Mago/Ranger/Guaritore | 6 kit, corpo procedurale condiviso. Daria proposta per il primo Ranger |
+| Personaggi giocabili | 6, uno per Tank/Combattente/Assassino/Mago/Ranger/Guaritore | 6 kit; primo Ranger con corpo originale provvisorio, altri cinque condivisi. Daria proposta di personaggio |
 | NPC narrativi | 3: Liora, figura del rifugio, interlocutore di Cartiglio | Liora in testi/ritratto; gli altri due da definire |
 | Tipi di nemico | 8: 6 comuni/élite e 2 boss | 4 definizioni: due echi, Custode, sentinella. I due echi condividono comportamento; non sono quattro IA diverse |
 | Missioni principali | 6 | 3 blocchi: prima frattura, pista di Liora, giardino con recupero/ritorno |

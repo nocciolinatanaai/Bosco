@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAtUtc": "2026-11-10T18:39:25.374Z",
+  "startedAtUtc": "2026-11-10T19:24:43.817Z",
   "fixture": "legacy v1 guardian checkpoint with three traces; normal-time UI navigation",
   "runs": [
     {
@@ -32,9 +32,9 @@
       "newWebGLBuffersOnWarmRevisit": 0
     }
   ],
-  "buildEntrySha256": "bf700caf6ca99584b4ac01b17693590826ddcba3122c1a7cfb2c51398affbfc3",
+  "buildEntrySha256": "b31b965fcf5f311f1a46dcf33a4b863616bc1b5b4de19cb5b0bb6d472a6437ba",
   "runnerSha256": "d05943b52c071dda65cc4221a0dd83f1b1239a58d033d3da15b6c2f7e68269de",
-  "finishedAtUtc": "2026-11-10T18:40:42.638Z",
-  "checkedSourceCommit": "47b9f36e968487cfbf17e039a8319948cd748652",
-  "renderer": "Chromium SwiftShader, Light quality, DPR 1, normal time; not physical iPhone"
+  "finishedAtUtc": "2026-11-10T19:26:01.665Z",
+  "checkedSourceCommit": "864f97ff5fedce58da97fab769fb02cd6a2643b6",
+  "renderer": "Chromium SwiftShader, Light quality, normal time, DPR 1; not physical iPhone"
 }

@@ -143,3 +143,13 @@ W01/C04 parziali: due aree locali, missione di recupero/segnale/ritorno,
 sentinella rettilinea con coperture e salvataggi v2 compatibili v1. 88 test,
 build e prova UI dedicata desktop/mobile passati su 47b9f36. Regressione completa
 passata sui due viewport (3412915); ultimo ritocco UI/ripresa verificato su 45f89ba. Nessuno streaming, prova umana o modello Daria implementati.
+
+
+## Primo Ranger originale e comunicazione
+
+C05/EV01 parziali: corpo Ranger dedicato, arco/corda/posa e risonanza integrati.
+94 test, build, studio di authoring, regressione e Giardino passati su 864f97f.
+Volto/mani/pieghe, contatto della presa e origine visiva dei proiettili da rifinire
+prima di chiamare il modello finale. Altri cinque corpi condivisi. Quantità
+primo arco proposte in CONTENT_SCOPE, caption pronta e brief trailer successivo;
+nessun video o post prodotto/pubblicato da Codex in questo blocco.

@@ -26,7 +26,8 @@ Prototipo in sviluppo: grafica e contenuti continuano a evolversi.
 ## Materiale allegato e prossimo incarico
 
 Se il post usa la tavola di Daria aggiungere: «Concept artistico del personaggio;
-non è una cattura del gioco». Per screenshot reali usare le catture versionate,
+non è una cattura del gioco». Se si usa lo studio 3D, etichettarlo come studio del modello, non camera di gioco.
+Per screenshot reali usare le catture versionate,
 indicando correttamente lo stato provvisorio. Nessuna promessa di gilde già attive.
 
 Il proprietario ha chiesto il trailer come incarico successivo, non in questo

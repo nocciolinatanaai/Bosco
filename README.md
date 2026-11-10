@@ -81,8 +81,8 @@ nessun deploy, migrazione online o modifica degli account social è stato esegui
 ## Limiti noti
 
 Nessun multiplayer, mondo vasto, collisioni ambientali complete, asset finali,
-salvataggi online, backend nuovo o store operativo. Gli archetipi hanno regole, equipaggiamenti e pose differenti; condividono ancora
-il modello procedurale di base. Animazioni, audio e resa artistica finali mancano. Nessuna promessa
+salvataggi online, backend nuovo o store operativo. Gli archetipi hanno regole, equipaggiamenti e pose differenti; cinque condividono ancora
+il modello procedurale di base, mentre il Ranger ha una prima interpretazione originale. Animazioni, audio e resa artistica finali mancano. Nessuna promessa
 di durata o viralità. La prima build contiene un chunk motore superiore a 500 kB
 minificati: distribuzione, prestazioni reali e caricamento progressivo sono da
 ottimizzare. Per pubblicare va distribuita dist/, non la radice del repository.
@@ -104,3 +104,9 @@ verifiche e limiti in HANDOFF e docs/QUEST_02.md.
 `npm run test:garden` verifica migrazione, nuova area, bussola, ricarica, ritorno
 e rivisite su desktop/mobile, a tempo normale. In Cloud usare la stessa variabile
 MYTHWOOD_CHROMIUM_PATH. Partenza da un checkpoint sintetico dopo la prima missione.
+
+
+Studio Ranger: `npm run test:character` produce quattro viste di authoring con
+lo stesso setup per vecchio corpo condiviso e nuovo Ranger. Non è la camera del
+gioco; il confronto non rappresenta il vecchio Bosco pubblicato. Caption e
+quantità proposte in docs/social/RESTART_CAPTION.md e docs/CONTENT_SCOPE.md.

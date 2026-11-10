@@ -22,3 +22,9 @@ Catture Giardino dei nomi: desktop-garden-entry, mobile-garden-entry,
 mobile-garden-compass e mobile-garden-landscape. Build sorgenti 47b9f36,
 Chromium SwiftShader, Leggera, DPR 1. Screenshot della scena effettiva, non
 concept; arte procedurale provvisoria. Esiti in verification/garden-latest.json.
+
+
+Aggiornamento 864f97f: catture Giardino sostituite con la stessa scena e nuovo
+Ranger; aggiunte desktop-resonance e mobile-resonance dalla regressione normale.
+Non sono concept o camera di authoring. Prove Garden in Leggera/DPR 1; regressione
+mobile DPR 2. Il modello resta provvisorio, nessun confronto di FPS.

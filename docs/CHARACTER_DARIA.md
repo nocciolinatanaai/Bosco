@@ -99,3 +99,11 @@ visuals/ranger.js; nessun asset acquistato o PNG trasformato automaticamente.
 La resa resta semplificata, soprattutto volto, mani e pieghe: non equivale alla
 qualità del concept né a un personaggio finale. Claude potrà proporre una
 modellazione migliore a partire da questa base, con confronto e test pertinenti.
+
+
+Verifica integrata finale su 864f97f: 94 test, build, regressione completa e
+Giardino passati desktop/mobile. Report e catture hanno il proprio ambito:
+authoring in character-study, gameplay in prototype. Prima del modello finale
+restano da rifinire volto/mano/pieghe, contatto della presa e origine visiva dei
+proiettili (ancora gestita dalla VFX generica). Nessuna validazione artistica con
+persone o FPS/hardware. Il concept continua a essere un riferimento più ambizioso.

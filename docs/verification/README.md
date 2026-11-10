@@ -50,3 +50,8 @@ quando l'autosalvataggio è spento. La matrice corrente è in HANDOFF.md.
 character-latest.json: studio d'autore dei due modelli con medesime luce/camera,
 quattro pose e hash sorgente/immagini. Non è screenshot della camera di gioco né
 misura di FPS. Il conteggio 8.524 triangoli include anche mesh nascoste.
+
+
+Blocco Ranger originale: unit/character/browser/garden-latest aggiornati su
+864f97f. Il report checkpoint UI precedente resta attribuito a 45f89ba; non
+riutilizzare quel commit per presentare un nuovo collaudo del modello.

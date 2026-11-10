@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAtUtc": "2026-11-10T18:41:58.854Z",
+  "startedAtUtc": "2026-11-10T19:14:41.803Z",
   "runs": [
     {
       "name": "desktop",
@@ -29,7 +29,7 @@
       "persistentEntries": 0
     }
   ],
-  "buildEntrySha256": "bf700caf6ca99584b4ac01b17693590826ddcba3122c1a7cfb2c51398affbfc3",
+  "buildEntrySha256": "b31b965fcf5f311f1a46dcf33a4b863616bc1b5b4de19cb5b0bb6d472a6437ba",
   "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
   "runnerSha256": "a4c59fb58903cff9eae2a53ec186c80246662b2210fb201f9aaca16f0f889d21",
   "storageFallbacks": [
@@ -44,7 +44,7 @@
       "errors": 0
     }
   ],
-  "finishedAtUtc": "2026-11-10T18:50:35.306Z",
-  "checkedSourceCommit": "34129152baaf266cef79607179f2a81e850435e5",
-  "renderer": "Chromium SwiftShader software at normal time; mobile DPR 2; not physical iPhone"
+  "finishedAtUtc": "2026-11-10T19:23:01.566Z",
+  "checkedSourceCommit": "864f97ff5fedce58da97fab769fb02cd6a2643b6",
+  "renderer": "Chromium SwiftShader, normal time, mobile DPR 2; not physical iPhone"
 }

@@ -2,27 +2,29 @@
 
 Aggiornato da Codex il 10 novembre 2026, fuso Europe/Rome.
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Ultimo commit applicativo: **45f89ba**. Verificare sempre git log/status e remoto
+Ultimo commit applicativo: **864f97f**. Verificare sempre git log/status e remoto
 prima di continuare. Main e servizio precedente restano separati.
 
-## Blocco corrente — primo Ranger originale in verifica
+## Ultimo blocco concluso — Ranger e comunicazione della ripartenza
 
-Base 8abd192. Quantità proposte primo arco in CONTENT_SCOPE.md: sei personaggi,
-tre NPC, otto tipi di nemico e dieci missioni, non ancora approvate/realizzate.
-Caption pronta in social/RESTART_CAPTION.md; pubblicazione manuale richiesta dal
-proprietario, nessun post o trailer prodotto in questo blocco.
+94 test superati, build riuscita (710 kB JS / 190 kB gzip, warning aperto).
+Primo corpo Ranger originale integrato, distinto dagli altri cinque ruoli:
+giacca, sciarpa/mantello, treccia, faretra, taccuino, arco con corda, freccia
+incoccata e risonanza. 8.524 triangoli di mesh totali, 44 mesh e 14 materiali.
+Resa semplificata: volto, mani, pieghe e contatti della posa restano da rifinire.
+Non equivale alla tavola illustrata o a una scultura finale approvata.
 
-Prima traduzione procedurale del concept Daria integrata per il Ranger: corpo
-proprio, abiti, treccia, mantello, faretra, arco/corda e risonanza. Altri kit e
-regole preservati. 8.524 triangoli totali di mesh, 44 mesh dopo raggruppamento,
-14 materiali: conteggio del modello, non FPS o draw call della scena completa.
-94 test superati; build riuscita (710 kB JS / 190 kB gzip, warning aperto). Studio geometria a quattro pose completato: corpo, corda, risonanza e retro.
-Vista di authoring, non camera del gioco; resa stilizzata ancora distante dal
-concept illustrato. Studio condiviso in assets/character-study con hash in character-latest.json.
-Verifica browser integrata ancora pendente:
-i rapporti precedenti sotto non coprono questo modello. Arte ancora provvisoria,
-nessuna conversione automatica del PNG o scultura finale. Nessun incarico Claude
-sovrapposto registrato; nessuna spesa/deploy/produzione.
+Studio di authoring a quattro pose e regressione integrata superati, così come
+il Giardino con nuovo modello su desktop/mobile. Nessun errore/richiesta esterna
+nei percorsi completi. Zero nuove createBuffer durante tre rivisite a caldo:
+non misura tutte le risorse GPU o FPS. Nessuna prova umana o hardware reale.
+
+CONTENT_SCOPE.md propone per il primo arco sei personaggi, tre NPC, otto tipi
+di nemico e dieci missioni. Solo i sei ruoli sono già concordati; gli altri
+numeri sono obiettivi adattabili, non contenuti completati. Caption con cinque
+hashtag in social/RESTART_CAPTION.md per pubblicazione manuale del proprietario.
+TRAILER_BRIEF.md contiene solo appunti per il successivo incarico: nessun video
+prodotto o pubblicato. Vecchio kit ritirato. Nessun acquisto/deploy/produzione.
 
 ## Mandato e collaborazione
 
@@ -52,7 +54,8 @@ un'integrazione social attiva. Ads, messaggi privati e account terzi esclusi.
 Prototipo individuale Vite/Three.js, Node >=22 e lockfile. Nessuna chiamata al
 backend precedente, account, analytics o pagamenti nella nuova build.
 
-- Sei kit di classe, combo, abilità, proiettili, scatto a vigore e interruzioni.
+- Sei kit di classe, primo corpo Ranger originale e cinque ruoli con corpo
+  condiviso; combo, abilità, proiettili, scatto a vigore e interruzioni.
 - Due echi → ricordo di Liora → risveglio → Custode con Frattura/Onda → tre tracce.
 - Ranger Tiro di ritorno: schivata d'impatto dopo risveglio, finestra di 4 secondi
   per abilità doppia; seconda freccia ritardata di 140 ms al 65% del danno base.
@@ -90,20 +93,20 @@ di regioni. I dati locali non sono autorità per economia o premi online futuri.
 
 ## Verifiche e provenienza
 
-**88 test superati**, build riuscita: circa 702 kB JS / 187 kB gzip; warning
+**94 test superati**, build riuscita: circa 710 kB JS / 190 kB gzip; warning
 chunk >500 kB ancora aperto. Rapporti in docs/verification/:
 
 | Rapporto | Sorgenti verificate | Ambito |
 | --- | --- | --- |
-| unit-latest.json | 45f89ba | 88 test, incluse fixture SQL sintetiche e ripresa sentinella |
-| garden-latest.json | 47b9f36 | Desktop/mobile, missione, migrazione, ricarica, ritorno, rivisite |
-| browser-latest.json | 3412915 | Regressione completa del primo episodio a tempo normale, inclusi fallback storage |
-| checkpoint-ui-latest.json | 45f89ba | Ultimo testo guida e ripresa v1/v2 con autosave spento, sentinella già sconfitta |
+| unit-latest.json | 864f97f | 94 test, incluse geometria/pose, regole e fixture SQL sintetiche |
+| garden-latest.json | 864f97f | Desktop/mobile, missione, migrazione, ricarica, ritorno, rivisite |
+| browser-latest.json | 864f97f | Regressione completa del primo episodio a tempo normale, inclusi fallback storage |
+| character-latest.json | 864f97f | Confronto di authoring, quattro pose, hash geometria/immagini |
+| checkpoint-ui-latest.json | 45f89ba | Precedente controllo testo guida e ripresa v1/v2 con autosave spento, sentinella già sconfitta |
 
-Tra 3412915 e 45f89ba il solo ritocco applicativo è il testo dell'obiettivo quando
-nel giardino non restano nemici: controllato nel test rapido dedicato. Ogni
-rapporto include gli hash pertinenti; non attribuire automaticamente a nuovi
-sorgenti risultati di commit precedenti. Tutti i runner finali sopra hanno exit 0.
+I rapporti indicano sorgenti/hash e ambito; quello rapido checkpoint precedente
+mantiene la propria provenienza e non è stato rieseguito in questo blocco.
+I runner di studio, regressione e Giardino correnti hanno exit 0.
 
 Chromium SwiftShader, non dispositivi fisici. Nuova area: Leggera, DPR 1,
 1440×900/390×844 e layout 844×390. Regressione: mobile DPR 2 e controlli dei tre
@@ -122,6 +125,7 @@ npm run build
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:garden
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:checkpoints
+MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:character
 ```
 
 Altrove installare Chromium Playwright. npm run dev avvia su loopback; il relativo
@@ -133,7 +137,8 @@ sono in test-results/, ignorata da Git; condividere solo gli esiti verificati.
 
 1. **Arte:** tradurre un personaggio in qualità giocabile con confronto reale.
    CHARACTER_DARIA.md e tavola originale sono una proposta per il Ranger;
-   nome/cast non approvati, nessun modello Daria implementato. Non presentare
+   nome/cast non approvati; prima interpretazione procedurale presente, qualità
+   finale e somiglianza al concept da migliorare. Non presentare
    il concept come screenshot o asset 3D già pronto.
 2. **Prova umana:** PLAYTEST_01.md; capire obiettivo, cariche, crescita e orientamento.
    Non dedurre divertimento, bilanciamento o retention dai bot.
