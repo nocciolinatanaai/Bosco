@@ -194,3 +194,10 @@ Blocco attivo: Ranger, schivata di un impatto → finestra di tiro doppio;
 file combat/runtime/ui/visuals e test dedicati, documenti feedback e roadmap.
 Preservare scatto comune, sei classi, tappe locali e sequenza narrativa.
 Nessun incarico sovrapposto osservato. Nessuna produzione o spesa.
+
+
+Checkpoint correttivo del runner Ranger: focus sul canvas prima di Spazio,
+percorso di avvicinamento diagonale e lettura value del progress corretti.
+I primi due tentativi non sono esiti superati; diagnostiche conservate localmente.
+Nessuna modifica a danni o salute per far passare il test. Tempismo del potere
+esplicitato nelle istruzioni. Verifica finale ancora da eseguire.

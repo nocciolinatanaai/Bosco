@@ -3,7 +3,7 @@ export function journey(s) {
   const echoes = s.enemies.filter(e => !e.boss), remaining = echoes.filter(e => e.hp > 0).length;
   if (s.cleared && s.trail.complete) return { id: 'complete', title: 'La mappa ricorda', hint: 'Tre segni, una firma: Cartiglio. Il ricordo ora indica una strada.' };
   if (s.cleared) return { id: 'trail', title: 'La strada che manca', hint: `${s.trail.found.length} / 3 tracce. Raggiungi il segno luminoso e scatta vicino: la risonanza ricostruirà il percorso.` };
-  if (s.evolved) return { id: 'guardian', title: 'Spezza il silenzio', hint: s.role.id === 'ranger' ? 'Evita un impatto con lo scatto: avrai 4 secondi per rispondere con l’abilità e due frecce.' : 'Il tuo scatto ora colpisce i nemici vicini. Provalo contro il Custode.' };
+  if (s.evolved) return { id: 'guardian', title: 'Spezza il silenzio', hint: s.role.id === 'ranger' ? 'Schiva all’ultimo istante: avrai 4 secondi per rispondere con l’abilità e due frecce.' : 'Il tuo scatto ora colpisce i nemici vicini. Provalo contro il Custode.' };
   if (remaining === 0) return { id: 'resonance', title: 'Ascolta il ricordo', hint: 'Risveglia l’eco: lo scatto diventerà anche un contrattacco.' };
   if (remaining < echoes.length) return { id: 'echoes', title: 'Libera l’ultimo eco', hint: 'Aspetta la carica, esci dal cerchio e sfrutta il recupero.' };
   if (s.lesson.distance < 1 && !s.lesson.hit) return { id: 'move', title: 'Trova gli echi', hint: 'Muoviti con WASD, joystick o toccando il terreno.' };

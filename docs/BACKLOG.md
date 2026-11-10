@@ -121,3 +121,11 @@ Salvataggio locale delle tappe: implementato opt-in/ripresa/cancellazione;
 69 test e build riusciti. Verifica browser estesa superata su desktop/mobile simulato, inclusi fallback
 per dati corrotti e storage bloccato (rapporto sorgenti 2b832e8).
 Non equivale a persistenza online, anti-cheat o progressione fra dispositivi.
+
+
+## Prima crescita specifica e ascolto del pubblico
+
+EV01 parziale: Ranger Tiro di ritorno implementato, otto test nuovi (77 totali)
+e build riusciti. Prova browser dedicata e regressione ancora pendenti.
+PLAYER_FEEDBACK.md riserva capacità alle richieste reali; ROADMAP_40.md raccoglie
+risultati da costruire prima di rivalutare l'avanzamento complessivo.

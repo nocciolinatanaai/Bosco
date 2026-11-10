@@ -114,7 +114,7 @@ export function startRuntime($) {
     $('info-title').textContent = title; $('info-body').textContent = body;
     $('input-options').hidden = !controls; info.showModal();
   };
-  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
+  $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Il Ranger risvegliato può schivare un impatto all’ultimo istante e usare l’abilità entro 4 secondi per un tiro doppio. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
   $('guild').addEventListener('click', () => showInfo('Una storia da costruire insieme', 'Gilde, contributi asincroni e spedizioni cooperative fanno parte del design approvato. Questa prova è esclusivamente individuale: nessun altro giocatore è collegato.'));
   $('store').addEventListener('click', () => showInfo('Store Mythwood', 'Store chiuso durante il prototipo. Nessun prodotto, codice o pagamento attivo. Il catalogo precedente non viene caricato.'));
   $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
@@ -206,7 +206,7 @@ export function startRuntime($) {
       }
       if (event.type === 'evolved') {
         auraMat.opacity = .8; player.scale.setScalar(1.34);
-        notice(state.role.id === 'ranger' ? 'TIRO DI RITORNO · Evita un impatto con lo scatto, poi usa l’abilità per rispondere con due frecce.' : 'PASSO DI RISONANZA · Lo scatto ora colpisce e interrompe. Affronta il Custode.', 7);
+        notice(state.role.id === 'ranger' ? 'TIRO DI RITORNO · Schiva all’ultimo istante, poi usa l’abilità per rispondere con due frecce.' : 'PASSO DI RISONANZA · Lo scatto ora colpisce e interrompe. Affronta il Custode.', 7);
       }
       if (event.type === 'defeated') { clearControls(); $('result-text').textContent = defeatMessage(state); result.showModal(); setPause(false); }
     }
@@ -238,6 +238,7 @@ export function startRuntime($) {
     $('signature-status').textContent = returnReady ? `TIRO DI RITORNO · ${state.returnShot.toFixed(1)} s · usa l’abilità` : '';
     $('skill').classList.toggle('return-ready', returnReady);
     $('skill-name').textContent = returnReady ? 'Tiro di ritorno' : state.role.skill;
+    $('skill').title = returnReady ? 'Tiro di ritorno' : state.role.skill;
     $('skill').setAttribute('aria-label', returnReady ? 'Tiro di ritorno. Usa l’abilità prima dello scadere per scoccare due frecce.' : `${state.role.skill}. Abilità di classe.`);
     $('skill-state').textContent = state.skillBuffer > 0 ? 'IN CODA' : state.cooldown > 0 ? `${state.cooldown.toFixed(1)} s` : 'PRONTA';
     $('dash').disabled = state.stamina < 30 || state.dashCooldown > 0 || state.status !== 'playing';

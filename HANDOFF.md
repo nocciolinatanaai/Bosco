@@ -14,6 +14,11 @@ per richieste reali: nessuna percentuale nuova o feedback inventato.
 Ranger Tiro di ritorno implementato: impatto evitato con scatto → 4 secondi per
 rispondere con abilità doppia. Otto test nuovi, 77 totali superati; build riuscita
 (689 kB JS / 183 kB gzip, warning ancora presente). Specifica RANGER_EVOLUTION.md.
+Due tentativi iniziali del runner si sono fermati per errori della prova:
+focus rimasto nel menu (Spazio non attiva volutamente lo scatto su quei pulsanti)
+e lettura inputValue su un progress. Corretto il runner, aggiunte diagnostiche
+e istruzioni sul tempismo. La prova aveva eseguito il contrattacco desktop, ma
+non è segnata superata finché il runner non termina.
 Verifica browser del nuovo comportamento e regressione completa ancora pendenti
 al checkpoint. Rapporti versionati precedenti non coprono questo nuovo codice.
 
