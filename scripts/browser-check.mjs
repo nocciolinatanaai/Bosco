@@ -125,7 +125,10 @@ try {
     }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.screenshot({ path: `test-results/${name}-arena.png` });
-    await page.locator('#brand').click(); await page.locator('[data-class="ranger"]').click(); await page.locator('#start').click();
+    assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0, 'Nessuna persistenza senza opt-in');
+    await page.locator('#brand').click(); await page.locator('[data-class="ranger"]').click();
+    await page.locator('#save-start').check(); await page.locator('#start').click();
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'arrival');
     assert.equal(await page.locator('#boss').isHidden(), true, 'Custode sigillato prima del ricordo');
     assert.ok((await page.locator('#journey-hint').innerText()).includes('Muoviti'));
     await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
@@ -145,6 +148,7 @@ try {
     }
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#rank').innerText(), 'PRIMA RISONANZA');
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'awakened');
     assert.equal(await page.locator('#boss').isVisible(), true);
     await page.locator('#dash').click();
     assert.equal(await page.locator('#dash strong').innerText(), 'Risonanza');
@@ -168,6 +172,7 @@ try {
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#boss').isHidden(), true);
     assert.equal(await page.locator('#quest-title').innerText(), 'La strada che manca');
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'guardian');
     if (mobile) {
       await page.setViewportSize({ width: 844, height: 390 });
       const follow = await page.locator('#follow-trail').boundingBox(), stick = await page.locator('#joystick').boundingBox();
@@ -179,6 +184,19 @@ try {
       await page.waitForFunction(() => document.getElementById('follow-trail').textContent.includes('Risuona'), {}, { timeout: 60000 });
       await page.locator('#follow-trail').click();
       if (i < 2) await page.waitForFunction(n => document.getElementById('journey-hint').textContent.startsWith(`${n} / 3`), i + 1);
+      assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).traces), i + 1);
+      if (i === 0) {
+        await page.reload({ waitUntil: 'networkidle' });
+        assert.ok((await page.locator('#saved-summary').innerText()).includes('1 / 3'));
+        await page.locator('#resume-saved').click();
+        assert.equal(await page.locator('#role-name').innerText(), 'Ranger');
+        assert.equal(await page.locator('#hp-text').innerText(), '130 / 130');
+        assert.equal(await page.locator('#memory').evaluate(e => e.open), false);
+        assert.ok((await page.locator('#journey-hint').innerText()).startsWith('1 / 3'));
+        if (mobile) {
+          await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click();
+        }
+      }
     }
     await page.waitForFunction(() => document.getElementById('memory').open);
     assert.ok((await page.locator('#memory-body').innerText()).includes('Cartiglio'));
@@ -191,7 +209,22 @@ try {
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#quest-title').innerText(), 'La mappa ricorda');
     assert.equal(await page.locator('#follow-trail').isHidden(), true);
-    await page.locator('#brand').click(); await page.locator('[data-class="mage"]').click(); await page.locator('#start').click();
+    await page.locator('#help').click(); await page.locator('#save-option').uncheck();
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).autoSave), false);
+    await page.locator('#close-info').click();
+    await page.reload({ waitUntil: 'networkidle' });
+    assert.equal(await page.locator('#save-start').isChecked(), false);
+    assert.ok((await page.locator('#saved-summary').innerText()).includes('Cartiglio'));
+    await page.evaluate(() => localStorage.setItem('unrelated-test', 'keep'));
+    page.once('dialog', dialog => dialog.accept()); await page.locator('#forget-saved').click();
+    assert.equal(await page.evaluate(() => localStorage.getItem('mythwood.checkpoint.v1')), null);
+    assert.equal(await page.evaluate(() => localStorage.getItem('unrelated-test')), 'keep');
+    await page.evaluate(() => localStorage.removeItem('unrelated-test'));
+    assert.equal(await page.locator('#resume-saved').isHidden(), true);
+    if (mobile) {
+      await page.locator('#start').click(); await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click(); await page.locator('#brand').click();
+    }
+    await page.locator('[data-class="mage"]').click(); await page.locator('#start').click();
     await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
     await page.waitForFunction(() => document.getElementById('result').open, {}, { timeout: 90000 });
     assert.ok((await page.locator('#result-text').innerText()).includes('L’ultimo colpo'));
@@ -203,9 +236,36 @@ try {
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0);
     assert.deepEqual(external, [], 'Nessuna richiesta remota');
     assert.deepEqual(errors, [], 'Nessun errore browser');
-    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, tracce e ritratto Liora, audio, qualità grafica, sconfitta e riprova, isolamento`);
-    report.runs.push({ name, viewport, status: 'passed', externalRequests: external.length, errors: errors.length, portraitRequests: portraitRequests.length, persistentEntries: 0 });
+    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, tracce e ritratto Liora, salvataggio/ripresa/eliminazione, audio, qualità grafica, sconfitta e riprova, isolamento`);
+    report.runs.push({ name, viewport, status: 'passed', externalRequests: external.length, errors: errors.length, portraitRequests: portraitRequests.length, checkpoints: 'opt-in, milestones, reload, resume, pause preference, delete own key', persistentEntries: 0 });
     await saveReport();
+    await context.close();
+  }
+  report.storageFallbacks = [];
+  for (const mode of ['corrupt', 'blocked']) {
+    const context = await browser.newContext(); const page = await context.newPage(); const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('**/*', route => new URL(route.request().url()).origin === 'http://127.0.0.1:5180' ? route.continue() : route.abort());
+    await page.addInitScript(mode => {
+      if (mode === 'blocked') Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Disabled', 'SecurityError'); } });
+      else { localStorage.setItem('mythwood.checkpoint.v1', '{broken'); localStorage.setItem('unrelated-test', 'keep'); }
+    }, mode);
+    await page.goto('http://127.0.0.1:5180/', { waitUntil: 'networkidle' });
+    assert.equal(await page.locator('#resume-saved').isHidden(), true);
+    if (mode === 'corrupt') {
+      assert.equal(await page.evaluate(() => localStorage.getItem('mythwood.checkpoint.v1')), '{broken');
+      assert.ok((await page.locator('#saved-summary').innerText()).includes('non è leggibile'));
+      page.once('dialog', dialog => dialog.accept()); await page.locator('#forget-saved').click();
+      assert.equal(await page.evaluate(() => localStorage.getItem('mythwood.checkpoint.v1')), null);
+      assert.equal(await page.evaluate(() => localStorage.getItem('unrelated-test')), 'keep');
+    } else await page.locator('#save-start').check();
+    await page.locator('#start').click();
+    assert.equal(await page.locator('#selection').evaluate(e => e.open), false);
+    if (mode === 'blocked') {
+      assert.equal(await page.locator('#save-start').isChecked(), false);
+      assert.ok((await page.locator('#save-start-status').innerText()).includes('non disponibile'));
+    }
+    assert.deepEqual(errors, []); report.storageFallbacks.push({ mode, status: 'passed', errors: 0 }); await saveReport();
     await context.close();
   }
   report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.currentViewport; await saveReport();

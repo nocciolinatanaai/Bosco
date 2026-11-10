@@ -31,7 +31,8 @@ percorso: non è un teletrasporto. Da vicino il pulsante attiva lo scatto e ne
 rispetta risorse/recupero; il giocatore può usare anche i comandi normali.
 Il focus torna al canvas per evitare che Spazio riattivi il pulsante di navigazione.
 
-Il nuovo tentativo riparte senza tracce precedenti: non esistono ancora salvataggi.
+Senza autosalvataggio il nuovo tentativo riparte da zero. Con il salvataggio
+locale attivo si riprende dall’ultima tappa; vedi LOCAL_CHECKPOINTS.md.
 
 ## File e verifiche
 

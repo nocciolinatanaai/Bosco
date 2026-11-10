@@ -19,7 +19,8 @@ npm run dev
 ```
 
 Il server ascolta su loopback. Non contatta Supabase, non crea account, non
-salva progressi, non usa analytics e non abilita pagamenti.
+usa analytics e non abilita pagamenti. Il salvataggio locale delle tappe è
+facoltativo, inizialmente spento: vedi [LOCAL_CHECKPOINTS.md](docs/LOCAL_CHECKPOINTS.md).
 
 ## Cosa provare
 
@@ -73,7 +74,7 @@ nessun deploy, migrazione online o modifica degli account social è stato esegui
 ## Limiti noti
 
 Nessun multiplayer, mondo vasto, collisioni ambientali complete, asset finali,
-salvataggi, backend nuovo o store operativo. Gli archetipi hanno regole, equipaggiamenti e pose differenti; condividono ancora
+salvataggi online, backend nuovo o store operativo. Gli archetipi hanno regole, equipaggiamenti e pose differenti; condividono ancora
 il modello procedurale di base. Animazioni, audio e resa artistica finali mancano. Nessuna promessa
 di durata o viralità. La prima build contiene un chunk motore superiore a 500 kB
 minificati: distribuzione, prestazioni reali e caricamento progressivo sono da

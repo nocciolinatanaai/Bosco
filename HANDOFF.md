@@ -5,6 +5,24 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
+### Checkpoint: salvataggio locale facoltativo (verifica browser pendente)
+
+10 novembre 2026, Codex, base e52d1ca. Implementati opt-in, ripresa da tappa,
+preferenza autosalvataggio, cancellazione esplicita e controllo di conflitti fra
+schede. Nessun account o chiamata al backend. Cinque campi locali soltanto;
+combattimenti ricreati con vita/vigore pieni. Disattivare conserva il progresso;
+eliminare rimuove solo la chiave Mythwood. Dettagli in LOCAL_CHECKPOINTS.md.
+
+File checkpoints.js, runtime.js, ui.js, style.css e tests/checkpoints.test.mjs.
+69 test superati, build riuscita (687 kB JS / 182 kB gzip, warning dimensione
+ancora presente). Runner browser esteso a ricarica/ripresa dopo prima traccia,
+preferenza persistita, cancellazione selettiva, dati corrotti e storage bloccato.
+Queste nuove verifiche browser sono ancora pendenti a questo checkpoint;
+i rapporti versionati precedenti documentano e245bf8, non questa modifica.
+Prossimo passo: eseguire il runner, correggere eventuali regressioni e condividere
+il rapporto finale. Nessun merge/deploy o revisione ricevuta da Tonino.
+
+
 ### Checkpoint verificato: pista interattiva e ritratto di Liora
 
 10 novembre 2026, Codex. Prosecuzione autonoma sul ramo condiviso, base e732810

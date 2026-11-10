@@ -155,3 +155,11 @@ rapporto persistente disponibile in docs/verification/. Le catture aggiornate
 non sostituiscono il rapporto e non dimostrano prestazioni hardware. Questa
 consegna documentale registra il risultato; nessun merge/deploy o risposta di
 Tonino ricevuta. I checkpoint successivi seguono la regola richiesta dal proprietario.
+
+
+## Salvataggio locale — checkpoint prima della prova browser
+
+Codex, 10 novembre 2026, base e52d1ca. Opt-in e ripresa alle tappe implementati;
+69 test e build passano. Nuovi controlli browser ancora pendenti. File assegnati:
+checkpoints.js, runtime/ui/style, relativi test e documenti. Dati solo locali,
+nessuna produzione. Riprendere dal nuovo paragrafo HANDOFF e da LOCAL_CHECKPOINTS.

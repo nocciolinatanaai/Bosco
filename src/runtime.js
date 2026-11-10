@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { createCheckpointStore, restoreCheckpoint, checkpointLabel, checkpointFromSession } from './checkpoints.js';
 import { activeTrace, TRACE_RADIUS } from './trail.js';
 import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
@@ -33,6 +34,56 @@ export function startRuntime($) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const motionReduced = () => reducedMotion.matches || motionOverride;
   const active = () => state?.status === 'playing' && !paused && !selection.open && !info.open && !result.open && !memory.open;
+  const checkpointStore = createCheckpointStore();
+  let saved = checkpointStore.load(), saveEnabled = Boolean(saved.checkpoint?.autoSave);
+  function refreshSaveUI(message = '') {
+    $('save-start').checked = saveEnabled; $('save-option').checked = saveEnabled;
+    $('saved-checkpoint').hidden = !saved.checkpoint && saved.status !== 'invalid';
+    $('saved-summary').textContent = saved.checkpoint ? checkpointLabel(saved.checkpoint) : 'La tappa non è leggibile. Puoi eliminarla oppure iniziare senza salvarla.';
+    $('resume-saved').hidden = !saved.checkpoint;
+    $('delete-save').hidden = !saved.checkpoint && saved.status !== 'invalid';
+    $('start').textContent = saved.checkpoint ? 'Nuova spedizione ↗' : 'Attraversa la soglia ↗';
+    $('restart').textContent = saveEnabled && saved.checkpoint ? 'Riprova dalla tappa' : 'Riprova';
+    const defaultMessage = saved.status === 'unavailable' ? 'Memoria del dispositivo non disponibile. Puoi giocare senza salvataggio.'
+      : saveEnabled ? 'Salvataggio attivo alle tappe. I combattimenti in corso non vengono conservati.'
+      : saved.checkpoint ? 'Autosalvataggio disattivato. La tappa precedente resta disponibile.'
+      : 'Facoltativo: salva solo classe e tappe. Nessun account o invio al server.';
+    $('save-start-status').textContent = message || (saved.checkpoint && saveEnabled ? 'Una nuova spedizione sostituirà questa tappa; Riprendi conserva i progressi.' : defaultMessage);
+    $('save-status').textContent = message || `${defaultMessage} Attivarlo conserva la spedizione aperta. Elimina tappa rimuove soltanto il salvataggio Mythwood.`;
+  }
+  function acceptSaveResult(result, operation) {
+    if (Object.hasOwn(result, 'checkpoint')) saved = result;
+    if (result.status === 'conflict') {
+      saveEnabled = false; saved = checkpointStore.load();
+      const text = 'Salvataggio sospeso: un’altra scheda ha cambiato la tappa. Apri la selezione per scegliere cosa riprendere.';
+      refreshSaveUI(text); notice(text, 6); return;
+    }
+    if (result.status === 'unavailable') {
+      saveEnabled = false;
+      const text = operation === 'delete' ? 'Non è stato possibile eliminare la tappa: memoria non accessibile.' : 'Salvataggio non disponibile. La spedizione continua senza nuovi salvataggi.';
+      refreshSaveUI(text); notice(text, 6); return;
+    }
+    refreshSaveUI();
+  }
+  function saveProgress(overwrite = false) {
+    if (saveEnabled && state) acceptSaveResult(checkpointStore.save(state, overwrite), 'save');
+  }
+  function changeSaving(enabled, fromSelection) {
+    if (enabled && !fromSelection && state && saved.checkpoint && checkpointLabel(saved.checkpoint) !== checkpointLabel(checkpointFromSession(state)) &&
+        !window.confirm('Conservare la spedizione aperta al posto della tappa precedente?')) { refreshSaveUI(); return; }
+    saveEnabled = enabled;
+    if (!enabled) { acceptSaveResult(checkpointStore.pause(), 'pause'); return; }
+    if (state && !fromSelection) { saveProgress(); return; }
+    refreshSaveUI();
+  }
+  function deleteCheckpoint() {
+    if (!window.confirm('Eliminare la tappa salvata su questo dispositivo? La spedizione aperta resterà giocabile.')) return;
+    saveEnabled = false; acceptSaveResult(checkpointStore.clear(), 'delete');
+  }
+  $('save-start').addEventListener('change', () => changeSaving($('save-start').checked, true));
+  $('save-option').addEventListener('change', () => changeSaving($('save-option').checked, false));
+  $('delete-save').addEventListener('click', deleteCheckpoint); $('forget-saved').addEventListener('click', deleteCheckpoint);
+  refreshSaveUI();
   function notice(text, duration = 4) { $('toast').textContent = text; noticeUntil = performance.now() + duration * 1000; }
   function choose(id) {
     selected = id;
@@ -66,7 +117,7 @@ export function startRuntime($) {
   $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
   $('guild').addEventListener('click', () => showInfo('Una storia da costruire insieme', 'Gilde, contributi asincroni e spedizioni cooperative fanno parte del design approvato. Questa prova è esclusivamente individuale: nessun altro giocatore è collegato.'));
   $('store').addEventListener('click', () => showInfo('Store Mythwood', 'Store chiuso durante il prototipo. Nessun prodotto, codice o pagamento attivo. Il catalogo precedente non viene caricato.'));
-  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie o memoria persistente, non invia telemetria e non contatta Supabase. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
+  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
   $('close-info').addEventListener('click', () => { info.close(); setPause(pausedBeforeInfo); });
   info.addEventListener('cancel', () => setPause(pausedBeforeInfo));
   memory.addEventListener('cancel', e => e.preventDefault());
@@ -89,7 +140,7 @@ export function startRuntime($) {
   result.addEventListener('cancel', (e) => e.preventDefault());
   $('pause').addEventListener('click', () => { if (state?.status === 'playing') setPause(!paused); });
   $('resume').addEventListener('click', () => setPause(false));
-  $('brand').addEventListener('click', (e) => { e.preventDefault(); setPause(true); selection.showModal(); });
+  $('brand').addEventListener('click', (e) => { e.preventDefault(); setPause(true); saved = checkpointStore.load(); saveEnabled = Boolean(saved.checkpoint?.autoSave); refreshSaveUI(); selection.showModal(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden && state) setPause(true); });
   window.addEventListener('blur', () => { if (state) setPause(true); else clearControls(); });
   $('dpad-option').addEventListener('change', () => {
@@ -105,7 +156,7 @@ export function startRuntime($) {
 
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas: $('world'), antialias: true, powerPreference: 'high-performance' }); }
-  catch { $('graphics-error').hidden = false; $('start').disabled = true; $('class-description').textContent = 'WebGL non disponibile: la scena non può essere avviata.'; return; }
+  catch { $('graphics-error').hidden = false; $('start').disabled = true; $('resume-saved').disabled = true; $('class-description').textContent = 'WebGL non disponibile: la scena non può essere avviata.'; return; }
   let graphics = qualitySettings('balanced', devicePixelRatio);
   renderer.setPixelRatio(graphics.pixelRatio);
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -130,6 +181,7 @@ export function startRuntime($) {
   function consumeEvents() {
     if (!state) return;
     for (const event of drainEvents(state)) {
+      if (['evolved', 'cleared', 'trail-progress'].includes(event.type)) saveProgress();
       effects.event(event, state, motionReduced());
       if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
       else audio.event(event);
@@ -236,7 +288,7 @@ export function startRuntime($) {
   $('skill').addEventListener('click', skill); $('dash').addEventListener('click', dash);
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
 
-  function beginSession() {
+  function beginSession(restoredState = null, replaceSave = false) {
     clearControls(); effects.clear(); audio.stop();
     void audio.setEnabled($('audio-start').checked);
     for (const { group, marker } of enemyViews.values()) {
@@ -245,8 +297,8 @@ export function startRuntime($) {
       marker.traverse((node) => { if (node.isMesh) { node.geometry.dispose(); node.material.dispose(); } });
     }
     enemyViews.clear(); labels.clear(); $('world-labels').replaceChildren(); floats.length = 0;
-    state = createSession(selected); lastGuide = null; uiAt = -1; player.userData.setClass(state.role); auraMat.opacity = .18;
-    player.scale.setScalar(1.2); player.position.set(state.x, 0, state.z); player.rotation.y = Math.PI;
+    state = restoredState || createSession(selected); lastGuide = null; uiAt = -1; player.userData.setClass(state.role); auraMat.opacity = state.evolved ? .8 : .18;
+    player.scale.setScalar(state.evolved ? 1.34 : 1.2); player.position.set(state.x, 0, state.z); player.rotation.y = Math.PI;
     for (const enemy of state.enemies) {
       const view = art.addEnemy(enemy); view.group.userData.enemyId = enemy.id; enemyViews.set(enemy.id, view);
       {
@@ -263,8 +315,19 @@ export function startRuntime($) {
     if (memory.open) memory.close(); memoryKind = null;
     if (result.open) result.close(); if (selection.open) selection.close();
     setPause(false); notice('Attacca, osserva la carica, scatta fuori dal cerchio.', 5); updateUI();
+    if (restoredState) notice('Tappa ripresa. Vita e vigore ripristinati; il combattimento in corso ricomincia.', 6);
+    saveProgress(replaceSave);
   }
-  $('start').addEventListener('click', beginSession); $('restart').addEventListener('click', beginSession);
+  $('start').addEventListener('click', () => beginSession(null, true));
+  $('restart').addEventListener('click', () => beginSession(saveEnabled && saved.checkpoint ? restoreCheckpoint(saved.checkpoint) : null));
+  $('resume-saved').addEventListener('click', () => {
+    const previous = saved.checkpoint; saved = checkpointStore.load();
+    if (JSON.stringify(previous) !== JSON.stringify(saved.checkpoint)) {
+      saveEnabled = Boolean(saved.checkpoint?.autoSave); refreshSaveUI('La tappa è cambiata in un’altra scheda. Controllala prima di riprendere.'); return;
+    }
+    refreshSaveUI(); const restored = restoreCheckpoint(saved.checkpoint);
+    if (restored) { choose(restored.role.id); beginSession(restored); }
+  });
   $('change-class').addEventListener('click', () => { result.close(); setPause(true); selection.showModal(); });
 
   $('world').addEventListener('pointerdown', (event) => {

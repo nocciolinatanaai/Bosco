@@ -249,3 +249,15 @@ footer { z-index: 9; }
   #memory-body { font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
   #memory .primary { min-height: 44px; padding: 10px 20px; }
 }
+
+.save-start { display: flex; gap: 8px; align-items: center; font-size: 12px; margin-top: 14px; }
+.save-start input { width: 18px; height: 18px; accent-color: var(--gold); flex-shrink: 0; }
+#save-start-status { margin-top: 6px; }
+#saved-checkpoint { padding: 12px; border: 1px solid #a68b6359; background: #24303b; margin-top: 16px; }
+#saved-summary { font-size: 12px; margin: 0 0 10px; color: #ead2aa; }
+.saved-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.saved-actions button, #delete-save { border: 1px solid var(--line); background: #182737; min-height: 44px; padding: 8px 12px; font-size: 12px; }
+#resume-saved { border-color: var(--gold); color: var(--gold); }
+.save-options { border: 1px solid var(--line); padding: 14px; }
+.save-options legend { color: var(--gold); padding: 0 6px; }
+#save-status { font-size: 12px; line-height: 1.6; color: var(--muted); }

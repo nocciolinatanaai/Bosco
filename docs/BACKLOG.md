@@ -115,3 +115,8 @@ W01/C04 parziali: il sentiero esistente contiene tre tracce in sequenza, potere
 riutilizzato fuori dal combattimento, navigazione assistita interrompibile e
 breve conclusione Cartiglio. Non è streaming o seconda regione. Verificare con
 persone se la scoperta è comprensibile e appagante prima di moltiplicare i segni.
+
+
+Salvataggio locale delle tappe: implementato opt-in/ripresa/cancellazione;
+69 test e build riusciti. Verifica browser estesa pendente al checkpoint corrente.
+Non equivale a persistenza online, anti-cheat o progressione fra dispositivi.
