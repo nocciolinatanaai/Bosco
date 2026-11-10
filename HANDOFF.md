@@ -17,7 +17,16 @@ rispondere con abilità doppia. Otto test nuovi, 77 totali superati; build riusc
 Due tentativi iniziali del runner si sono fermati per errori della prova:
 focus rimasto nel menu (Spazio non attiva volutamente lo scatto su quei pulsanti)
 e lettura inputValue su un progress. Corretto il runner, aggiunte diagnostiche
-e istruzioni sul tempismo. La prova aveva eseguito il contrattacco desktop, ma
+e istruzioni sul tempismo. Un tentativo successivo ha saltato la breve indicazione 0,1 s nel rendering
+software. Il runner ora usa il tempo del browser avanzato a piccoli passi,
+con input reali, senza accesso allo stato interno; la regressione resta a tempo
+normale. Emersa anche una frizione UX: movimento/attacco dopo il menu ora
+restituiscono il focus al canvas, così Spazio torna a scattare.
+Il runner controlla anche l’attesa della fine dello scatto prima di Q e lascia
+scorrere il clock del browser durante le catture con il gioco in pausa. Corretto
+il messaggio per l’abilità premuta durante lo scatto: attendere la fine, non
+suggerire un altro scatto.
+La prova aveva eseguito il contrattacco desktop, ma
 non è segnata superata finché il runner non termina.
 Verifica browser del nuovo comportamento e regressione completa ancora pendenti
 al checkpoint. Rapporti versionati precedenti non coprono questo nuovo codice.

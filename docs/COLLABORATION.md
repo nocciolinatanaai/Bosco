@@ -201,3 +201,11 @@ percorso di avvicinamento diagonale e lettura value del progress corretti.
 I primi due tentativi non sono esiti superati; diagnostiche conservate localmente.
 Nessuna modifica a danni o salute per far passare il test. Tempismo del potere
 esplicitato nelle istruzioni. Verifica finale ancora da eseguire.
+
+
+Secondo checkpoint di verifica: focus di gioco ripristinato dopo menu quando
+si riprendono movimento/attacco; messaggio abilità durante scatto corretto.
+Runner con clock controllato per evitare campionamento non deterministico del
+momento di schivata; catture con gioco in pausa e attesa abilità disponibile.
+77 test superati, verifica browser finale ancora in corso. Nessun nuovo danno
+ritoccato per la prova. Piano e feedback aggiornati anche nel design principale.

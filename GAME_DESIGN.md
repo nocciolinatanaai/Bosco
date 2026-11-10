@@ -185,8 +185,8 @@ Preparare due trattamenti della stessa scena, uno 2,5D e uno 3D stilizzato.
 
 Valutare coerenza, leggibilità sullo schermo piccolo, personaggi riconoscibili,
 animazioni e feedback. Evitare asset incompatibili fra loro. Registrare licenze
-e costo prima di usare o comprare risorse. Nessun asset è stato ancora acquistato
-o generato per questa proposta.
+e costo prima di usare o comprare risorse. Nessun asset è stato acquistato. Concept e ritratto 2D di Liora sono stati
+generati e documentati; i personaggi 3D rimangono procedurali provvisori.
 
 Obiettivi tecnici da misurare, non risultati già ottenuti: 30 FPS stabili su un
 telefono di riferimento concordato, 60 FPS su PC di riferimento, caricamento
@@ -266,3 +266,14 @@ una gilda online o la realizzazione del mondo grande.
 Primo ritratto illustrato originale di Liora nelle scene di memoria; asset generato
 con image_gen e provenienza versionata (docs/LIORA_PORTRAIT.md). Non è il suo
 modello 3D, il cast finale o la resa già raggiunta per tutti i personaggi.
+
+
+## Ascolto del pubblico e prossimo traguardo
+
+Il proprietario chiede spazio per le richieste dei giocatori e prosecuzione verso
+circa il 35–40% prima di integrare la revisione di Claude. La stima resta da
+rivalutare sui risultati, non sul numero dei task chiusi. ROADMAP_40.md descrive
+la prossima base; PLAYER_FEEDBACK.md riserva capacità alle prove e correzioni.
+Codex coordina direzione e integrazione, Claude può implementare incarichi
+circoscritti e contestare le scelte con evidenze. Nessun collegamento automatico
+alle sessioni o feedback ricevuto viene presunto.

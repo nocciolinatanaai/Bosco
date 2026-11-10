@@ -265,7 +265,7 @@ export function startRuntime($) {
   function primary() { if (active()) { attack(state); consumeEvents(); updateUI(); } }
   function skill() {
     if (!active()) return;
-    if (!cast(state)) notice(state.cooldown > 0 ? `Abilità pronta fra ${state.cooldown.toFixed(1)} s` : 'Termina il colpo o scatta per interromperlo', 1.5);
+    if (!cast(state)) notice(state.dodgeRemaining > 0 ? 'Termina lo scatto, poi usa l’abilità.' : state.cooldown > 0 ? `Abilità pronta fra ${state.cooldown.toFixed(1)} s` : 'Termina il colpo o scatta per interromperlo', 1.5);
     consumeEvents(); updateUI();
   }
   function movementInput() {
@@ -363,6 +363,7 @@ export function startRuntime($) {
     if (!active()) return;
     const nonCombatButton = event.target.closest('button:not([data-combat-action])');
     if (event.code === 'Space' && nonCombatButton) return;
+    if (nonCombatButton && ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'KeyJ', 'KeyQ'].includes(event.code)) $('world').focus({ preventScroll: true });
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
     keys.add(event.code);
     if (!event.repeat) {

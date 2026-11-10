@@ -95,3 +95,10 @@ fluidità o ergonomia su un iPhone fisico.
 4. Attacchi del boss realmente diversi, collisioni coerenti col mondo,
    audio, tutorial da validare con persone e evoluzione specifica per una classe.
 5. Kit cooperativi soltanto dopo una simulazione autorevole e prove multi-client.
+
+
+Dopo aver chiuso informazioni, movimento o attacco da tastiera riportano il
+focus al canvas. Spazio su un pulsante del menu continua ad attivare quel
+pulsante; dopo aver ripreso i comandi di gioco torna a essere lo scatto.
+Nessun trasferimento del focus durante la compilazione di input o nei dialoghi.
+Ranger risvegliato: nuova finestra di contrattacco in RANGER_EVOLUTION.md.
