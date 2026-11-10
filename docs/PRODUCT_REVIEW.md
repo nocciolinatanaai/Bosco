@@ -28,7 +28,7 @@ che il pubblico torni, né che le sei classi siano bilanciate.
 | Ricordo raccontato in una finestra di testo | Liora può restare una spiegazione invece di un personaggio memorabile | Una breve azione/scena che faccia percepire il suo carattere prima del testo |
 | Evoluzione comune e assenza di sinergie reali | Crescita ancora limitata rispetto alla promessa RPG | Una trasformazione specifica di classe e una sinergia simulata, con prima/dopo confrontabile |
 | Arena e sentiero circoscritti | Non soddisfano ancora la richiesta di mondo grande | Due aree con contenuti diversi e passaggio senza perdita di stato; poi streaming |
-| Nessuna prova su hardware reale e motore in chunk >500 kB | Non sappiamo tempi di caricamento, fluidità, calore o ergonomia effettivi | Dispositivi concordati, frame time e rete dichiarati; qualità adattabile sulla base dei dati |
+| Modalità Leggera/Bilanciata/Alta presenti, ma nessuna prova hardware reale e motore in chunk >500 kB | Non sappiamo tempi di caricamento, fluidità, calore o ergonomia effettivi | Dispositivi concordati, frame time e rete dichiarati; qualità adattabile sulla base dei dati |
 | Nessun backend autorevole o cooperativa | Non esistono ancora gilde giocabili | Due client in staging sintetico, riconnessione e premio unico, prima di annunciarli |
 
 ## Ordine che propongo

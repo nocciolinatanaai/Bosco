@@ -5,7 +5,30 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
-### Ultimo intervento: audio originale, ricerca e sconfitta leggibile
+### Ultimo intervento: qualità grafica e controlli alla rotazione
+
+10 novembre 2026, Codex. Prosecuzione autonoma richiesta dal proprietario.
+Base 96a6466: audio, ricerca e feedback di sconfitta già pubblicati sul ramo
+condiviso. Checkout pulito prima dell’intervento; nessun incarico sovrapposto
+osservato. Nessun merge/deploy, spesa o operazione su produzione.
+
+Implementate Leggera/Bilanciata/Alta in Comandi e audio. Limiti di pixel ratio,
+mappe d’ombra e bloom; percorso diretto in Leggera. Segnali del combattimento e
+logica preservati. Riapplicazione al resize con azzeramento dei comandi trattenuti.
+File graphics-quality.js, environment.js, runtime.js, ui.js, style.css;
+test di profili e runner browser con controllo dei buffer reali, mobile a 2×.
+Specifiche e limiti in docs/GRAPHICS_QUALITY.md.
+
+Verifiche: 55 test superati, build circa 673 kB JS / 178 kB gzip; warning >500 kB
+presente. Prova browser finale superata su desktop 1440×900 e mobile 390×844 (dispositivo
+simulato a 2×), con layout landscape 844×390. Controllati i buffer delle tre
+modalità e completato il percorso con audio, Frattura/Onda, vittoria, sconfitta
+e riprova; il mobile percorre la prova in Leggera. Nessun errore JS, richiesta
+esterna o persistenza osservati. Rapporti in test-results/*-graphics.json. Non dichiarare FPS o prestazioni
+iPhone sulla base del rapporto pixel. Le preferenze restano in memoria locale
+alla sessione, senza persistenza o telemetria.
+
+### Intervento precedente: audio originale, ricerca e sconfitta leggibile
 
 10 novembre 2026, Codex. Mandato continuativo del proprietario: proseguire in
 autonomia e mantenere il ramo condiviso. Partenza 058e7e5, checkout pulito;

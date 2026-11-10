@@ -239,6 +239,14 @@ export function createArtWorld(renderer) {
   return {
     scene, materials: m, player: actor.root, body: actor.body, weapon: actor.weapon, aura, auraMat,
     portalRing: p.rings,
+    setShadowQuality(enabled, size) {
+      sun.castShadow = enabled;
+      if (sun.shadow.mapSize.x !== size) {
+        sun.shadow.map?.dispose(); sun.shadow.mapPass?.dispose();
+        sun.shadow.map = null; sun.shadow.mapPass = null; sun.shadow.mapSize.set(size, size);
+      }
+      sun.shadow.needsUpdate = true;
+    },
     addEnemy(enemy) {
       const group = createGuardian(m, enemy.boss); group.position.set(enemy.x, 0, enemy.z); scene.add(group);
       const marker = createTelegraph(); scene.add(marker);
@@ -256,8 +264,10 @@ export function createPipeline(renderer, scene, camera) {
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), .32, .5, 1.15);
   composer.addPass(bloom); composer.addPass(new OutputPass());
+  let postprocessing = true;
   return {
+    configure(settings) { postprocessing = settings.bloom; bloom.enabled = settings.bloom; composer.setPixelRatio(settings.pixelRatio); },
     resize(width, height) { composer.setSize(width, height); },
-    render() { composer.render(); },
+    render() { if (postprocessing) composer.render(); else renderer.render(scene, camera); },
   };
 }

@@ -124,3 +124,8 @@ implementa audio originale opzionale e feedback della causa di sconfitta;
 ricerca comparativa documentata e proposta narrativa completano la consegna.
 La prima lettura di fonti Steam non viene presentata come sessione di gioco.
 Nessuna risposta di Tonino ancora ricevuta, nessuna pubblicazione social o deploy.
+
+Avanzamento autonomo successivo: grafica configurabile (GRAPHICS_QUALITY.md).
+Profili espliciti, nessun adattamento automatico o valore FPS dichiarato.
+Nessuna modifica concorrente di Tonino osservata; il ramo remoto è stato
+recuperato senza sostituire la main o il sito pubblicato.

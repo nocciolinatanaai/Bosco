@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 // Serve soltanto dist/ su loopback; nessuna connessione al backend di produzione.
@@ -18,7 +18,7 @@ try {
   browser = await chromium.launch({ ...(executablePath ? { executablePath } : {}), args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   await mkdir('test-results', { recursive: true });
   for (const [name, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['mobile', { width: 390, height: 844 }, true]]) {
-    const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile });
+    const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: mobile ? 2 : 1 });
     const page = await context.newPage();
     const errors = [], external = [];
     page.on('pageerror', (error) => { errors.push(error.message); console.error(name, error.message); });
@@ -52,6 +52,16 @@ try {
     await page.locator('#audio-volume').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight');
     assert.equal(await page.locator('#audio-volume-text').innerText(), '1%');
     await page.locator('#audio-option').check();
+    const graphicsChecks = [];
+    for (const [mode, cap] of [['high', 1.75], ['light', 1], ['balanced', 1.35]]) {
+      await page.locator('#quality-select').selectOption(mode);
+      const buffer = await page.locator('#world').evaluate(canvas => ({ width: canvas.width, height: canvas.height, ratio: devicePixelRatio }));
+      assert.ok(Math.abs(buffer.width - viewport.width * Math.min(buffer.ratio, cap)) <= 1);
+      assert.ok(Math.abs(buffer.height - viewport.height * Math.min(buffer.ratio, cap)) <= 1);
+      graphicsChecks.push({ mode, ...buffer });
+    }
+    if (mobile) await page.locator('#quality-select').selectOption('light');
+    await writeFile(`test-results/${name}-graphics.json`, JSON.stringify(graphicsChecks, null, 2));
     await page.locator('#close-info').click();
     assert.equal(await page.locator('#pause').innerText(), 'Riprendi', 'Chiudere le informazioni deve preservare la pausa precedente');
     await page.locator('#pause').click();
@@ -144,7 +154,7 @@ try {
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0);
     assert.deepEqual(external, [], 'Nessuna richiesta remota');
     assert.deepEqual(errors, [], 'Nessun errore browser');
-    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, audio, sconfitta e riprova, isolamento`);
+    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, audio, qualità grafica, sconfitta e riprova, isolamento`);
     await context.close();
   }
 } finally {

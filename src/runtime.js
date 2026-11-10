@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
 import { journey, MEMORY } from './journey.js';
@@ -97,7 +98,8 @@ export function startRuntime($) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas: $('world'), antialias: true, powerPreference: 'high-performance' }); }
   catch { $('graphics-error').hidden = false; $('start').disabled = true; $('class-description').textContent = 'WebGL non disponibile: la scena non può essere avviata.'; return; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.35));
+  let graphics = qualitySettings('balanced', devicePixelRatio);
+  renderer.setPixelRatio(graphics.pixelRatio);
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   const art = createArtWorld(renderer), { scene, player, aura, auraMat } = art;
@@ -297,7 +299,16 @@ export function startRuntime($) {
   });
 
   function resize() { renderer.setSize(innerWidth, innerHeight); pipeline.resize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
-  window.addEventListener('resize', resize); resize();
+  function setGraphics(id) {
+    graphics = qualitySettings(id, devicePixelRatio);
+    renderer.setPixelRatio(graphics.pixelRatio); renderer.shadowMap.enabled = graphics.shadows;
+    art.setShadowQuality(graphics.shadows, graphics.shadowSize); pipeline.configure(graphics);
+    $('quality-select').value = graphics.id; $('quality-status').textContent = graphics.description;
+    resize();
+  }
+  $('quality-select').addEventListener('change', () => setGraphics($('quality-select').value));
+  window.addEventListener('resize', () => { clearControls(); setGraphics(graphics.id); });
+  setGraphics(graphics.id);
   let then = performance.now();
   const fixedStep = 1 / 60;
   renderer.setAnimationLoop((now) => {

@@ -101,3 +101,10 @@ validazione artistica e hardware reale ancora aperti. Aggiunto riepilogo della
 causa di sconfitta con suggerimento specifico e riprova senza conservare quella
 causa. C01 parziale: tre fonti ufficiali lette, ancora senza osservazioni di
 sessioni di gioco o ricerca utenti. Proposta di storia in STORY_BIBLE.md.
+
+## Impostazioni del rendering — 10 novembre
+
+Tre modalità grafiche implementate con limiti di risoluzione, ombre e bloom;
+i segnali funzionali restano attivi. La riduzione dei buffer viene verificata
+nel browser; FPS e consumi sui dispositivi reali non sono ancora misurati.
+GRAPHICS_QUALITY.md raccoglie specifiche e prova successiva richiesta.
