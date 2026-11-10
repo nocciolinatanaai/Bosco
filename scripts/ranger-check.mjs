@@ -44,15 +44,6 @@ try {
       }
       throw Error(`Condizione non raggiunta dopo ${maxMs} ms di simulazione: ${report.step}`);
     }
-    async function capturePaused(path) {
-      // Let Chromium paint while the GAME remains paused. A frozen browser RAF
-      // would otherwise prevent Playwright's screenshot stabilization.
-      assert.equal(await page.locator('#pause').innerText(), 'Riprendi');
-      await page.clock.resume();
-      await page.screenshot({ path });
-      const now = await page.evaluate(() => Date.now());
-      await page.clock.pauseAt(new Date(now + 1000));
-    }
     await page.addInitScript(() => localStorage.setItem('mythwood.checkpoint.v1', JSON.stringify({ version: 1, autoSave: false, role: 'ranger', stage: 'awakened', traces: 0 })));
     report.viewport = name; report.step = 'resume'; await save();
     await page.goto('http://127.0.0.1:5182/', { waitUntil: 'networkidle' });
@@ -61,10 +52,10 @@ try {
     assert.equal(await page.locator('#rank').innerText(), 'PRIMA RISONANZA');
     assert.equal(await page.locator('#signature-status').isHidden(), true);
     report.step = 'approach'; await save();
-    await page.keyboard.down('KeyW'); await page.keyboard.down('KeyD');
+    await page.keyboard.down('KeyW'); if (!mobile) await page.keyboard.down('KeyD');
     assert.equal(await page.evaluate(() => document.activeElement.id), 'world', 'Riprendere a muoversi dopo il menu restituisce il focus al gioco');
     await advanceUntil(async () => (await page.locator('#boss-intent').textContent()).includes('FRATTURA'), 15000);
-    await page.keyboard.up('KeyW'); await page.keyboard.up('KeyD');
+    await page.keyboard.up('KeyW'); if (!mobile) await page.keyboard.up('KeyD');
     report.step = 'dodge impact'; await save();
     await advanceUntil(async () => /FRATTURA.*0\.1 s/.test(await page.locator('#boss-intent').textContent()), 15000, true);
     await page.keyboard.press('Space');
@@ -73,13 +64,11 @@ try {
     assert.equal(await page.locator('#skill-name').innerText(), 'Tiro di ritorno');
     assert.ok((await page.locator('#skill').getAttribute('aria-label')).includes('due frecce'));
     await page.locator('#pause').click({ force: true });
-    await capturePaused(`test-results/${name}-return-shot-ready.png`);
     if (mobile) {
       await page.setViewportSize({ width: 844, height: 390 });
       const hud = await page.locator('#hud').boundingBox(), actions = await page.locator('#actions').boundingBox();
       assert.ok(hud.y + hud.height < actions.y || hud.x + hud.width < actions.x, 'HUD e azioni separati');
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-      await capturePaused('test-results/mobile-return-shot-landscape.png');
       await page.setViewportSize(viewport);
     }
     await page.locator('#pause').click({ force: true });
@@ -100,8 +89,6 @@ try {
 } catch (error) {
   if (currentPage && !currentPage.isClosed()) {
     report.diagnostics = await currentPage.evaluate(() => ({ hp: document.getElementById('hp-text').textContent, stamina: document.getElementById('stamina-text').textContent, intent: document.getElementById('boss-intent').textContent, focus: document.activeElement.id, toast: document.getElementById('toast').textContent, skill: document.getElementById('skill-state').textContent, signature: document.getElementById('signature-status').textContent, paused: document.getElementById('pause').textContent })).catch(() => ({}));
-    await currentPage.clock.resume().catch(() => {});
-    await currentPage.screenshot({ path: 'test-results/ranger-failure.png' }).catch(() => {});
   }
   report.status = 'failed'; report.error = error.message; report.finishedAtUtc = new Date().toISOString(); await save(); throw error;
 } finally { await browser?.close(); server.kill('SIGTERM'); }

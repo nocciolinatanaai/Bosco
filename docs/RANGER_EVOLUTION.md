@@ -31,3 +31,12 @@ File: combat.js, journey.js, runtime.js, ui.js, style.css, visuals/combat-effect
 Otto test dedicati verificano condizioni, tempo, consumo, annullamento, danno,
 singola morte, ripresa e riuso delle viste. Leggere HANDOFF per l'esito browser.
 Bilanciamento e comprensione richiedono una prova umana; non dedurli dal bot.
+
+
+Prova browser ripetibile: npm run test:ranger, con Chromium Playwright o
+MYTHWOOD_CHROMIUM_PATH nel Cloud. Parte da una tappa sintetica risvegliata,
+usa input tastiera/touch e avanza il clock del browser a passi di 100 ms
+(50 ms vicino all'impatto). Non legge o modifica lo stato interno del gioco.
+Verifica anche focus dopo menu e ingombri landscape. Nessuna cattura in questo
+runner: il clock simulato interferisce con la stabilizzazione screenshot.
+La regressione e le catture normali restano nel runner test:browser.

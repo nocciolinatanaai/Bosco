@@ -4,6 +4,10 @@ Preparato il 10 novembre 2026. Il proprietario prevede il rientro di Claude
 l’11 novembre; disponibilità e accesso alla sua sessione non verificati.
 Nessuna risposta o revisione di Tonino è stata ricevuta finora.
 
+Nuovo mandato di coordinamento: Codex mantiene direzione e integrazione;
+Claude può implementare incarichi circoscritti e contestare con prove. Leggere
+ROADMAP_40.md e PLAYER_FEEDBACK.md. Non presupporre il traguardo raggiunto.
+
 ## Punto di partenza comune
 
 Leggere AGENTS.md, HANDOFF.md, GAME_DESIGN.md, EPISODE_01.md, COMBAT_UX.md e

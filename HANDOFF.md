@@ -3,6 +3,22 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Ranger: prova dedicata completata, regressione in avvio
+
+Il runner dedicato è ora passato su desktop 1440×900 e mobile 390×844,
+con controllo landscape 844×390. Input tastiera e abilità touch mobile: impatto
+schivato → finestra visibile → due frecce → Custode a 171 PV → abilità normale.
+Zero errori/richieste esterne. Il clock del browser avanza a piccoli passi per
+il tempismo: non è una prova hardware o una misura di FPS. Nessun accesso allo
+stato interno; partenza da tappa sintetica. Rapporto ranger-latest.json con hash
+runner/build e commit applicativo edd2d59. 77 test e build riusciti.
+
+Correzioni definitive del runner: niente screenshot con clock simulato, attendere
+fine scatto prima di usare l'abilità, avvicinamento diverso sui due orientamenti
+di camera. I tentativi precedenti non erano esiti passati. Il runner completo
+a tempo normale resta da eseguire su questi sorgenti; il rapporto browser-latest
+precedente non li copre ancora. Nessuna pubblicazione, produzione o spesa.
+
 ## Blocco corrente: crescita e spazio al pubblico
 
 Base bdd9454. Mandato aggiornato: Codex prosegue verso una base più completa

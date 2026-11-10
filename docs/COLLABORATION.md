@@ -209,3 +209,13 @@ Runner con clock controllato per evitare campionamento non deterministico del
 momento di schivata; catture con gioco in pausa e attesa abilità disponibile.
 77 test superati, verifica browser finale ancora in corso. Nessun nuovo danno
 ritoccato per la prova. Piano e feedback aggiornati anche nel design principale.
+
+
+## Ranger — verifica dedicata conclusa
+
+Prova finale desktop/mobile passata: impatto evitato, finestra, tiro doppio,
+109 danni effettivi complessivi, reset UI, focus dopo menu e layout landscape.
+Clock controllato; niente catture in questo runner. Rapporto ranger-latest.json,
+applicazione edd2d59 e runner identificato dall'hash. 77 test passati. Il prompt
+Claude è riscritto sul mandato attuale. Checkpoint prima della regressione lunga:
+full browser a tempo normale ancora pendente, nessun 35–40% dichiarato raggiunto.

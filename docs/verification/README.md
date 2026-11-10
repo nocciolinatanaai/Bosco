@@ -27,3 +27,9 @@ checkpoint-ui-latest.json documenta la prova mirata della UI della build success
 stringa corretta, fixture con autosave spento, cancellazione annullata e ripresa.
 Il commit applicativo e l'hash del runner sono distinti; il runner riutilizzabile
 è scripts/checkpoint-ui-check.mjs. La prova non ripete tutta la campagna.
+
+
+ranger-latest.json: contrattacco con input tastiera/touch e clock browser avanzato
+a passi di 100/50 ms. Tappa sintetica, nessuna modifica dello stato interno;
+non è un collaudo hardware. Commit applicativo distinto dall'hash del runner.
+La regressione generale e le catture usano tempo normale in browser-latest.json.

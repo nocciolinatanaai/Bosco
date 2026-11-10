@@ -25,6 +25,10 @@ facoltativo, inizialmente spento: vedi [LOCAL_CHECKPOINTS.md](docs/LOCAL_CHECKPO
 Prova rapida del salvataggio: `npm run test:checkpoints` con Chromium Playwright
 o MYTHWOOD_CHROMIUM_PATH nel Cloud. Usa dati sintetici e non contatta Supabase.
 
+Prova del contrattacco Ranger: `npm run test:ranger` (stessa variabile Chromium
+nel Cloud). Usa una tappa sintetica e tempo browser controllato per il tempismo;
+la regressione generale resta `npm run test:browser` a tempo normale.
+
 ## Cosa provare
 
 Scegli una delle sei classi. Muoviti con WASD/frecce, toccando il terreno o con

@@ -10,7 +10,7 @@ Non aumentare la percentuale contando file, test o documenti.
 
 | Blocco | Risultato osservabile | Stato |
 | --- | --- | --- |
-| Crescita | Un'evoluzione specifica cambia una decisione nel combattimento e ha feedback visivo/UI | Ranger Tiro di ritorno in sviluppo; prova browser pendente |
+| Crescita | Un'evoluzione specifica cambia una decisione nel combattimento e ha feedback visivo/UI | Ranger Tiro di ritorno implementato, prova dedicata desktop/mobile superata; grafica definitiva e bilanciamento aperti |
 | Avventura | Due aree con interazioni differenti, una scoperta narrativa e un passaggio/ripresa coerente | Arena e sentiero presenti; seconda area da costruire |
 | Identità visiva | Un personaggio e una scena rifiniti, animazioni leggibili, confronto reale con il concept | Procedurale provvisorio e ritratto 2D; qualità finale aperta |
 | Squadra | Prova isolata di due client con stato autorevole, riconnessione e nessun premio duplicato | Non implementata |
