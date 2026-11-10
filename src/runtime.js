@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { defeatMessage } from './defeat.js';
+import { createCombatAudio } from './audio/index.js';
 import { journey, MEMORY } from './journey.js';
 import { screenMovement, joystickVector } from './controls.js';
 import { createArtWorld, createPipeline } from './visuals/environment.js';
@@ -7,6 +9,16 @@ import { updateTelegraph } from './visuals/telegraph.js';
 import { createCombatEffects } from './visuals/combat-effects.js';
 
 export function startRuntime($) {
+  const audio = createCombatAudio({ onStatus(status) {
+    $('audio-option').checked = status.enabled; $('audio-start').checked = status.enabled;
+    $('audio-volume').value = Math.round(status.volume * 100); $('audio-volume-text').textContent = `${Math.round(status.volume * 100)}%`;
+    const messages = { off: 'Audio disattivato', paused: 'Audio in pausa', muted: 'Volume a zero', on: 'Effetti sonori attivi', waiting: 'Audio in attesa: disattivalo e riattivalo per riprovare', unsupported: 'Audio non supportato: puoi continuare senza suoni', unavailable: 'Audio non disponibile: puoi continuare senza suoni' };
+    $('audio-status').textContent = messages[status.state]; $('audio-status').dataset.state = status.state;
+  } });
+  $('audio-start').addEventListener('change', () => { $('audio-option').checked = $('audio-start').checked; });
+  $('audio-option').addEventListener('change', () => { void audio.setEnabled($('audio-option').checked); });
+  $('audio-volume').addEventListener('input', () => audio.setVolume(Number($('audio-volume').value) / 100));
+  window.addEventListener('pagehide', () => { void audio.setPaused(true); });
   let memoryKind = null, lastGuide = null;
   const memory = $('memory');
   let selected = 'fighter', state = null, paused = false, pausedBeforeInfo = false;
@@ -40,6 +52,7 @@ export function startRuntime($) {
     $('pause').textContent = value ? 'Riprendi' : 'Pausa';
     $('pause-overlay').hidden = !value || state?.status !== 'playing';
     document.body.classList.toggle('is-paused', Boolean(value && state?.status === 'playing'));
+    return audio.setPaused(value);
   }
   const showInfo = (title, body, controls = false) => {
     pausedBeforeInfo = paused; setPause(true);
@@ -54,7 +67,8 @@ export function startRuntime($) {
   info.addEventListener('cancel', () => setPause(pausedBeforeInfo));
   memory.addEventListener('cancel', e => e.preventDefault());
   $('memory-continue').addEventListener('click', () => {
-    const awakening = memoryKind === 'resonance'; memory.close(); memoryKind = null; setPause(false);
+    const awakening = memoryKind === 'resonance'; memory.close(); memoryKind = null; const ready = setPause(false);
+    if (!awakening) void ready.then(() => { if (active()) audio.play('victory'); });
     if (awakening) evolve(state); consumeEvents(); updateUI();
   });
   function showMemory(kind) {
@@ -107,6 +121,8 @@ export function startRuntime($) {
     if (!state) return;
     for (const event of drainEvents(state)) {
       effects.event(event, state, motionReduced());
+      if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
+      else audio.event(event);
       if (event.type === 'hit') floatText(`${event.amount}${event.critical ? '!' : ''}`, event.x, event.z, event.critical ? 'critical' : '');
       if (event.type === 'heal') { if (event.amount > 0) floatText(`+${event.amount}`, state.x, state.z, 'healing'); notice('Risonanza vitale · impulso rilasciato', 2); }
       if (event.type === 'hurt') {
@@ -124,7 +140,7 @@ export function startRuntime($) {
         auraMat.opacity = .8; player.scale.setScalar(1.34);
         notice('PASSO DI RISONANZA · Lo scatto ora colpisce e interrompe. Affronta il Custode.', 7);
       }
-      if (event.type === 'defeated') { clearControls(); result.showModal(); setPause(false); }
+      if (event.type === 'defeated') { clearControls(); $('result-text').textContent = defeatMessage(state); result.showModal(); setPause(false); }
     }
   }
 
@@ -196,7 +212,8 @@ export function startRuntime($) {
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
 
   function beginSession() {
-    clearControls(); effects.clear();
+    clearControls(); effects.clear(); audio.stop();
+    void audio.setEnabled($('audio-start').checked);
     for (const { group, marker } of enemyViews.values()) {
       scene.remove(group, marker);
       group.traverse((node) => { if (node.isMesh) node.geometry.dispose(); });

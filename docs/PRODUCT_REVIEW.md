@@ -22,7 +22,7 @@ che il pubblico torni, né che le sei classi siano bilanciate.
 | Problema osservato o limite | Implicazione | Prossima prova utile |
 |---|---|---|
 | Modello umanoide comune e forme procedurali semplici | Le sei classi non hanno ancora identità visiva forte; distanza evidente dal concept | Un personaggio originale rifinito e animato, prima di moltiplicare modelli |
-| Assenza di audio | Impatti e trasformazione hanno soltanto feedback visivo | Piccolo set sonoro originale o con licenza documentata, volume/mute e avvio su gesto utente |
+| Prima bozza audio sintetica implementata (AUDIO.md), qualità non validata | Impatti e avvisi ora hanno anche feedback sonoro opzionale | Ascolto su dispositivi reali e revisione dei livelli prima del sound design finale |
 | Boss con sole due mosse, mostri con comportamento quasi uguale | Si può imparare rapidamente tutto il contenuto | Prova umana per capire quando servono nuove decisioni, senza aggiungere subito statistiche |
 | Vittoria automatica verificata soprattutto col Ranger | Non conosciamo il valore relativo dei kit o del kiting | Confronto controllato di tutte le classi e prova reale; nessun nerf basato soltanto sul bot |
 | Ricordo raccontato in una finestra di testo | Liora può restare una spiegazione invece di un personaggio memorabile | Una breve azione/scena che faccia percepire il suo carattere prima del testo |

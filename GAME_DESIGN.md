@@ -28,7 +28,8 @@ circa 35 giorni e 30 euro residui, da riconciliare con le spese effettive.
 - Mimmo di Gianmarco Rinaldi, `@gimmoai`: riferimento per un esperimento autonomo
   raccontato durante il suo svolgimento. Sono stati letti bio e descrizione del
   reel Dfc65J9Ok4R e osservati alcuni fotogrammi, non trascritto tutto l'audio.
-- Non è ancora stata completata una ricerca comparativa documentata degli RPG.
+- Prima ricerca documentata su tre descrizioni ufficiali RPG in docs/RPG_RESEARCH.md;
+  nessuna demo giocata o validazione del coinvolgimento ancora svolta.
 - Grafica attuale giudicata insoddisfacente dal proprietario; manca una revisione
   visiva completa del gameplay reale da parte di Codex.
 
@@ -250,3 +251,9 @@ Il Custode ora alterna Frattura sul punto mirato e Onda sul proprio centro,
 con preparazioni e aperture diverse (docs/GUARDIAN.md). L’obiettivo della prova
 è far scegliere fra spostamento, allontanamento e interruzione; soddisfazione
 e bilanciamento non sono ancora misurati con persone.
+
+Proposte successive in docs/STORY_BIBLE.md: motivazione di Liora, conflitto
+sulla cancellazione dei ricordi e arco iniziale. Soltanto il primo frammento
+è nel prototipo; i capitoli successivi non sono contenuti già disponibili.
+Effetti sonori originali opzionali e riepilogo della causa di sconfitta aggiunti
+per rendere più chiaro il combattimento (docs/AUDIO.md).

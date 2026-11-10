@@ -42,5 +42,5 @@ Una vittoria automatica del Ranger non prova il bilanciamento delle sei classi.
 
 Da verificare con persone: riconoscere le due mosse senza aiuto, reagire dopo
 un errore, capire quando rientrare. Misurare anche smartphone reali e frame time.
-Audio, collisioni complete, varietà dei mostri, immunità alle interruzioni e
+Sound design finale (bozza sintetica in AUDIO.md), collisioni complete, varietà dei mostri, immunità alle interruzioni e
 un eventuale cambio di fase del boss restano decisioni da valutare, non aggiunte.

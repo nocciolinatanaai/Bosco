@@ -93,3 +93,11 @@ C06 parziale: implementate Frattura e Onda con tempi, centri, pose e segnali
 distinti. La geometria del cerchio segue il raggio della mossa. Restano prova
 umana, audio e bilanciamento. Prossimo incarico: revisione concreta di Tonino
 secondo CLAUDE_REVIEW.md; nessuna sua risposta è ancora presente.
+
+## Audio, ricerca e feedback del tentativo — 10 novembre
+
+Prima bozza sonora originale opzionale, volume/mute e gestione pausa implementati;
+validazione artistica e hardware reale ancora aperti. Aggiunto riepilogo della
+causa di sconfitta con suggerimento specifico e riprova senza conservare quella
+causa. C01 parziale: tre fonti ufficiali lette, ancora senza osservazioni di
+sessioni di gioco o ricerca utenti. Proposta di storia in STORY_BIBLE.md.

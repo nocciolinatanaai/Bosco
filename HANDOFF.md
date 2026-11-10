@@ -5,7 +5,41 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
-### Ultimo intervento: pubblicazione della base condivisa
+### Ultimo intervento: audio originale, ricerca e sconfitta leggibile
+
+10 novembre 2026, Codex. Mandato continuativo del proprietario: proseguire in
+autonomia e mantenere il ramo condiviso. Partenza 058e7e5, checkout pulito;
+nessun incarico di un altro agente osservato. Push del ramo autorizzato,
+nessun merge/deploy, SQL online, acquisto o pubblicazione social.
+
+Implementati 17 cue procedurali originali, opt-in, volume 0–100 (iniziale 35),
+pausa/mute/cancellazione, fallback senza audio e limite di voci. Creazione su
+gesto utente; nessun microfono, asset sonoro scaricato o nuova dipendenza.
+File src/audio/, runtime.js, ui.js e style.css; AUDIO.md descrive limiti e prove.
+Aggiunto riepilogo della causa di sconfitta (defeat.js e metadati in combat.js),
+con suggerimento relativo all’attacco che ha colpito e reset al nuovo tentativo.
+
+Verifiche: 53 test della logica superati; harness Web Audio nativo superato su
+17 cue, campioni finiti, volume zero e stop silenziosi, cleanup reale. La prova browser finale passa su desktop 1440×900 e mobile 390×844, con layout
+landscape 844×390: opt-in/pausa/mute/volume, Frattura/Onda, vittoria, riepilogo
+sconfitta e riprova. Nessun errore JS, richiesta esterna o dato persistente
+osservato nei controlli. Build corrente circa
+671 kB JS / 177 kB gzip, warning chunk >500 kB aperto. Nessuna prova hardware
+Safari/iPhone o ascolto valutato da giocatori. CI audio aggiunta; esito remoto
+non osservato.
+
+Ricerca: lette le descrizioni ufficiali Steam di Hades, Hyper Light Drifter e
+CrossCode. Fonti e brevi estratti in research/; analisi/ipotesi in RPG_RESEARCH.md.
+Non sono demo giocate né misure di engagement. STORY_BIBLE.md propone carattere
+di Liora e tre frammenti: solo il primo è implementato. Materiale per obiezioni
+di Tonino, non trama interamente approvata o contenuto già sviluppato.
+
+Consegna versionata nel ramo mythwood/collaboration-base; la storia Git
+identifica il commit corrente. Nessun merge o deploy. Fonti, prove sonore e
+ricerca sono disponibili nei percorsi documentati; la bozza WAV non è
+un asset sonoro definitivo o materiale promozionale.
+
+### Intervento precedente: pubblicazione della base condivisa
 
 10 novembre 2026, Codex. Nuovo mandato esplicito del proprietario: caricare
 codice, documenti e tutte le idee nella repository condivisa e proseguire

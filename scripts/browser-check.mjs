@@ -35,15 +35,23 @@ try {
     await page.locator('[data-class="healer"]').click();
     assert.equal(await page.locator('[data-class="healer"]').getAttribute('aria-pressed'), 'true');
     await page.screenshot({ path: `test-results/${name}-selection.png` });
+    await page.locator('#audio-start').check();
     await page.locator('#start').click();
+    await page.waitForFunction(() => document.getElementById('audio-status').dataset.state === 'on');
     assert.equal(await page.locator('#selection').evaluate((element) => element.open), false);
     assert.equal(await page.locator('#role-name').innerText(), 'Guaritore');
     await page.locator('#skill').click();
     await page.waitForFunction(() => document.getElementById('toast').textContent.includes('Risonanza vitale'));
     assert.equal(await page.locator('#skill').isDisabled(), true);
     await page.locator('#pause').click();
+    assert.equal(await page.locator('#audio-status').getAttribute('data-state'), 'paused');
     assert.equal(await page.locator('#pause').innerText(), 'Riprendi');
     await page.locator('#help').click();
+    await page.locator('#audio-option').uncheck();
+    assert.equal(await page.locator('#audio-status').getAttribute('data-state'), 'off');
+    await page.locator('#audio-volume').focus(); await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight');
+    assert.equal(await page.locator('#audio-volume-text').innerText(), '1%');
+    await page.locator('#audio-option').check();
     await page.locator('#close-info').click();
     assert.equal(await page.locator('#pause').innerText(), 'Riprendi', 'Chiudere le informazioni deve preservare la pausa precedente');
     await page.locator('#pause').click();
@@ -124,10 +132,19 @@ try {
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#boss').isHidden(), true);
     assert.equal(await page.locator('#quest-title').innerText(), 'Una voce è tornata');
+    await page.locator('#brand').click(); await page.locator('[data-class="mage"]').click(); await page.locator('#start').click();
+    await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
+    await page.waitForFunction(() => document.getElementById('result').open, {}, { timeout: 90000 });
+    assert.ok((await page.locator('#result-text').innerText()).includes('L’ultimo colpo'));
+    assert.ok((await page.locator('#result-text').innerText()).includes('eco'));
+    await page.screenshot({ path: `test-results/${name}-defeat.png` });
+    await page.locator('#restart').click();
+    assert.equal(await page.locator('#hp-text').innerText(), '85 / 85');
+    assert.equal(await page.locator('#quest-title').innerText(), 'Trova gli echi');
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0);
     assert.deepEqual(external, [], 'Nessuna richiesta remota');
     assert.deepEqual(errors, [], 'Nessun errore browser');
-    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria sul Custode e isolamento`);
+    console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, audio, sconfitta e riprova, isolamento`);
     await context.close();
   }
 } finally {

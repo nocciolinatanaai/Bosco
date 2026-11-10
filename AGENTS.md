@@ -16,7 +16,10 @@ Leggere, nell'ordine:
 6. Per il gameplay corrente: `docs/COMBAT_UX.md` e `docs/EPISODE_01.md`.
    Preservare la sequenza echi → ricordo → evoluzione → Custode; motivare
    cambiamenti e aggiornare i test. Il testo di Liora resta una proposta narrativa.
-7. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
+7. Audio e riferimenti: `docs/AUDIO.md`, `docs/RPG_RESEARCH.md` e
+   `docs/STORY_BIBLE.md`. Distinguere bozza sonora, fonti promozionali e
+   trama proposta da risultati osservati o contenuti già implementati.
+8. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
    `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
 ## Autonomia e confini

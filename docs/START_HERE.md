@@ -8,7 +8,8 @@ La main del vecchio sito è distinta: leggere il ramo giusto.
 
 1. Leggi AGENTS.md, docs/IDEAS.md, HANDOFF.md e GAME_DESIGN.md.
 2. Confronta il concept con le catture reali in docs/assets/prototype/.
-3. Leggi docs/PRODUCT_REVIEW.md e docs/CLAUDE_REVIEW.md: servono obiezioni e
+3. Leggi anche docs/AUDIO.md, docs/RPG_RESEARCH.md e docs/STORY_BIBLE.md;
+   separa prototipo e proposte successive. Leggi docs/PRODUCT_REVIEW.md e docs/CLAUDE_REVIEW.md: servono obiezioni e
    proposte concrete, non una conferma generica di tutte le idee.
 4. Esegui npm ci --ignore-scripts, npm test e npm run build con Node >=22.
    Per il browser: npx playwright install chromium, poi npm run test:browser;

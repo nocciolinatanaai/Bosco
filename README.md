@@ -31,13 +31,16 @@ Libera i due echi, accogli il ricordo e prova il nuovo scatto offensivo contro
 il Custode. Frattura segna il tuo punto; Onda richiede di allontanarsi dal boss
 o interromperlo. Il risveglio avviene prima del boss, non dopo la vittoria finale.
 Il sentiero orientale è un'estensione della stessa scena: non è ancora streaming
-fra regioni. Esc o Pausa fermano il combattimento. Dettagli in [docs/COMBAT_UX.md](docs/COMBAT_UX.md) e [docs/EPISODE_01.md](docs/EPISODE_01.md).
+fra regioni. Esc o Pausa fermano il combattimento. Effetti sonori opzionali alla selezione;
+volume e mute in Comandi e audio. Dettagli in [docs/COMBAT_UX.md](docs/COMBAT_UX.md) e [docs/EPISODE_01.md](docs/EPISODE_01.md).
 
 ## Verifiche
 
 ```sh
 npm test
 npm run build
+# Test Web Audio nel browser:
+MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:audio
 # Chromium già installato nell'ambiente Cloud:
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 npm audit

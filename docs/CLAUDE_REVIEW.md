@@ -30,7 +30,7 @@ superato perché il documento precedente lo riporta.
 | Boss | Frattura mirata e Onda centrata, con segnali e recuperi distinti | Dove c’è ambiguità o una strategia dominante? Indica riproduzione e modifica minima |
 | Classi | Sei kit, modello di base comune; sinergie online non presenti | Definisci un primo personaggio originale e una sinergia da provare in simulazione, senza promettere cooperativa già pronta |
 | Grafica | Concept approvato; scena procedurale ancora distante | Scegli un miglioramento visivo circoscritto, con riferimento, provenienza/licenza, costo e artefatto confrontabile |
-| Riferimenti | Ricerca comparativa RPG non ancora completata | Studia tre giochi pertinenti da fonti verificabili: osservazione concreta, adattamento sostenibile, cosa evitare. Nessuna metrica di successo inventata |
+| Riferimenti | Ricerca comparativa RPG non ancora completata | Approfondisci la prima lettura di tre descrizioni ufficiali in RPG_RESEARCH.md con prove di gameplay verificabili: osservazione concreta, adattamento sostenibile, cosa evitare. Nessuna metrica di successo inventata |
 | Recupero legacy | Manca la ricostruzione completa Supabase | Dove sono riscatta, asset, scheduler, cron e procedure deploy? Fornisci sorgenti redatti e inventario, senza modificare produzione |
 
 Il bypass NULL del login è stato riprodotto soltanto in isolamento; patch proposta

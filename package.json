@@ -11,7 +11,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test --test-concurrency=1 tests/*.test.mjs",
-    "test:browser": "npm run build && node scripts/browser-check.mjs"
+    "test:browser": "npm run build && node scripts/browser-check.mjs",
+    "test:audio": "node scripts/audio-check.mjs"
   },
   "dependencies": {
     "three": "0.187.0"

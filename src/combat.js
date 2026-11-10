@@ -22,7 +22,7 @@ export function createSession(id) {
     cooldown: 0, dashCooldown: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
     evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
-    lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false,
+    lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null,
     time: 0, sequence: 0, events: [], targetId: null, projectiles: [],
     enemies: [enemy('shade-a', 'Eco errante', -5, 2, 52, false, 1.3), enemy('shade-b', 'Eco corazzato', 6, -1, 65, false, 1.8),
       enemy('guardian', 'Il Custode Vuoto', 0, -9, 280, true, 2.2)] };
@@ -112,14 +112,16 @@ export function dodge(s, dx = s.facing.x, dz = s.facing.z) {
   return true;
 }
 
-export function hurt(s, amount) {
+export function hurt(s, amount, source = null) {
   if (s.status !== 'playing' || !Number.isFinite(amount) || amount <= 0) return 0;
   if (s.invulnerable > 0) {
     if (s.dodgeRemaining > 0) emit(s, 'evaded');
     return 0;
   }
   const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 ? .25 : 1)));
+  if (actual <= 0) return 0;
   s.hp -= actual; s.invulnerable = .28;
+  s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
   emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 });
   if (s.hp === 0) { s.status = 'defeated'; s.action = null; s.projectiles = []; emit(s, 'defeated'); }
   return actual;
@@ -226,7 +228,7 @@ export function advanceEnemies(s, dt) {
       if (enemy.windup === 0) {
         enemy.phase = 'recovery'; enemy.recovery = enemy.recoveryDuration;
         emit(s, 'enemy-impact', { enemyId: enemy.id, x: enemy.aimX, z: enemy.aimZ, radius: enemy.radius, kind: enemy.attackKind });
-        if (Math.hypot(s.x - enemy.aimX, s.z - enemy.aimZ) < enemy.radius) hurt(s, enemy.impactDamage);
+        if (Math.hypot(s.x - enemy.aimX, s.z - enemy.aimZ) < enemy.radius) hurt(s, enemy.impactDamage, { kind: enemy.attackKind, name: enemy.name });
       }
       continue;
     }

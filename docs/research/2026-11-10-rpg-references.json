@@ -1,0 +1,55 @@
+[
+  {
+    "name": "Hades",
+    "appid": 1145360,
+    "source": "https://store.steampowered.com/api/appdetails?appids=1145360&l=english",
+    "store_url": "https://store.steampowered.com/app/1145360/",
+    "genres": [
+      "Action",
+      "Indie",
+      "RPG"
+    ],
+    "developer": [
+      "Supergiant Games"
+    ],
+    "retrieved_date": "2026-11-10",
+    "short_evidence_quote": "while growing stronger and unraveling more of the story with each unique escape attempt.",
+    "evidence_type": "developer/publisher store description, not a play session or user study"
+  },
+  {
+    "name": "Hyper Light Drifter",
+    "appid": 257850,
+    "source": "https://store.steampowered.com/api/appdetails?appids=257850&l=english",
+    "store_url": "https://store.steampowered.com/app/257850/",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie",
+      "RPG"
+    ],
+    "developer": [
+      "Heart Machine"
+    ],
+    "retrieved_date": "2026-11-10",
+    "short_evidence_quote": "Upgrade weapons, learn new skills, discover equipment",
+    "evidence_type": "developer/publisher store description, not a play session or user study"
+  },
+  {
+    "name": "CrossCode",
+    "appid": 368340,
+    "source": "https://store.steampowered.com/api/appdetails?appids=368340&l=english",
+    "store_url": "https://store.steampowered.com/app/368340/",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Indie",
+      "RPG"
+    ],
+    "developer": [
+      "Radical Fish Games"
+    ],
+    "retrieved_date": "2026-11-10",
+    "short_evidence_quote": "reveal and exploit the enemies' weaknesses",
+    "evidence_type": "developer/publisher store description, not a play session or user study"
+  }
+]

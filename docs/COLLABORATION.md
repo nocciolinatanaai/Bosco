@@ -116,3 +116,11 @@ Pubblicazione verificata: base bdfd5f9 caricata su
 origin/mythwood/collaboration-base; main resta ac9039e. Le istruzioni di revisione
 sono ora nel ramo remoto. Questo prova la disponibilità dei file, non la lettura
 di Tonino. Test locali 45/45 e build riuscita; stato CI remoto non osservato.
+
+## Lavoro autonomo successivo — audio e comprensione
+
+Il proprietario ha ribadito di continuare senza conferme a ogni passo. Codex
+implementa audio originale opzionale e feedback della causa di sconfitta;
+ricerca comparativa documentata e proposta narrativa completano la consegna.
+La prima lettura di fonti Steam non viene presentata come sessione di gioco.
+Nessuna risposta di Tonino ancora ricevuta, nessuna pubblicazione social o deploy.
