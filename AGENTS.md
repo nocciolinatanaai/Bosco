@@ -117,3 +117,15 @@ su main, deploy, SQL di produzione, spese e servizi esterni non sono inclusi.
 Leggere docs/IDEAS.md e docs/PRODUCT_REVIEW.md; proseguire con prove e motivazioni.
 
 Le regole del task corrente del proprietario prevalgono su questo documento.
+
+
+## Revisione visiva corrente
+
+Leggere docs/VISUAL_UPGRADE.md per il Ranger con scheletro e la provenienza CC0.
+I test procedurali precedenti verificano il fallback, non il GLB importato:
+per quest'ultimo eseguire visual-review.mjs e la regressione browser Ranger.
+Non rimuovere blob dalla CSP senza verificare le texture incorporate anche nel
+percorso ImageBitmap/Safari. Il proprietario ha sospeso il teaser: qualità della
+scena giocabile prioritaria, niente trailer finché non rivalutato. Nel blocco
+corrente è richiesto di non pubblicare: commit locali possibili, niente push,
+deploy o post. Non riattivare gli esperimenti cinematografici sospesi in tools/.

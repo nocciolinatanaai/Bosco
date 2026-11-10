@@ -2,8 +2,9 @@
 
 Aggiornato da Codex il 10 novembre 2026, fuso Europe/Rome.
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Ultimo commit applicativo: **864f97f**. Verificare sempre git log/status e remoto
-prima di continuare. Main e servizio precedente restano separati.
+Ultimo checkpoint applicativo locale: **35868c3**, non inviato al remoto.
+Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
+sempre git log/status prima di continuare. Main e servizio precedente separati.
 
 ## Blocco locale corrente — prima sostituzione grafica del Ranger
 
@@ -18,7 +19,9 @@ Portale meno intenso e luce/foschia riviste. CSP consente blob locale per le
 texture incorporate, senza aggiungere host esterni. Loader e GLB caricati solo
 quando richiesti; fallback visibile se il file fallisce. Gameplay invariato.
 95 test e build riusciti; studio quattro pose, mira e fallback passati, viste
-app desktop/mobile catturate. Regressione finale Ranger/Giardino ancora in corso.
+app desktop/mobile catturate. Regressione finale Ranger e Giardino passata su
+entrambe le dimensioni: zero errori browser/richieste esterne. Tre rivisite a
+caldo senza nuove createBuffer osservate; non misura FPS o tutte le risorse GPU.
 Build: 763 kB JS / 205 kB gzip, loader separato 45 kB / 13 kB gzip, GLB 1,6 MB.
 Il warning bundle >500 kB resta aperto; nessuna prova hardware reale.
 

@@ -71,3 +71,15 @@ blender -b -t 2 --python scripts/prepare-ranger-model.py -- /percorso/human_fema
 Nessuna dipendenza Blender richiesta per avviare il gioco: il GLB pronto e le
 texture incorporate sono nel checkout. py7zr è stato installato solo in /tmp
 per l'estrazione; nessuna dipendenza runtime npm o servizio esterno aggiunti.
+
+
+## Esito del primo blocco
+
+Checkpoint applicativo locale 35868c3. 95 test passati e build riuscita.
+Confronto quattro pose, direzione dell'arco e caricamento fallito verificati.
+Regressioni finali Ranger e Giardino passate su desktop/mobile, zero errori
+browser e richieste esterne. Rapporti del medesimo buildEntrySha256 conservati
+in docs/assets/visual-review/. Warning bundle >500 kB aperto: main 763 kB
+(205 kB gzip), loader separato 45 kB (13 kB gzip). Nessun test iPhone reale.
+Il conteggio del solo nuovo personaggio/accessori è 5.794 triangoli, 18 mesh
+e sei primitive skinned; il fallback conservato comporta memoria aggiuntiva.

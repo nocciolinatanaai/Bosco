@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-10T21:06:59.607Z",
+  "fixture": "synthetic awakened Ranger; keyboard/touch combat with browser clock stepped at 100 ms, 50 ms near impact; no state hooks",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "passed",
+      "bossHp": 171,
+      "errors": 0,
+      "externalRequests": 0
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "bossHp": 171,
+      "errors": 0,
+      "externalRequests": 0
+    }
+  ],
+  "runnerSha256": "6a733f0452893ede8b2fa068c131d473a3b3a679db4689de494910a869226b8e",
+  "buildEntrySha256": "fb3b3430a8a70aa7df0cfdc704534bda1955bae52b682facd8066ad1ac070421",
+  "finishedAtUtc": "2026-11-10T21:09:58.504Z"
+}

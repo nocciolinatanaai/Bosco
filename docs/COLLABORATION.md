@@ -391,3 +391,19 @@ prepare-ranger-model.py, visual-review.mjs, tools/visual-review, test asset e do
 Modifiche precedenti al teaser conservate ma non riprese. Nessun push o deploy.
 95 test iniziali passati; controlli browser e valutazione visiva ancora in corso.
 La base resta provvisoria e non viene dichiarata equivalente al concept approvato.
+
+
+## Revisione grafica — primo blocco verificato
+
+Checkpoint locale 35868c3; nessun push. 95 test, build e confronto di quattro
+pose passati; controllati caricamento reale, asse di mira e fallback su asset
+bloccato. Ranger: impatto schivato/tiro doppio/reset; Giardino: migrazione,
+bussola, reload, segnale, ritorno e tre rivisite. Entrambi su desktop/mobile
+Chromium con zero errori/richieste esterne. Rapporti in assets/visual-review/.
+La CSP locale è stata estesa al solo schema blob per le texture incorporate.
+
+Resta una base CC0 generica adattata, non Daria finale né approvazione artistica
+del proprietario. Da rifinire volto/abiti, contatti e transizioni/scatto; poi
+materiali e architettura del piccolo tratto di rovine e nemico. Altri cinque
+corpi e Custode ancora provvisori. Teaser sospeso. Nessuna risposta Claude
+presunta, nessun deploy, post, push o spesa esterna. File del blocco liberi.
