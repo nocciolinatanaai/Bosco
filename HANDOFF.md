@@ -5,6 +5,20 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
+### Integrazione documentale e prima verifica desktop
+
+Sorgenti del salvataggio pubblicati in 2b832e8. Il runner completo ha superato
+il viewport desktop 1440×900, compresi opt-in, ripresa dopo ricarica, preferenza
+autosalvataggio e cancellazione selettiva; zero errori/richieste esterne. Mobile
+e fallback ancora in esecuzione: non considerarli completati. Rapporto atomico
+locale in test-results/browser-report.json, comando avviato con log/exit persistenti.
+
+Aggiornati AGENTS, stato privacy e specifica dell'episodio; aggiunto protocollo
+PLAYTEST_01 per le prove umane ancora da effettuare. Corretto il sottotitolo
+statico della selezione, che diceva sempre «Progressi non salvati» anche con opt-in.
+Questa sola stringa successiva non è nella build attualmente sotto test: richiede
+build e smoke finale, senza attribuirle il rapporto browser precedente.
+
 ### Checkpoint: salvataggio locale facoltativo (verifica browser pendente)
 
 10 novembre 2026, Codex, base e52d1ca. Implementati opt-in, ripresa da tappa,

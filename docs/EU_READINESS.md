@@ -78,7 +78,10 @@ da una norma vigente. Nessuna dichiarazione di conformità ricavata solo da ques
 ## Stato della nuova build locale
 
 - Account, chat, analytics e pagamenti: non implementati, nessuna raccolta nuova.
-- Nessun cookie o localStorage usato dall'applicazione.
+- Nessun cookie di tracciamento. localStorage facoltativo per una tappa Mythwood:
+  classe, progressione e preferenza autosalvataggio, senza invio al server.
+  Opt-in inizialmente spento, disattivazione e cancellazione selettiva disponibili;
+  specifica in LOCAL_CHECKPOINTS.md. Rivalutare il testo prima del servizio pubblico.
 - I file vengono richiesti al server locale; un futuro hosting può registrare
   IP e log tecnici: da includere nell'analisi prima del servizio pubblico.
 - Il vecchio servizio e le vecchie informative sono ancora online: la nuova

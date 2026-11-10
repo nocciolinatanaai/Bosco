@@ -19,7 +19,9 @@ Leggere, nell'ordine:
 7. Audio e riferimenti: `docs/AUDIO.md`, `docs/RPG_RESEARCH.md` e
    `docs/STORY_BIBLE.md`. Distinguere bozza sonora, fonti promozionali e
    trama proposta da risultati osservati o contenuti già implementati.
-8. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
+8. Per salvataggi e ripresa: `docs/LOCAL_CHECKPOINTS.md`. Conservare opt-in,
+   cancellazione selettiva e fallback; non fidarsi dei dati locali per premi online.
+9. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
    `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
 ## Autonomia e confini

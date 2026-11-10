@@ -163,3 +163,9 @@ Codex, 10 novembre 2026, base e52d1ca. Opt-in e ripresa alle tappe implementati;
 69 test e build passano. Nuovi controlli browser ancora pendenti. File assegnati:
 checkpoints.js, runtime/ui/style, relativi test e documenti. Dati solo locali,
 nessuna produzione. Riprendere dal nuovo paragrafo HANDOFF e da LOCAL_CHECKPOINTS.
+
+
+Checkpoint successivo: percorso desktop passato su sorgenti 2b832e8;
+mobile/fallback in corso. Privacy, istruzioni di ripresa e protocollo di prova
+umana aggiornati. Una stringa UI fuorviante corretta dopo la build sotto test:
+verificarla separatamente alla conclusione, senza confondere gli hash.

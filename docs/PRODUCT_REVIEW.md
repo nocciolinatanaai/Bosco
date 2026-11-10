@@ -34,6 +34,7 @@ che il pubblico torni, né che le sei classi siano bilanciate.
 ## Ordine che propongo
 
 1. Validare l’incontro con persone e telefoni reali, chiedendo cosa non capiscono.
+   Protocollo pronto in PLAYTEST_01.md; nessun risultato umano ancora raccolto.
 2. Rifinire un personaggio, una scena e il feedback sonoro mantenendo i comandi
    reattivi; confrontare catture reali con il concept, senza nuovi reel sui segnaposto.
 3. Far agire Liora e trasformare una classe in modo distintivo; coinvolgere

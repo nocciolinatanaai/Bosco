@@ -35,7 +35,8 @@ narrativa a una modifica dei comandi utilizzabile subito.
 
 Testi in src/journey.js; regole in combat.js; finestre/guida in ui.js e runtime.js;
 effetto dell’impulso in visuals/combat-effects.js. Il dialogo non usa HTML remoto.
-Nessuna persistenza, ricompensa economica, nuovo backend o servizio esterno.
+Le tappe possono ora essere conservate localmente con opt-in (LOCAL_CHECKPOINTS.md).
+Nessuna ricompensa economica, nuovo backend o servizio esterno.
 L’HUD distingue il bersaglio visibile da quello a portata: quando necessario
 mostra «Avvicinati per attaccare».
 
@@ -49,7 +50,7 @@ in HANDOFF.md. Le prove della logica non attestano bilanciamento o divertimento.
 
 La finestra narrativa è leggibile/riprendibile e ferma la simulazione; il controllo
 completo di accessibilità con tecnologie assistive resta da svolgere. Nessun
-voice-over, audio di combattimento o asset finale. L’arena resta circoscritta:
+voice-over o asset 3D finale. Bozza sonora opzionale in AUDIO.md. L’arena resta circoscritta:
 non è il grande mondo richiesto né un episodio di durata garantita.
 
 ## Prossimo incarico per la revisione
