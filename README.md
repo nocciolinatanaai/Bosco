@@ -22,6 +22,9 @@ Il server ascolta su loopback. Non contatta Supabase, non crea account, non
 usa analytics e non abilita pagamenti. Il salvataggio locale delle tappe è
 facoltativo, inizialmente spento: vedi [LOCAL_CHECKPOINTS.md](docs/LOCAL_CHECKPOINTS.md).
 
+Prova rapida del salvataggio: `npm run test:checkpoints` con Chromium Playwright
+o MYTHWOOD_CHROMIUM_PATH nel Cloud. Usa dati sintetici e non contatta Supabase.
+
 ## Cosa provare
 
 Scegli una delle sei classi. Muoviti con WASD/frecce, toccando il terreno o con

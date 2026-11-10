@@ -42,5 +42,11 @@ Cancellare i dati del browser o cambiare origine/dispositivo perde lo slot.
 
 Verifica: nove test di dominio/storage in checkpoints.test.mjs; il runner browser
 include opt-in, avanzamento, ricarica/ripresa, disattivazione persistita,
-cancellazione selettiva, corruzione e API bloccata. Leggere HANDOFF e il commit
-del rapporto per distinguere controlli implementati da esecuzioni completate.
+cancellazione selettiva, corruzione e API bloccata. Esecuzione completata su desktop/mobile simulato per sorgenti 2b832e8:
+rapporto in verification/browser-latest.json. Non è un collaudo iPhone reale.
+
+
+Prova UI rapida ripetibile: `npm run test:checkpoints` (in Cloud aggiungere
+MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium). Usa una tappa sintetica con due tracce,
+verifica annullamento della cancellazione e ripresa con autosalvataggio spento
+su due viewport. Non sostituisce il percorso completo di test:browser.

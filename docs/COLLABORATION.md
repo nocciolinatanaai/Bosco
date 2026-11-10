@@ -169,3 +169,14 @@ Checkpoint successivo: percorso desktop passato su sorgenti 2b832e8;
 mobile/fallback in corso. Privacy, istruzioni di ripresa e protocollo di prova
 umana aggiornati. Una stringa UI fuorviante corretta dopo la build sotto test:
 verificarla separatamente alla conclusione, senza confondere gli hash.
+
+
+## Salvataggi — risultato conclusivo
+
+Browser completo su 2b832e8 concluso con exit 0: desktop e mobile simulato,
+opt-in, tappe, ricarica/ripresa, preferenza off persistita e cancellazione
+selettiva. Prove separate di dati corrotti e API bloccata superate. Rapporti
+versionati aggiornati, zero errori/richieste esterne nei percorsi completi.
+Test rapido UI separato per la stringa corretta in ebe0d16, ripresa con autosave
+spento e cancellazione annullata; runner riutilizzabile test:checkpoints.
+Nessuna revisione di Tonino, migrazione o pubblicazione di produzione eseguita.

@@ -5,6 +5,26 @@ Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
 ## Stato aggiornato della ricostruzione locale
 
+### Salvataggi: verifica finale completata
+
+Sorgenti 2b832e8: 69 test e build riusciti; runner browser concluso con exit 0
+su desktop 1440×900 e mobile 390×844, incluso landscape. Ripresa dopo ricarica
+alla prima traccia, avanzamento fino alla terza, disattivazione persistita,
+cancellazione selettiva, dati corrotti e storage bloccato superati. Nessun
+pageerror o richiesta esterna nei percorsi completi. L'assenza di persistenza
+è controllata prima dell'opt-in e dopo cancellazione, non durante il salvataggio.
+Due richieste ritratto per viewport sono previste perché il percorso ricarica
+la pagina. Rapporto e hash in docs/verification/browser-latest.json.
+
+I paragrafi precedenti sotto descrivono checkpoint intermedi: le verifiche
+indicate allora come pendenti sono ora concluse. Il testo UI successivo in
+ebe0d16 è distinto: prova mirata finale desktop/mobile superata, registrata
+separatamente in verification/checkpoint-ui-latest.json. Runner ripetibile
+con npm run test:checkpoints; usa fixture sintetica, anche cancellazione annullata. Nessun merge,
+deploy o cambiamento a Supabase. Grafica finale, validazione umana, cooperativa,
+backend e mondo ampio restano aperti. Prima di aggiungere capitoli, revisione
+con Tonino di Liora e trasformazione di classe; protocollo PLAYTEST_01 disponibile.
+
 ### Integrazione documentale e prima verifica desktop
 
 Sorgenti del salvataggio pubblicati in 2b832e8. Il runner completo ha superato

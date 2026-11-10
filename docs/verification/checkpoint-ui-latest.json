@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "finishedAtUtc": "2026-11-10T13:49:07.111Z",
+  "fixture": "synthetic guardian checkpoint with autosave off; deletion cancelled",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "errors": 0
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "errors": 0
+    }
+  ],
+  "checkedApplicationCommit": "ebe0d1647a2765c7ef31f5f13b2926b0f0a04cdb",
+  "command": "MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium node scripts/checkpoint-ui-check.mjs",
+  "runnerSha256": "ba3bdb8bb6bae6bd1c5959e42ff33dba8d4d5ce5ab8c8155763c19e7260df3cc",
+  "buildEntrySha256": "834ee37e2cb21067dee61a56a7c2b39510f432edfd3cbb590ae24eb4bce6686d",
+  "renderer": "Chromium SwiftShader software; not physical iPhone"
+}

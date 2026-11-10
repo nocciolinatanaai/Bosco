@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "startedAtUtc": "2026-11-10T12:55:44.056Z",
+  "startedAtUtc": "2026-11-10T13:38:04.671Z",
   "runs": [
     {
       "name": "desktop",
@@ -11,7 +11,8 @@
       "status": "passed",
       "externalRequests": 0,
       "errors": 0,
-      "portraitRequests": 1,
+      "portraitRequests": 2,
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
       "persistentEntries": 0
     },
     {
@@ -23,14 +24,27 @@
       "status": "passed",
       "externalRequests": 0,
       "errors": 0,
-      "portraitRequests": 1,
+      "portraitRequests": 2,
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
       "persistentEntries": 0
     }
   ],
-  "buildEntrySha256": "e639d046d5bc9a6d97a5a5fad78fe80b18788eefe8bcc2d634b146d87342728a",
+  "buildEntrySha256": "b67fecbb343a00773d8e695e924af94a6f7f0f62f00d5dc779bfd8eb000fc2e6",
   "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
-  "runnerSha256": "f2c6de0a56fc868894583f1a69ef6854bb3ea0e89c5989de4aec118abeb2f86b",
-  "finishedAtUtc": "2026-11-10T13:03:02.181Z",
-  "checkedSourceCommit": "e245bf83a3083c704eb1bb836f9f95101d2a5168",
+  "runnerSha256": "38d128b38ba75f5c1e6c44fda1c8861a2e0e0415f5c2da510d24da5d2c3b56e6",
+  "storageFallbacks": [
+    {
+      "mode": "corrupt",
+      "status": "passed",
+      "errors": 0
+    },
+    {
+      "mode": "blocked",
+      "status": "passed",
+      "errors": 0
+    }
+  ],
+  "finishedAtUtc": "2026-11-10T13:46:34.192Z",
+  "checkedSourceCommit": "2b832e81cb5562001f9b3a2ee936561b4ca37a5f",
   "renderer": "Chromium SwiftShader software; not physical iPhone"
 }

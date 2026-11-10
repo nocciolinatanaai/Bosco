@@ -118,5 +118,6 @@ persone se la scoperta è comprensibile e appagante prima di moltiplicare i segn
 
 
 Salvataggio locale delle tappe: implementato opt-in/ripresa/cancellazione;
-69 test e build riusciti. Verifica browser estesa pendente al checkpoint corrente.
+69 test e build riusciti. Verifica browser estesa superata su desktop/mobile simulato, inclusi fallback
+per dati corrotti e storage bloccato (rapporto sorgenti 2b832e8).
 Non equivale a persistenza online, anti-cheat o progressione fra dispositivi.
