@@ -3,6 +3,22 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Giardino: prova dedicata finale passata, regressione in avvio
+
+Sorgenti 47b9f36. 88 test superati, build riuscita (702 kB JS / 187 kB gzip,
+warning aperto). Prova nuova area conclusa con exit 0 su desktop 1440×900 e
+mobile 390×844, DPR 1/qualità Leggera/tempo normale; layout 844×390 controllato.
+Migrazione v1 senza scrittura al caricamento, scrittura v2 all'uso, bussola,
+ricarica con oggetto conservato, segnale, ritorno e tre rivisite superati.
+Zero errori/richieste esterne; durante le rivisite a caldo, zero chiamate nuove
+a WebGL createBuffer osservate. Non è una misura di tutte le risorse GPU o FPS.
+
+Rapporti garden-latest e unit-latest in docs/verification, catture reali in
+assets/prototype. Il giardino è geometria locale costruita al primo ingresso
+e conservata. Nessuno streaming di file o server multiplayer. La regressione
+completa del primo episodio sulla nuova build resta da eseguire; il rapporto
+browser-latest precedente non la copre ancora. Nessun deploy, spesa o produzione.
+
 ## Checkpoint intermedio — layout corretto e coperture fisiche
 
 Prova dedicata del giardino superata su desktop/mobile a tempo normale dopo la

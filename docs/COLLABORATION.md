@@ -268,3 +268,12 @@ fallito per sovrapposizione al joystick. Prova dedicata passata sui due viewport
 zero nuovi buffer WebGL durante tre rivisite a caldo. Poi corretta la copertura
 per frecce/armi fisiche del giocatore, 88 test passati. Rilanciare prova dedicata
 su questa patch e regressione normale prima di segnare il blocco verificato.
+
+
+## Giardino — verifica dedicata finale
+
+47b9f36: 88 test/build e percorso UI nuova area superati su desktop/mobile,
+landscape controllato, DPR 1 e qualità Leggera. Migrazione/ripresa/ritorno e
+rivisite passano; zero createBuffer nuove a caldo, senza dichiarare FPS/memoria
+totale. Rapporti e catture condivisi. Regressione primo episodio in avvio,
+ancora pendente; nessuna comunicazione Claude o produzione presunta.

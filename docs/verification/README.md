@@ -33,3 +33,9 @@ ranger-latest.json: contrattacco con input tastiera/touch e clock browser avanza
 a passi di 100/50 ms. Tappa sintetica, nessuna modifica dello stato interno;
 non è un collaudo hardware. Commit applicativo distinto dall'hash del runner.
 La regressione generale e le catture usano tempo normale in browser-latest.json.
+
+
+garden-latest.json: percorso UI a tempo normale, migrazione v1→v2, bussola,
+ricarica, segnale e ritorno; viewport mobile DPR 1, modalità Leggera. Contatore
+WebGL createBuffer durante tre rivisite a caldo: non misura tutte le allocazioni
+GPU, picco di memoria o FPS. Nessuna prova su telefono reale.

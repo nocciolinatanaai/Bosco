@@ -16,3 +16,9 @@ ritratto illustrato e pista Cartiglio; mobile-memory-landscape.png mostra il
 layout 844×390. Viewport mobile a scala 2×, rendering software; le dimensioni
 fisiche del PNG non rappresentano un dispositivo Apple collaudato. Rapporti
 in docs/verification/. La scena nelle catture è quella del prototipo reale.
+
+
+Catture Giardino dei nomi: desktop-garden-entry, mobile-garden-entry,
+mobile-garden-compass e mobile-garden-landscape. Build sorgenti 47b9f36,
+Chromium SwiftShader, Leggera, DPR 1. Screenshot della scena effettiva, non
+concept; arte procedurale provvisoria. Esiti in verification/garden-latest.json.
