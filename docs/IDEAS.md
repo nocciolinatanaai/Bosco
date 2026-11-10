@@ -11,7 +11,7 @@ sviluppa le ipotesi creative; HANDOFF.md descrive ciò che esiste davvero.
 | Qualità | Priorità a trama, grafica, giocabilità e soddisfazione | Prova action e narrativa breve; arte procedurale ancora distante dal concept |
 | Ispirazione | Fantasia di crescita di Solo Leveling, senza copiarne personaggi, asset, storia o poteri distintivi | Classi generiche e potere degli echi come proposta originale |
 | Direzione visiva | Mockup approvato: rovine, vegetazione cristallina, guardiano, frattura dorata, ombre blu/viola, squadra stilizzata dettagliata | Concept in assets; catture reali separate in assets/prototype |
-| Esplorazione | Mappa molto grande, ricca di contenuti e scoperte | Una piccola arena e un sentiero nella stessa scena; nessuno streaming del mondo |
+| Esplorazione | Mappa molto grande, ricca di contenuti e scoperte | Piazza/sentiero e prima area Giardino con recupero/ritorno; geometria locale riutilizzata, nessuno streaming del mondo |
 | Personaggi | Più personaggi fra cui scegliere, con abilità diverse | Sei kit, un modello procedurale condiviso; non un cast completo |
 | Classi | Assassini, Maghi, Ranger, Guaritori, Tank e Combattenti | Kit di prova con attacchi, abilità ed equipaggiamenti differenti |
 | Richieste giocatori | Lasciare spazio alle proposte del pubblico | Processo in PLAYER_FEEDBACK.md; nessun feedback reale ancora raccolto |

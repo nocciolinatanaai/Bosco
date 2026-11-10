@@ -46,7 +46,9 @@ Custode con due mosse, prima risonanza e tre tracce sul sentiero. Audio opzional
 qualità grafica regolabile, ritratto 2D originale e salvataggio locale opt-in.
 Tiro di ritorno è la prima variazione specifica del Ranger: controlla HANDOFF
 per stato e verifiche correnti. Modelli/animazioni restano procedurali provvisori.
-Non esistono ancora nuovo backend, cooperativa, grande mondo o store operativo.
+Giardino dei nomi: prima area di recupero/ritorno ora implementata; leggere
+docs/REGIONS.md e HANDOFF per le verifiche correnti. Non esistono ancora nuovo
+backend, cooperativa, grande mondo o store operativo.
 
 Esegui npm ci --ignore-scripts, npm test e npm run build con Node >=22.
 I runner browser e le condizioni Cloud sono nel README. I rapporti versionati

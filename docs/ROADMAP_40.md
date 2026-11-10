@@ -11,7 +11,7 @@ Non aumentare la percentuale contando file, test o documenti.
 | Blocco | Risultato osservabile | Stato |
 | --- | --- | --- |
 | Crescita | Un'evoluzione specifica cambia una decisione nel combattimento e ha feedback visivo/UI | Ranger Tiro di ritorno implementato, prova dedicata desktop/mobile superata; grafica definitiva e bilanciamento aperti |
-| Avventura | Due aree con interazioni differenti, una scoperta narrativa e un passaggio/ripresa coerente | Arena e sentiero presenti; seconda area da costruire |
+| Avventura | Due aree con interazioni differenti, una scoperta narrativa e un passaggio/ripresa coerente | Giardino con recupero/ritorno implementato, prova dedicata passata; regressione in corso, prova umana aperta |
 | Identità visiva | Un personaggio e una scena rifiniti, animazioni leggibili, confronto reale con il concept | Procedurale provvisorio e ritratto 2D; qualità finale aperta |
 | Squadra | Prova isolata di due client con stato autorevole, riconnessione e nessun premio duplicato | Non implementata |
 | Esperienza | Un'altra persona comprende obiettivo, cariche e crescita, con correzioni ai problemi osservati | Protocollo pronto; nessuna prova umana svolta |
@@ -21,7 +21,7 @@ loro completamento equivalga matematicamente al 40%. Budget e tempo residui
 vanno riconciliati: nessuna spesa o data di rilascio aggiuntiva decisa qui.
 
 Ordine operativo proposto: chiudere la prima crescita specifica; rendere credibile
-un personaggio/scena; aprire la seconda area; provare cooperazione in staging.
+un personaggio/scena; validare e rifinire la seconda area; provare cooperazione in staging.
 Alternare le implementazioni alle correzioni emerse dalle prove, secondo
 PLAYER_FEEDBACK.md. Non rimandare segnalazioni bloccanti fino al 40%.
 
@@ -40,5 +40,5 @@ attualmente collegata e nessuna sua revisione è stata ricevuta.
 
 
 Brief successivi pronti per la discussione: CHARACTER_DARIA.md per la traduzione
-artistica del primo Ranger, QUEST_02.md per seconda area e ritorno. Sono proposte,
-non blocchi già completati; nomi e dettagli restano modificabili dai feedback.
+artistica del primo Ranger, QUEST_02.md per seconda area e ritorno. Daria resta una proposta artistica, mentre il primo Giardino è implementato
+e in verifica; nomi e dettagli restano modificabili dai feedback.

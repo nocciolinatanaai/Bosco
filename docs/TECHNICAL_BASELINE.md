@@ -98,3 +98,8 @@ Il client locale ora separa i profili degli attacchi nemici (enemy-attacks.js)
 dalla geometria del segnale (visuals/telegraph.js). Il raggio visualizzato viene
 scalato dal valore usato dalla simulazione, senza ricreare le mesh a ogni cambio
 mossa. Frattura e Onda sono descritte in GUARDIAN.md; non cambiano la baseline SQL.
+
+
+Seconda area locale: garden.js e visuals/garden.js, regole/filtri condivisi
+con combat/runtime; struttura e limiti in REGIONS.md. Checkpoint v2 compatibili
+v1 in lettura. Nessun nuovo servizio esterno o cambiamento SQL di produzione.

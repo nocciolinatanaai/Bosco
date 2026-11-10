@@ -3,6 +3,18 @@
 Aggiornamento: 10 novembre 2026, Europe/Rome.
 Baseline codice: `ac9039ea91983a9586b01eeab4a60a02b5e88b54`.
 
+## Ultimo ritocco UI e controllo ripresa preparato
+
+Dopo la build 47b9f36, corretto il testo del bersaglio quando nel giardino non
+restano nemici: ora indica l'obiettivo del giardino, non la vecchia pista.
+Aggiunto al runner rapido checkpoint un caso v2 con bussola e sentinella già
+sconfitta, autosalvataggio spento. 88 test passati, incluso il nuovo controllo
+di ripresa della sentinella dopo una sconfitta reale nella simulazione.
+Questo ritocco di testo richiede build/smoke alla fine della regressione lunga
+attualmente in corso sulla build precedente. Non ricompilare dist durante il
+runner attivo. Documentata architettura e limiti in REGIONS.md; roadmap e
+istruzioni Claude allineate allo stato effettivo della seconda area.
+
 ## Giardino: prova dedicata finale passata, regressione in avvio
 
 Sorgenti 47b9f36. 88 test superati, build riuscita (702 kB JS / 187 kB gzip,

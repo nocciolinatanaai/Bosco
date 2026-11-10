@@ -21,7 +21,10 @@ Leggere, nell'ordine:
    trama proposta da risultati osservati o contenuti già implementati.
 8. Per salvataggi e ripresa: `docs/LOCAL_CHECKPOINTS.md`. Conservare opt-in,
    cancellazione selettiva e fallback; non fidarsi dei dati locali per premi online.
-9. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
+9. Per le due aree: `docs/REGIONS.md` e `docs/QUEST_02.md`. Filtrare simulazione,
+   bersagli e rendering per area; cleared resta il primo Custode. Preservare
+   migrazione v1→v2 e nessuna scrittura al semplice caricamento.
+10. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
    `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
 ## Autonomia e confini

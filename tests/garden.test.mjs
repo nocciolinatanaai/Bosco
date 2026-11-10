@@ -84,6 +84,8 @@ test('sentinella può essere interrotta e sconfitta senza duplicare il finale de
   assert.equal(enemy.phase, 'stagger');
   for (let i = 0; i < 15 && enemy.hp > 0; i++) { attack(s); step(s, .6); }
   assert.equal(enemy.hp, 0); assert.equal(s.garden.sentryDefeated, true);
+  const resumed = restoreCheckpoint(checkpointFromSession(s));
+  assert.equal(resumed.enemies[3].hp, 0); assert.equal(resumed.garden.sentryDefeated, true);
   const events = drainEvents(s); assert.equal(events.filter(e => e.type === 'cleared').length, 0);
   assert.equal(events.filter(e => e.type === 'garden-progress' && e.interaction === 'sentry').length, 1);
 });

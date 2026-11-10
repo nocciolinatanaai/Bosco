@@ -277,3 +277,9 @@ landscape controllato, DPR 1 e qualità Leggera. Migrazione/ripresa/ritorno e
 rivisite passano; zero createBuffer nuove a caldo, senza dichiarare FPS/memoria
 totale. Rapporti e catture condivisi. Regressione primo episodio in avvio,
 ancora pendente; nessuna comunicazione Claude o produzione presunta.
+
+
+Checkpoint documentazione/ultimo testo UI: in assenza di nemici il giardino ora
+mostra l'obiettivo corretto. Test rapido v2 sentinella sconfitta/bussola preparato;
+88 test passati. Regressione normale in corso sulla build precedente, smoke del
+ritocco da eseguire dopo. Non ricompilare dist mentre il runner la sta servendo.

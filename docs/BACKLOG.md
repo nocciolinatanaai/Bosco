@@ -135,3 +135,11 @@ risultati da costruire prima di rivalutare l'avanzamento complessivo.
 Proposte successive, non implementate: CHARACTER_DARIA.md (modello e animazioni)
 e QUEST_02.md (seconda area con recupero e ritorno). Restano arte, cooperativa,
 backend, store e validazione umana: il 35–40% complessivo non è dichiarato raggiunto.
+
+
+## Seconda area — Giardino dei nomi
+
+W01/C04 parziali: due aree locali, missione di recupero/segnale/ritorno,
+sentinella rettilinea con coperture e salvataggi v2 compatibili v1. 88 test,
+build e prova UI dedicata desktop/mobile passati su 47b9f36. Regressione completa
+in corso. Nessuno streaming, prova umana o modello Daria implementati.

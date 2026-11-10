@@ -248,7 +248,7 @@ export function startRuntime($) {
     $('stamina').value = state.stamina; $('stamina-text').textContent = `${Math.floor(state.stamina)} / 100`;
     const current = selectedEnemy(state, 18);
     const inReach = current && Math.hypot(current.x - state.x, current.z - state.z) <= state.role.basicRange * (state.evolved ? 1.2 : 1);
-    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
+    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : state.area === 'garden' ? gardenObjective(state)?.label || 'Giardino dei nomi' : state.garden.step === 4 ? 'Segnale riportato · il passaggio resta aperto' : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
     $('skill').disabled = state.cooldown > 0 || state.status !== 'playing' || state.dodgeRemaining > 0 || state.skillBuffer > 0;
     $('skill').style.setProperty('--cooldown', `${Math.max(0, 1 - state.cooldown / state.role.cooldown) * 100}%`);
     const returnReady = state.evolved && state.role.id === 'ranger' && state.returnShot > 0;
