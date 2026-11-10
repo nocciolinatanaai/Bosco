@@ -1,0 +1,96 @@
+{
+  "errors": [],
+  "external": [],
+  "status": "passed",
+  "model": {
+    "triangles": 5794,
+    "meshes": 18,
+    "skinned": 6,
+    "status": "ready",
+    "clips": [
+      "cast_two_handed_bow",
+      "channel_two_handed_bow",
+      "idle",
+      "jump",
+      "run"
+    ],
+    "bounds": [
+      1.5652668525936968,
+      2.2020424923386197,
+      1.0171915633511897
+    ]
+  },
+  "directions": {
+    "idle": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "run": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "draw": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "back": {
+      "bowForward": [
+        1.2246467991473532e-16,
+        0,
+        -1
+      ],
+      "actorForward": [
+        1.2246467991473532e-16,
+        0,
+        -1
+      ]
+    }
+  },
+  "gameViews": [
+    "desktop",
+    "mobile"
+  ],
+  "assetFailure": {
+    "loaded": false,
+    "status": "fallback",
+    "visibleNodes": 5
+  },
+  "capture_note": "Game screenshots paused; only pause overlay and pause desaturation hidden by authoring runner. Studio uses same camera/light for both models; no raster editing.",
+  "source_sha256": {
+    "src/visuals/ranger-skinned.js": "bd057292a8c7dac1bb5fa2ffd8fc4db585c80bf088a895122a49cc98181f0f79",
+    "src/visuals/ranger.js": "4e866ee485a5827fa1918d8b988cebcc16574649d6b9e4b45bec091a45d21e3b",
+    "src/visuals/actors.js": "26e7544248b56fe84e04dc0b1037bddf64efb0d62fdd5e902ab2a700a24e4d35",
+    "src/visuals/environment.js": "64b9b1e4511a74d479931b634a857e9295660a930a5d9ca4a046a798a9852662",
+    "public/models/ranger/ranger-base.glb": "fc4006277b2507ceff21250070fc5da42a5a791950ae73ce5f83f4202b94bc23"
+  },
+  "capture_sha256": {
+    "game-desktop.png": "1f84e0cdbb9b7bd5b814be9f50d7aa9a603923907d16b901eac0002d0ca4dc23",
+    "ranger-draw.png": "59e853299f5354ed4d7d7ebeed36f1dad6259351c980243ca4d14c85535bb231",
+    "ranger-idle.png": "1a50410488820e326cba8c5aaaff506837f59de5a542658c21b0e6688a5f49f4",
+    "game-mobile.png": "5f5a47f877e26f29daf393042cd5cf42d2d3a8b08502a5e7722afd3d8767572a"
+  }
+}

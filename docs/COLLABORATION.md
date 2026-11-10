@@ -357,3 +357,37 @@ Decodifica completa senza errori, 1080×1920/30 fps H.264/AAC, -14,24 LUFS e
 reale, ascolto umano o risultato social dichiarato. Solo media/docs modificati,
 nessuna pubblicazione o deploy. Il brief gameplay precedente è superato dalla
 richiesta esplicita di un concept anche cinematografico.
+
+## Correzione del trailer — lavoro locale nella nuova bozza
+
+Il proprietario chiarisce che desidera una cinematica animata del gioco e della
+sua evoluzione, non un montaggio di illustrazioni. Il precedente teaser illustrato
+non soddisfa questa richiesta e non va riproposto come soluzione.
+Nuova scena di authoring tools/cinematic/ con modelli/ambiente Three.js esistenti,
+regia dedicata, arco, schivata e Custode. Script capture-engine-teaser.mjs.
+Nessuna modifica alle regole del gioco. Ultima istruzione: non pubblicare nulla;
+questo blocco rimane locale, senza push, deploy o invio social. Render in verifica.
+
+
+## Stop del proprietario — priorità alla grafica
+
+Il proprietario giudica le immagini 3D molto lontane dal risultato desiderato
+e sospende il teaser finché la grafica non sarà almeno guardabile. Render
+interrotto, nessun nuovo teaser consegnato o pubblicato. Gli esperimenti in
+tools/cinematic/ e gli output parziali sono sospesi, non materiale promozionale.
+Prossima priorità: una sola scena giocabile convincente con personaggio,
+ambiente, illuminazione e animazioni da valutare visivamente col proprietario.
+Non riprendere il trailer o dedurre approvazione artistica da test tecnici.
+Nessun push, deploy o pubblicazione eseguiti in questo blocco.
+
+## Revisione grafica — blocco locale attivo
+
+Il proprietario autorizza l'avvio della scena giocabile più convincente; teaser
+sospeso. Base anatomica CC0 di System G6 importata da OpenGameArt, selezionata,
+collegata allo scheletro ed esportata GLB con Blender. Prime animazioni del
+Ranger collegate allo stato esistente; accessori e caricamento locale con fallback.
+File: ranger-skinned.js, ranger.js, actors.js, environment.js, public/models/ranger,
+prepare-ranger-model.py, visual-review.mjs, tools/visual-review, test asset e docs.
+Modifiche precedenti al teaser conservate ma non riprese. Nessun push o deploy.
+95 test iniziali passati; controlli browser e valutazione visiva ancora in corso.
+La base resta provvisoria e non viene dichiarata equivalente al concept approvato.

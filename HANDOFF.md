@@ -5,7 +5,29 @@ Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 Ultimo commit applicativo: **864f97f**. Verificare sempre git log/status e remoto
 prima di continuare. Main e servizio precedente restano separati.
 
-## Ultimo blocco concluso — Ranger e comunicazione della ripartenza
+## Blocco locale corrente — prima sostituzione grafica del Ranger
+
+Il proprietario chiede di iniziare a migliorare la scena giocabile; teaser fermo.
+Base GLB CC0 di System G6, con scheletro e cinque clip, integrata al primo Ranger
+selezionato. Moduli vestiti/capelli collegati alle ossa, texture incorporate,
+accessori Mythwood e asse dell'arco allineato alla simulazione. È una base
+generica provvisoria; volto/abiti, transizioni, scatto e contatti vanno rifiniti.
+Gli altri cinque personaggi e il Custode restano segnaposto.
+
+Portale meno intenso e luce/foschia riviste. CSP consente blob locale per le
+texture incorporate, senza aggiungere host esterni. Loader e GLB caricati solo
+quando richiesti; fallback visibile se il file fallisce. Gameplay invariato.
+95 test e build riusciti; studio quattro pose, mira e fallback passati, viste
+app desktop/mobile catturate. Regressione finale Ranger/Giardino ancora in corso.
+Build: 763 kB JS / 205 kB gzip, loader separato 45 kB / 13 kB gzip, GLB 1,6 MB.
+Il warning bundle >500 kB resta aperto; nessuna prova hardware reale.
+
+Vedere docs/VISUAL_UPGRADE.md, public/models/ranger/SOURCE.json e screenshot/
+rapporto in docs/assets/visual-review/. Le catture non sono concept AI.
+Nessun push, deploy o pubblicazione. Modifiche precedenti al teaser preservate
+ma sospese: non eseguire i relativi script.
+
+## Blocco precedente — Ranger procedurale e comunicazione della ripartenza
 
 94 test superati, build riuscita (710 kB JS / 190 kB gzip, warning aperto).
 Primo corpo Ranger originale integrato, distinto dagli altri cinque ruoli:
@@ -196,3 +218,24 @@ docs/social/. Decodifica completa senza errori; audio misurato -14,24 LUFS,
 o giudizio umano sull'audio. Test gameplay non ripetuti: codice invariato.
 Checkpoint sorgenti 2e24a4e; consegna nel commit successivo. Nessun post inviato,
 nessun deploy, nessuna risposta di Claude presunta.
+
+## Correzione richiesta — cinematica 3D, non illustrazioni
+
+La consegna illustrata precedente è stata respinta come interpretazione della
+richiesta. Il proprietario intende personaggi/ambienti/azioni del gioco in movimento.
+Nuovo lavoro locale tools/cinematic/, script scripts/capture-engine-teaser.mjs:
+scene dirette usando la vera geometria corrente, nessuna immagine generata.
+Resa dei modelli ancora provvisoria e semplificata; non paragonabile al concept.
+Nessun push/deploy/pubblicazione, come da ultima istruzione. Render in verifica.
+
+
+## Stop del proprietario — priorità alla grafica
+
+Il proprietario giudica le immagini 3D molto lontane dal risultato desiderato
+e sospende il teaser finché la grafica non sarà almeno guardabile. Render
+interrotto, nessun nuovo teaser consegnato o pubblicato. Gli esperimenti in
+tools/cinematic/ e gli output parziali sono sospesi, non materiale promozionale.
+Prossima priorità: una sola scena giocabile convincente con personaggio,
+ambiente, illuminazione e animazioni da valutare visivamente col proprietario.
+Non riprendere il trailer o dedurre approvazione artistica da test tecnici.
+Nessun push, deploy o pubblicazione eseguiti in questo blocco.

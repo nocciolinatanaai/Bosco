@@ -8,6 +8,9 @@ online completo. La produzione precedente non è stata modificata.
 
 Il client include una CSP senza esecuzione di stringhe, script remoti o connessioni
 esterne. Gli stili inline sono ancora consentiti per i colori delle classi.
+Le texture incorporate nel GLB usano URL blob creati localmente: img-src e
+connect-src consentono questo schema per il loader Three.js (anche su Safari).
+Non sono stati aggiunti host esterni o wildcard alle connessioni.
 La CSP in meta non protegge dall'inquadramento in iframe: l'hosting definitivo
 deve impostare header appropriati, incluso frame-ancestors. Non dichiarare
 sicurezza completa sulla sola base della CSP.

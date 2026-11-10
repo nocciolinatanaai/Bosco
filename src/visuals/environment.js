@@ -81,13 +81,13 @@ function portal(root, m) {
         vec2 p=vP; float n=noise(p*5.+vec2(uTime*.1,-uTime*.06))*.55+noise(p*13.-uTime*.04)*.25;
         float r=length((p-vec2(.5,.48))*vec2(1.2,1.));
         float veil=smoothstep(.08,.65,r); float rip=pow(abs(sin(p.y*25.+n*6.-uTime*.25)),18.);
-        vec3 c=mix(vec3(.045,.018,.09),vec3(2.6,1.18,.28),veil);
-        c+=vec3(1.4,.7,.2)*rip*.24; gl_FragColor=vec4(c,1.);
+        vec3 c=mix(vec3(.045,.018,.09),vec3(1.4,.65,.14),veil);
+        c+=vec3(1.4,.7,.2)*rip*.16; gl_FragColor=vec4(c,1.);
       }`,
   });
   const plane = piece(root, new THREE.ShapeGeometry(shape, 40), material, 0, .05, -18.4);
   plane.castShadow = false; plane.receiveShadow = false;
-  const edge = new THREE.PointLight('#ffbb68', 120, 23, 1.8); edge.position.set(0, 3.8, -16); root.add(edge);
+  const edge = new THREE.PointLight('#ffbb68', 38, 23, 1.8); edge.position.set(0, 3.8, -16); root.add(edge);
   const front = new THREE.Group(); root.add(front);
   for (let i = 0; i < 7; i++) {
     const ring = piece(front, new THREE.TorusGeometry(1.3 + i * .19, .015, 4, 70), m.luminous, 0, 4.6, -17.8);
@@ -97,18 +97,18 @@ function portal(root, m) {
 }
 
 export function createArtWorld(renderer) {
-  const scene = new THREE.Scene(); scene.background = new THREE.Color('#1a273d'); scene.fog = new THREE.FogExp2('#29394d', .012);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color('#101e30'); scene.fog = new THREE.FogExp2('#253346', .018);
   const room = new RoomEnvironment();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromScene(room, .04);
-  scene.environment = environment.texture; scene.environmentIntensity = .3;
+  scene.environment = environment.texture; scene.environmentIntensity = .22;
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
   const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
   let gardenWorld = null, area = 'plaza';
   const rand = random(215);
-  scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .6));
-  const sun = new THREE.DirectionalLight('#b3c9e4', 2);
+  scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .45));
+  const sun = new THREE.DirectionalLight('#b3c9e4', 1.45);
   sun.position.set(-10, 22, 14); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -25, right: 25, top: 25, bottom: -25, near: .5, far: 70 });
   sun.shadow.bias = -.0005; sun.shadow.normalBias = .035; scene.add(sun);
@@ -254,7 +254,7 @@ export function createArtWorld(renderer) {
       if (id === area) return; area = id;
       if (id === 'garden' && !gardenWorld) gardenWorld = createGardenWorld(scene, m);
       plazaRoot.visible = id !== 'garden'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
-      scene.background.set(id === 'garden' ? '#152e32' : '#1a273d'); scene.fog.color.set(id === 'garden' ? '#24483f' : '#29394d');
+      scene.background.set(id === 'garden' ? '#152e32' : '#101e30'); scene.fog.color.set(id === 'garden' ? '#24483f' : '#253346');
     },
     updateGarden(state, reducedMotion) { if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
     addEnemy(enemy) {

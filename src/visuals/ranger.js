@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { attachSkinnedRanger } from './ranger-skinned.js';
 import { block, curve, ellipsoid, link, piece, batchArchitecture } from './geometry.js';
 
 const joint = (parent, name, position) => {
@@ -167,5 +168,6 @@ export function createRangerActor() {
       strip.vertices.needsUpdate = true;
     }
   };
+  attachSkinnedRanger(root);
   return { root, body: m.jacket, weapon: bow };
 }

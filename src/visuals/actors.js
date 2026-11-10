@@ -173,6 +173,7 @@ export function createAdventurer(m) {
     generic.root.userData.setClass(role);
     generic.root.visible = role.id !== 'ranger'; ranger.root.visible = role.id === 'ranger';
     active = role.id === 'ranger' ? ranger : generic;
+    if(role.id === 'ranger')void ranger.root.userData.loadVisual();
   };
   root.userData.animate = (time, moving, attack, reducedMotion, combat) => active.root.userData.animate(time, moving, attack, reducedMotion, combat);
   return { root, body: generic.body, weapon: generic.weapon };

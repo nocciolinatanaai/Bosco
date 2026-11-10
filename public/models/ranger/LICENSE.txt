@@ -1,0 +1,9 @@
+Modular RPG Characters — System G6 (Qoma)
+
+Upstream release: CC0 1.0 Universal.
+https://opengameart.org/content/modular-rpg-characters
+https://creativecommons.org/publicdomain/zero/1.0/
+
+See UPSTREAM_README.txt for the author notice and SOURCE.json for exact provenance.
+Mythwood adaptation: selected meshes, skeleton binding and glTF material conversion.
+No assertion of exclusive ownership over this CC0 base.
