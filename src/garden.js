@@ -18,7 +18,7 @@ function travelReset(s) {
   s.dodgeRemaining = 0; s.invulnerable = 0; s.returnShot = 0;
 }
 export function enterGarden(s) {
-  if (s.status !== 'playing' || s.area === 'garden' || !s.evolved || !s.cleared || !s.trail.complete || !near(s, { x: 38.5, z: 7 })) return false;
+  if (s.status !== 'playing' || s.area !== 'plaza' || !s.evolved || !s.cleared || !s.trail.complete || !near(s, { x: 38.5, z: 7 })) return false;
   if (!s.enemies.some(e => e.type === 'sentry')) {
     const enemy = createSentry(); if (s.garden.sentryDefeated) { enemy.hp = 0; enemy.phase = 'dead'; }
     s.enemies.push(enemy);
@@ -33,7 +33,7 @@ export function leaveGarden(s) {
 }
 export function gardenObjective(s) {
   if (s.status !== 'playing') return null;
-  if (s.area !== 'garden') return s.cleared && s.evolved && s.trail.complete ? { id: 'enter', x: 38.5, z: 7, label: 'Entra nel giardino', approach: 'Raggiungi il passaggio' } : null;
+  if (s.area !== 'garden') return s.area !== 'plaza' ? null : s.cleared && s.evolved && s.trail.complete ? { id: 'enter', x: 38.5, z: 7, label: 'Entra nel giardino', approach: 'Raggiungi il passaggio' } : null;
   if (s.garden.step === 1) return { id: 'compass', ...GARDEN_COMPASS, label: 'Recupera la bussola', approach: 'Raggiungi la bussola' };
   if (s.garden.step === 2) return { id: 'signal', ...GARDEN_ENTRY, label: 'Accendi il segnale', approach: 'Riporta la bussola alla soglia' };
   return { id: 'leave', ...GARDEN_ENTRY, label: 'Torna al sentiero', approach: 'Raggiungi la soglia' };

@@ -1,3 +1,4 @@
+import { createCaveWorld } from './caves.js';
 import { createGardenWorld, createGardenSentry } from './garden.js';
 import { createBeamTelegraph, createTelegraph } from './telegraph.js';
 import * as THREE from 'three';
@@ -105,7 +106,7 @@ export function createArtWorld(renderer) {
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
   const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
-  let gardenWorld = null, area = 'plaza';
+  let caveWorld = null, gardenWorld = null, area = 'plaza';
   const rand = random(215);
   scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .45));
   const sun = new THREE.DirectionalLight('#b3c9e4', 1.45);
@@ -256,10 +257,12 @@ export function createArtWorld(renderer) {
     setArea(id) {
       if (id === area) return; area = id;
       if (id === 'garden' && !gardenWorld) gardenWorld = createGardenWorld(scene, m);
-      plazaRoot.visible = id !== 'garden'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
-      scene.background.set(id === 'garden' ? '#152e32' : '#101e30'); scene.fog.color.set(id === 'garden' ? '#24483f' : '#253346');
+      if (id === 'caves' && !caveWorld) caveWorld = createCaveWorld(scene, m);
+      if (caveWorld) caveWorld.root.visible = id === 'caves';
+      plazaRoot.visible = id === 'plaza'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
+      scene.background.set(id === 'caves' ? '#141523' : id === 'garden' ? '#152e32' : '#101e30'); scene.fog.color.set(id === 'caves' ? '#242338' : id === 'garden' ? '#24483f' : '#253346');
     },
-    updateGarden(state, reducedMotion) { if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
+    updateGarden(state, reducedMotion) { if (state.area === 'caves' && caveWorld) caveWorld.update(state, reducedMotion); if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
     addEnemy(enemy) {
       const group = enemy.type === 'sentry' ? createGardenSentry(m) : createGuardian(m, enemy.boss); group.position.set(enemy.x, 0, enemy.z); scene.add(group);
       const marker = enemy.type === 'sentry' ? createBeamTelegraph() : createTelegraph(); scene.add(marker);

@@ -93,7 +93,7 @@ test('sentinella può essere interrotta e sconfitta senza duplicare il finale de
 test('checkpoint v1/v2 migrano a v3 senza scrivere; v3 conserva ogni tappa e ricrea il combattimento a un ingresso sicuro', () => {
   let raw = JSON.stringify(old('healer')), writes = 0;
   const store = createCheckpointStore(() => ({ getItem: () => raw, setItem: (key, value) => { assert.equal(key, CHECKPOINT_KEY); writes++; raw = value; } }));
-  const loaded = store.load(); assert.equal(loaded.checkpoint.version, 3); assert.equal(writes, 0);
+  const loaded = store.load(); assert.equal(loaded.checkpoint.version, 4); assert.equal(writes, 0);
   assert.equal(JSON.parse(raw).version, 1);
   for (const role of CLASSES) for (let phase = 1; phase <= 4; phase++) {
     const s = garden(role.id); s.garden.step = phase; if (phase === 4) { s.area = 'plaza'; s.x = 38.5; s.z = 7; }
@@ -106,7 +106,7 @@ test('checkpoint v1/v2 migrano a v3 senza scrivere; v3 conserva ogni tappa e ric
 
 test('schema corrente rifiuta combinazioni impossibili, versioni ignote e proprietà estranee', () => {
   const valid = checkpointFromSession(garden());
-  for (const bad of [{ ...valid, version: 4 }, { ...valid, traces: 2 }, { ...valid, stage: 'arrival' },
+  for (const bad of [{ ...valid, version: 5 }, { ...valid, traces: 2 }, { ...valid, stage: 'arrival' },
     { ...valid, garden: { ...valid.garden, step: 5 } }, { ...valid, garden: { ...valid.garden, user: 'secret' } },
     { ...valid, garden: { ...valid.garden, step: 3, area: 'plaza' } }]) assert.equal(validateCheckpoint(bad), null);
   const s = garden(); s.garden.sentryDefeated = true; assert.throws(() => checkpointFromSession(s));

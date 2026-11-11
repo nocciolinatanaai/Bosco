@@ -39,7 +39,7 @@ try {
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 1, 'Reading must not write');
     await page.locator('#resume-saved').click();
     await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click();
-    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 3);
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 4);
     report.step = 'entry'; await save();
     await page.locator('#world-interact').click();
     assert.equal(await page.locator('#quest-title').innerText(), 'La bussola dei dispersi');

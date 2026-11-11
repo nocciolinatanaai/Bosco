@@ -18,7 +18,7 @@ export function createMemoryTrail(scene) {
   return {
     root,
     update(state, time, reducedMotion) {
-      root.visible = Boolean(state?.area !== 'garden' && state?.cleared && state?.evolved); if (!root.visible) return;
+      root.visible = Boolean(state?.area === 'plaza' && state?.cleared && state?.evolved); if (!root.visible) return;
       line.material.opacity = state.trail.complete ? .8 : .15 + state.trail.found.length * .18;
       nodes.forEach((node, i) => {
         const found = state.trail.found.includes(MEMORY_TRACES[i].id), current = !state.trail.complete && i === state.trail.found.length;

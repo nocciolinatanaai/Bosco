@@ -1,3 +1,4 @@
+import { enterCaves, CAVE_ENTRY } from './caves.js';
 import { validAttunement } from './artifacts.js';
 import { CLASSES, createSession, evolve, drainEvents } from './game.js';
 import { enterGarden, GARDEN_ENTRY } from './garden.js';
@@ -8,7 +9,7 @@ const stages = new Set(['arrival', 'awakened', 'guardian']);
 export function validateCheckpoint(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   const keys = Object.keys(value).sort().join(',');
-  if (![1, 2, 3].includes(value.version) || keys !== (value.version === 1 ? 'autoSave,role,stage,traces,version' : value.version===2?'autoSave,garden,role,stage,traces,version':'attunement,autoSave,garden,role,stage,traces,version')) return null;
+  if (![1, 2, 3, 4].includes(value.version) || keys !== (value.version === 1 ? 'autoSave,role,stage,traces,version' : value.version===2?'autoSave,garden,role,stage,traces,version':value.version===3?'attunement,autoSave,garden,role,stage,traces,version':'attunement,autoSave,caves,garden,role,stage,traces,version')) return null;
   if (typeof value.autoSave !== 'boolean' || !CLASSES.some(r => r.id === value.role) || !stages.has(value.stage)) return null;
   if (!Number.isInteger(value.traces) || value.traces < 0 || value.traces > MEMORY_TRACES.length || (value.stage !== 'guardian' && value.traces !== 0)) return null;
   const garden = value.version === 1 ? { step: 0, area: 'plaza', sentryDefeated: false } : value.garden;
@@ -16,21 +17,28 @@ export function validateCheckpoint(value) {
   if (!Number.isInteger(garden.step) || garden.step < 0 || garden.step > 4 || !['plaza', 'garden'].includes(garden.area) || typeof garden.sentryDefeated !== 'boolean') return null;
   if ((garden.step > 0 && (value.stage !== 'guardian' || value.traces !== 3)) ||
       (garden.step === 0 && (garden.area !== 'plaza' || garden.sentryDefeated)) || (garden.step === 3 && garden.area !== 'garden')) return null;
-  const attunement=value.version===3?value.attunement:null;
+  const attunement=value.version>=3?value.attunement:null;
   if(!validAttunement(attunement)||(attunement!==null&&value.stage==='arrival'))return null;
-  return { version: 3, attunement, autoSave: value.autoSave, role: value.role, stage: value.stage, traces: value.traces,
+  const caves = value.version === 4 ? value.caves : { step: 0, inside: false, wardenDefeated: false };
+  if (!caves || typeof caves !== 'object' || Array.isArray(caves) || Object.keys(caves).sort().join(',') !== 'inside,step,wardenDefeated' ||
+      !Number.isInteger(caves.step) || caves.step < 0 || caves.step > 3 || typeof caves.inside !== 'boolean' || typeof caves.wardenDefeated !== 'boolean' ||
+      (caves.step === 0 && (caves.inside || caves.wardenDefeated)) ||
+      (caves.step > 0 && garden.step !== 4) || (caves.inside && garden.area !== 'plaza')) return null;
+  return { version: 4, caves: { ...caves }, attunement, autoSave: value.autoSave, role: value.role, stage: value.stage, traces: value.traces,
     garden: { step: garden.step, area: garden.area, sentryDefeated: garden.sentryDefeated } };
 }
 export function checkpointFromSession(state, autoSave = true) {
   const stage = state.cleared && state.evolved ? 'guardian' : state.evolved ? 'awakened' : 'arrival';
-  const found = state.trail.found, plazaEnemies = state.enemies.filter(e => e.area !== 'garden');
+  const found = state.trail.found, plazaEnemies = state.enemies.filter(e => (e.area || 'plaza') === 'plaza');
   if ((state.cleared && !state.evolved) || (state.evolved && plazaEnemies.some(e => !e.boss && e.hp > 0)) ||
       (state.cleared && plazaEnemies.some(e => e.hp > 0)) || !Array.isArray(found) || found.length > MEMORY_TRACES.length ||
       found.some((id, i) => id !== MEMORY_TRACES[i].id) || (found.length > 0 && stage !== 'guardian')) throw new Error('Tappa incoerente');
   const sentry = state.enemies.find(e => e.type === 'sentry');
   if (state.garden.step > 0 && (!sentry || (sentry.hp <= 0) !== state.garden.sentryDefeated)) throw new Error('Stato sentinella incoerente');
-  const data = validateCheckpoint({ version: 3, attunement:state.artifact.attunement, autoSave, role: state.role.id, stage, traces: stage === 'guardian' ? found.length : 0,
-    garden: { ...state.garden, area: state.area } });
+  const warden = state.enemies.find(e => e.type === 'warden');
+  if (state.caves.step > 0 && (!warden || (warden.hp <= 0) !== state.caves.wardenDefeated)) throw new Error('Stato guardiano delle cave incoerente');
+  const data = validateCheckpoint({ version: 4, caves: { ...state.caves, inside: state.area === 'caves' }, attunement:state.artifact.attunement, autoSave, role: state.role.id, stage, traces: stage === 'guardian' ? found.length : 0,
+    garden: { ...state.garden, area: state.area === 'caves' ? 'plaza' : state.area } });
   if (!data) throw new Error('Tappa non supportata');
   return data;
 }
@@ -54,6 +62,12 @@ export function restoreCheckpoint(value) {
     if (state.area === 'garden') { Object.assign(state, GARDEN_ENTRY); state.region = 'Giardino dei nomi'; }
     else { state.x = 38.5; state.z = 7; state.region = 'Il sentiero delle memorie'; }
   }
+  if (data.caves.step > 0) {
+    state.area = 'plaza'; state.x = 35; state.z = 7; state.caves.wardenDefeated = data.caves.wardenDefeated;
+    enterCaves(state); state.caves.step = data.caves.step;
+    if (data.caves.inside) Object.assign(state, CAVE_ENTRY);
+    else { state.area = data.garden.area; state.x = 35; state.z = 7; state.region = state.area === 'garden' ? 'Giardino dei nomi' : 'Il sentiero delle memorie'; if (state.area === 'garden') Object.assign(state, GARDEN_ENTRY); }
+  }
   state.artifact.attunement=data.attunement;
   drainEvents(state); state.sequence = 0;
   return state;
@@ -61,6 +75,7 @@ export function restoreCheckpoint(value) {
 export function checkpointLabel(data) {
   if (!data) return '';
   const role = CLASSES.find(r => r.id === data.role)?.name || '';
+  if (data.caves?.step) return `${role} · ${['', 'Cave dei Sussurri', 'Lente recuperata', 'Lente restituita a Liora'][data.caves.step]}`;
   if (data.garden?.step) return `${role} · ${['', 'Giardino dei nomi', 'Bussola recuperata', 'Segnale acceso', 'Segnale riportato'][data.garden.step]}`;
   const stage = data.stage === 'arrival' ? 'Ingresso nella frattura' : data.stage === 'awakened' ? 'Ricordo di Liora accolto' : data.traces === 3 ? 'Pista Cartiglio ricostruita' : `Custode sconfitto · ${data.traces} / 3 tracce`;
   return `${role} · ${stage}`;

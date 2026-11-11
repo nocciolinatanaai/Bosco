@@ -1,5 +1,6 @@
+import { caveObjective, CAVE_GATE, CAVE_ENTRY } from './caves.js';
 import * as THREE from 'three';
-import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, interactGarden, attuneArtifact, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, interactGarden, interactCaves, attuneArtifact, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
 import { createCheckpointStore, restoreCheckpoint, checkpointLabel, checkpointFromSession } from './checkpoints.js';
 import { gardenObjective, GARDEN_ENTRY, inArea } from './garden.js';
 import { activeTrace, TRACE_RADIUS } from './trail.js';
@@ -211,7 +212,7 @@ export function startRuntime($) {
   function consumeEvents() {
     if (!state) return;
     for (const event of drainEvents(state)) {
-      if (['evolved', 'cleared', 'trail-progress', 'garden-progress','artifact-attuned'].includes(event.type)) saveProgress();
+      if (['evolved', 'cleared', 'trail-progress', 'garden-progress','cave-progress','artifact-attuned'].includes(event.type)) saveProgress();
       effects.event(event, state, motionReduced());
       if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
       else audio.event(event);
@@ -227,6 +228,12 @@ export function startRuntime($) {
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
+      if (event.type === 'cave-progress') {
+        syncEnemyViews(); switchArea();
+        notice({ enter: 'Cave dei Sussurri · Recupera la lente. Il rintocco colpisce dentro il cerchio.', lens: 'Lente recuperata · Riportala a Liora.', leave: 'Sei tornato al sentiero.', warden: 'Guardiano del rintocco disattivato.' }[event.interaction], 6);
+        if (event.completed) showMemory('caves');
+      }
+      if (event.type === 'enemy-windup' && state.area === 'caves') notice('Rintocco in arrivo · Esci dal cerchio o schiva all’impatto.', 2);
       if (event.type === 'garden-progress') {
         if (['enter', 'leave'].includes(event.interaction)) { syncEnemyViews(); switchArea(); }
         const messages = { enter: 'Giardino dei nomi · Recupera la bussola. Puoi aggirare la sentinella.', compass: 'Bussola recuperata · Riportala alla soglia.', signal: 'L’ago punta dentro la frattura. Qualcuno sta correggendo la rotta.', leave: 'Sei tornato al sentiero.', sentry: 'Sentinella disattivata · Il percorso è libero.' };
@@ -257,20 +264,22 @@ export function startRuntime($) {
     $('quest-title').textContent = guide.title; $('journey-hint').textContent = guide.hint;
     const trace = activeTrace(state);
     $('follow-trail').hidden = !trace;
-    const objective = gardenObjective(state);
+    const objective = state.area === 'caves' ? caveObjective(state) : gardenObjective(state);
     $('world-interact').hidden = !objective;
     if (objective) {
       const distance = Math.hypot(state.x - objective.x, state.z - objective.z);
       $('world-interact').textContent = distance <= 2.2 ? objective.label : `${objective.approach} · ${Math.ceil(distance)} m`;
     }
-    $('leave-garden').hidden = state.area !== 'garden' || state.garden.step >= 3;
-    $('leave-garden').disabled = Math.hypot(state.x - GARDEN_ENTRY.x, state.z - GARDEN_ENTRY.z) > 2.2;
+    $('cave-travel').hidden = state.area !== 'plaza' || state.garden.step !== 4;
+    $('leave-garden').textContent = state.area === 'caves' ? 'Esci dalle cave' : 'Ritorna al sentiero';
+    $('leave-garden').hidden = state.area === 'caves' ? false : state.area !== 'garden' || state.garden.step >= 3;
+    $('leave-garden').disabled = Math.hypot(state.x - (state.area === 'caves' ? CAVE_ENTRY.x : GARDEN_ENTRY.x), state.z - (state.area === 'caves' ? CAVE_ENTRY.z : GARDEN_ENTRY.z)) > 2.2;
     $('quest-item').hidden = state.garden.step < 2;
-    $('quest-item').textContent = state.garden.step === 4 ? '✓ Segnale riportato' : 'Bussola · con te';
+    $('quest-item').textContent = state.caves.step >= 2 ? state.caves.step === 3 ? '✓ Lente restituita a Liora' : 'Lente · con te' : state.garden.step === 4 ? '✓ Segnale riportato' : 'Bussola · con te';
     const traceNear = trace && Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS;
     $('follow-trail').disabled = Boolean(traceNear && (state.stamina < 30 || state.dashCooldown > 0));
     if (trace) $('follow-trail').textContent = traceNear ? 'Risuona con lo scatto · 30 vigore' : 'Raggiungi la prossima traccia';
-    $('objective').textContent = state.garden.step > 0 ? 'La bussola è uno strumento di spedizione. Riporta il segnale: Liora potrà capire se la rotta viene ancora corretta.' : state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+    $('objective').textContent = state.caves.step > 0 ? 'La lente conserva due rotte sovrapposte. Recuperala nelle cave: Liora potrà distinguere la strada dalla correzione.' : state.garden.step > 0 ? 'La bussola è uno strumento di spedizione. Riporta il segnale: Liora potrà capire se la rotta viene ancora corretta.' : state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
     if (guide.id !== lastGuide) {
       lastGuide = guide.id;
       if (!memory.open) notice(guide.hint, 6);
@@ -279,7 +288,7 @@ export function startRuntime($) {
     $('stamina').value = state.stamina; $('stamina-text').textContent = `${Math.floor(state.stamina)} / 100`;
     const current = selectedEnemy(state, 18);
     const inReach = current && Math.hypot(current.x - state.x, current.z - state.z) <= state.role.basicRange * (state.evolved ? 1.2 : 1);
-    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : state.area === 'garden' ? gardenObjective(state)?.label || 'Giardino dei nomi' : state.garden.step === 4 ? 'Segnale riportato · il passaggio resta aperto' : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
+    $('target-status').textContent = current ? `${current.name} · ${Math.ceil(current.hp)} PV${inReach ? '' : ' · Avvicinati per attaccare'}` : state.area === 'caves' ? caveObjective(state)?.label : state.area === 'garden' ? gardenObjective(state)?.label || 'Giardino dei nomi' : state.garden.step === 4 ? 'Segnale riportato · il passaggio resta aperto' : trace ? `${trace.name} · segui la traccia luminosa` : state.cleared ? 'Pista conservata · il sentiero ricorda' : 'Tocca un nemico per selezionarlo';
     $('skill').disabled = state.cooldown > 0 || state.status !== 'playing' || state.dodgeRemaining > 0 || state.skillBuffer > 0;
     $('skill').style.setProperty('--cooldown', `${Math.max(0, 1 - state.cooldown / state.role.cooldown) * 100}%`);
     const returnReady = state.evolved && state.role.id === 'ranger' && state.returnShot > 0;
@@ -296,7 +305,7 @@ export function startRuntime($) {
     $('combo-label').textContent = state.action?.kind === 'basic' ? `COLPO ${state.action.combo} / 3` : 'TIENI PREMUTO';
     $('attack').style.setProperty('--swing', `${state.action?.kind === 'basic' ? state.action.elapsed / state.action.duration * 100 : 0}%`);
     $('region').textContent = `◇ ${state.region}`;
-    const boss = state.enemies.find((e) => e.boss); $('boss').hidden = state.area === 'garden' || boss.hp <= 0 || boss.sealed; $('boss-hp').value = boss.hp;
+    const boss = state.enemies.find((e) => e.boss); $('boss').hidden = state.area !== 'plaza' || boss.hp <= 0 || boss.sealed; $('boss-hp').value = boss.hp;
     $('boss-intent').textContent = boss.phase === 'windup' ? `${boss.attackKind === 'nova' ? 'ONDA · ALLONTANATI' : 'FRATTURA · SPOSTATI'} · ${boss.windup.toFixed(1)} s` : boss.phase === 'recovery' || boss.phase === 'stagger' ? `APERTURA · ${boss.recovery.toFixed(1)} s` : 'OSSERVA IL SUO ATTACCO';
     $('boss').classList.toggle('charging', boss.phase === 'windup');
     $('evolve').hidden = state.evolved || !canEvolve(state);
@@ -344,13 +353,18 @@ export function startRuntime($) {
     $('world').focus({ preventScroll: true });
   });
   $('world-interact').addEventListener('click', () => {
-    if (!active()) return; const objective = gardenObjective(state); if (!objective) return;
+    if (!active()) return; const objective = state.area === 'caves' ? caveObjective(state) : gardenObjective(state); if (!objective) return;
     clearControls();
-    if (Math.hypot(state.x - objective.x, state.z - objective.z) <= 2.2) { interactGarden(state, objective.id); consumeEvents(); updateUI(); }
+    if (Math.hypot(state.x - objective.x, state.z - objective.z) <= 2.2) { (state.area === 'caves' ? interactCaves : interactGarden)(state, objective.id); consumeEvents(); updateUI(); }
     else target = { x: objective.x, z: objective.z };
     $('world').focus({ preventScroll: true });
   });
-  $('leave-garden').addEventListener('click', () => { if (active()) { clearControls(); interactGarden(state, 'leave'); consumeEvents(); updateUI(); } });
+  $('cave-travel').addEventListener('click', () => {
+    if (!active()) return; clearControls();
+    if (Math.hypot(state.x - CAVE_GATE.x, state.z - CAVE_GATE.z) <= 2.2) { interactCaves(state, 'enter'); consumeEvents(); updateUI(); }
+    else target = { ...CAVE_GATE };
+  });
+  $('leave-garden').addEventListener('click', () => { if (active()) { clearControls(); (state.area === 'caves' ? interactCaves : interactGarden)(state, 'leave'); consumeEvents(); updateUI(); } });
   $('skill').addEventListener('click', skill); $('dash').addEventListener('click', dash);
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
 
@@ -508,8 +522,8 @@ export function startRuntime($) {
         if ((heldAttack || keys.has('KeyJ')) && !state.action) attack(state);
         consumeEvents();
       }
-      state.region = state.area === 'garden' ? 'Giardino dei nomi' : state.x > 24 ? 'Il sentiero delle memorie' : 'Piazza del ritorno';
-      if (state.area !== 'garden' && state.x > 24 && !state.explored) { state.explored = true; notice('Hai trovato il sentiero delle memorie.', 3); }
+      state.region = state.area === 'caves' ? 'Cave dei Sussurri' : state.area === 'garden' ? 'Giardino dei nomi' : state.x > 24 ? 'Il sentiero delle memorie' : 'Piazza del ritorno';
+      if (state.area === 'plaza' && state.x > 24 && !state.explored) { state.explored = true; notice('Hai trovato il sentiero delle memorie.', 3); }
       if (state.time - uiAt > .08) { updateUI(); uiAt = state.time; }
     }
     if (state) {

@@ -15,6 +15,7 @@
     "test:audio": "node scripts/audio-check.mjs",
     "test:checkpoints": "npm run build && node scripts/checkpoint-ui-check.mjs",
     "test:ranger": "npm run build && node scripts/ranger-check.mjs",
+    "test:caves": "npm run build && node scripts/caves-check.mjs",
     "test:garden": "npm run build && node scripts/garden-check.mjs",
     "test:character": "node scripts/character-check.mjs"
   },

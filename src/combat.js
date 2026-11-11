@@ -1,3 +1,4 @@
+import { createCaves, cavePosition, advanceWarden, interactCaves as caveInteraction } from './caves.js';
 import { createArtifact, selectAttunement, activateArtifact } from './artifacts.js';
 import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
@@ -24,7 +25,7 @@ export function createSession(id) {
   return { role, x: 0, z: 12, hp: role.hp, maxHp: role.hp, stamina: 100, staminaDelay: 0,
     cooldown: 0, dashCooldown: 0, returnShot: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
-    area: 'plaza', garden: createGarden(), artifact:createArtifact(), evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
+    area: 'plaza', garden: createGarden(), caves: createCaves(), artifact:createArtifact(), evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
     lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null, trail: createTrail(),
     time: 0, sequence: 0, events: [], targetId: null, projectiles: [],
     enemies: [enemy('shade-a', 'Eco errante', -5, 2, 52, false, 1.3), enemy('shade-b', 'Eco corazzato', 6, -1, 65, false, 1.8),
@@ -76,8 +77,8 @@ export function movePlayer(s, dx, dz, dt, speed = 5) {
   if (!Number.isFinite(speed) || speed <= 0) return false;
   const scale = Math.min(1, length) / length * Math.min(dt, .05) * Math.min(speed, 20);
   const beforeX = s.x, beforeZ = s.z;
-  if (s.area === 'garden') {
-    const next = gardenPosition(s.x + dx * scale, s.z + dz * scale);
+  if (s.area === 'garden' || s.area === 'caves') {
+    const next = (s.area === 'caves' ? cavePosition : gardenPosition)(s.x + dx * scale, s.z + dz * scale);
     s.x = next.x; s.z = next.z;
     if (!s.action && s.dodgeRemaining <= 0) s.facing = { x: dx / length, z: dz / length };
     const travelled = Math.hypot(s.x - beforeX, s.z - beforeZ); s.lesson.distance += travelled;
@@ -156,11 +157,12 @@ function hit(s, enemy, damage, stagger = 0, critical = false) {
   }
   emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical });
   if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
-  if (!s.resonanceReady && !s.evolved && s.enemies.filter(e => !e.boss && e.area !== 'garden').every(e => e.hp <= 0)) {
+  if (!s.resonanceReady && !s.evolved && s.enemies.filter(e => !e.boss && (e.area || 'plaza') === 'plaza').every(e => e.hp <= 0)) {
     s.resonanceReady = true; emit(s, 'resonance-ready');
   }
+  if (enemy.type === 'warden' && enemy.hp === 0) { s.caves.wardenDefeated = true; emit(s, 'cave-progress', { interaction: 'warden', completed: false }); }
   if (enemy.type === 'sentry' && enemy.hp === 0) { s.garden.sentryDefeated = true; emit(s, 'garden-progress', { interaction: 'sentry', step: s.garden.step }); }
-  if (!s.cleared && s.enemies.filter(e => e.area !== 'garden').every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
+  if (!s.cleared && s.enemies.filter(e => (e.area || 'plaza') === 'plaza').every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
 }
 
 function projectile(s, action, damage, empowered = false, echo = false) {
@@ -260,6 +262,7 @@ export function advanceEnemies(s, dt) {
     enemy.hitFlash = Math.max(0, enemy.hitFlash - dt);
     if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) continue;
     if (enemy.stagger > 0) { enemy.stagger = Math.max(0, enemy.stagger - dt); enemy.phase = 'stagger'; if (enemy.stagger === 0) { enemy.phase = 'recovery'; enemy.recovery = .4; } continue; }
+    if (enemy.type === 'warden') { advanceWarden(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
     if (enemy.type === 'sentry') { advanceSentry(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
     if (enemy.phase === 'windup') {
       enemy.windup = Math.max(0, enemy.windup - dt);
@@ -289,7 +292,7 @@ export function advanceEnemies(s, dt) {
   }
 }
 
-export const canEvolve = (s) => s.status === 'playing' && !s.evolved && s.enemies.filter(e => !e.boss && e.area !== 'garden').every(e => e.hp <= 0);
+export const canEvolve = (s) => s.status === 'playing' && !s.evolved && s.enemies.filter(e => !e.boss && (e.area || 'plaza') === 'plaza').every(e => e.hp <= 0);
 
 export function evolve(s) {
   if (!canEvolve(s)) return false;
@@ -308,4 +311,9 @@ export function interactGarden(s, id) {
 export function attuneArtifact(s,id){
  if(!selectAttunement(s,id))return false;
  emit(s,'artifact-attuned',{attunement:id});return true;
+}
+
+export function interactCaves(s, id) {
+  const result = caveInteraction(s, id); if (!result) return false;
+  emit(s, 'cave-progress', result); return true;
 }

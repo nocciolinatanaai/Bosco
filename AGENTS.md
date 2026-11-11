@@ -23,7 +23,7 @@ Leggere, nell'ordine:
    cancellazione selettiva e fallback; non fidarsi dei dati locali per premi online.
 9. Per le due aree: `docs/REGIONS.md` e `docs/QUEST_02.md`. Filtrare simulazione,
    bersagli e rendering per area; cleared resta il primo Custode. Preservare
-   lettura v1/v2→v3 e nessuna scrittura al semplice caricamento.
+   lettura v1/v2/v3→v4 e nessuna scrittura al semplice caricamento.
 10. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
    `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
@@ -139,3 +139,6 @@ Per artefatti, scelte nel ricordo o ripresa: leggere docs/ARTIFACT_01.md e
 docs/LOCAL_CHECKPOINTS.md. Non alterare i bonus senza test di schivata reale,
 limiti delle risorse e compatibilità delle tappe. Per nuove regioni leggere
 docs/WORLD_AND_PROGRESSION.md: distingue aree giocabili da proposte.
+
+Per la terza area leggere docs/CAVES_01.md. Preservare isolamento plaza/garden/caves,
+missione opzionale senza uccisione obbligatoria e ritorno anticipato senza cura.

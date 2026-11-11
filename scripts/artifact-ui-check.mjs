@@ -17,7 +17,7 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   await page.screenshot({path:`${out}/${name}-choice.png`});await page.locator('#artifact-close').click();assert.equal(await page.locator('#pause').textContent(),'Pausa');
   await page.locator('#help').click();await page.locator('#save-option').check();await page.locator('#close-info').click();
-  let data=await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')));assert.equal(data.version,3);assert.equal(data.attunement,'ward');
+  let data=await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')));assert.equal(data.version,4);assert.equal(data.attunement,'ward');
   await page.reload({waitUntil:'networkidle'});await page.locator('#resume-saved').click();assert.ok((await page.locator('#artifact-status').textContent()).includes('Custodia'));
   await page.locator('#artifact-open').click();await page.locator('#artifact-menu [data-attunement="surge"]').click();await page.locator('#artifact-close').click();
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).attunement),'surge');

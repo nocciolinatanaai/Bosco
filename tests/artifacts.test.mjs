@@ -22,10 +22,10 @@ test('non si cambia tecnica durante un’azione o per azzerare il recupero',()=>
  s.dodgeRemaining=0;s.artifact.cooldown=0;s.x=0;s.z=-8;assert.equal(attuneArtifact(s,'surge'),false);
  s.x=0;s.z=12;assert.equal(attuneArtifact(s,'surge'),true);
 });
-test('tappa v3 conserva la scelta ma non i bonus temporanei; v1/v2 restano leggibili',()=>{
+test('tappa corrente conserva la scelta ma non i bonus temporanei; v1/v2 restano leggibili',()=>{
  const s=awakened();attuneArtifact(s,'surge');s.artifact.cooldown=4;
- const cp=checkpointFromSession(s);assert.equal(cp.version,3);assert.equal(cp.attunement,'surge');
+ const cp=checkpointFromSession(s);assert.equal(cp.version,4);assert.equal(cp.attunement,'surge');
  const restored=restoreCheckpoint(cp);assert.equal(restored.artifact.attunement,'surge');assert.equal(restored.artifact.cooldown,0);
- for(const version of [1,2]){const legacy={...cp,version};delete legacy.attunement;if(version===1)delete legacy.garden;assert.equal(validateCheckpoint(legacy).attunement,null);}
+ for(const version of [1,2]){const legacy={...cp,version};delete legacy.caves;delete legacy.attunement;if(version===1)delete legacy.garden;assert.equal(validateCheckpoint(legacy).attunement,null);}
  assert.equal(validateCheckpoint({...cp,attunement:'admin'}),null);assert.equal(validateCheckpoint({...cp,stage:'arrival'}),null);
 });

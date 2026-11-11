@@ -6,6 +6,13 @@ Ultimo checkpoint applicativo locale: **c4a2d88**, non inviato al remoto.
 Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
 sempre git log/status prima di continuare. Main e servizio precedente separati.
 
+## In verifica — Cave dei Sussurri
+
+Terza area, lente da recuperare/restituire, nemico con rintocco circolare e
+ritorno anticipato. V4 compatibile in lettura v1/v2/v3. 110 test e build passati;
+browser della missione e Giardino da concludere. docs/CAVES_01.md descrive regole
+e limiti. Nessun push o deploy. Il blocco Sigillo sotto è la base precedente.
+
 ## Blocco corrente — Sigillo di Liora e priorità ai contenuti
 
 Il proprietario giudica anche la prova Daria molto lontana dal concept e chiede
