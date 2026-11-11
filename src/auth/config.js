@@ -23,3 +23,9 @@ export function authError(error) {
  if(error?.code==='invalid_credentials')return 'Email o password non corrette.';
  return 'Operazione non completata. Controlla i dati e riprova. Se il problema continua, contatta il progetto.';
 }
+
+export function assertPublicAuthEnv(env={}) {
+ const key=env.VITE_SUPABASE_PUBLISHABLE_KEY||'';
+ if(key&&!/^sb_publishable_[a-zA-Z0-9_-]{20,}$/.test(key))throw Error('La build richiede una Publishable key Supabase pubblica; chiave non valida o riservata rifiutata.');
+ if((env.VITE_SUPABASE_URL||'').includes(LEGACY_PROJECT))throw Error('Il progetto legacy non è consentito per i nuovi account.');
+}

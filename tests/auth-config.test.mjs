@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {authConfig,callbackUrl,safeOAuthUrl,authError} from '../src/auth/config.js';
+import test from 'node:test';import assert from 'node:assert/strict';import {authConfig,assertPublicAuthEnv,callbackUrl,safeOAuthUrl,authError} from '../src/auth/config.js';
 const env={VITE_SUPABASE_URL:'https://mythwood-test.supabase.co',VITE_SUPABASE_PUBLISHABLE_KEY:'sb_publishable_abcdefghijklmnopqrstuvwxyz',VITE_AUTH_OPERATOR:'Test operator',VITE_AUTH_CONTACT:'test@example.invalid'};
 test('account: configurazione esplicita del progetto nuovo, nessun fallback legacy o chiave riservata',()=>{
  assert.equal(authConfig(),null);const config=authConfig(env);assert.equal(config.url,env.VITE_SUPABASE_URL);
@@ -13,3 +13,5 @@ test('account: callback locale anche in sottocartella Pages e destinazione OAuth
  for(const url of ['https://attacker.example/auth/v1/authorize','javascript:alert(1)',config.url+'/not-auth'])assert.equal(safeOAuthUrl(url,config),null);
 });
 test('account: messaggi pubblici non divulgano dettagli server o utenti',()=>{assert.ok(authError({status:429}).includes('Troppe'));assert.ok(authError({code:'invalid_credentials'}).includes('non corrette'));assert.equal(authError({message:'private stack trace'}).includes('private'),false);});
+
+test('account: una chiave privata o il progetto legacy interrompono la build anziché finire nel bundle',()=>{assert.doesNotThrow(()=>assertPublicAuthEnv(env));assert.throws(()=>assertPublicAuthEnv({...env,VITE_SUPABASE_PUBLISHABLE_KEY:'sb_secret_fake_private_value'}));assert.throws(()=>assertPublicAuthEnv({...env,VITE_SUPABASE_URL:'https://lxnhcuthmdkpeklucutu.supabase.co'}));});

@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
-import { authConfig } from './src/auth/config.js';
+import { authConfig, assertPublicAuthEnv } from './src/auth/config.js';
 export default defineConfig(({mode})=>{
- const auth=authConfig(loadEnv(mode,process.cwd(),'VITE_'));
+ const env=loadEnv(mode,process.cwd(),'VITE_');assertPublicAuthEnv(env);const auth=authConfig(env);
  return {
   base:'./',server:{host:'127.0.0.1',fs:{deny:['.env','.env.*','*.{crt,pem}','**/.git/**','**/attachments/**']}},
   plugins:[{name:'account-csp',transformIndexHtml(html,ctx){return auth&&ctx.path==='/account.html'?html.replace("connect-src 'self'",`connect-src 'self' ${auth.url}`):html;}}],
