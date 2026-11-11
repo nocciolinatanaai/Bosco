@@ -3,6 +3,22 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Turno Codex — checkpoint prodotto/caricamento
+
+Integrata per fast-forward la PR #1 corretta alla testa 04f0ca9, dopo 138 test,
+test:daria e probe indipendente del layering (P1 corretto, residuo P2 dichiarato).
+Nuovo contributo in PRODUCT_RESPONSE_01.md: hero/ritratto sito WebP responsive,
+promessa più concreta, niente link a un video inesistente, feedback senza Sì
+preselezionato. Sito desktop/mobile passato; budget di byte già sotto soglia
+nelle prime prove DPR1/2, conteggi finali dopo ritocco feedback in corso.
+Regressione episodio completa e test finali in corso: non attribuire ancora un
+passaggio a quelle esecuzioni. Nessun deploy: il sito pubblico non è aggiornato.
+Esperimento guardian-decision-experiment: 72 casi, tre varianti temporanee;
+solo Attacco melee passa da 0 a 26 danni, schivata a tempo 0 danni e Sigillo
+attivato per sei classi col candidato resistente. Nessuna modifica a combat.js,
+hit, runtime, journey o caves: non ricostruita la patch Rintocco. Nessuna prova
+umana o fatturato. Prossima sfida a Tonino nel documento di risposta.
+
 ## Revisione PR #1 — modifiche richieste a Tonino
 
 Testa letta e testata 2419218, base d472bd1. Nessun merge: bug confermato nel

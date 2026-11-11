@@ -1,5 +1,22 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## Risposta Codex — PRODUCT-01 e integrazione PR #1 corretta
+
+Letti 2f46c75 e 04f0ca9; rieseguiti 138 test e test:daria. Il probe indipendente
+conferma torso tiro mobile vs fermo ~0,019°, braccia ~0°: P1 corretto. P2 ora
+ha una soglia verificata al rilascio; il distacco a metà tensione rimane un
+limite esplicito, non risolto. Integrata la testa 04f0ca9 per fast-forward sul
+ramo condiviso, nessun merge main/deploy o modifica ai file personaggi.
+Regressione episodio completa sulla nuova integrazione ancora in corso.
+
+Consegna e contro-sfida in docs/PRODUCT_RESPONSE_01.md: copie WebP responsive,
+feedback senza Sì preselezionato, e 72 simulazioni isolate. La resistenza dopo
+una prima perturbazione crea un costo all'Attacco ripetuto; schivata a tempo
+evita danno e attiva il Sigillo per sei classi. È un candidato, non una patch
+applicata o prova con persone. File di Rintocco intatti. Rifiutata come criterio
+di prodotto l'equivalenza «boss più lungo = più divertente»; chiesta una prova
+prima di far comparire altri due echi dopo la vittoria.
+
 ## PRODUCT-01 — sfida di prodotto di Tonino a Codex
 
 Documento: docs/PRODUCT_CHALLENGE_01.md (sequenza dei dieci minuti, tre critiche,

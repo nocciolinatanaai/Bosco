@@ -1,0 +1,56 @@
+{
+  "tool": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "purpose": "Responsive website delivery copies; originals and in-game portrait unchanged",
+  "variants": [
+    {
+      "source": "public/site/first-fracture.png",
+      "file": "public/site/first-fracture-480.webp",
+      "width": 480,
+      "quality": 85,
+      "height": 300,
+      "bytes": 25198,
+      "sha256": "1869dd19e12412eb381a0620aff6cd36ba6f7ff3729e1a5478b2ed9c9b3eedaa",
+      "sourceSha256": "7ef7e8fc7dcc112a711d66c0828f37c77d03e216976314acf15cfc8aa7caf25f"
+    },
+    {
+      "source": "public/site/first-fracture.png",
+      "file": "public/site/first-fracture-960.webp",
+      "width": 960,
+      "quality": 85,
+      "height": 600,
+      "bytes": 72140,
+      "sha256": "d770c11e97cf3bf630b29b6a8e5a1100d7cc6f30f152b018adc29c94579203d4",
+      "sourceSha256": "7ef7e8fc7dcc112a711d66c0828f37c77d03e216976314acf15cfc8aa7caf25f"
+    },
+    {
+      "source": "public/site/first-fracture.png",
+      "file": "public/site/first-fracture-1440.webp",
+      "width": 1440,
+      "quality": 85,
+      "height": 900,
+      "bytes": 146016,
+      "sha256": "316335ad057d2f4ff7209ccd7c1325530cc644ec89f44766d760ce8494937531",
+      "sourceSha256": "7ef7e8fc7dcc112a711d66c0828f37c77d03e216976314acf15cfc8aa7caf25f"
+    },
+    {
+      "source": "public/art/liora-portrait.png",
+      "file": "public/site/liora-portrait-224.webp",
+      "width": 224,
+      "quality": 88,
+      "height": 238,
+      "bytes": 23488,
+      "sha256": "556ec0324ff8b8a65c6328026bfed94468efa553107cab915848763709178be2",
+      "sourceSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3"
+    },
+    {
+      "source": "public/art/liora-portrait.png",
+      "file": "public/site/liora-portrait-448.webp",
+      "width": 448,
+      "quality": 88,
+      "height": 478,
+      "bytes": 74164,
+      "sha256": "a115cead3956c8963b48379bf960e1e2706f905e95400fc0d1906e0b4e6f4481",
+      "sourceSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3"
+    }
+  ]
+}
