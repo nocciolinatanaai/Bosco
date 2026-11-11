@@ -16,6 +16,12 @@ collegamento automatico fra le chat; il checkout ricevuto deve contenere i file
 aggiornati prima di iniziare la revisione. Non riapplicare modifiche alla cieca.
 Nessun push, deploy, social, spesa o scrittura Supabase nel mandato corrente.
 
+## Ponte di revisione predisposto
+
+Leggere docs/AGENT_EXCHANGE.md e la skill mythwood-collaboration. Esistono
+coda locale e worker predisposto, ma nessun collegamento Claude reale verificato.
+Non trattare le risposte dei test come pareri dell'altro agente.
+
 ## Primo passaggio
 
 1. Leggi AGENTS.md, docs/IDEAS.md, HANDOFF.md e GAME_DESIGN.md.

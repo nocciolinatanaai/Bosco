@@ -19,7 +19,7 @@ export async function queueRequest(root, queue, question, files) {
   const { stdout: commit } = await exec('git', ['rev-parse', 'HEAD'], { cwd: root });
   const context = [];
   for (const file of files) {
-    if (path.isAbsolute(file) || file.split(/[\\/]/).includes('..') || !/^(src\/.*\.(js|css)|tests\/.*\.mjs|docs\/[A-Z_]+\.md|HANDOFF\.md|GAME_DESIGN\.md)$/.test(file)) throw Error('File fuori dalla lista consentita');
+    if (path.isAbsolute(file) || file.split(/[\\/]/).includes('..') || !/^(src\/.*\.(js|css)|tests\/.*\.mjs|docs\/[A-Z0-9_]+\.md|HANDOFF\.md|GAME_DESIGN\.md)$/.test(file)) throw Error('File fuori dalla lista consentita');
     // Only committed contents leave the working tree; no .env, credentials or local edits.
     const { stdout: content } = await exec('git', ['show', `HEAD:${file}`], { cwd: root, maxBuffer: 100000 });
     context.push({ path: file, sha256: sha(content), content });

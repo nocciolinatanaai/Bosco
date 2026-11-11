@@ -19,8 +19,15 @@ Gioco: obiettivi aggiornati alla consegna della lente, ingresso Cave con distanz
 e azione esplicita, messaggi sotto l'altezza reale della missione su telefono.
 117 test e percorso Cave desktop/mobile passati. Dopo controllo visivo aggiunto
 un limite scorrevole alla missione espansa per separarla da HUD e messaggi;
-verifica layout 390×844 e 360×740 in corso a questo checkpoint.
+verifica layout 390×844 e 360×740 passata per Giardino e Cave: messaggio
+separato da HUD, nessun overflow orizzontale e uscita raggiungibile scorrendo.
+Evidenze in docs/assets/exchange-ux-pass/. Il percorso Cave completo precede
+l’ultimo ritocco CSS; il controllo layout usa la build finale.
 Nessun nuovo contenuto narrativo o regione; nessun push/deploy/social/spesa.
+Una richiesta di revisione è accodata solo localmente (snapshot 1ccf4b4), non
+consegnata e non inclusa nel bundle Git. Il proprietario deve chiarire se
+collegare una nuova sessione Claude Code o la conversazione web esistente.
+La skill non consente di pilotare quella conversazione.
 
 ## Blocco precedente — Cave dei Sussurri
 

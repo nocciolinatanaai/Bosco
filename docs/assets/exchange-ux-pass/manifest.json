@@ -1,0 +1,37 @@
+{
+  "checkpoint": "1ccf4b4",
+  "dateUtc": "2026-11-11",
+  "unitTests": 117,
+  "protocolTestsAfterDocumentationPathFix": 5,
+  "unitLogSha256": "48657659c2c6ccb2fa43ea5d2496d90c215d58ece0633c5fee9b587643c6393f",
+  "protocolLogSha256": "11549f66511f22273257fbbc56bd50daf7e5aedd4ba2e89e2e15930d1bf27390",
+  "finalBuildHtmlSha256": "69b7017b39fe2331bc80d3e9cc00da5c4e95a65b2a736e063f641e294de0d248",
+  "flowBuildScriptSha256": "e16824beb8e26c568f0db85c610cb842f5130d98216ff9ba02a52fe65bd70bab",
+  "sourceSha256": {
+    "src/journey.js": "79188cda30637236bb36ce758b4838f2f487e1a8459183fef57dfb847ec394b2",
+    "src/runtime.js": "a8d55c273838c4648b1b2df9ee3ad9b0e158d152bb29a13c6934f955c0c450c2",
+    "src/style.css": "a04796b4ef5b4926902323debd3c5583f3342c0afefd7db9989eeb7d6ea31c8d",
+    "scripts/lib/agent-exchange.mjs": "01c226e3b9772688d01c953a945a8db391469c0fe66d7d7bd552e17aae04a886",
+    "scripts/agent-exchange.mjs": "b4925fa62b441c47bc562779b5f7b9965eff593d41bfd1478bc67ea2572a7179",
+    "scripts/caves-check.mjs": "7d79ab641a947fc5998d1afac6a3a6aae24ba012ad53ef11dc7cd7ea202fc913",
+    "scripts/quest-layout-check.mjs": "8d86f8beb79390006ad27224b143e91984c068b4a397cc3a13a948d159aa9157",
+    "tests/agent-exchange.test.mjs": "120504615365b01bd6ea6f6f9fc034a59879158407dafac8f56f77a89e92df5a",
+    ".agents/skills/mythwood-collaboration/SKILL.md": "db2cba0c6485a488987fe1d95085810431379e5769efd0a2a8bd6f68101943dd"
+  },
+  "evidenceSha256": {
+    "caves-360.png": "843b9e81797828a592bbda2c328a14cc342640e78a8b5c5c6383389d7de7e1bd",
+    "caves-390.png": "330915b52be1a4642088c47e372abd60d4822e7ac0de948207084c3c3b75166c",
+    "caves-report.json": "b358b65f561d992319b045eeac0e6a34e30579989346e0274b88b72a3bed24b7",
+    "layout-report.json": "4dbe1f78c202477d4c9e5cb7d2b54897aeb1f431dafab78d98a97e552461f100"
+  },
+  "limitations": [
+    "No Claude connector, CLI authentication or shared remote transport; no real model call",
+    "Protocol worker simulated only; CLI flags not verified with real Claude",
+    "Caves flow passed before final CSS spacing limit; dedicated layout checks passed on final build",
+    "Mobile Chromium emulation; no physical iPhone test",
+    "No first-episode full rerun this block",
+    "No push, deploy, publication or spending"
+  ],
+  "finalUnitLogSha256": "ef7f976123b7a216610dec2d33ed2f96e0f72688207a942d8b1fc37f406ae1f2",
+  "finalUnitTests": 117
+}

@@ -514,5 +514,11 @@ non verificata o chiamata API. Prove simulate separate dal funzionamento reale.
 
 Obiettivi conclusi corretti; ingresso Cave leggibile; messaggi mobile separati
 dalla missione. 117 test e percorso Cave desktop/mobile passati. Ulteriore
-correzione CSS dopo ispezione della missione espansa, verifica layout pendente
-al checkpoint. Nessun parere attribuito a Claude; richieste locali non inviate.
+correzione CSS dopo ispezione della missione espansa: layout Giardino/Cave passato
+a 390×844 e 360×740, uscita scorribile e nessuna sovrapposizione messaggio/HUD. Nessun parere attribuito a Claude; richieste locali non inviate.
+
+La prima creazione di richiesta ha rifiutato CAVES_01 per una whitelist senza
+cifre: corretto il filtro e aggiunto il caso ai test. Richiesta successiva
+accodata localmente; deliveredToClaude=false. Attesa preferenza del proprietario
+fra nuova sessione Claude Code e conversazione web esistente. Nessun nuovo
+collegamento dichiarato attivo.

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "area": "garden",
+      "width": 390,
+      "height": 844,
+      "status": "passed",
+      "expandedMessageClearOfHud": true,
+      "exitReachable": true
+    },
+    {
+      "area": "caves",
+      "width": 390,
+      "height": 844,
+      "status": "passed",
+      "expandedMessageClearOfHud": true,
+      "exitReachable": true
+    },
+    {
+      "area": "garden",
+      "width": 360,
+      "height": 740,
+      "status": "passed",
+      "expandedMessageClearOfHud": true,
+      "exitReachable": true
+    },
+    {
+      "area": "caves",
+      "width": 360,
+      "height": 740,
+      "status": "passed",
+      "expandedMessageClearOfHud": true,
+      "exitReachable": true
+    }
+  ],
+  "errors": [],
+  "external": []
+}

@@ -10,7 +10,8 @@ const exec = promisify(execFile);
 async function fixture(t) {
  const root=await mkdtemp(path.join(os.tmpdir(),'mythwood-exchange-'));t.after(()=>rm(root,{recursive:true,force:true}));
  await mkdir(path.join(root,'src'));await writeFile(path.join(root,'src/caves.js'),'export const value = 1;\n');
- await exec('git',['init','--quiet'],{cwd:root});await exec('git',['add','src/caves.js'],{cwd:root});
+ await mkdir(path.join(root,'docs'));await writeFile(path.join(root,'docs/CAVES_01.md'),'Cave fixture');
+ await exec('git',['init','--quiet'],{cwd:root});await exec('git',['add','src/caves.js','docs/CAVES_01.md'],{cwd:root});
  await exec('git',['-c','user.name=Test','-c','user.email=test@example.invalid','commit','--quiet','-m','fixture'],{cwd:root});
  return {root,queue:path.join(root,'exchange')};
 }
@@ -19,6 +20,7 @@ test('scambio: include soltanto snapshot committato e rifiuta segreti/percorso a
  const request=await queueRequest(root,queue,'Rivedi il combattimento',['src/caves.js']);assert.equal(request.context[0].content,'export const value = 1;\n');
  for(const file of ['.env','../src/caves.js','/etc/passwd','docs/private.json'])await assert.rejects(queueRequest(root,queue,'review',[file]));
  assert.ok(reviewPrompt(request).includes('untrusted review data'));
+ const documented=await queueRequest(root,queue,'Review mission',['docs/CAVES_01.md']);assert.equal(documented.context[0].content,'Cave fixture');
 });
 test('scambio: risposta vincolata a ID/hash/commit e non sovrascrivibile',async t=>{
  const {root,queue}=await fixture(t),r=await queueRequest(root,queue,'review',['src/caves.js']),loaded=await loadRequest(queue,r.id);
