@@ -109,59 +109,84 @@ M = {
 
 # ---------------------------------------------------------------- face
 def paint_face():
-    """Original painted face on the CC0 head UV layout (no upstream pixels kept)."""
-    S = 1024
-    yy, xx = np.mgrid[0:S, 0:S].astype(float) / S * 512  # coordinates in source 512 space, y down
+    """Original painted face on the CC0 head UV layout (no upstream pixels kept).
+    Painted at 2048 px with anti-aliased edges and no blur: the face occupies a small UV
+    region, so texel density and crisp lines decide how defined it reads in the game."""
+    S = 2048
+    k = 512 / S                                    # one output pixel in 512-space units
+    yy, xx = np.mgrid[0:S, 0:S].astype(float) * k  # coordinates in source 512 space, y down
     skin = disp(np.array([190, 132, 100]) / 255)
     base = np.ones((S, S, 3)) * skin
-    n = noise(S, 6, 11)[..., None]
-    base *= .93 + n * .1
+    base *= .93 + noise(S, 6, 11)[..., None] * .1
     def blob(cx, cy, rx, ry, power=2.):
         d = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2
         return np.clip(1 - d, 0, 1) ** power
+    def disc(cx, cy, r):                           # anti-aliased filled circle
+        d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2)
+        return np.clip((r - d) / k + .5, 0, 1)
+    def line(y, half, mask):                       # anti-aliased curve of given half-width
+        return np.clip((half - np.abs(yy - y)) / k + .5, 0, 1) * mask
     def tint(mask, rgb, amount):
         nonlocal base
         c = disp(np.array(rgb) / 255)
         base = base * (1 - mask[..., None] * amount) + c * mask[..., None] * amount
-    # Warm cheeks and nose, soft shading around eyes and under cheekbones.
+    def spot(cx, cy, r, rgb, amount):              # small local blob, cheap at 2048
+        x0, x1 = int((cx - r - 1) / k), int((cx + r + 1) / k) + 1
+        y0, y1 = int((cy - r - 1) / k), int((cy + r + 1) / k) + 1
+        sub = base[y0:y1, x0:x1]
+        d = np.sqrt((xx[y0:y1, x0:x1] - cx) ** 2 + (yy[y0:y1, x0:x1] - cy) ** 2)
+        m = np.clip(1 - d / r, 0, 1)[..., None] * amount
+        base[y0:y1, x0:x1] = sub * (1 - m) + disp(np.array(rgb) / 255) * m
+    # Warm cheeks and nose, shading around eyes and under cheekbones.
     for cx in (215, 297):
         tint(blob(cx, 292, 34, 22), (196, 120, 100), .28)
-        tint(blob(cx, 266, 30, 12), (150, 104, 88), .22)          # eye socket shadow
-        tint(blob(cx + (-1 if cx < 256 else 1) * 22, 318, 18, 28), (160, 112, 90), .2)  # cheek hollow
-    tint(blob(256, 296, 9, 26), (232, 186, 154), .25)              # nose bridge highlight
-    tint(blob(256, 308, 16, 6), (170, 112, 92), .35)               # nostril shadow
-    tint(blob(256, 348, 34, 14), (170, 124, 100), .18)             # chin/jaw
-    # Freckles over nose and cheeks.
+        tint(blob(cx, 264, 30, 13), (140, 96, 80), .26)           # eye socket shadow
+        tint(blob(cx + (-1 if cx < 256 else 1) * 22, 318, 18, 28), (160, 112, 90), .2)
+    tint(blob(256, 296, 8, 26), (236, 190, 158), .3)               # nose bridge highlight
+    for sx in (-1, 1):                                             # crisp nostrils and wings
+        tint(blob(256 + sx * 6.5, 309, 3.2, 1.6, 1), (100, 62, 52), .6)
+        tint(blob(256 + sx * 10, 306, 3, 4.5), (168, 112, 92), .35)
+    tint(blob(256, 349, 32, 13), (168, 120, 98), .2)               # chin/jaw
+    # Freckles: small, varied, mostly over nose and cheeks.
     r = np.random.default_rng(7)
-    for _ in range(160):
-        cx = 256 + r.normal(0, 38); cy = 292 + r.normal(0, 12)
+    for _ in range(220):
+        cx = 256 + r.normal(0, 36); cy = 292 + r.normal(0, 11)
         if abs(cx - 256) < 6 and cy < 280: continue
-        tint(blob(cx, cy, r.uniform(.6, 1.2), r.uniform(.6, 1.2), 1), (150, 96, 70), r.uniform(.18, .4))
-    # Eyes: almond shape, hazel-green iris, defined upper lid, lower lash line.
+        spot(cx, cy, r.uniform(.45, 1.0), (140, 86, 62), r.uniform(.25, .55))
+    # Eyes: almond shape, hazel-green iris with limbal ring, sharp lids and lashes.
     for side, cx in ((-1, 225), (1, 287)):
-        white = blob(cx, 263, 12.5, 3.8, 1)
-        tint(white, (208, 194, 182), .85)
-        tint(blob(cx + side * .5, 263, 3.8, 3.8, 1) * (white > 0), (88, 92, 58), .95)
-        tint(blob(cx + side * .5, 263, 1.6, 1.6, 1), (20, 16, 12), .9)
-        tint(blob(cx - side * 2, 261, 1, 1, 1), (250, 250, 240), .8)
-        lid = np.clip(1 - np.abs((yy - (259.4 + ((xx - cx) / 13) ** 2 * 3.6)) / 1.7), 0, 1) * (np.abs(xx - cx) < 14)
-        tint(lid, (34, 22, 18), .92)
-        crease = np.clip(1 - np.abs((yy - (253 + ((xx - cx) / 16) ** 2 * 3)) / 1.6), 0, 1) * (np.abs(xx - cx) < 14)
-        tint(crease, (120, 80, 66), .45)
-        low = np.clip(1 - np.abs((yy - (268 - ((xx - cx) / 15) ** 2 * 3)) / 1.2), 0, 1) * (np.abs(xx - cx) < 13)
-        tint(low, (110, 72, 60), .4)
-        # Strong, straight-to-arched dark brows.
+        ic = cx + side * .5
+        open_ = (yy > 259.6 + ((xx - cx) / 12.5) ** 2 * 3.4) & (yy < 266.8 - ((xx - cx) / 12.5) ** 2 * 3.2)
+        white = open_.astype(float)
+        tint(white, (214, 202, 190), .9)
+        tint(white * blob(cx, 263, 12.5, 4, 1) * 0 + white * np.clip(np.abs(xx - cx) / 12.5, 0, 1), (170, 140, 128), .35)  # corner shade
+        iris = disc(ic, 263, 3.9) * white
+        tint(iris, (96, 104, 62), .97)
+        ang = np.arctan2(yy - 263, xx - ic)
+        tint(iris * (.5 + .5 * np.sin(ang * 18)) * blob(ic, 263, 3.9, 3.9, .5), (130, 120, 70), .35)  # radial fibres
+        tint(iris - disc(ic, 263, 3.3) * white, (38, 40, 26), .8)                                  # limbal ring
+        tint(disc(ic, 263, 1.55) * white, (14, 11, 9), .97)                                        # pupil
+        tint(disc(ic - side * 1.3, 261.7, .7), (250, 248, 238), .9)                                 # catch light
+        upper = 259.6 + ((xx - cx) / 12.5) ** 2 * 3.4
+        tint(line(upper - .5, 1.05 + .5 * np.clip((xx - cx) * side / 12, 0, 1), np.abs(xx - cx) < 13.5), (26, 17, 14), .95)
+        tint(line(upper - 1.6, .45, (np.abs(xx - cx) < 12.5)), (60, 40, 32), .5)                   # lid shadow
+        tint(line(254 + ((xx - cx) / 15) ** 2 * 3, .7, np.abs(xx - cx) < 13), (118, 78, 64), .5)   # crease
+        lower = 266.8 - ((xx - cx) / 12.5) ** 2 * 3.2
+        tint(line(lower + .4, .45, np.abs(xx - cx) < 12), (104, 66, 54), .6)
+        # Brows: dense dark base with hair-stroke breakup, straight then arched.
         t = (xx - cx) * side
         browy = 245 - 3.2 * np.clip((t + 16) / 22, 0, 1) + 4.0 * np.clip((t - 6) / 12, 0, 1)
-        thick = 5.2 - np.clip((t + 4) / 22, 0, 1) * 2.2
-        brow = np.clip(1 - np.abs(yy - browy) / thick, 0, 1) * ((t > -17) & (t < 19))
-        tint(np.clip(brow, 0, 1), (40, 26, 20), .9)
-    # Lips: natural rose-brown, defined line, fuller lower lip.
-    upper = blob(256, 325, 19, 4.4, 1) * (yy < 327)
-    lower = blob(256, 329, 17, 5.2, 1) * (yy >= 327)
-    tint(upper + lower, (158, 86, 78), .8)
-    tint(np.clip(1 - np.abs(yy - 327.2) / 1.0, 0, 1) * (np.abs(xx - 256) < 18), (92, 52, 48), .8)
-    tint(blob(256, 330.5, 7, 1.6, 1), (214, 160, 146), .3)
+        thick = 2.6 - np.clip((t + 4) / 22, 0, 1) * 1.1
+        brow = np.clip((thick - np.abs(yy - browy)) / (2 * k) + .5, 0, 1) * np.clip((t + 17) / 2, 0, 1) * np.clip((19 - t) / 3, 0, 1)
+        strokes = .92 + .08 * np.sin((xx * 2.2 + yy * 1.1 * side) * 3.0)
+        tint(brow * strokes, (36, 23, 18), .95)
+    # Lips: defined line, cupid's bow, fuller lower lip with a soft highlight.
+    bow = 323.4 + 1.3 * np.abs(np.sin((xx - 256) / 19 * np.pi)) * (np.abs(xx - 256) < 19)
+    upper = np.clip((np.minimum(yy - bow, 327.2 - yy)) / k + .5, 0, 1) * np.clip((19 - np.abs(xx - 256)) / 2, 0, 1)
+    lower = np.clip((6.4 * np.sqrt(np.clip(1 - ((xx - 256) / 17) ** 2, 0, 1)) - (yy - 327.2)) / k + .5, 0, 1) * (yy >= 327.2)
+    tint(upper, (146, 70, 66), .9); tint(lower, (160, 80, 74), .88)
+    tint(line(327.3, .55, np.abs(xx - 256) < 18), (84, 44, 40), .9)
+    tint(blob(256, 330, 7, 1.5, 1), (222, 168, 152), .35)
     # Scalp and hairline: dark brown so the hair shell never shows pale gaps.
     scalp = disp(np.array([40, 27, 21]) / 255)
     src = np.array(head_image_rgb)  # 512x512 RGB, sampled only to locate the painted hair area
@@ -170,9 +195,6 @@ def paint_face():
     hairmask = ((s[..., 0] - s[..., 2]) < .16) & (s[..., 1] < .62) & (s[..., 0] > .35)
     hairmask = hairmask.astype(float) * ((((xx - 256) / 92) ** 2 + ((yy - 300) / 88) ** 2) > 1)
     base = base * (1 - hairmask[..., None]) + scalp * hairmask[..., None]
-    # Soft blur: painted lines read as skin features, not aliased pixel steps.
-    for _ in range(2):
-        base = (base * 4 + np.roll(base, 1, 0) + np.roll(base, -1, 0) + np.roll(base, 1, 1) + np.roll(base, -1, 1)) / 8
     pixels = np.dstack([np.clip(base, 0, 1)[::-1], np.ones((S, S, 1))])
     return image('daria_face_pass01', S, pixels)
 
@@ -674,7 +696,7 @@ scene.render.fps = 30
 for o in bpy.data.objects: o.select_set(o.type in ('MESH', 'ARMATURE'))
 props = bpy.ops.export_scene.gltf.get_rna_type().properties.keys()
 opts = dict(filepath=TARGET, export_format='GLB', use_selection=True, export_animations=True, export_force_sampling=True,
-            export_yup=True, export_image_format='JPEG', export_jpeg_quality=86)
+            export_yup=True, export_image_format='JPEG', export_jpeg_quality=95)
 if 'export_animation_mode' in props: opts['export_animation_mode'] = 'ACTIONS'
 bpy.ops.export_scene.gltf(**opts)
 tris = sum(sum(len(p.vertices) - 2 for p in o.data.polygons) for o in bpy.data.objects if o.type == 'MESH')

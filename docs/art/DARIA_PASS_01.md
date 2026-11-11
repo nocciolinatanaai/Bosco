@@ -51,7 +51,7 @@ punti, non come pelle che buca il vestito.
 
 | | Prima | Dopo |
 | --- | --- | --- |
-| File GLB | 1.129.388 byte | 946.716 byte |
+| File GLB | 1.129.388 byte | 1.004.408 byte |
 | Triangoli nel GLB | — | 13.598 (budget 20k) |
 | Triangoli visibili dell'attore nello studio (con arco) | 16.752 | 14.174 |
 | Mesh visibili / skinned / materiali (studio) | 18 / 13 / 16 | 21 / 18 / 20 |
@@ -140,6 +140,22 @@ Prove: `docs/assets/daria-pass01/combat/`
 npm run test:daria      # studio prima/dopo + sonda di combattimento con soglie
 python3.11 scripts/daria-clip-penetration.py -- public/models/ranger/daria-refined.glb public/models/ranger/daria-pass01.glb out.json
 ```
+
+## Correzione del volto (segnalazione del proprietario)
+
+Il proprietario ha notato che il volto era meno definito di prima. Aveva ragione. Le cause:
+- texture del volto in JPEG da 20 KB, contro il PNG da 135 KB precedente;
+- due passaggi di sfocatura;
+- solo 1024 px per un'area UV piccola.
+
+Ora il volto è dipinto a 2048 px con bordi anti-alias e senza sfocatura, ed è esportato in JPEG qualità 95.
+Dettagli aggiunti:
+- iride con anello e fibre, punto luce;
+- palpebre e ciglia nette, piega della palpebra;
+- narici;
+- labbra con arco di Cupido.
+
+Il GLB passa da 946.716 a 1.004.408 byte (sotto il limite di 1,5 MB del test).
 
 ## Ancora lontano dal concept (onesto)
 
