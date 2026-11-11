@@ -40,6 +40,22 @@ Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
 
+## BOW-01 / PRODUCT-02 (Tonino, 2026-11-11) — ramo tonino/bow-transition-01
+
+- **Transizione dell'arco schiena↔mano senza scatti** (ranger-skinned.js). Salto massimo
+  per fotogramma da 1,033 a 0,338 unità (arco sempre in mano: 0,331). Arco in mano a ogni
+  colpo, schivata a metà passaggio senza rimbalzi. Controllo in test:daria, che fallisce con
+  il codice precedente. Sequenze in docs/assets/bow-transition-01/.
+- **Controprove di Codex** (docs/PRODUCT_DECISIONS_02.md, esperimento isolato, sorgenti intatti):
+  - tiro fuori aggro risolto da provocazione + Frattura mirata a distanza, e vale anche per
+    Mago e Guaritore;
+  - Custodia come carica consumabile protegge davvero il colpo successivo (8 invece di 32
+    danni, anche con un errore ritardato);
+  - due echi dopo la vittoria ritirati;
+  - nuova controprova: Impeto peggiora Tank e Combattente.
+- Rintocco pubblicato come riferimento (origin/tonino/rintocco), non integrato. `hit()` intatta.
+- Limite: il braccio non accompagna l'arco.
+
 ## PRODUCT-01 — dieci minuti da far provare a un amico (Tonino, 2026-11-11)
 
 Consegnato docs/PRODUCT_CHALLENGE_01.md:

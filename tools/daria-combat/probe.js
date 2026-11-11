@@ -12,7 +12,7 @@ const grid=new THREE.GridHelper(60,60,'#6b7680','#4a545c');scene.add(grid);
 const camera=new THREE.PerspectiveCamera(55,1.5,.1,160);
 const STEP=1/60;
 // Script: run right, reverse, shoot a target behind, shoot and cancel with a dodge, skill, shoot while running diagonally.
-const SCRIPT=[{t:0,move:[1,0]},{t:.9,move:[-1,0]},{t:1.5,attack:true},{t:2.2,move:null},{t:2.3,attack:true},{t:2.4,dodge:[0,1]},{t:2.9,cast:true},{t:3.8,move:[.7,-.7]},{t:4.0,attack:true},{t:4.8,move:null},{t:5.2,end:true}];
+const SCRIPT=[{t:0,move:[1,0]},{t:.9,move:[-1,0]},{t:1.5,attack:true},{t:2.2,move:null},{t:2.3,attack:true},{t:2.4,dodge:[0,1]},{t:2.9,cast:true},{t:3.8,move:[.7,-.7]},{t:4.0,attack:true},{t:4.8,move:null},{t:5.2,move:[-.7,.7]},{t:5.6,attack:true},{t:5.66,dodge:[-1,0]},{t:6.4,move:null},{t:6.7,end:true}];
 let s,actor,variant,frame,move,last,prevFoot,events;
 const v=()=>new THREE.Vector3();const tmp={a:v(),b:v(),c:v(),d:v(),fl:v(),fr:v()};
 window.combatSetup=async name=>{
@@ -60,6 +60,7 @@ window.combatStep=()=>{
   out.feet=[[fl.x,fl.y,fl.z].map(n=>+n.toFixed(4)),[fr.x,fr.y,fr.z].map(n=>+n.toFixed(4))];
   out.yawError=+THREE.MathUtils.radToDeg(Math.abs(Math.atan2(Math.sin(angle-actor.root.rotation.y),Math.cos(angle-actor.root.rotation.y)))).toFixed(2);
   out.loco=actor.root.userData.locomotion;
+  if(bow){const local=actor.root.worldToLocal(bow.getWorldPosition(v()));out.bowLocal=[local.x,local.y,local.z].map(n=>+n.toFixed(4));out.bowInHand=actor.root.userData.bowInHand??1;}
   out.player=[+s.x.toFixed(3),+s.z.toFixed(3)];
   frame++;return out;
 };

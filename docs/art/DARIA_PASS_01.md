@@ -162,6 +162,31 @@ Alternative ancora nel generatore:
 Confronto in `face-idle.jpg`. Nel volto la somiglianza con la tavola resta limitata:
 lineamenti e stile sono quelli della base CC0.
 
+## Transizione dell'arco schiena ↔ mano (BOW-01)
+
+Prima l'arco passava fra schiena e mano in un solo fotogramma: 1,033 unità di salto.
+Ora viaggia lungo una curva sopra la spalla sinistra, con velocità limitata:
+- **verso la mano in 0,14 s**, entro il rilascio più rapido (0,22 s);
+- **verso la schiena in 0,30 s**.
+
+Durante una schivata la destinazione resta quella in corso, quindi niente rimbalzi.
+Corda e freccia compaiono solo con l'arco in mano.
+
+Misure (`npm run test:daria`, sonda di combattimento):
+
+| | Prima | Dopo |
+| --- | --- | --- |
+| Passo massimo dell'arco per fotogramma (nello spazio del personaggio) | 1,033 | 0,338 (arco sempre in mano nel modello precedente: 0,331) |
+| Fotogrammi di transizione nel copione | 0 | 129 |
+| Arco in mano e presa nel fotogramma del colpo | sì / 0 | sì / 0 |
+
+La soglia ("passo massimo ≤ 1,15 × quello di un arco sempre in mano") fallisce con il
+codice precedente. Sequenze prima/dopo in `docs/assets/bow-transition-01/bow-before-after.jpg`:
+schiena→mano in un attacco in corsa, mano→schiena, schivata a metà passaggio.
+
+**Limite.** Il braccio non va a prendere l'arco: l'arco viaggia da solo lungo la curva.
+Serve una IK del braccio o una clip dedicata.
+
 ## Ancora lontano dal concept (onesto)
 
 - Il volto è quello CC0 stilizzato, con pochi ritocchi: niente scultura né pelle SSS,
@@ -169,7 +194,7 @@ lineamenti e stile sono quelli della base CC0.
 - Capelli in "card" piatte: da dietro si vedono come lamelle scure.
 - La mantellina è statica (nessuna simulazione di stoffa). Le falde della tavola non ci sono più.
 - Mano destra lontana dalla corda a metà tensione (clip CC0).
-- Passaggio istantaneo dell'arco fra schiena e mano.
+- Il braccio non accompagna l'arco nel passaggio schiena↔mano (l'arco viaggia lungo una curva).
 - La girata verso un bersaglio alle spalle richiede 2–3 fotogrammi all'inizio della tensione.
 - Stivali e silhouette delle gambe sono quelli CC0.
 - Nessuna nuova animazione: la posa di tensione CC0 non è la presa del concept
