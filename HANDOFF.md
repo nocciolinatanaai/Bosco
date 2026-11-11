@@ -3,7 +3,7 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
-## Checkpoint — asset 3D delle classi, verifiche finali in corso
+## Asset 3D delle classi — base tecnica verificata, arte incompleta
 
 Il proprietario approva la direzione delle sei tavole e chiede personaggi reali.
 Sei PNG salvati in docs/assets/character-sheets; cinque nuovi GLB riggati in
@@ -11,8 +11,12 @@ public/models/characters (Ranger conserva Daria). Loader locale per classe
 integrato in actors.js, asset-pipeline/materials/animation applicate; nessun file
 riservato a Tonino modificato. Dettagli, provenienza CC0 e limiti in
 docs/art/CHARACTER_MODELS_01.md. **Volti e costumi non ancora fedeli ai concept**.
-Primo giro: 135 test e 30 pose passati ma difetti visivi riscontrati e corretti;
-seconda verifica studio e regressione completa episodio ancora in corso.
+Verifica finale: 135 test, build, 30 pose studio e regressione episodio completa
+desktop/mobile passati. Restano compenetrazioni abiti e volti/costumi generici.
+Evidenze in docs/assets/character-models-first-pass/. Il proprietario non vede
+i personaggi: non sono pubblicati; richiesta quale vista usi. Server locale
+porta 5173 avviato, /tools/character-roster-review/ risponde HTTP 200; nessun
+collegamento remoto di anteprima verificato.
 Nessun deploy o spesa. Non trattare questo checkpoint come approvazione grafica.
 
 
@@ -21,8 +25,8 @@ Nessun deploy o spesa. Non trattare questo checkpoint come approvazione grafica.
 Brief in docs/art/CHARACTER_SHEETS_01.md: fronte, profilo e dettagli volto per
 le sei classi; Daria coerente con il brief esistente, altri volti proposti.
 Mage non configurato (tre variabili assenti); alternativa image_gen comunicata
-al proprietario. Le immagini restituite in chat non sono automaticamente asset
-versionati, né grafica della build. Valutazione artistica ancora da effettuare.
+al proprietario. Le sei immagini sono ora salvate in docs/assets/character-sheets. Il proprietario
+le approva come direzione; questo non approva i modelli 3D.
 
 
 ## Skill asset procedurali Python

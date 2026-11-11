@@ -62,6 +62,13 @@ il cast serve rifinire un personaggio fino al confronto convincente col concept.
 
 Prima prova: 135 test superati; 30 pose browser nello studio senza page error.
 La revisione delle immagini ha però scoperto Tank bianco per mappe mancanti e
-normali della sopravveste rivolte all'interno. Correzioni applicate, revisione
-e regressione completa dell'episodio in corso: non dichiararle superate finché
-non completate. Le metriche non misurano FPS su iPhone né approvazione artistica.
+normali della sopravveste rivolte all'interno. Materiali Tank e winding corretti, ma compenetrazioni degli abiti ancora visibili.
+Verifica finale: 135 test, build, studio 30 pose e regressione episodio completa
+desktop/mobile passati. Evidenze in docs/assets/character-models-first-pass/.
+La resa resta insufficiente rispetto ai concept; nessuna approvazione artistica
+o misura FPS su iPhone implicita. Fallback loader non verificato con un nuovo
+test browser di errore in questo blocco.
+
+Nuovi asset sul ramo sviluppo, non Pages: il proprietario segnala di non vederli.
+Server locale avviato porta 5173; studio e tank.glb rispondono HTTP 200, ma non
+è disponibile una URL remota di anteprima verificata per iPhone.

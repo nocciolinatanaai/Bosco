@@ -1,0 +1,338 @@
+{
+  "status": "passed",
+  "characters": [
+    {
+      "role": "tank",
+      "pose": "idle",
+      "triangles": 3388,
+      "skinned": 6,
+      "bounds": [
+        1.6661567508706523,
+        2.2,
+        0.5622778948205859
+      ]
+    },
+    {
+      "role": "tank",
+      "pose": "run",
+      "triangles": 3388,
+      "skinned": 6,
+      "bounds": [
+        1.6661567508706523,
+        2.2,
+        0.7723236562876726
+      ]
+    },
+    {
+      "role": "tank",
+      "pose": "prepare",
+      "triangles": 3388,
+      "skinned": 6,
+      "bounds": [
+        1.6661567508706523,
+        2.2,
+        1.1933907463518494
+      ]
+    },
+    {
+      "role": "tank",
+      "pose": "attack",
+      "triangles": 3388,
+      "skinned": 6,
+      "bounds": [
+        1.6661567508706523,
+        2.63831236929083,
+        0.9543665721471273
+      ]
+    },
+    {
+      "role": "tank",
+      "pose": "special",
+      "triangles": 3388,
+      "skinned": 6,
+      "bounds": [
+        1.6661567508706523,
+        2.2,
+        1.084204574290189
+      ]
+    },
+    {
+      "role": "fighter",
+      "pose": "idle",
+      "triangles": 3646,
+      "skinned": 7,
+      "bounds": [
+        1.5687595656476598,
+        2.1999999999999997,
+        0.5259495404536977
+      ]
+    },
+    {
+      "role": "fighter",
+      "pose": "run",
+      "triangles": 3646,
+      "skinned": 7,
+      "bounds": [
+        1.5687595656476598,
+        2.1999999999999997,
+        0.8228585197917397
+      ]
+    },
+    {
+      "role": "fighter",
+      "pose": "prepare",
+      "triangles": 3646,
+      "skinned": 7,
+      "bounds": [
+        1.5687595656476598,
+        2.1999999999999997,
+        1.4465229580499768
+      ]
+    },
+    {
+      "role": "fighter",
+      "pose": "attack",
+      "triangles": 3646,
+      "skinned": 7,
+      "bounds": [
+        1.5687595656476598,
+        2.91526055559672,
+        0.5785405838008109
+      ]
+    },
+    {
+      "role": "fighter",
+      "pose": "special",
+      "triangles": 3646,
+      "skinned": 7,
+      "bounds": [
+        1.5687595656476598,
+        2.1999999999999997,
+        1.1307718133198619
+      ]
+    },
+    {
+      "role": "assassin",
+      "pose": "idle",
+      "triangles": 3598,
+      "skinned": 9,
+      "bounds": [
+        1.6518208848599527,
+        2.2,
+        0.5305271894752275
+      ]
+    },
+    {
+      "role": "assassin",
+      "pose": "run",
+      "triangles": 3598,
+      "skinned": 9,
+      "bounds": [
+        1.6518208848599527,
+        2.2,
+        0.6273693112492961
+      ]
+    },
+    {
+      "role": "assassin",
+      "pose": "prepare",
+      "triangles": 3598,
+      "skinned": 9,
+      "bounds": [
+        1.6518208848599527,
+        2.2,
+        1.0378000155053408
+      ]
+    },
+    {
+      "role": "assassin",
+      "pose": "attack",
+      "triangles": 3598,
+      "skinned": 9,
+      "bounds": [
+        1.6518208848599527,
+        2.4268813677896715,
+        1.0348691667955423
+      ]
+    },
+    {
+      "role": "assassin",
+      "pose": "special",
+      "triangles": 3598,
+      "skinned": 9,
+      "bounds": [
+        1.6744177966880298,
+        2.2,
+        1.0878531532013929
+      ]
+    },
+    {
+      "role": "mage",
+      "pose": "idle",
+      "triangles": 3284,
+      "skinned": 7,
+      "bounds": [
+        1.5640764749373126,
+        2.2,
+        0.5160603842392297
+      ]
+    },
+    {
+      "role": "mage",
+      "pose": "run",
+      "triangles": 3284,
+      "skinned": 7,
+      "bounds": [
+        1.5640764749373126,
+        2.2,
+        0.5636558074498326
+      ]
+    },
+    {
+      "role": "mage",
+      "pose": "prepare",
+      "triangles": 3284,
+      "skinned": 7,
+      "bounds": [
+        1.5640764749373126,
+        2.2,
+        0.863227648405821
+      ]
+    },
+    {
+      "role": "mage",
+      "pose": "attack",
+      "triangles": 3284,
+      "skinned": 7,
+      "bounds": [
+        1.5640764749373126,
+        2.2,
+        1.325715686774178
+      ]
+    },
+    {
+      "role": "mage",
+      "pose": "special",
+      "triangles": 3284,
+      "skinned": 7,
+      "bounds": [
+        1.5640764749373126,
+        2.2,
+        0.8355652605950987
+      ]
+    },
+    {
+      "role": "ranger",
+      "pose": "idle",
+      "triangles": 17344,
+      "skinned": 13,
+      "bounds": [
+        1.550080249890148,
+        2.2,
+        1.0474244821716026
+      ]
+    },
+    {
+      "role": "ranger",
+      "pose": "run",
+      "triangles": 17344,
+      "skinned": 13,
+      "bounds": [
+        1.550080249890148,
+        2.239531910636823,
+        1.1619619999285793
+      ]
+    },
+    {
+      "role": "ranger",
+      "pose": "prepare",
+      "triangles": 17344,
+      "skinned": 13,
+      "bounds": [
+        1.5556845975312361,
+        2.8020676059528626,
+        1.5528234902323703
+      ]
+    },
+    {
+      "role": "ranger",
+      "pose": "attack",
+      "triangles": 17344,
+      "skinned": 13,
+      "bounds": [
+        1.441535034547226,
+        2.8065122124152713,
+        1.9142295128359699
+      ]
+    },
+    {
+      "role": "ranger",
+      "pose": "special",
+      "triangles": 17344,
+      "skinned": 13,
+      "bounds": [
+        1.441535034547226,
+        2.8065122124152713,
+        1.9142295128359699
+      ]
+    },
+    {
+      "role": "healer",
+      "pose": "idle",
+      "triangles": 3364,
+      "skinned": 9,
+      "bounds": [
+        1.6589320301134989,
+        2.2,
+        0.5328111271223979
+      ]
+    },
+    {
+      "role": "healer",
+      "pose": "run",
+      "triangles": 3364,
+      "skinned": 9,
+      "bounds": [
+        1.6589320301134989,
+        2.2,
+        0.579007770928422
+      ]
+    },
+    {
+      "role": "healer",
+      "pose": "prepare",
+      "triangles": 3364,
+      "skinned": 9,
+      "bounds": [
+        1.6589320301134989,
+        2.2,
+        0.8581965059746647
+      ]
+    },
+    {
+      "role": "healer",
+      "pose": "attack",
+      "triangles": 3364,
+      "skinned": 9,
+      "bounds": [
+        1.6589320301134989,
+        2.2,
+        1.338381196061856
+      ]
+    },
+    {
+      "role": "healer",
+      "pose": "special",
+      "triangles": 3364,
+      "skinned": 9,
+      "bounds": [
+        1.6589320301134989,
+        2.2,
+        0.832731412600052
+      ]
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "limitations": "Authoring fixture, not gameplay or physical iPhone performance"
+}
