@@ -1,0 +1,41 @@
+{
+  "title": "Modular RPG Characters",
+  "author": "System G6 / Qoma",
+  "license": "CC0 1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source_page": "https://opengameart.org/content/modular-rpg-characters",
+  "archive_url": "https://opengameart.org/sites/default/files/modular_rpg_characters.7z",
+  "archive_sha256": "ef53003c6b29798a634fb27a3f9fc3181a2c02b217689744f2944fc5fcc0fd99",
+  "retrieved": "2026-11-10",
+  "source_blend": "modular_rpg_characters/human_female.blend",
+  "conversion": "scripts/prepare-ranger-model.py / Blender 4.3.2",
+  "modifications": [
+    "Selected head_default, hair_3, medium armor/boots/gloves",
+    "Rebuilt Principled materials from upstream PNG atlases; PNG pixels unchanged",
+    "Bound modular hair and clothing to existing 43-bone armature using upstream weights",
+    "Retained five motion clips and exported embedded GLB"
+  ],
+  "glb_sha256": "fc4006277b2507ceff21250070fc5da42a5a791950ae73ce5f83f4202b94bc23",
+  "accessories": "Original Mythwood bow, cape, scarf, quiver and braid geometry in ranger-skinned.js",
+  "status": "Provisional base, not final approved Daria sculpt; no purchase",
+  "refined": {
+    "file": "daria-refined.glb",
+    "sha256": "e9a31c5939eeaa6b6823f109d6fd4105cd56efc4bc3d285f5c01c110606f89de",
+    "script": "scripts/prepare-daria-refined.py",
+    "derived_from": "Same System G6 CC0 human_female.blend archive documented above",
+    "original_geometry": [
+      "Fitted open-front expedition jacket and lapels",
+      "Leather harness, seams, belt and map notebook",
+      "Swept hair cap, directional locks and three-strand braid",
+      "Folded sage scarf"
+    ],
+    "changes_to_base": [
+      "Selected anatomical body instead of medium armor",
+      "Head topology subdivided once, lower face mildly narrowed/elongated; original facial texture retained",
+      "Clothing modules weighted to the original skeleton",
+      "Original five clips retained"
+    ],
+    "runtime_changes": "Folded shorter cape, fabric data maps and refined/base comparison; no raster pixels edited",
+    "status": "Local visual trial; owner judged result far below target. Further art work paused in favor of gameplay/content. Both versions retained."
+  }
+}

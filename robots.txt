@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /demo.html
+Disallow: /account.html
