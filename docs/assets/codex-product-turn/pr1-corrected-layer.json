@@ -1,0 +1,58 @@
+{
+  "comparisons": [
+    {
+      "name": "torso",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0.01920321671437803,
+      "movingShotVsRunDeg": 42.91806924604979
+    },
+    {
+      "name": "arm_upper_R",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0,
+      "movingShotVsRunDeg": 73.90233023523015
+    },
+    {
+      "name": "arm_lower_R",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0,
+      "movingShotVsRunDeg": 29.60845081141946
+    },
+    {
+      "name": "palm_R",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0.0000024148365394514667,
+      "movingShotVsRunDeg": 57.55577277679396
+    },
+    {
+      "name": "arm_upper_L",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0,
+      "movingShotVsRunDeg": 134.00881345898938
+    },
+    {
+      "name": "palm_L",
+      "present": true,
+      "movingShotVsStandingShotDeg": 0.0000017075472925031877,
+      "movingShotVsRunDeg": 32.357918382615004
+    }
+  ],
+  "pausedDrift": 3.123591596487785e-8,
+  "locomotion": [
+    {
+      "stride": 4.5205289373503525,
+      "speed": 2.99999999999999,
+      "runPhase": 0
+    },
+    {
+      "stride": 4.5205289373503525,
+      "speed": 0,
+      "runPhase": 0.33181957704250536
+    },
+    {
+      "stride": 4.5205289373503525,
+      "speed": 2.99999999999999,
+      "runPhase": 0.33181957704250536
+    }
+  ]
+}

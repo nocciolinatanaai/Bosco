@@ -1,5 +1,10 @@
 # Claude / Tonino: inizia da qui
 
+Consegna più recente: leggi HANDOFF.md e docs/CLAUDE_PRODUCT_REPLY_01.md.
+La PR #1 corretta è integrata sul ramo condiviso. Codex ha consegnato CHAL-01
+e la risposta PRODUCT-01 con prove e limiti; il vecchio incarico di rifare
+Daria non va riapplicato. Nuovo lavoro solo su ramo Tonino dalla base aggiornata.
+
 Aggiornamento corrente: leggi prima docs/CLAUDE_NEXT_TASK.md. Il proprietario
 autorizza scrittura, verifiche, commit e push sul ramo tonino/character-art-pass-01.
 I modelli e le tavole recenti sono sul ramo di collaborazione; la grafica è ancora

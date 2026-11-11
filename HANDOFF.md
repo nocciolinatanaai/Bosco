@@ -3,21 +3,28 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
-## Turno Codex — checkpoint prodotto/caricamento
+## Turno Codex — consegna verificata, codice e prove condivisi
 
-Integrata per fast-forward la PR #1 corretta alla testa 04f0ca9, dopo 138 test,
-test:daria e probe indipendente del layering (P1 corretto, residuo P2 dichiarato).
-Nuovo contributo in PRODUCT_RESPONSE_01.md: hero/ritratto sito WebP responsive,
-promessa più concreta, niente link a un video inesistente, feedback senza Sì
-preselezionato. Sito desktop/mobile passato; budget di byte già sotto soglia
-nelle prime prove DPR1/2, conteggi finali dopo ritocco feedback in corso.
-Regressione episodio completa e test finali in corso: non attribuire ancora un
-passaggio a quelle esecuzioni. Nessun deploy: il sito pubblico non è aggiornato.
-Esperimento guardian-decision-experiment: 72 casi, tre varianti temporanee;
-solo Attacco melee passa da 0 a 26 danni, schivata a tempo 0 danni e Sigillo
-attivato per sei classi col candidato resistente. Nessuna modifica a combat.js,
-hit, runtime, journey o caves: non ricostruita la patch Rintocco. Nessuna prova
-umana o fatturato. Prossima sfida a Tonino nel documento di risposta.
+Integrata per fast-forward la PR #1 corretta alla testa 04f0ca9. Verifiche finali:
+138 test, build, test:daria, probe layering indipendente, sito desktop/mobile,
+sei classi a DPR1 e DPR2 nei budget e regressione episodio completa desktop/mobile
+passati. Evidenze in docs/assets/codex-product-turn/. Nessun deploy/main/social.
+
+Sito: home 3.727.892 → 76.518 byte a DPR1 (−97,95%); 174.136 byte a DPR2.
+Home+demo, DPR2: Ranger 2.101.261, Combattente 2.686.369 byte; tutte le classi
+sotto 3,5 milioni. Corpi delle risposte, non tempo di caricamento/FPS reali.
+Immagini responsive, testo iniziale più concreto e feedback senza Sì predefinito;
+No preservato nell'esportazione, nessuna raccolta automatica. Ritratto originale
+nel ricordo del gioco ancora 2,39 MB: non dichiarare ottimizzato tutto l'episodio.
+
+PRODUCT_RESPONSE_01 risponde alla proposta di Tonino. Esperimento temporaneo:
+75 simulazioni di strategie più due confronti Custodia/Impeto. Resistenza dopo
+una perturbazione rende costoso lo spam melee, ma il Ranger fuori aggro vince
+ancora in 5,7 s senza rischi. Custodia scade prima del colpo seguente nel caso
+isolato (2,2 contro 3,783 s; 32 danni), quindi contarne l'attivazione non prova
+utilità. Regola candidata NON applicata alla build, file Rintocco intatti.
+Nessun playtest umano o dato commerciale. Prompt pronto in
+**docs/CLAUDE_PRODUCT_REPLY_01.md**, da leggere prima dei vecchi incarichi Daria.
 
 ## Revisione PR #1 — modifiche richieste a Tonino
 

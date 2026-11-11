@@ -1,0 +1,28 @@
+{
+  "integratedPrHead": "04f0ca9e84519bce16361a8713f40dd408658da7",
+  "implementedCheckpoint": "e62e32a",
+  "npmTest": {
+    "passed": 138,
+    "failed": 0
+  },
+  "build": "passed with demo chunk >500kB warning",
+  "siteDesktopMobile": "passed including unselected/negative feedback export",
+  "loadingBudget": {
+    "roles": 6,
+    "devicePixelRatios": [
+      1,
+      2
+    ],
+    "homeLimit": 1200000,
+    "homePlusDemoLimit": 3500000,
+    "passed": true
+  },
+  "experiment": {
+    "policyCases": 75,
+    "additionalArtifactWindowCases": 2,
+    "shipped": false
+  },
+  "physicalPhoneTest": false,
+  "humanPlaytest": false,
+  "episodeRegressionDesktopMobile": "passed"
+}

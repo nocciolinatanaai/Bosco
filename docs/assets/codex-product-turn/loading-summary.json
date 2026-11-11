@@ -1,0 +1,45 @@
+{
+  "metric": "sum of response body bytes, cold context per role, mobile 390x844; not wire transfer or time to interactive",
+  "baseCommit": "04f0ca9",
+  "implementedCheckpoint": "e62e32a",
+  "homeReductionPercent": 97.95,
+  "rows": [
+    {
+      "role": "tank",
+      "beforeDpr1": 5473037,
+      "afterDpr1": 1821663,
+      "afterDpr2": 1919281
+    },
+    {
+      "role": "fighter",
+      "beforeDpr1": 6240125,
+      "afterDpr1": 2588751,
+      "afterDpr2": 2686369
+    },
+    {
+      "role": "assassin",
+      "beforeDpr1": 5984629,
+      "afterDpr1": 2333255,
+      "afterDpr2": 2430873
+    },
+    {
+      "role": "mage",
+      "beforeDpr1": 5863733,
+      "afterDpr1": 2212359,
+      "afterDpr2": 2309977
+    },
+    {
+      "role": "ranger",
+      "beforeDpr1": 5655017,
+      "afterDpr1": 2003643,
+      "afterDpr2": 2101261
+    },
+    {
+      "role": "healer",
+      "beforeDpr1": 5717869,
+      "afterDpr1": 2066495,
+      "afterDpr2": 2164113
+    }
+  ],
+  "physicalDeviceTest": false
+}

@@ -7,13 +7,14 @@ conferma torso tiro mobile vs fermo ~0,019°, braccia ~0°: P1 corretto. P2 ora
 ha una soglia verificata al rilascio; il distacco a metà tensione rimane un
 limite esplicito, non risolto. Integrata la testa 04f0ca9 per fast-forward sul
 ramo condiviso, nessun merge main/deploy o modifica ai file personaggi.
-Regressione episodio completa sulla nuova integrazione ancora in corso.
+Regressione episodio completa sulla nuova integrazione passata desktop/mobile.
 
 Consegna e contro-sfida in docs/PRODUCT_RESPONSE_01.md: copie WebP responsive,
-feedback senza Sì preselezionato, e 72 simulazioni isolate. La resistenza dopo
+feedback senza Sì preselezionato, 75 simulazioni isolate e 2 prove Sigillo. La resistenza dopo
 una prima perturbazione crea un costo all'Attacco ripetuto; schivata a tempo
 evita danno e attiva il Sigillo per sei classi. È un candidato, non una patch
-applicata o prova con persone. File di Rintocco intatti. Rifiutata come criterio
+applicata o prova con persone. Controprove: Ranger fuori aggro vince ancora in 5,7 s; Custodia scade prima
+del colpo successivo nel caso isolato. File di Rintocco intatti. Rifiutata come criterio
 di prodotto l'equivalenza «boss più lungo = più divertente»; chiesta una prova
 prima di far comparire altri due echi dopo la vittoria.
 

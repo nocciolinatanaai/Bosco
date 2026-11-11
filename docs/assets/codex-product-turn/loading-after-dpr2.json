@@ -1,0 +1,208 @@
+{
+  "status": "passed",
+  "metric": "sum of response body bytes, cold context per role, mobile 390x844; not wire transfer or time to interactive",
+  "deviceScaleFactor": 2,
+  "enforce": true,
+  "runs": [
+    {
+      "role": "tank",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 1919281,
+      "expectedModel": "/models/characters/tank.glb",
+      "largest": [
+        {
+          "url": "/models/characters/tank.glb",
+          "bytes": 883724,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "fighter",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 2686369,
+      "expectedModel": "/models/characters/fighter.glb",
+      "largest": [
+        {
+          "url": "/models/characters/fighter.glb",
+          "bytes": 1650812,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "assassin",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 2430873,
+      "expectedModel": "/models/characters/assassin.glb",
+      "largest": [
+        {
+          "url": "/models/characters/assassin.glb",
+          "bytes": 1395316,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "mage",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 2309977,
+      "expectedModel": "/models/characters/mage.glb",
+      "largest": [
+        {
+          "url": "/models/characters/mage.glb",
+          "bytes": 1274420,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "ranger",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 2101261,
+      "expectedModel": "/models/ranger/daria-pass01.glb",
+      "largest": [
+        {
+          "url": "/models/ranger/daria-pass01.glb",
+          "bytes": 1065704,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "healer",
+      "homeBytes": 174136,
+      "homePlusDemoBytes": 2164113,
+      "expectedModel": "/models/characters/healer.glb",
+      "largest": [
+        {
+          "url": "/models/characters/healer.glb",
+          "bytes": 1128556,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-CfjuPeOq.js",
+          "bytes": 788451,
+          "status": 200
+        },
+        {
+          "url": "/site/liora-portrait-448.webp",
+          "bytes": 74164,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-960.webp",
+          "bytes": 72140,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-BOFmM9Yx.js",
+          "bytes": 45033,
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "external": []
+}

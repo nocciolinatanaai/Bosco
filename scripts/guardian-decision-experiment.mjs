@@ -25,9 +25,10 @@ for(const [variant,replacement] of Object.entries(variants)){
  }
  module=module.replaceAll(/from '(\.\/[^']+)'/g,(_,relative)=>`from '${pathToFileURL(resolve('src',relative)).href}'`);
  const path=resolve(out,`${variant}.mjs`);await writeFile(path,module);const game=await import(pathToFileURL(path));
- for(const role of CLASSES)for(const policy of ['basic','spam','timed-dodge','impulse-on-charge']){
+ for(const role of CLASSES)for(const policy of ['basic','spam','timed-dodge','impulse-on-charge',...(role.id==='ranger'?['outside-aggro']:[])]){
   const s=restoreCheckpoint({version:1,autoSave:false,role:role.id,stage:'awakened',traces:0});
-  const boss=s.enemies.find(e=>e.boss);s.x=boss.x-2.5;s.z=boss.z;game.attuneArtifact(s,'ward');game.drainEvents(s);
+  const boss=s.enemies.find(e=>e.boss),offset=policy==='outside-aggro'?{x:0,z:14.25}:{x:-2.5,z:0};
+  s.x=boss.x+offset.x;s.z=boss.z+offset.z;game.attuneArtifact(s,'ward');game.drainEvents(s);
   let impacts=0,damage=0,evaded=0,artifact=0,dodges=0;
   const dt=1/60;
   for(let frame=0;frame<120/dt&&boss.hp>0&&s.status==='playing';frame++){
@@ -36,7 +37,7 @@ for(const [variant,replacement] of Object.entries(variants)){
    if((timed||impulse)&&s.dashCooldown<=0&&s.stamina>=30){if(game.dodge(s,0,1))dodges++;}
    if(policy!=='basic'&&s.cooldown<=0)game.cast(s);
    game.tickCooldowns(s,dt);
-   const dx=boss.x-2.5-s.x,dz=boss.z-s.z,d=Math.hypot(dx,dz);
+   const dx=boss.x+offset.x-s.x,dz=boss.z+offset.z-s.z,d=Math.hypot(dx,dz);
    if(d>.001)game.movePlayer(s,dx/d*Math.min(1,d/(5*dt)),dz/d*Math.min(1,d/(5*dt)),dt);
    game.advanceEnemies(s,dt);if(!s.action)game.attack(s);
    for(const e of game.drainEvents(s)){
@@ -51,6 +52,25 @@ for(const [variant,replacement] of Object.entries(variants)){
  }
 }
 assert.equal(await readFile('src/combat.js','utf8'),original,'Reserved combat source must remain unchanged');
-const report={scope:'Experimental stagger rules only in temporary modules. Tempered candidate blocks further staggers after the first, until an enemy attack completes; resets at that impact. Six evolved classes, 120s cap, legitimate checkpoint, 1/60s. Not a shipped change or human playtest. Timed-dodge reacts with perfect knowledge of simulation windup.',sourceSha256:createHash('sha256').update(original).digest('hex'),variants,rows};
+// Separate counterexample: does Ward protect the player from the next solo-boss attack?
+const candidate=await import(pathToFileURL(resolve(out,'tempered-once.mjs')));
+const artifactWindowProbe=[];
+for(const attunement of ['ward','surge']){
+ const s=restoreCheckpoint({version:1,autoSave:false,role:'fighter',stage:'awakened',traces:0});
+ const boss=s.enemies.find(e=>e.boss);s.x=boss.x-2.5;s.z=boss.z;candidate.attuneArtifact(s,attunement);candidate.drainEvents(s);
+ candidate.cast(s); // One legitimate early interruption activates the candidate's resistance.
+ let impacts=0,activation=null,secondImpact=null,incomingDamage=0,shieldAtSecondImpact=null;
+ for(let frame=0;frame<1200&&impacts<2&&s.status==='playing';frame++){
+  if(activation===null&&boss.phase==='windup'&&boss.windup<=.1&&s.dashCooldown<=0)candidate.dodge(s,0,1);
+  candidate.tickCooldowns(s,1/60);candidate.advanceEnemies(s,1/60);
+  for(const e of candidate.drainEvents(s)){
+   if(e.type==='artifact-triggered')activation=s.time;
+   if(e.type==='enemy-impact'&&e.enemyId===boss.id){impacts++;if(impacts===2){secondImpact=s.time;shieldAtSecondImpact=s.shield;}}
+   if(e.type==='hurt')incomingDamage+=e.amount;
+  }
+ }
+ artifactWindowProbe.push({attunement,activation,secondImpact,secondsToNextImpact:activation!==null&&secondImpact!==null?+(secondImpact-activation).toFixed(3):null,shieldAtSecondImpact,incomingDamage});
+}
+const report={scope:'Experimental stagger rules only in temporary modules. Tempered candidate blocks further staggers after the first, until an enemy attack completes; resets at that impact. Six evolved classes, 120s cap, legitimate checkpoint, 1/60s. Not a shipped change or human playtest. Timed-dodge reacts with perfect knowledge of simulation windup.',sourceSha256:createHash('sha256').update(original).digest('hex'),variants,rows,artifactWindowProbe};
 await writeFile(`${out}/report.json`,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(rows.filter(r=>r.policy==='basic'),null,2));

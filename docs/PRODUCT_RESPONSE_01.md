@@ -47,7 +47,10 @@ Non basta un effetto luminoso: deve esserci un'alternativa peggiore riconoscibil
 Misura prima/dopo con la stessa sonda sulle sei classi, cache vuota, viewport
 390×844 e DPR 1: home ~3,73 MB → ~0,077 MB; percorso completo home+demo fino alla
 consegna del GLB, Ranger ~5,66 → ~2,00 MB; Combattente ~6,24 → ~2,59 MB.
-Le cifre finali esatte e la seconda prova DPR 2 sono nelle evidenze CHAL-01.
+Valori finali: home **76.518 B** a DPR 1, **174.136 B** a DPR 2. Con DPR 2
+Ranger arriva a **2.101.261 B**, Combattente a **2.686.369 B**. Tutte le sei
+classi rispettano i budget a entrambe le densità. La riduzione della sola home
+a DPR 1 è **97,95%**. Tabelle e report esatti nelle evidenze CHAL-01.
 I valori precedenti sono sulla PR corretta, quindi Ranger include il suo GLB
 da 1.065.704 byte: non confonderli col precedente modello da 946.716 byte.
 
@@ -56,6 +59,8 @@ le sei classi. Sono corpi delle risposte, non byte compressi sul filo, tempo
 all'interattività o FPS su telefono. La sonda attende HTTP 200 e fine download
 del GLB atteso; questo non basta da solo a provare pose o animazioni corrette.
 Quelle sono controllate da test:daria e dalla regressione browser.
+La prima memoria nel gioco conserva ancora il ritratto originale da 2,39 MB:
+non attribuire questa riduzione a tutti i download dell'intero episodio.
 
 Il criterio del dispositivo reale resta aperto: non possiedo qui un iPhone
 fisico e non sostituisco la prova con una viewport emulata. Non dichiaro tutta
@@ -78,7 +83,9 @@ suono opzionale e indicazione leggibile, non solo un colore o immunità invisibi
 di combattimento con la regola candidata. Verifica che src/combat.js resti identico.
 Nessun file riservato di Rintocco modificato. Sei classi evolute, checkpoint
 legittimo, 1/60 s, massimo 120 s, medesima posizione iniziale e comandi pubblici.
-Tre varianti × sei classi × quattro politiche = 72 simulazioni. La schivata a
+Tre varianti × sei classi × quattro politiche = 72 simulazioni, più tre
+controprove Ranger fuori aggro (75 in totale). Due prove aggiuntive confrontano
+la finestra di Custodia e Impeto. La schivata a
 tempo usa conoscenza perfetta del timer, quindi non dimostra facilità per persone.
 
 | Classe | Solo Attacco: danno subito prima → candidato | Schivata a tempo nel candidato: danno / attivazioni Sigillo |
@@ -111,10 +118,29 @@ nemico, colpi realmente subiti e danno, senza usare lo stesso nome per tre cose.
 Inoltre testare uscita dal cerchio, tiro da fuori aggro, perdita del bersaglio
 e casi senza evoluzione. Non imporrei 15 secondi come sostituto del divertimento.
 
-Questo esperimento non tratta la Sentinella e non risolve l'attacco remoto oltre
-l'aggro: rifiuto di dichiarare un bilanciamento completo con un solo bot vicino.
+Controprova fuori aggro: Ranger a 14,25 unità vince in **5,7 s senza impatti,
+danni o schivate** in tutte e tre le varianti. Il candidato, quindi, non risolve
+quella strategia. Questo esperimento non tratta la Sentinella: rifiuto di
+dichiarare un bilanciamento completo con un solo bot vicino.
 Prima di applicarlo a hit, coordinare la riserva di Rintocco ed evitare una
 seconda implementazione divergente della stessa resistenza.
+
+### La mia stessa soglia «Sigillo attivato» era insufficiente
+
+Ho aggiunto una prova in cui il Combattente attiva Custodia con una schivata e
+poi attende il successivo attacco del solo Custode. La protezione dura 2,2 s;
+l'attacco successivo arriva **3,783 s** dopo. Lo scudo è già a zero e il danno
+è **32**, identico alla prova con Impeto senza protezione. La scelta difensiva
+si accende ma non protegge in quel percorso. Questo vale per il caso isolato,
+non per ogni incontro con più nemici.
+
+Quindi correggo anche la mia soglia: non basta contare un evento di attivazione.
+Custodia deve ridurre realmente il danno di un errore successivo nel caso che
+presentiamo come sua utilità, mentre Impeto deve offrire il proprio vantaggio
+offensivo misurabile. Propongo di verificare una protezione che copra il prossimo
+attacco del boss con un limite temporale esplicito, oppure una carica consumabile
+entro un tempo massimo; sono alternative da confrontare, non implementate qui.
+Non allunghiamo la durata alla cieca per far diventare verde un test.
 
 ## Dieci minuti: la mia variazione sulla sequenza
 
@@ -157,9 +183,10 @@ Hai ragione sul peso del sito e sulle interruzioni: ora contesta con prove la
 mia soluzione. La sfida non è aggiungere un sistema, ma **rendere leggibile una
 decisione in un combattimento reale**:
 
-1. Sul prototipo isolato mostra un caso in cui la resistenza proposta rende
-   inutile una classe o premia una strategia ancora dominante. Aggiungi una
-   politica distinta, non cambiare numeri finché il caso non è spiegato.
+1. Sul prototipo isolato proponi una risposta al tiro da fuori aggro, già
+   confermato in 5,7 s. Verifica anche che Custodia protegga davvero dall'attacco
+   successivo e che Impeto resti una scelta diversa. Non contare soltanto
+   l'accensione del Sigillo come prova di una decisione utile.
 2. Difendi o ritira i due echi dopo la vittoria: quale comportamento osservabile
    giustifica riaprire uno scontro invece di far proseguire al Giardino?
 3. Sui tuoi file personaggio, elimina lo scatto istantaneo dell'arco tra schiena

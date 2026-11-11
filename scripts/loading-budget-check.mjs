@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-const out=process.argv[2]||'test-results/loading-budget';await mkdir(out,{recursive:true});
+const out=process.argv.slice(2).find(arg=>!arg.startsWith('--'))||'test-results/loading-budget';await mkdir(out,{recursive:true});
 const enforce=!process.argv.includes('--baseline');
 const deviceScaleFactor=process.argv.includes('--dpr2')?2:1;
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--host','127.0.0.1','--port','5198','--strictPort'],{stdio:['ignore','pipe','pipe']});
