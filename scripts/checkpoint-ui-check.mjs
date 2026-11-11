@@ -14,7 +14,7 @@ try {
     const page=await browser.newPage({viewport}); const errors=[]; page.on('pageerror', e=>errors.push(e.message));
     const checkpoint={version:1,autoSave:false,role:'ranger',stage:'guardian',traces:2};
     await page.addInitScript(data=>{if(!localStorage.getItem('mythwood.checkpoint.v1'))localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(data));},checkpoint);
-    await page.goto('http://127.0.0.1:5181/',{waitUntil:'networkidle'});
+    await page.goto('http://127.0.0.1:5181/demo.html',{waitUntil:'networkidle'});
     assert.equal(await page.locator('.selection-actions small').innerText(),'Prova locale · Nessun account');
     assert.equal(await page.locator('#save-start').isChecked(),false);
     assert.equal(await page.locator('#resume-saved').isVisible(),true);

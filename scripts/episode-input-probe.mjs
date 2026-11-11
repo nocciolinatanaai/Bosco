@@ -14,7 +14,7 @@ try{
   const context=await browser.newContext({viewport:{width:1440,height:900}});page=await context.newPage();const errors=[],external=[];
   page.on('pageerror',e=>errors.push(e.message));await page.route('**/*',r=>{if(new URL(r.request().url()).origin!=='http://127.0.0.1:5195'){external.push(r.request().url());return r.abort();}return r.continue();});
   await page.addInitScript(()=>{const native=window.requestAnimationFrame.bind(window);window.probeSuspend=false;window.probeFrames=0;window.requestAnimationFrame=callback=>{const deliver=t=>{if(window.probeSuspend)return native(deliver);window.probeFrames++;callback(t);};return native(deliver);};});
-  await page.goto('http://127.0.0.1:5195/',{waitUntil:'networkidle'});await page.locator('[data-class="ranger"]').click();await page.locator('#start').click();
+  await page.goto('http://127.0.0.1:5195/demo.html',{waitUntil:'networkidle'});await page.locator('[data-class="ranger"]').click();await page.locator('#start').click();
   await page.locator('#help').click();await page.locator('#quality-select').selectOption('light');await page.locator('#close-info').click();
   await page.evaluate(()=>window.probeSuspend=true);const before=await snapshot(page);
   await page.keyboard.down('KeyW');await page.waitForTimeout(1600);

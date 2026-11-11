@@ -12,7 +12,7 @@ try{
   const context=await browser.newContext({viewport:{width,height},isMobile:true,hasTouch:true});page=await context.newPage();
   page.on('pageerror',e=>report.errors.push(e.message));await page.route('**/*',r=>{if(new URL(r.request().url()).origin!=='http://127.0.0.1:5193'){report.external.push(r.request().url());return r.abort();}return r.continue();});
   const cp={version:4,attunement:'ward',autoSave:false,role:'ranger',stage:'guardian',traces:3,garden:{step:area==='garden'?1:4,area:area==='garden'?'garden':'plaza',sentryDefeated:false},caves:{step:area==='caves'?1:0,inside:area==='caves',wardenDefeated:false}};
-  await page.addInitScript(cp=>localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(cp)),cp);await page.goto('http://127.0.0.1:5193/',{waitUntil:'networkidle'});await page.locator('#resume-saved').click();await page.locator('#quest-toggle').click();
+  await page.addInitScript(cp=>localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(cp)),cp);await page.goto('http://127.0.0.1:5193/demo.html',{waitUntil:'networkidle'});await page.locator('#resume-saved').click();await page.locator('#quest-toggle').click();
   await page.waitForFunction(()=>{const q=document.querySelector('.quest').getBoundingClientRect(),t=document.getElementById('toast').getBoundingClientRect(),h=document.getElementById('hud').getBoundingClientRect();return t.top>=q.bottom+7&&t.bottom<=h.top;});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   const leave=page.locator('#leave-garden');await leave.scrollIntoViewIfNeeded();const box=await leave.boundingBox();assert.ok(box.height>=44);

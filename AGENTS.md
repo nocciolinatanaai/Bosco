@@ -162,3 +162,12 @@ e apre PR verso quel ramo. Non committare entrambi sullo stesso ramo. La PR
 rintocco è attesa: non ricostruire la patch né modificare src/caves.js o hit in
 src/combat.js mentre è riservata. Revisione in PR e PEER_REVIEW con prove,
 comandi e decisioni motivate; nessuna approvazione automatica per cortesia.
+
+## Mandato attuale — sito, demo e account
+
+Il proprietario richiede demo, video e sito GitHub Pages; autorizzata preparazione
+e pubblicazione del sito sul ramo di build mythwood/pages senza merge main.
+Account email/Google su progetto Supabase **separato** per scelta esplicita.
+Non riusare il vecchio host o inventare account: leggere ACCOUNTS_SETUP e
+DEMO_LAUNCH. Nuovo video da gameplay reale; nessuna pubblicazione social eseguita.
+Restano riservati i file di Tonino finché non arriva il bundle della sua patch.

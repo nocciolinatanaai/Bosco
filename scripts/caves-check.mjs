@@ -16,7 +16,7 @@ try {
   page.on('pageerror',e=>errors.push(e.message));await page.route('**/*',r=>{if(new URL(r.request().url()).origin!=='http://127.0.0.1:5191'){external.push(r.request().url());return r.abort();}return r.continue();});
   const legacy={version:3,attunement:'ward',autoSave:true,role:'ranger',stage:'guardian',traces:3,garden:{step:4,area:'plaza',sentryDefeated:false}};
   await page.addInitScript(data=>{if(!localStorage.getItem('mythwood.checkpoint.v1'))localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(data));},legacy);
-  await page.goto('http://127.0.0.1:5191/',{waitUntil:'networkidle'});assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1'))),legacy);
+  await page.goto('http://127.0.0.1:5191/demo.html',{waitUntil:'networkidle'});assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1'))),legacy);
   await page.locator('#resume-saved').click();await page.locator('#help').click();await page.locator('#quality-select').selectOption('light');await page.locator('#close-info').click();
   await page.locator('#cave-travel').click();await page.waitForFunction(()=>document.getElementById('cave-travel').textContent==='Entra nelle Cave dei Sussurri');await page.locator('#cave-travel').click();
   await page.waitForFunction(()=>document.getElementById('region').textContent.includes('Cave dei Sussurri'));

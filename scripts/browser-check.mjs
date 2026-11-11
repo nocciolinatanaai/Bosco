@@ -50,7 +50,7 @@ try {
       if (new URL(route.request().url()).origin !== 'http://127.0.0.1:5180') { external.push(route.request().url()); return route.abort(); }
       return route.continue();
     });
-    await page.goto('http://127.0.0.1:5180/', { waitUntil: 'networkidle' });
+    await page.goto('http://127.0.0.1:5180/demo.html', { waitUntil: 'networkidle' });
     assert.equal(await page.title(), 'Mythwood · La prima frattura');
     assert.equal(await page.locator('[data-class]').count(), 6);
     assert.equal(portraitRequests.length, 0, 'Ritratto non scaricato durante la selezione');
@@ -192,6 +192,9 @@ try {
     await page.screenshot({ path: `test-results/${name}-ending.png` });
     await page.locator('#memory-continue').click();
     assert.equal(await page.locator('#boss').isHidden(), true);
+    assert.equal(await page.locator('#demo-complete').evaluate(e => e.open), true, 'Riepilogo demo dopo il Custode');
+    await page.locator('#demo-continue').click();
+    assert.equal(await page.locator('#pause').innerText(), 'Pausa');
     assert.equal(await page.locator('#quest-title').innerText(), 'La strada che manca');
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'guardian');
     if (mobile) {
@@ -274,7 +277,7 @@ try {
       if (mode === 'blocked') Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Disabled', 'SecurityError'); } });
       else { localStorage.setItem('mythwood.checkpoint.v1', '{broken'); localStorage.setItem('unrelated-test', 'keep'); }
     }, mode);
-    await page.goto('http://127.0.0.1:5180/', { waitUntil: 'networkidle' });
+    await page.goto('http://127.0.0.1:5180/demo.html', { waitUntil: 'networkidle' });
     assert.equal(await page.locator('#resume-saved').isHidden(), true);
     if (mode === 'corrupt') {
       assert.equal(await page.evaluate(() => localStorage.getItem('mythwood.checkpoint.v1')), '{broken');

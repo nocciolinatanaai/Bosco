@@ -46,7 +46,7 @@ try {
     }
     await page.addInitScript(() => localStorage.setItem('mythwood.checkpoint.v1', JSON.stringify({ version: 1, autoSave: false, role: 'ranger', stage: 'awakened', traces: 0 })));
     report.viewport = name; report.step = 'resume'; await save();
-    await page.goto('http://127.0.0.1:5182/', { waitUntil: 'networkidle' });
+    await page.goto('http://127.0.0.1:5182/demo.html', { waitUntil: 'networkidle' });
     await page.locator('#resume-saved').click({ force: true });
     await page.locator('#help').click({ force: true }); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click({ force: true });
     assert.equal(await page.locator('#rank').innerText(), 'PRIMA RISONANZA');

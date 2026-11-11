@@ -10,7 +10,7 @@ try{
   await page.route('**/*',r=>{if(new URL(r.request().url()).origin!=='http://127.0.0.1:5190'){report.external.push(r.request().url());return r.abort();}return r.continue();});
   const legacy={version:1,autoSave:false,role:'mage',stage:'awakened',traces:0};
   await page.addInitScript(data=>{if(!localStorage.getItem('mythwood.checkpoint.v1'))localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(data));},legacy);
-  await page.goto('http://127.0.0.1:5190/',{waitUntil:'networkidle'});await page.locator('#resume-saved').click();
+  await page.goto('http://127.0.0.1:5190/demo.html',{waitUntil:'networkidle'});await page.locator('#resume-saved').click();
   assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1'))),legacy,'Leggere una tappa non la riscrive');
   await page.locator('#artifact-open').click();assert.equal(await page.locator('#pause').textContent(),'Riprendi');
   await page.locator('#artifact-menu [data-attunement="ward"]').click();assert.ok((await page.locator('#artifact-menu-status').textContent()).includes('Custodia attiva'));

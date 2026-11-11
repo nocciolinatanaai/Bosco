@@ -11,6 +11,7 @@ ancora non consegnati al momento dell'assegnazione; non ricostruire la patch.
 | --- | --- | --- | --- | --- |
 | Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | In preparazione secondo il proprietario; PR attesa verso mythwood/collaboration-base |
 | Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | Concluso: 2 regressioni complete passate, timeout riprodotto/corretto nel runner, 62 scenari; PEER_REVIEW |
+| Codex | Demo con riepilogo, sito statico, video gameplay e preparazione Pages | index.html; demo.html; vite.config.js; src/site/; src/demo-entry.js; src/demo-shell.css; script test/cattura; public/site; documenti di consegna | mythwood/collaboration-base (sorgenti), mythwood/pages (build) | In corso; nessuna modifica ai file riservati a Tonino |
 
 Codex integra sul ramo di collaborazione; Tonino usa rami tonino/<incarico> e
 PR verso quel ramo. Non committare entrambi sullo stesso ramo. Finché la PR
@@ -567,3 +568,15 @@ Decisione: problemi/candidati di bilanciamento registrati, nessuna correzione
 applicata o PR Tonino approvata senza consegna. Prossimo passo: revisione della
 PR Rintocco quando il proprietario la segnala. Nessun merge main, deploy, social,
 spesa o produzione. Ramo condiviso aggiornato con commit di verifica.
+
+
+## Mandato demo, video e sito
+
+Il proprietario richiede demo, video per i social e sito; conferma GitHub Pages
+come hosting. Questo riapre la preparazione del materiale promozionale e autorizza
+la messa online del sito richiesto, senza merge su main, spese o modifiche a
+Supabase. La pubblicazione dei post non fa parte di questo blocco. Token API
+GitHub non valido: invio Git disponibile, configurazione Pages da verificare
+nell'account del proprietario. Bundle di Tonino ancora mancante: file riservati
+intatti, niente ricostruzione del Rintocco. Video nuovo da gioco reale, separato
+dagli esperimenti cinematografici vecchi non tracciati.

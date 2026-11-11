@@ -15,6 +15,24 @@ le diciture precedenti «nessun push» non impediscono il push ora richiesto.
 Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
 La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
+## In corso — demo, sito, video e nuovi account
+
+Mandato ampliato: demo con riepilogo, sito GitHub Pages, video da gioco reale;
+registrazione email e Google su **nuovo progetto Supabase** scelto dal proprietario.
+File di Tonino non toccati, bundle ancora mancante. Root diventa landing; gioco
+in demo.html. Sorgenti nuovi demo-entry/demo-shell, site/ e auth/, configurazione
+Vite multipagina. Script browser aggiornati al percorso della demo.
+
+Sito desktop/mobile testato, video in cattura (primo tentativo ha rilevato Space
+con focus ancora sul bottone del menu; aggiunto ritorno focus nel wrapper demo
+e nella cattura). Registrazione predisposta, non attiva: nessun nuovo progetto
+creato o credenziale disponibile. ACCOUNTS_SETUP spiega configurazione e prova
+reale necessarie. Test account solo con provider fittizio/intercettato.
+
+Verifiche finali demo/video/auth e ramo Pages ancora da concludere al checkpoint.
+API GitHub non valida; Git push disponibile. Non chiamare il sito online prima
+dell'attivazione Pages e verifica. Nessuna spesa, social o produzione Supabase.
+
 ## Blocco concluso — regressione e revisione coordinata con Tonino
 
 Mandato e tabella incarichi nella testa di COLLABORATION. Tonino/rintocco è

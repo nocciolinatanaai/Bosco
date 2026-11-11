@@ -35,7 +35,7 @@ try {
     // Seed once: reload must use the checkpoint written by the application.
     await page.addInitScript(() => { if (!localStorage.getItem('mythwood.checkpoint.v1')) localStorage.setItem('mythwood.checkpoint.v1', JSON.stringify({ version: 1, autoSave: true, role: 'ranger', stage: 'guardian', traces: 3 })); });
     report.viewport = name; report.step = 'v1 migration'; await save();
-    await page.goto('http://127.0.0.1:5184/', { waitUntil: 'networkidle' });
+    await page.goto('http://127.0.0.1:5184/demo.html', { waitUntil: 'networkidle' });
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 1, 'Reading must not write');
     await page.locator('#resume-saved').click();
     await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click();

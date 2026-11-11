@@ -12,7 +12,7 @@ try{
  const aim=report.directions.draw;assert.ok(aim.bowForward.reduce((sum,n,i)=>sum+n*aim.actorForward[i],0)>.99,'Arco diretto verso il bersaglio della simulazione');
  report.gameViews=[];
  for(const [name,width,height] of [['desktop',1440,900],['mobile',390,844]]){
-  await page.setViewportSize({width,height});await page.goto('http://127.0.0.1:5188/');
+  await page.setViewportSize({width,height});await page.goto('http://127.0.0.1:5188/demo.html');
   await page.locator('[data-class="ranger"]').click();
   const loaded=page.waitForResponse(r=>r.url().endsWith('daria-refined.glb')&&r.status()===200);
   await page.locator('#start').click();await loaded;await page.waitForLoadState('networkidle');
@@ -20,7 +20,7 @@ try{
  }
  // Failed local asset must keep a visible fallback and resolve, never stall the game.
  await page.route('**/daria-refined.glb',route=>route.abort());
- await page.goto('http://127.0.0.1:5188/');
+ await page.goto('http://127.0.0.1:5188/demo.html');
  report.assetFailure=await page.evaluate(async()=>{
   const {createRangerActor}=await import('/src/visuals/ranger.js');const actor=createRangerActor();
   const loaded=await actor.root.userData.loadVisual();actor.root.userData.animate(1,true,0,false,{});
