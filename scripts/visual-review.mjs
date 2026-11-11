@@ -1,5 +1,5 @@
 import {chromium} from 'playwright';import {spawn} from 'node:child_process';import {mkdir,writeFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-const out='/workspace/artifacts/visual-review';await mkdir(out,{recursive:true});
+const out=process.argv[2]||'test-results/visual-review';await mkdir(out,{recursive:true});
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','--host','127.0.0.1','--port','5188','--strictPort'],{stdio:['ignore','pipe','pipe']});let browser;
 const report={errors:[],external:[],status:'running'};
 try{
@@ -14,12 +14,12 @@ try{
  for(const [name,width,height] of [['desktop',1440,900],['mobile',390,844]]){
   await page.setViewportSize({width,height});await page.goto('http://127.0.0.1:5188/demo.html');
   await page.locator('[data-class="ranger"]').click();
-  const loaded=page.waitForResponse(r=>r.url().endsWith('daria-refined.glb')&&r.status()===200);
+  const loaded=page.waitForResponse(r=>r.url().endsWith('daria-pass01.glb')&&r.status()===200);
   await page.locator('#start').click();await loaded;await page.waitForLoadState('networkidle');
   await page.locator('#pause').click();await page.addStyleTag({content:'#pause-overlay{display:none!important}.is-paused #world{filter:none}'});await page.screenshot({path:`${out}/game-${name}.png`});report.gameViews.push(name);
  }
  // Failed local asset must keep a visible fallback and resolve, never stall the game.
- await page.route('**/daria-refined.glb',route=>route.abort());
+ await page.route('**/daria-pass01.glb',route=>route.abort());
  await page.goto('http://127.0.0.1:5188/demo.html');
  report.assetFailure=await page.evaluate(async()=>{
   const {createRangerActor}=await import('/src/visuals/ranger.js');const actor=createRangerActor();

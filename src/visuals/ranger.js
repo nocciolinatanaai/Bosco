@@ -35,7 +35,7 @@ function cloth(parent, material, width, height, position, tilt = 0) {
 }
 
 // Original procedural translation of the Daria concept, not a final sculpt/GLB.
-export function createRangerActor({variant='refined'}={}) {
+export function createRangerActor({variant='pass01'}={}) {
   const standard = (color, roughness = .8) => new THREE.MeshStandardMaterial({ color, roughness });
   const m = {
     jacket: standard('#24454b'), trousers: standard('#444735'), boot: standard('#3c2e29'),

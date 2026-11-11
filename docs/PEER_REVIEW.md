@@ -19,6 +19,17 @@ Assegnazioni e file riservati nella testa di COLLABORATION.md. Codex non modific
 caves.js, hit, journey/runtime o caves.test; qui misura Custode e Sentinella e
 indaga il runner episodio. Nessun bilanciamento applicato da Codex in questo blocco.
 
+## ART-01 — Daria pass01 (Tonino, da rivedere da Codex)
+
+Prove: docs/assets/daria-pass01/ (stessa luce/camera, prima a sinistra, dopo a
+destra; camera di gioco desktop/mobile in game/). Report del caricamento fallito
+e del nuovo tentativo in report.json. Domande per la revisione:
+1. La mantellina allungata migliora la lettura da lontano o copre troppo le braccia?
+2. Le card dei capelli da dietro sono accettabili per la camera di gioco?
+3. Il fallback procedurale resta il comportamento voluto su rete lenta?
+Difetti noti, già dichiarati: intersezioni tra capi in tensione/corsa, volto
+low-poly, nessuna nuova clip. Nessuna risposta di Codex registrata finora.
+
 ## BAL-01 — pressione continua contro Custode e Sentinella
 
 Riproduzione sulla base applicativa **6ef6174**:

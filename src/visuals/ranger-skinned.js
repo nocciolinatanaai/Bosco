@@ -5,16 +5,18 @@ import { createPoseSampler } from './pose-sampler.js';
 import { rangerFabric } from './ranger-fabric.js';
 
 const sources=new Map();
+// pass01: character-art pass with clothes, hair, braid, capelet and quiver inside the GLB.
+export const RANGER_FILES={base:'ranger-base.glb',refined:'daria-refined.glb',pass01:'daria-pass01.glb'};
 const loadSource = variant => {
-  const name=variant==='base'?'ranger-base.glb':'daria-refined.glb';
+  const name=RANGER_FILES[variant]||RANGER_FILES.pass01;
   if(!sources.has(name))sources.set(name,import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/ranger/${name}`)).catch(error=>{sources.delete(name);throw error;}));
   return sources.get(name);
 };
 
 // Third-party CC0 anatomical/animation base, with original Mythwood accessories.
 // Loading stays local and lazy. Every actor gets its own skeleton and mixer.
-export function attachSkinnedRanger(root,{variant='refined'}={}) {
-  const refined=variant==='refined';
+export function attachSkinnedRanger(root,{variant='pass01'}={}) {
+  const refined=variant==='refined', dressed=variant==='pass01';
   const fallbackChildren=[...root.children], fallbackAnimate=root.userData.animate;
   let visual=null, pending=null;
   root.userData.visualStatus='placeholder';
@@ -30,7 +32,7 @@ export function attachSkinnedRanger(root,{variant='refined'}={}) {
       const scale=2.2/height;model.scale.multiplyScalar(scale);model.position.y=-box.min.y*scale;
       model.traverse(n=>{
         if(!n.isMesh)return;n.castShadow=true;n.receiveShadow=true;
-        n.material=n.material.clone();if(!refined)n.material.roughness=.85;
+        n.material=n.material.clone();if(dressed){n.frustumCulled=false;return;}if(!refined)n.material.roughness=.85;
         if(refined&&/coat|undershirt|trousers|scarf/.test(n.material.name)){Object.assign(n.material,rangerFabric());n.material.normalScale=new THREE.Vector2(.18,.18);}
         if(n.material.name.includes('medium_armor'))n.material.color.set('#9bbbc0');
         if(n.material.name.includes('head')){n.material.color.set(refined?'#dfb38b':'#e1bb98');if(refined)n.material.roughness=.65;}
@@ -40,7 +42,7 @@ export function attachSkinnedRanger(root,{variant='refined'}={}) {
       const mixer=new THREE.AnimationMixer(model), clips=Object.fromEntries(gltf.animations.map(c=>[c.name.replace('human_female_',''),c]));
       for(const name of ['idle','run','channel_two_handed_bow','cast_two_handed_bow','jump'])if(!clips[name])throw Error(`Missing Ranger motion: ${name}`);
       const poseSampler=createPoseSampler(mixer,Object.entries(clips).map(([name,clip])=>{const named=clip.clone();named.name=name;return named;}));
-      const palmL=model.getObjectByName('palm_L'),palmR=model.getObjectByName('palm_R'),torso=model.getObjectByName('torso');
+      const palmL=model.getObjectByName(dressed?'wep_pos_L':'palm_L'),palmR=model.getObjectByName(dressed?'wep_pos_R':'palm_R'),torso=model.getObjectByName('torso');
       if(!palmL||!palmR||!torso)throw Error('Incomplete Ranger skeleton');
       const wood=new THREE.MeshStandardMaterial({color:'#563d2c',roughness:.65}),brass=new THREE.MeshStandardMaterial({color:'#b69a60',metalness:.65,roughness:.4});
       const bow=new THREE.Group();bow.name='daria-skinned-bow';presentation.add(bow);
@@ -68,10 +70,12 @@ export function attachSkinnedRanger(root,{variant='refined'}={}) {
       const braid=new THREE.Group();presentation.add(braid);
       const hair=new THREE.MeshStandardMaterial({color:'#29201c',roughness:.92});
       for(let strand=0;strand<(refined?0:3);strand++){const path=[];for(let n=0;n<14;n++){const a=n*1.4+strand*Math.PI*2/3;path.push([.08+Math.sin(a)*.023+n*.004,-n*.035,-.13+Math.cos(a)*.018]);}curve(braid,hair,path,.014,26);}
-      const head=model.getObjectByName('head'),headPosition=new THREE.Vector3();
+      // The dressed GLB carries its own capelet, scarf, braid and quiver, skinned to the skeleton.
+      if(dressed){cape.visible=false;scarf.visible=false;quiver.visible=false;braid.visible=false;}
+      const head=model.getObjectByName('head'),headPosition=new THREE.Vector3(),nock=new THREE.Vector3();
       const left=new THREE.Vector3(),right=new THREE.Vector3(),chest=new THREE.Vector3(),forward=new THREE.Vector3(),xAxis=new THREE.Vector3(),up=new THREE.Vector3(0,1,0),basis=new THREE.Matrix4();
       // Authored animation is sampled by normalized game action phase, never changes hit timing.
-      visual={refined,presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
+      visual={refined,dressed,nock,presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
       for(const node of fallbackChildren)node.visible=false;
       root.add(presentation);root.userData.visualStatus='ready';root.userData.visualSource='System G6 CC0 / Mythwood accessories';
       root.userData.visualClips=Object.keys(clips);root.userData.visualVariant=variant;
@@ -106,11 +110,18 @@ export function attachSkinnedRanger(root,{variant='refined'}={}) {
     v.xAxis.crossVectors(v.up,v.forward).normalize();v.basis.makeBasis(v.xAxis,v.up,v.forward);v.bow.quaternion.setFromRotationMatrix(v.basis);
     v.bow.position.copy(v.left).addScaledVector(v.forward,-.12);
     const draw=drawing?Math.min(1,action.elapsed/action.windup):0;
-    v.lineGeo.attributes.position.setXYZ(1,0,0,-draw*.28);v.lineGeo.attributes.position.needsUpdate=true;
-    v.arrow.visible=Boolean(drawing);v.arrow.position.z=.3-draw*.28;v.echo.visible=Boolean(combat.evolved);
+    let pull=draw*.28;
+    if(v.dressed&&drawing){
+      // The string follows the drawing hand when it is near the bow plane; released string snaps back.
+      v.bow.updateMatrixWorld(true);v.bow.worldToLocal(v.palmR.getWorldPosition(v.nock));
+      if(Math.hypot(v.nock.x,v.nock.y)<.35&&v.nock.z<0)pull=Math.min(.5,Math.max(pull*.5,-v.nock.z));
+    }
+    v.lineGeo.attributes.position.setXYZ(1,0,0,-pull);v.lineGeo.attributes.position.needsUpdate=true;
+    v.arrow.visible=Boolean(drawing);v.arrow.position.z=.45-pull;v.echo.visible=Boolean(combat.evolved);
     v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));v.cape.position.set(v.chest.x,v.chest.y+.05,v.chest.z-(v.refined?.24:.18));v.cape.rotation.y=v.refined?v.yaw:0;
     v.presentation.worldToLocal(v.head.getWorldPosition(v.headPosition));v.braid.position.copy(v.headPosition);v.braid.rotation.y=v.model.rotation.y;
     v.scarf.position.set(v.chest.x,v.chest.y+.48,v.chest.z);v.quiver.position.set(v.chest.x+.16,v.chest.y+.1,v.chest.z-.3);
+    if(v.dressed)return;
     for(let i=0;i<v.vertices.count;i++){const f=(.475-v.original[i*3+1])/.95;v.vertices.setZ(i,v.original[i*3+2]+(reducedMotion?0:Math.sin(time*4+v.original[i*3]*7)*.025*f));}
     v.vertices.needsUpdate=true;v.cape.geometry.computeVertexNormals();
   };

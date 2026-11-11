@@ -7,7 +7,7 @@ const pmrem=new THREE.PMREMGenerator(renderer),room=new RoomEnvironment(),env=pm
 scene.add(new THREE.HemisphereLight('#c8d9ef','#252c31',1));
 const light=new THREE.DirectionalLight('#ffe1ba',2.5);light.position.set(3,5,5);scene.add(light);const rim=new THREE.DirectionalLight('#9aaeff',1);rim.position.set(-3,4,-3);scene.add(rim);
 const camera=new THREE.PerspectiveCamera(34,1.5,.1,40);camera.position.set(0,2.35,5.5);camera.lookAt(0,1.1,0);
-const old=createRangerActor({variant:'base'}),next=createRangerActor({variant:'refined'});old.root.position.x=-1;next.root.position.x=1;scene.add(old.root,next.root);
+const old=createRangerActor({variant:'refined'}),next=createRangerActor({variant:'pass01'});old.root.position.x=-1;next.root.position.x=1;scene.add(old.root,next.root);
 const [baselineReady,ready]=await Promise.all([old.root.userData.loadVisual(),next.root.userData.loadVisual()]);if(!baselineReady)throw Error('Baseline failed to load');if(!ready)throw Error('Skinned model failed to load');
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(15,12),new THREE.MeshStandardMaterial({color:'#1d303e',roughness:.9}));floor.rotation.x=-Math.PI/2;floor.position.y=-.02;scene.add(floor);
 window.reviewPose=(pose,time=1.25)=>{

@@ -3,6 +3,22 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Consegna di Tonino — Daria pass01 (2026-11-11)
+
+Ramo tonino/character-art-pass-01 da d472bd1. Daria rifatta nel modello
+giocabile: volto ridipinto adulto con lentiggini, capelli e treccia sulla spalla,
+giacca petrolio con maniche e falde, mantellina terracotta, sciarpa salvia,
+faretra, cinture e taccuino. Abiti costruiti come gusci del corpo con i suoi
+pesi e pelle coperta rimossa: niente più pelle che buca i vestiti. Corda
+dell'arco che segue la mano destra; danni e tempi invariati. Generatore Blender
+riproducibile (stesso SHA in due esecuzioni), 14.158 triangoli, 980.816 byte.
+Verificato: 138 test, build con CSP, ranger-check, roster 30 pose, visual-review
+(pausa/ripetizione, fallback su caricamento fallito) e browser-check completo,
+desktop e mobile. Prove prima/dopo in docs/assets/daria-pass01/.
+Non finito: niente scultura del volto, capelli a card, stoffa statica, clip CC0
+invariate, arco procedurale. Dettagli e limiti in docs/art/DARIA_PASS_01.md.
+Rintocco resta separato su tonino/rintocco (3222cd1), non integrato.
+
 ## Nuovo incarico Claude — scrittura autorizzata
 
 Il proprietario richiede commit del lavoro e nuovo prompt per Claude. Verificato

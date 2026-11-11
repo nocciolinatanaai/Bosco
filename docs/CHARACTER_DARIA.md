@@ -107,3 +107,9 @@ authoring in character-study, gameplay in prototype. Prima del modello finale
 restano da rifinire volto/mano/pieghe, contatto della presa e origine visiva dei
 proiettili (ancora gestita dalla VFX generica). Nessuna validazione artistica con
 persone o FPS/hardware. Il concept continua a essere un riferimento più ambizioso.
+
+
+## Pass01 di Tonino
+
+Modello giocabile aggiornato in public/models/ranger/daria-pass01.glb; il refined
+resta per confronto. Risultati, prove e limiti in docs/art/DARIA_PASS_01.md.

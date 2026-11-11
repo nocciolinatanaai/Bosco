@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-for(const file of ['ranger-base.glb','daria-refined.glb'])test(`${file}: skin complete, cinque motion e nessun riferimento remoto`,()=>{
+for(const file of ['ranger-base.glb','daria-refined.glb','daria-pass01.glb'])test(`${file}: skin complete, cinque motion e nessun riferimento remoto`,()=>{
  const data=readFileSync(new URL('../public/models/ranger/'+file,import.meta.url));
  assert.equal(data.readUInt32LE(0),0x46546c67);assert.equal(data.readUInt32LE(4),2);assert.equal(data.readUInt32LE(8),data.length);assert.ok(data.length<3*1024*1024);
  const json=JSON.parse(data.subarray(20,20+data.readUInt32LE(12)).toString());

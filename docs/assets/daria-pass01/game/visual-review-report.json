@@ -1,0 +1,88 @@
+{
+  "errors": [],
+  "external": [],
+  "status": "passed",
+  "model": {
+    "triangles": 16470,
+    "meshes": 30,
+    "skinned": 18,
+    "status": "ready",
+    "clips": [
+      "cast_two_handed_bow",
+      "channel_two_handed_bow",
+      "idle",
+      "jump",
+      "run"
+    ],
+    "bounds": [
+      1.5315782298181804,
+      2.2,
+      1.1808261097372463
+    ]
+  },
+  "motion": {
+    "startJump": 0,
+    "interruptJump": 0,
+    "pauseDrift": 0,
+    "resetFinite": true
+  },
+  "directions": {
+    "idle": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "run": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "draw": {
+      "bowForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ],
+      "actorForward": [
+        0.19866933079506124,
+        0,
+        0.9800665778412416
+      ]
+    },
+    "back": {
+      "bowForward": [
+        1.2246467991473532e-16,
+        0,
+        -1
+      ],
+      "actorForward": [
+        1.2246467991473532e-16,
+        0,
+        -1
+      ]
+    }
+  },
+  "gameViews": [
+    "desktop",
+    "mobile"
+  ],
+  "assetFailure": {
+    "loaded": false,
+    "status": "fallback",
+    "visibleNodes": 5
+  }
+}

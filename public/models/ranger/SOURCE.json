@@ -37,5 +37,34 @@
     ],
     "runtime_changes": "Folded shorter cape, fabric data maps and refined/base comparison; no raster pixels edited",
     "status": "Local visual trial; owner judged result far below target. Further art work paused in favor of gameplay/content. Both versions retained."
+  },
+  "pass01": {
+    "file": "daria-pass01.glb",
+    "bytes": 980816,
+    "sha256": "39be919ae3fb00d088cdafc3e4cbc88a45d6a904aca733efd4f45771d5f7ae6a",
+    "triangles": 14158,
+    "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
+    "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
+    "original_geometry": [
+      "Jacket, sleeves, tunic and trousers as offset shells of the body, with body skin weights",
+      "Four-panel jacket skirt split at front, back and sides",
+      "Ragged terracotta capelet with brass ring brooch",
+      "Sage cowl scarf",
+      "Hair volume sampled on the skull, side waves, crown strands and three-strand braid over the left shoulder",
+      "Bracers, belts, thigh straps, quiver strap, quiver with six arrows, pouch and map notebook"
+    ],
+    "original_pixels": [
+      "Face texture repainted procedurally (skin, freckles, hazel-green eyes, brows, lips) on the upstream UV layout; no upstream face pixels kept",
+      "Fabric and leather textures generated procedurally"
+    ],
+    "changes_to_base": [
+      "Body faces covered by clothing removed (no skin can poke through)",
+      "Head mildly narrowed in the lower face, jaw widened",
+      "Boots and their upstream texture retained",
+      "Clips retained unchanged"
+    ],
+    "status": "Character-art pass 01: closer to the approved sheet, not a final sculpt; see docs/art/DARIA_PASS_01.md",
+    "materials": 16,
+    "images": 9
   }
 }
