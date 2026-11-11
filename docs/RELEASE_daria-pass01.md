@@ -35,8 +35,11 @@ Conseguenze da sapere prima del cambio:
 - il giro programmato "Giro di Tonino" (statistiche del vecchio gioco, risposte e
   pubblicazioni Instagram) è stato **disattivato** l'11/11, non cancellato. Le altre
   attività programmate del vecchio progetto erano già disattivate.
-- da decidere con il proprietario, perché irreversibili o esterni: vecchio progetto
-  Supabase e dati dei giocatori, profili social, ramo main.
+- vecchio Supabase **in pausa** dall'11/11 (decisione del proprietario): fino al cambio
+  di Pages, mythwood.it mostra il vecchio gioco senza backend;
+- Instagram: annuncio pubblicato (https://www.instagram.com/p/DfnHY8-iacO/); bio,
+  vecchi post e TikTok a mano dal proprietario;
+- main resta intatto per il ripristino (decisione del proprietario).
 
 Restano i blocchi tecnici e di processo: push negato (403), revisione di Codex,
 verifica del sito pubblicato non possibile da questa sessione.

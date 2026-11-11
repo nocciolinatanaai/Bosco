@@ -9,7 +9,9 @@ Il proprietario: "Tutto il vecchio progetto Mythwood è morto e deve essere
 sostituito da questo. Tutto." Questo repository/ramo è l'unico progetto Mythwood.
 La demo sostituirà il gioco su mythwood.it (procedura e ripristino in
 docs/RELEASE_daria-pass01.md). Il giro programmato del vecchio progetto è disattivato.
-Non riusare il vecchio backend. Vecchi dati, Supabase e social: decisioni aperte.
+Non riusare il vecchio backend. Vecchio Supabase **in pausa** (dati conservati), annuncio
+su Instagram pubblicato, social manuali al proprietario. Messaggio per Codex:
+docs/TONINO_TO_CODEX_2026-11-11.md.
 
 ## Consegna di Tonino — Daria pass01 (2026-11-11)
 
