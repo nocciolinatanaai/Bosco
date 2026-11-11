@@ -3,6 +3,15 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Concept sheet richiesti — sei classi
+
+Brief in docs/art/CHARACTER_SHEETS_01.md: fronte, profilo e dettagli volto per
+le sei classi; Daria coerente con il brief esistente, altri volti proposti.
+Mage non configurato (tre variabili assenti); alternativa image_gen comunicata
+al proprietario. Le immagini restituite in chat non sono automaticamente asset
+versionati, né grafica della build. Valutazione artistica ancora da effettuare.
+
+
 ## Skill asset procedurali Python
 
 Creata `.agents/skills/procedural-character-assets/SKILL.md`: istruisce a scrivere
