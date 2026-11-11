@@ -3,6 +3,19 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Checkpoint — asset 3D delle classi, verifiche finali in corso
+
+Il proprietario approva la direzione delle sei tavole e chiede personaggi reali.
+Sei PNG salvati in docs/assets/character-sheets; cinque nuovi GLB riggati in
+public/models/characters (Ranger conserva Daria). Loader locale per classe
+integrato in actors.js, asset-pipeline/materials/animation applicate; nessun file
+riservato a Tonino modificato. Dettagli, provenienza CC0 e limiti in
+docs/art/CHARACTER_MODELS_01.md. **Volti e costumi non ancora fedeli ai concept**.
+Primo giro: 135 test e 30 pose passati ma difetti visivi riscontrati e corretti;
+seconda verifica studio e regressione completa episodio ancora in corso.
+Nessun deploy o spesa. Non trattare questo checkpoint come approvazione grafica.
+
+
 ## Concept sheet richiesti — sei classi
 
 Brief in docs/art/CHARACTER_SHEETS_01.md: fronte, profilo e dettagli volto per

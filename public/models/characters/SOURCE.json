@@ -1,0 +1,103 @@
+{
+  "source": "System G6 / Modular RPG Characters",
+  "license": "CC0-1.0",
+  "provenance": "../ranger/SOURCE.json",
+  "status": "first rigged bases; concept likeness incomplete",
+  "characters": {
+    "tank": {
+      "file": "tank.glb",
+      "bytes": 883724,
+      "sha256": "6b461efeab3166bbfa41aca72d6cc39015c42e3bbbe2eaf0219118f55414056c",
+      "clips": [
+        "attack",
+        "dodge",
+        "idle",
+        "prepare",
+        "run",
+        "special"
+      ],
+      "bones": 43,
+      "limitations": [
+        "generic upstream face; concept likeness not sculpted",
+        "source jump used provisionally for dodge",
+        "coat needs motion/clipping review"
+      ]
+    },
+    "fighter": {
+      "file": "fighter.glb",
+      "bytes": 1650812,
+      "sha256": "764c619e0973a4bedb381a534943ebffdf1a82947aef85add46a5974d8015ac5",
+      "clips": [
+        "attack",
+        "dodge",
+        "idle",
+        "prepare",
+        "run",
+        "special"
+      ],
+      "bones": 43,
+      "limitations": [
+        "generic upstream face; concept likeness not sculpted",
+        "source jump used provisionally for dodge",
+        "coat needs motion/clipping review"
+      ]
+    },
+    "assassin": {
+      "file": "assassin.glb",
+      "bytes": 1395316,
+      "sha256": "74d600aa2c0cb8a757ac9ab7c3c332b9c9a63607e771fdf373e218c762ed306f",
+      "clips": [
+        "attack",
+        "dodge",
+        "idle",
+        "prepare",
+        "run",
+        "special"
+      ],
+      "bones": 43,
+      "limitations": [
+        "generic upstream face; concept likeness not sculpted",
+        "source jump used provisionally for dodge",
+        "coat needs motion/clipping review"
+      ]
+    },
+    "mage": {
+      "file": "mage.glb",
+      "bytes": 1274420,
+      "sha256": "1f282800f626da9bd20cecb68f05e7ffabf169a2df63126c84d8b6ec842d0806",
+      "clips": [
+        "attack",
+        "dodge",
+        "idle",
+        "prepare",
+        "run",
+        "special"
+      ],
+      "bones": 43,
+      "limitations": [
+        "generic upstream face; concept likeness not sculpted",
+        "source jump used provisionally for dodge",
+        "coat needs motion/clipping review"
+      ]
+    },
+    "healer": {
+      "file": "healer.glb",
+      "bytes": 1128556,
+      "sha256": "9a9fddb8bff42ff6ffa6efbf27dc35ad1909fd6718fd4ee723a550aa1f71f00f",
+      "clips": [
+        "attack",
+        "dodge",
+        "idle",
+        "prepare",
+        "run",
+        "special"
+      ],
+      "bones": 43,
+      "limitations": [
+        "generic upstream face; concept likeness not sculpted",
+        "source jump used provisionally for dodge",
+        "coat needs motion/clipping review"
+      ]
+    }
+  }
+}

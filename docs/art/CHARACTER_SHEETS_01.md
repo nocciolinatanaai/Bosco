@@ -22,7 +22,11 @@ materiali consumati e illuminazione neutra leggibile su fondo grigio. Qualità
 semi-realistica da concept RPG contemporaneo; nessuna promessa di rendering UE5,
 modello riggato, texture PBR o perfetta coerenza geometrica tra viste.
 
-Le immagini vengono restituite nella chat dal generatore. Non dichiarare file
-locali versionati senza averli effettivamente ricevuti e salvati. Stato iniziale:
-brief pronti; risultati e difetti visivi da valutare dopo la generazione; nessuna
-approvazione artistica implicita e nessuna pubblicazione.
+Sei immagini generate e salvate senza modificare i pixel in
+docs/assets/character-sheets/{tank,fighter,assassin,mage,ranger,healer}.png.
+Dimensioni native 1536×1024, non 4K. Il proprietario ha detto che le tavole
+vanno bene e ha richiesto di creare i personaggi: approvazione della direzione
+artistica, non dei modelli 3D. Le viste restano interpretazioni illustrative,
+con differenze nei piccoli accessori e nella posizione delle armi.
+
+Stato 3D e verifiche in CHARACTER_MODELS_01.md. Nessuna pubblicazione.

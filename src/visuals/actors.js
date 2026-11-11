@@ -1,5 +1,6 @@
 import { createSealedGuardian } from './guardian-redesign.js';
 import { createRangerActor } from './ranger.js';
+import { attachClassCharacters } from './class-characters.js';
 import * as THREE from 'three';
 import { block, curve, ellipsoid, link, piece } from './geometry.js';
 
@@ -166,6 +167,7 @@ export function createGenericAdventurer(m) {
 
 export function createAdventurer(m) {
   const generic = createGenericAdventurer(m), ranger = createRangerActor();
+  attachClassCharacters(generic.root);
   const root = new THREE.Group(); root.name = 'Mythwood-original-adventurer';
   generic.root.name = 'prototype-shared-body'; generic.root.rotation.y = 0;
   root.add(generic.root, ranger.root); ranger.root.visible = false;
@@ -175,6 +177,7 @@ export function createAdventurer(m) {
     generic.root.visible = role.id !== 'ranger'; ranger.root.visible = role.id === 'ranger';
     active = role.id === 'ranger' ? ranger : generic;
     if(role.id === 'ranger')void ranger.root.userData.loadVisual();
+    else void generic.root.userData.selectVisual(role.id);
   };
   root.userData.animate = (time, moving, attack, reducedMotion, combat) => active.root.userData.animate(time, moving, attack, reducedMotion, combat);
   return { root, body: generic.body, weapon: generic.weapon };
