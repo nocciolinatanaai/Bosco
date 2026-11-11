@@ -5,6 +5,17 @@ CLAUDE_NEXT_TASK, **dopo la revisione prevista** e dal commit integrato.
 
 ## Stato: preparato e verificato, NON pubblicato
 
+**Blocco principale (segnalato dal proprietario, 2026-11-11):** oggi mythwood.it
+serve il gioco esistente del proprietario. Osservato da qui:
+- nocciolinatanaai.github.io/Bosco/ risponde 301 verso https://mythwood.it/;
+- origin/main (ac9039e) contiene CNAME mythwood.it e l'index.html del gioco attuale
+  ("Mythwood · gioco gratis dal telefono"), con il suo backend.
+
+Spostare la sorgente di Pages su mythwood/pages **sostituirebbe quel sito** con la
+demo prototipo, sullo stesso dominio. Non verificabile da qui quale ramo sia
+selezionato nelle impostazioni (API e dominio bloccati dal proxy). Nessuna
+pubblicazione finché il proprietario non sceglie dove deve vivere la demo.
+
 Blocchi reali, non aggirati:
 1. **Push negato**: `git push` verso nocciolinatanaai/bosco risponde 403 e
    l'aggiunta del repository con accesso in scrittura dice "you need push access".
