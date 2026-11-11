@@ -4,7 +4,7 @@ import {checkpointFromSession,restoreCheckpoint,validateCheckpoint} from '../src
 function awakened(role='ranger'){const s=createSession(role);for(const e of s.enemies.filter(e=>!e.boss))e.hp=0;evolve(s);return s;}
 test('sigillo bloccato prima del ricordo e tecniche disponibili per tutte le classi',()=>{
  assert.equal(attuneArtifact(createSession('mage'),'ward'),false);
- for(const r of CLASSES){const s=awakened(r.id);assert.equal(attuneArtifact(s,'ward'),true);assert.equal(attuneArtifact(s,'__proto__'),false);}
+ for(const r of CLASSES)for(const mode of ['ward','surge']){const s=awakened(r.id);assert.equal(attuneArtifact(s,mode),true);assert.equal(attuneArtifact(s,'__proto__'),false);}
 });
 test('Custodia richiede un impatto evitato, non il solo comando di schivata',()=>{
  const s=awakened();attuneArtifact(s,'ward');dodge(s);assert.equal(s.shield,0);const hp=s.hp;

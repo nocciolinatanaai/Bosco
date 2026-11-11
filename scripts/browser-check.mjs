@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 
 // Serve soltanto dist/ su loopback; nessuna connessione al backend di produzione.
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', '5180', '--strictPort'], { stdio: ['ignore', 'pipe', 'pipe'] });
-let browser;
+let browser,currentPage;
 const report = { status: 'running', startedAtUtc: new Date().toISOString(), runs: [] };
 async function saveReport() {
   await mkdir('test-results', { recursive: true });
@@ -31,7 +31,7 @@ try {
   for (const [name, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['mobile', { width: 390, height: 844 }, true]]) {
     report.currentViewport = name; await saveReport();
     const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: mobile ? 2 : 1 });
-    const page = await context.newPage();
+    const page = await context.newPage();currentPage=page;
     const errors = [], external = [], portraitRequests = [];
     page.on('request', request => { if (new URL(request.url()).pathname.endsWith('/art/liora-portrait.png')) portraitRequests.push(request.url()); });
     page.on('pageerror', (error) => { errors.push(error.message); console.error(name, error.message); });
@@ -134,7 +134,8 @@ try {
     assert.ok((await page.locator('#journey-hint').innerText()).includes('Muoviti'));
     await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
     await page.keyboard.down('KeyJ');
-    await page.waitForFunction(() => document.getElementById('memory').open, { }, { timeout: 60000 });
+    await page.waitForFunction(() => document.getElementById('memory').open||document.getElementById('result').open, { }, { timeout: 60000 });
+    assert.equal(await page.locator('#result').evaluate(e=>e.open),false,'Sopravvive fino al ricordo');
     await page.keyboard.up('KeyJ');
     assert.ok((await page.locator('#memory-body').innerText()).includes('Liora'));
     await page.waitForFunction(() => { const img = document.getElementById('liora-portrait'); return img.complete && img.naturalWidth > 0; });
@@ -251,7 +252,7 @@ try {
   }
   report.storageFallbacks = [];
   for (const mode of ['corrupt', 'blocked']) {
-    const context = await browser.newContext(); const page = await context.newPage(); const errors = [];
+    const context = await browser.newContext(); const page = await context.newPage();currentPage=page; const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.route('**/*', route => new URL(route.request().url()).origin === 'http://127.0.0.1:5180' ? route.continue() : route.abort());
     await page.addInitScript(mode => {
@@ -278,6 +279,17 @@ try {
   }
   report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.currentViewport; await saveReport();
 } catch (error) {
+  if (currentPage && !currentPage.isClosed()) {
+    try {
+      report.diagnostics = await currentPage.evaluate(() => {
+        const text = id => document.getElementById(id)?.textContent ?? null;
+        return { focus: document.activeElement?.id, hp: text('hp-text'), combo: text('combo-label'), toast: text('toast'), paused: text('pause'), target: text('target-status'), enemies: [...document.querySelectorAll('.enemy-label progress')].map(e => e.value) };
+      });
+      await currentPage.screenshot({ path: 'test-results/episode-failure.png' });
+    } catch (diagnosticError) {
+      report.diagnosticError = diagnosticError.message;
+    }
+  }
   report.status = 'failed'; report.error = error.message; report.finishedAtUtc = new Date().toISOString(); await saveReport(); throw error;
 } finally {
   await browser?.close();

@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-11T01:41:24.511Z",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 2,
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
+      "persistentEntries": 0
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 2,
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
+      "persistentEntries": 0
+    }
+  ],
+  "buildEntrySha256": "17051969a528c17ed39126d304932cc30ce9c8c4e919ee9d09e8672a9a258513",
+  "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
+  "runnerSha256": "1e9ab1740e8b7394d48df8a1a8d750064512ff8a76416c587a44893a74239cc9",
+  "storageFallbacks": [
+    {
+      "mode": "corrupt",
+      "status": "passed",
+      "errors": 0
+    },
+    {
+      "mode": "blocked",
+      "status": "passed",
+      "errors": 0
+    }
+  ],
+  "finishedAtUtc": "2026-11-11T01:49:16.849Z"
+}

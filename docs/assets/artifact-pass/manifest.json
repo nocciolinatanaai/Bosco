@@ -1,0 +1,39 @@
+{
+  "dateUtc": "2026-11-11",
+  "applicationCheckpoint": "c4a2d88",
+  "unitTests": 105,
+  "buildEntrySha256": "17051969a528c17ed39126d304932cc30ce9c8c4e919ee9d09e8672a9a258513",
+  "limitations": [
+    "Graphics provisional and rejected by owner",
+    "Chromium emulated mobile, no physical iPhone test",
+    "Initial concurrent episode run timed out before memory; isolated rerun passed; cause unconfirmed",
+    "Balance untested with external players",
+    "Two playable areas; further regions proposed only",
+    "HUD capture paused with pause overlay hidden for inspection",
+    "After passing browser run, failure-only diagnostic capture made tolerant of missing DOM; passed report retains executed runner hash"
+  ],
+  "sha256": {
+    "src/artifacts.js": "becca030ae25665eb54d0678267360df5007cef2e03d18ebec51217cc6a5b363",
+    "src/combat.js": "6f41204c83e3fa2c6efb1b97a0dcd27c74e4deede0aa8bc6ac0a4431fbe45115",
+    "src/checkpoints.js": "ae6264e2a27b56e180ab142c82b9855635e03e1aa8c5ccb6d6cbfe8e75c0bf1a",
+    "src/runtime.js": "20b5a0629b51102a95fb2e4664f2fcc3a1793c3ec54c1208cf0163b37a9f0081",
+    "src/ui.js": "aa19c16ab606982b3fcd29930d4319dd991ab1cdc3420ee2008681b1f4d96d8a",
+    "src/style.css": "6cf8bad0b93a85aaec38a134c75b4a6a02cf07981ed81456076283d4ab91f53d",
+    "src/journey.js": "88ea6c4ef562b1b5dbed39ec5eb9fb35c2480d419d46d5b7ca2cf101bf604ddf",
+    "src/visuals/combat-effects.js": "07f0b72712324561025a02c60872457aa3d58c80503fc5e09ae2d8e9770ac5e2",
+    "scripts/browser-check.mjs": "2c48597399a95d3046d67f8891cd896ab69386e6b3963e04731813485091fa97",
+    "scripts/garden-check.mjs": "6b048e9e6127a226311e885f56f04fd578ccaf49412803ed8ca242f4512a1802",
+    "scripts/artifact-ui-check.mjs": "a09cfebbd18e75f587ee5e869969f97faa6602711b92bd885c6eed36829b630c",
+    "tests/artifacts.test.mjs": "d50adf7179e23762df98b62bc1775068d8314ffc8c9cde13fbf219022d88e949",
+    "tests/checkpoints.test.mjs": "9ad15bdae97929d5cf6c233966cc419e5b5a6eab8d8e20cb929f64783833713c"
+  },
+  "evidenceSha256": {
+    "desktop-choice.png": "343ec92f19726a5afbf1379aeeff3da727d41fdabbf0ec2099e64d4ceca8ba28",
+    "episode-report.json": "74aa5d873c5a64d5ff3697ae73ca94cf3286f9a9cd5263061bebe3bfd140d1b0",
+    "garden-report.json": "0c1bba9484f88338b74b6d53a12bfd33aeaaf535c04ca21707ad58f1ab8adee9",
+    "mobile-choice.png": "6b0d4f56ddc0ed8f070d45c0da1ac527f939e57c75679ea7afa8e997356b5afd",
+    "mobile-hud.png": "d82354cd84f919431fc2ffaa175afd8f0590a4ff900cb7beeb02704abb92d055",
+    "report.json": "c5d30b2f5812abb53a38378b64d07674f52cace3844aef232799a824b5c752d1",
+    "unit-tests.log": "9658bb3181af338e28611f5387d0203526b0e74fbb46674350e3dba9b8f05938"
+  }
+}

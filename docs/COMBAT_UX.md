@@ -102,3 +102,12 @@ focus al canvas. Spazio su un pulsante del menu continua ad attivare quel
 pulsante; dopo aver ripreso i comandi di gioco torna a essere lo scatto.
 Nessun trasferimento del focus durante la compilazione di input o nei dialoghi.
 Ranger risvegliato: nuova finestra di contrattacco in RANGER_EVOLUTION.md.
+
+
+## Primo artefatto — Sigillo di Liora
+
+Accordatura opzionale nel ricordo prima del Custode, modificabile dal menu
+Sigillo in condizioni sicure. Custodia protegge dopo una schivata d'impatto;
+Impeto recupera vigore e anticipa l'abilità. Nessun quarto comando obbligatorio
+nel combattimento. Regole, limiti e numeri in ARTIFACT_01.md. La scelta provvisoria
+non è salvata prima di accogliere il ricordo. Checkpoint v3 con lettura v1/v2.

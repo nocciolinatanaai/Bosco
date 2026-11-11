@@ -5,11 +5,13 @@ Comandi. Non serve un account e non viene inviato al server. Lo scopo è poter
 interrompere la prova senza ripetere tutte le tappe già concluse.
 
 Un solo slot per origine/browser: `mythwood.checkpoint.v1` in localStorage.
-Il nome della chiave resta stabile; il formato corrente è v2. I sei campi sono
-`version: 2`, `autoSave`, `role`, `stage`, `traces` e `garden`. Quest’ultimo
-contiene solo `step` (0–4), `area` (plaza/garden) e `sentryDefeated` booleano.
-I file v1 vengono normalizzati in memoria senza scrivere: un successivo
-salvataggio o cambio della preferenza scrive v2. Versioni ignote restano
+Il nome della chiave resta stabile; il formato corrente è v3. I sette campi sono
+`version: 3`, `autoSave`, `role`, `stage`, `traces`, `garden` e `attunement`.
+`garden` contiene `step` (0–4), `area` (plaza/garden), `sentryDefeated` booleano.
+`attunement` è null, ward o surge; una scelta non nulla richiede una tappa dopo
+il ricordo di Liora. Non si salvano bonus o recuperi temporanei del sigillo.
+I file v1/v2 vengono normalizzati in memoria senza scrivere: un successivo
+salvataggio o cambio della preferenza scrive v3. Versioni ignote restano
 illeggibili ma non vengono cancellate automaticamente. Nessun identificativo, data, posizione arbitraria,
 credenziale, inventario economico, salute o stato parziale del combattimento. Le preferenze
 audio e qualità grafica continuano a durare solo nella sessione.
@@ -20,7 +22,7 @@ audio e qualità grafica continuano a durare solo nella sessione.
 | `awakened` | Ricordo accolto, echi liberati, Custode da affrontare |
 | `guardian` | Custode sconfitto, accesso al sentiero, 0–3 tracce conservate |
 
-Salvataggio all’avvio, risveglio, vittoria, tracce e transizioni del giardino.
+Salvataggio all’avvio, risveglio, vittoria, tracce e transizioni del giardino, oltre alla scelta della tecnica del sigillo.
 Nel giardino si conservano ingresso, bussola, segnale, ritorno e sentinella
 sconfitta; la ripresa ricrea l’ingresso sicuro e un eventuale combattimento
 non concluso. La bussola è uno stato di missione, non un oggetto duplicabile. La ripresa
@@ -44,7 +46,7 @@ non una transazione atomica né una garanzia contro scritture simultanee.
 
 I dati locali possono essere alterati dal giocatore. Nessun valore di questo
 slot deve diventare autorità per economia, premi o multiplayer futuri. Non c'è
-sincronizzazione cloud o esportazione. Il vecchio client v1 non legge v2:
+sincronizzazione cloud o esportazione. I vecchi client v1/v2 non leggono il formato v3:
 un rollback del client non è una migrazione inversa del salvataggio.
 Cancellare i dati del browser o cambiare origine/dispositivo perde lo slot.
 

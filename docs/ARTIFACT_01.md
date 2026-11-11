@@ -44,3 +44,12 @@ API pubblica attuneArtifact in game.js; regole in artifacts/combat; scelta e
 feedback in ui/runtime; anello VFX e suono originali già esistenti riutilizzati.
 Test pubblici della simulazione e persistenza, più browser e screenshot reali.
 Niente account, pagamenti, produzione o risorse online autorevoli.
+
+## Evidenze del blocco
+
+105 test superati; per ogni classe entrambe le accordature, danno evitato reale,
+limiti delle risorse, cambio in sicurezza e migrazione. UI, episodio completo e
+Giardino passati su Chromium desktop/mobile, senza errori o richieste esterne.
+Rapporti e schermate: assets/artifact-pass/. Un primo episodio eseguito insieme
+al Giardino è scaduto prima del ricordo; ripetizione isolata passata, causa non
+accertata. Non una prova su hardware mobile reale o di bilanciamento pubblico.

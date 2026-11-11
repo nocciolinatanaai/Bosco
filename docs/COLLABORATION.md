@@ -467,3 +467,19 @@ su schivata d'impatto e checkpoint v3 compatibile v1/v2. 105 test e UI dedicata
 passati; percorso completo con scelta nel ricordo e Giardino ancora da verificare.
 Spec: ARTIFACT_01. Espansione del mondo proposta in WORLD_AND_PROGRESSION, non
 nuove mappe già presenti. Nessun push, deploy, spesa o teaser.
+
+
+## Sigillo — verifica conclusa (2026-11-11 UTC)
+
+Checkpoint applicativo c4a2d88. 105 test, build, UI dedicata desktop/mobile,
+episodio completo e Giardino passati. V3 conserva scelta opzionale, compatibile
+con v1/v2 senza riscrittura alla lettura; bonus temporanei esclusi. Scelta nel
+ricordo non salvata prima della conferma. Evidenze in assets/artifact-pass/.
+Prima esecuzione episodio concorrente con Giardino: timeout prima del ricordo.
+Ripetizione isolata passata su entrambe le dimensioni, inclusi fallback storage;
+causa del primo timeout non accertata. Nessuna correzione gameplay per nasconderlo.
+Screenshot verificati per leggibilità di scelte e HUD; non approvazione grafica.
+
+Solo due aree giocabili. WORLD_AND_PROGRESSION propone le Cave dei Sussurri come
+prossimo ciclo completo; non dichiara nuove mappe o cooperativa implementate.
+Grafica/teaser sospesi, nessun push, pubblicazione, spesa o risposta di Claude.

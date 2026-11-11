@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "legacyReadNoWrite": true,
+      "choiceRestored": true,
+      "checkpointVersion": 3
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "legacyReadNoWrite": true,
+      "choiceRestored": true,
+      "checkpointVersion": 3
+    }
+  ],
+  "errors": [],
+  "external": []
+}

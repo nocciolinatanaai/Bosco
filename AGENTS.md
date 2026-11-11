@@ -23,7 +23,7 @@ Leggere, nell'ordine:
    cancellazione selettiva e fallback; non fidarsi dei dati locali per premi online.
 9. Per le due aree: `docs/REGIONS.md` e `docs/QUEST_02.md`. Filtrare simulazione,
    bersagli e rendering per area; cleared resta il primo Custode. Preservare
-   migrazione v1→v2 e nessuna scrittura al semplice caricamento.
+   lettura v1/v2→v3 e nessuna scrittura al semplice caricamento.
 10. Per la revisione al rientro di Tonino: `docs/GUARDIAN.md` e
    `docs/CLAUDE_REVIEW.md`. Non dichiarare revisioni o sincronizzazioni inesistenti.
 
@@ -126,10 +126,16 @@ I test procedurali precedenti verificano il fallback, non il GLB importato:
 per quest'ultimo eseguire visual-review.mjs e la regressione browser Ranger.
 Non rimuovere blob dalla CSP senza verificare le texture incorporate anche nel
 percorso ImageBitmap/Safari. Il proprietario ha sospeso il teaser: qualità della
-scena giocabile prioritaria, niente trailer finché non rivalutato. Nel blocco
+scena ancora insufficiente. La priorità corrente è sviluppare contenuti e
+meccaniche con controlli visivi periodici; niente trailer finché non rivalutato. Nel blocco
 corrente è richiesto di non pubblicare: commit locali possibili, niente push,
 deploy o post. Non riattivare gli esperimenti cinematografici sospesi in tools/.
 
 Per modifiche a pose, materiali o pipeline: leggere docs/SKILLS_WORKFLOW.md e le
 skill pertinenti installate in .agents/skills/. Usare confronto visivo a camera
 costante; non equiparare test tecnici e approvazione artistica del proprietario.
+
+Per artefatti, scelte nel ricordo o ripresa: leggere docs/ARTIFACT_01.md e
+docs/LOCAL_CHECKPOINTS.md. Non alterare i bonus senza test di schivata reale,
+limiti delle risorse e compatibilità delle tappe. Per nuove regioni leggere
+docs/WORLD_AND_PROGRESSION.md: distingue aree giocabili da proposte.

@@ -2,8 +2,9 @@
 
 ## Stato reale
 
-Il nuovo client è un prototipo locale senza account, persistenza, telemetria,
-backend o pagamenti. Non contatta il vecchio Supabase. Non è il nuovo servizio
+Il nuovo client è un prototipo locale senza account, telemetria, backend o
+pagamenti. Conserva tappe e tecnica del sigillo solo con salvataggio locale
+facoltativo; non memorizza credenziali o bonus di combattimento. Non contatta il vecchio Supabase. Non è il nuovo servizio
 online completo. La produzione precedente non è stata modificata.
 
 Il client include una CSP senza esecuzione di stringhe, script remoti o connessioni

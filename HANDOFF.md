@@ -1,37 +1,47 @@
 # Mythwood — consegna corrente
 
-Aggiornato da Codex nella sessione corrente, fuso Europe/Rome.
+Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Ultimo checkpoint applicativo locale: **70a1d20**, non inviato al remoto.
+Ultimo checkpoint applicativo locale: **c4a2d88**, non inviato al remoto.
 Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
 sempre git log/status prima di continuare. Main e servizio precedente separati.
 
-## Blocco locale corrente — superfici e raccordi con le skill
+## Blocco corrente — Sigillo di Liora e priorità ai contenuti
 
-Il proprietario richiede di applicare le skill installate e proseguire. Raccordi
-campionati su game time (120 ms), posa continua anche con comandi interrotti,
-pausa congelata e riavvio senza residui. Il mixer campionato update(0) richiede
-pesi espliciti; la fase dello scatto usa il tempo rimanente della schivata.
-Nessun cambio di collisioni, danni, eventi o controlli.
+Il proprietario giudica anche la prova Daria molto lontana dal concept e chiede
+trama, gameplay, personaggi, artefatti, magie, tecniche e mondo, mantenendo le
+verifiche visive. Grafica provvisoria conservata, ulteriore rifinitura sospesa.
+Nessuna approvazione artistica; teaser fermo. Nessun push, deploy, spesa o post.
 
-Pietra non metallica: atlante procedurale 2×2 per pavimenti, bordi consumati,
-crepe e umidità con roughness coerente; mappe separate per muratura. UV variate
-senza cambiare il seed del layout. Tre texture GPU in più; l'atlante 512 px e le
-mipmap richiedono più memoria. Non è un'ottimizzazione di memoria o prova di FPS.
-Pipeline ora misura tutti i pass: 220 draw / 352.063 triangoli nella vista larga
-fissa, incluse ombre e postprocessing; conteggi prima/dopo identici.
+Implementato il Sigillo di Liora nel primo ricordo, prima del Custode: Custodia
+(protezione 2,2 s) o Impeto (+18 vigore, -0,8 s recupero abilità), attivati solo
+quando una schivata evita un impatto, con recupero 6 s. Tutte le sei classi,
+scelta opzionale e modificabile in sicurezza. Nessun nuovo comando di lotta.
+La selezione nel ricordo resta provvisoria fino alla conferma del ricordo.
+Menu/HUD, feedback sonoro e anello VFX integrati. Spec: docs/ARTIFACT_01.md.
 
-99 test, build e studio reale passati. Zero salto al cambio/interruzione o deriva
-in pausa nelle tre ossa campionate; non una misura di qualità dell'intero rig.
-Ranger e Giardino superati su desktop/mobile, zero errori/richieste esterne.
-Confronti e manifest in docs/assets/skills-visual-pass/. Studio opt-in delle
-animazioni in /tools/visual-review/; superfici in /tools/surface-review/ dopo
-scripts/surface-review.mjs, che prepara la baseline locale da bc25e7c.
+Checkpoint v3 sulla stessa chiave storica: conserva solo scelta e tappe, mai
+bonus o cooldown. v1/v2 leggibili senza scritture; salvataggio sempre opt-in.
+Regole in src/artifacts.js e combat.js; persistenza in checkpoints.js;
+interfaccia in ui/runtime, effetti in visuals/combat-effects.js.
 
-Skill pertinenti e procedura in docs/SKILLS_WORKFLOW.md. Il modello CC0 e il
-Custode restano quelli già giudicati insufficienti: qualità artistica finale,
-identità di Daria e nuove risorse ambientali ancora aperte. Teaser sospeso.
-Nessun push, deploy, spesa o post. Esperimenti cinematografici preservati e fermi.
+105 test e build passati. UI Sigillo, episodio completo e Giardino superati su
+desktop/mobile; dati corrotti o storage bloccato gestiti. Nessun errore browser
+o richiesta esterna nelle esecuzioni passate. Prima prova episodio concorrente
+con Giardino scaduta prima del ricordo; ripetizione isolata superata. Causa non
+accertata: non dichiarare assenza di flakiness. Runner ora registra stato e
+screenshot in caso di errore. Evidenze in docs/assets/artifact-pass/.
+
+Sono giocabili due aree: nessuna terza regione, cooperativa o grande open world
+aggiunti. docs/WORLD_AND_PROGRESSION.md propone arco e criteri per le prossime
+regioni. Prossimo blocco: Cave dei Sussurri, ingresso/ritorno, un incontro diverso
+e uso dell'artefatto; serve ancora implementazione e verifica completa.
+
+Limiti: bilanciamento senza playtest esterni; grafica respinta; warning bundle
+>500 kB aperto; prove Chromium emulate, nessuna misura su iPhone reale. La prova
+Daria precedente è tecnicamente verificata ma non soddisfa il proprietario:
+report e confronti congelati in docs/assets/daria-trial/. Non riprendere trailer.
+Nessun contatto automatico con Claude: deve leggere questa consegna nel checkout.
 
 ## Blocco precedente — prima sostituzione grafica del Ranger
 
@@ -283,11 +293,9 @@ Asset Ranger generico invariato; non risolta la distanza artistica dal concept.
 Nessun push, deploy o post. Teaser sospeso; esperimenti preesistenti preservati.
 
 
-## In corso — prova Daria da mostrare al proprietario
+## Cronologia — prova Daria conclusa e respinta artisticamente
 
-Nuova geometria di giacca/capelli e mantello rivisto: file daria-refined.glb,
-script prepare-daria-refined.py; originale ranger-base.glb conservato.
-Variante base/refined nello studio a stessa camera/luci, non più confronto
-con il vecchio segnaposto procedurale. Volto mantiene la texture CC0 iniziale,
-con topologia smussata e lieve variazione di forma: non un nuovo volto finale.
-Verifiche visive e integrate pendenti; nessuna pubblicazione.
+Checkpoint locali cebdc8c e 3f10905: geometria abiti/capelli, mantello e materiali;
+base CC0 conservata. 99 test, build, studio pose e regressioni Ranger/Giardino
+passati. Non è un nuovo volto finale e non riproduce la qualità del concept.
+Il proprietario sposta la priorità ai contenuti: riferirsi al blocco corrente.
