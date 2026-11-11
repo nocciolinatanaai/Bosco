@@ -10,6 +10,9 @@ sempre git log/status prima di continuare. Main e servizio precedente separati.
 ## Blocco corrente — ponte di revisione e orientamento
 
 Richiesta: automatizzare la collaborazione tramite skill e continuare il gioco.
+Guida operativa richiesta dal proprietario: docs/CLAUDE_CONNECTION_GUIDE.md,
+per nuova CLI nello stesso ambiente, login personale, prima risposta e limiti.
+Creazione guida soltanto: nessuna installazione o chiamata al modello.
 Skill locale mythwood-collaboration e coda di snapshot HEAD implementate; leggere
 AGENT_EXCHANGE. Nessuna connessione reale attiva: mancano CLI Claude autenticata
 e trasporto condiviso; nessuna risposta ricevuta o chiamata a pagamento. Cinque

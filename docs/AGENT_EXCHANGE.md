@@ -4,6 +4,8 @@ Richiesta del proprietario: automatizzare il dialogo fra gli agenti, continuando
 lo sviluppo. Una skill può stabilire procedure e richiamare strumenti; non può
 collegarsi da sola a una chat Claude o concedere autenticazione/trasporto.
 
+Guida passo per passo per il proprietario: [CLAUDE_CONNECTION_GUIDE.md](CLAUDE_CONNECTION_GUIDE.md).
+
 ## Esito della verifica in questo ambiente
 
 - Nessun connettore Claude esposto dagli strumenti.
