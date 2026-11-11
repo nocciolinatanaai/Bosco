@@ -110,9 +110,13 @@ for i,p in enumerate(path):
 for i in range(len(path)-1):
  for j in range(4):faces.append((i*4+j,i*4+(j+1)%4,(i+1)*4+(j+1)%4,(i+1)*4+j))
 mesh('Daria flat leather shoulder harness',verts,faces,leather,'blend')
-for z in [2.18,2.25]:
- path=[(.30*math.cos(i/32*math.tau),-.015+.235*math.sin(i/32*math.tau),z) for i in range(33)]
- tube('Daria waist binding '+str(z),path,.022,leather,'pelvis')
+verts=[];faces=[];count=40
+for i in range(count+1):
+ a=i/count*math.tau
+ for rx,ry,z in [(.325,.30,2.16),(.325,.30,2.27),(.312,.287,2.27),(.312,.287,2.16)]:verts.append((rx*math.cos(a),-.015+ry*math.sin(a),z))
+for i in range(count):
+ for j in range(4):faces.append((i*4+j,i*4+(j+1)%4,(i+1)*4+(j+1)%4,(i+1)*4+j))
+mesh('Daria fitted leather belt',verts,faces,leather,'pelvis')
 # Organic cap with a high frontal hairline and low nape, following the skull.
 verts=[];faces=[];around=48;rings=14
 for j in range(rings+1):
@@ -172,6 +176,8 @@ def box(name,center,size,mat):
  bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
  bevel=obj.modifiers.new('Soft leather edges','BEVEL');bevel.width=.009;bevel.segments=2;bpy.ops.object.modifier_apply(modifier=bevel.name)
  obj.data.materials.append(mat);return bind(obj,'pelvis')
+box('Daria belt brass buckle',(0,-.334,2.215),(.12,.024,.095),trim)
+box('Daria belt buckle inset',(0,-.35,2.215),(.073,.01,.052),leather)
 box('Daria notebook pages',(.37,-.12,2.03),(.20,.085,.30),paper)
 for y in [-.175,-.065]:box('Daria notebook leather cover',(.37,y,2.03),(.23,.022,.34),leather)
 box('Daria notebook brass clasp',(.37,-.194,2.03),(.042,.018,.075),trim)

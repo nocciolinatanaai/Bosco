@@ -20,7 +20,7 @@
   "status": "Provisional base, not final approved Daria sculpt; no purchase",
   "refined": {
     "file": "daria-refined.glb",
-    "sha256": "8159ec117100c1d5359bdb8554083858732b3cf9a455ba4221e9c05edb08bba9",
+    "sha256": "e9a31c5939eeaa6b6823f109d6fd4105cd56efc4bc3d285f5c01c110606f89de",
     "script": "scripts/prepare-daria-refined.py",
     "derived_from": "Same System G6 CC0 human_female.blend archive documented above",
     "original_geometry": [

@@ -34,7 +34,7 @@ export function attachSkinnedRanger(root,{variant='refined'}={}) {
         if(refined&&/coat|undershirt|trousers|scarf/.test(n.material.name)){Object.assign(n.material,rangerFabric());n.material.normalScale=new THREE.Vector2(.18,.18);}
         if(n.material.name.includes('medium_armor'))n.material.color.set('#9bbbc0');
         if(n.material.name.includes('head')){n.material.color.set(refined?'#dfb38b':'#e1bb98');if(refined)n.material.roughness=.65;}
-        
+
       });
       presentation.updateMatrixWorld(true);
       const mixer=new THREE.AnimationMixer(model), clips=Object.fromEntries(gltf.animations.map(c=>[c.name.replace('human_female_',''),c]));
