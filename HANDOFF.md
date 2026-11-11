@@ -2,6 +2,18 @@
 
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
+
+## Skill concept personaggi — Mage Space
+
+Creata su richiesta `.agents/skills/mage-character-gen/SKILL.md`: concept
+semi-realistici, turnaround fronte/lato/retro neutri e relighting separato,
+dettagli pelle/SSS descritti come obiettivi visivi. Configurazione locale
+MAGE_API_KEY/MAGE_API_BASE_URL/MAGE_API_MODEL; endpoint, autenticazione e schema
+richiedono documentazione ufficiale verificata. Accesso www.mage.space bloccato
+dal proxy (CONNECT 403): nessuna API dichiarata funzionante, chiamata di
+generazione, immagine prodotta o credito consumato. Prossimo passo: verificare
+contratto API e disponibilità dell'account prima di configurare un adapter.
+
 ## Sincronizzazione richiesta dal proprietario
 
 Il proprietario richiede di rendere disponibili a Claude gli ultimi cambiamenti
