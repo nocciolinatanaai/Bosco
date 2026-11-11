@@ -3,6 +3,17 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Skill asset procedurali Python
+
+Creata `.agents/skills/procedural-character-assets/SKILL.md`: istruisce a scrivere
+ed eseguire generatori Python riproducibili per normal map, roughness pelle/tessuti
+e basi anatomiche OBJ/GLB. Include orientamento normali, tiling, proporzioni,
+reimportazione e controlli numerici/visivi; distingue blockout, mesh continua e
+asset pronto per animazione. Pillow/NumPy disponibili, trimesh non installato
+al controllo; nessuna dipendenza installata e nessun asset generato in questo task.
+Verificati struttura skill e calcolo della normale piatta dell'esempio NumPy.
+
+
 ## Skill pipeline personaggi — Agensi
 
 Aggiunta `.agents/skills/agensi-gamedev-characters/SKILL.md` con contratto comune
