@@ -11,10 +11,31 @@ serve il gioco esistente del proprietario. Osservato da qui:
 - origin/main (ac9039e) contiene CNAME mythwood.it e l'index.html del gioco attuale
   ("Mythwood · gioco gratis dal telefono"), con il suo backend.
 
-Spostare la sorgente di Pages su mythwood/pages **sostituirebbe quel sito** con la
-demo prototipo, sullo stesso dominio. Non verificabile da qui quale ramo sia
-selezionato nelle impostazioni (API e dominio bloccati dal proxy). Nessuna
-pubblicazione finché il proprietario non sceglie dove deve vivere la demo.
+Spostare la sorgente di Pages su mythwood/pages **sostituisce quel sito** con la
+demo, sullo stesso dominio. Non verificabile da qui quale ramo sia selezionato
+nelle impostazioni (API e dominio bloccati dal proxy).
+
+**Decisione del proprietario (2026-11-11): sì, la demo sostituisce il sito attuale
+su mythwood.it.**
+
+Come si fa senza perdere nulla:
+- main (ac9039e, gioco attuale) **non viene toccato**: il cambio avviene solo
+  scegliendo mythwood/pages come sorgente in Settings → Pages.
+- Ripristino del vecchio sito: rimettere la sorgente su main / root. Nessun push
+  necessario.
+- Ripristino della build precedente del ramo Pages: 6cfa401.
+
+Conseguenze da sapere prima del cambio:
+- il gioco attuale e il suo backend restano, ma non sono più raggiungibili dal dominio;
+- account della demo disattivati: si gioca come ospite;
+- il file di verifica TikTok viene copiato nella build;
+- anteprima.jpg, ingresso.jpg e nocciolina.png di main **non** sono nella build:
+  le anteprime dei link già condivisi che li usano smetteranno di funzionare;
+- il giro programmato "Giro di Tonino" e i contenuti social descrivono il gioco
+  attuale e andranno aggiornati o fermati.
+
+Restano i blocchi tecnici e di processo: push negato (403), revisione di Codex,
+verifica del sito pubblicato non possibile da questa sessione.
 
 Blocchi reali, non aggirati:
 1. **Push negato**: `git push` verso nocciolinatanaai/bosco risponde 403 e
