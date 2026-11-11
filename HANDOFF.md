@@ -53,6 +53,17 @@ Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
 
+## Monitor delle consegne — lato Tonino (2026-11-11)
+
+Letto e applicato docs/AGENT_MONITOR.md (74c682e, integrato nel ramo con un merge).
+Verificati nell'ambiente di Tonino:
+- attività programmata che risveglia la sessione: "Monitor consegne MYTHWOOD", ogni 2 ore;
+- eventi delle PR sottoscritte;
+- notifica push, prova inviata.
+
+Il monitor di Codex gira (baseline 74c682e). Nessuna connessione diretta alle chat.
+Dettagli e limiti: docs/TONINO_MONITOR.md. Ultima SHA esaminata del ramo condiviso: 74c682e.
+
 ## BOW-01 / PRODUCT-02 (Tonino, 2026-11-11) — ramo tonino/bow-transition-01
 
 - **Transizione dell'arco schiena↔mano senza scatti** (ranger-skinned.js). Salto massimo
