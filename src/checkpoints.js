@@ -1,3 +1,4 @@
+import { validAttunement } from './artifacts.js';
 import { CLASSES, createSession, evolve, drainEvents } from './game.js';
 import { enterGarden, GARDEN_ENTRY } from './garden.js';
 import { MEMORY_TRACES } from './trail.js';
@@ -7,7 +8,7 @@ const stages = new Set(['arrival', 'awakened', 'guardian']);
 export function validateCheckpoint(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   const keys = Object.keys(value).sort().join(',');
-  if (![1, 2].includes(value.version) || keys !== (value.version === 1 ? 'autoSave,role,stage,traces,version' : 'autoSave,garden,role,stage,traces,version')) return null;
+  if (![1, 2, 3].includes(value.version) || keys !== (value.version === 1 ? 'autoSave,role,stage,traces,version' : value.version===2?'autoSave,garden,role,stage,traces,version':'attunement,autoSave,garden,role,stage,traces,version')) return null;
   if (typeof value.autoSave !== 'boolean' || !CLASSES.some(r => r.id === value.role) || !stages.has(value.stage)) return null;
   if (!Number.isInteger(value.traces) || value.traces < 0 || value.traces > MEMORY_TRACES.length || (value.stage !== 'guardian' && value.traces !== 0)) return null;
   const garden = value.version === 1 ? { step: 0, area: 'plaza', sentryDefeated: false } : value.garden;
@@ -15,7 +16,9 @@ export function validateCheckpoint(value) {
   if (!Number.isInteger(garden.step) || garden.step < 0 || garden.step > 4 || !['plaza', 'garden'].includes(garden.area) || typeof garden.sentryDefeated !== 'boolean') return null;
   if ((garden.step > 0 && (value.stage !== 'guardian' || value.traces !== 3)) ||
       (garden.step === 0 && (garden.area !== 'plaza' || garden.sentryDefeated)) || (garden.step === 3 && garden.area !== 'garden')) return null;
-  return { version: 2, autoSave: value.autoSave, role: value.role, stage: value.stage, traces: value.traces,
+  const attunement=value.version===3?value.attunement:null;
+  if(!validAttunement(attunement)||(attunement!==null&&value.stage==='arrival'))return null;
+  return { version: 3, attunement, autoSave: value.autoSave, role: value.role, stage: value.stage, traces: value.traces,
     garden: { step: garden.step, area: garden.area, sentryDefeated: garden.sentryDefeated } };
 }
 export function checkpointFromSession(state, autoSave = true) {
@@ -26,7 +29,7 @@ export function checkpointFromSession(state, autoSave = true) {
       found.some((id, i) => id !== MEMORY_TRACES[i].id) || (found.length > 0 && stage !== 'guardian')) throw new Error('Tappa incoerente');
   const sentry = state.enemies.find(e => e.type === 'sentry');
   if (state.garden.step > 0 && (!sentry || (sentry.hp <= 0) !== state.garden.sentryDefeated)) throw new Error('Stato sentinella incoerente');
-  const data = validateCheckpoint({ version: 2, autoSave, role: state.role.id, stage, traces: stage === 'guardian' ? found.length : 0,
+  const data = validateCheckpoint({ version: 3, attunement:state.artifact.attunement, autoSave, role: state.role.id, stage, traces: stage === 'guardian' ? found.length : 0,
     garden: { ...state.garden, area: state.area } });
   if (!data) throw new Error('Tappa non supportata');
   return data;
@@ -51,6 +54,7 @@ export function restoreCheckpoint(value) {
     if (state.area === 'garden') { Object.assign(state, GARDEN_ENTRY); state.region = 'Giardino dei nomi'; }
     else { state.x = 38.5; state.z = 7; state.region = 'Il sentiero delle memorie'; }
   }
+  state.artifact.attunement=data.attunement;
   drainEvents(state); state.sequence = 0;
   return state;
 }

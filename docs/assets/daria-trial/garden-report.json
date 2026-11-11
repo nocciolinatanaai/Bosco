@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-11T01:22:18.168Z",
+  "fixture": "legacy v1 guardian checkpoint with three traces; normal-time UI navigation",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "passed",
+      "checkpointVersion": 2,
+      "questStep": 4,
+      "externalRequests": 0,
+      "errors": 0,
+      "repeatedVisits": 3,
+      "newWebGLBuffersOnWarmRevisit": 0
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "checkpointVersion": 2,
+      "questStep": 4,
+      "externalRequests": 0,
+      "errors": 0,
+      "repeatedVisits": 3,
+      "newWebGLBuffersOnWarmRevisit": 0
+    }
+  ],
+  "buildEntrySha256": "3b78b28fd7ca2b86c3b2a7535e13f8a08187c45fc6b3ff09e5b1c80ecf8fd90f",
+  "runnerSha256": "d05943b52c071dda65cc4221a0dd83f1b1239a58d033d3da15b6c2f7e68269de",
+  "finishedAtUtc": "2026-11-11T01:24:44.933Z"
+}

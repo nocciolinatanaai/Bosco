@@ -36,6 +36,7 @@ export function createCombatEffects(scene) {
   return {
     event(event, state, reducedMotion) {
       const color = state.role.color;
+      if(event.type==='artifact-triggered')ring(state.x,state.z,1.2,event.attunement==='ward'?'#86bdd2':'#f0ad76',.5);
       if (event.type === 'strike' && ['blade', 'shield', 'daggers'].includes(event.style)) {
         const radius = event.range;
         const facing = Math.atan2(-event.facing.z, event.facing.x), arc = event.combo === 3 ? Math.PI : Math.PI * .7;

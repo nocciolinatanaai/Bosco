@@ -147,7 +147,13 @@ try {
       await page.screenshot({ path: 'test-results/mobile-memory-landscape.png' });
       await page.setViewportSize(viewport);
     }
+    const beforeChoice=await page.evaluate(()=>localStorage.getItem('mythwood.checkpoint.v1'));
+    await page.locator('#memory-artifact [data-attunement="surge"]').click();
+    await page.locator('#memory-artifact [data-attunement="ward"]').click();
+    assert.equal(await page.evaluate(()=>localStorage.getItem('mythwood.checkpoint.v1')),beforeChoice,'Scelta provvisoria: non salva prima di accogliere il ricordo');
     await page.locator('#memory-continue').click();
+    assert.ok((await page.locator('#artifact-status').textContent()).includes('Custodia'));
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).attunement),'ward');
     assert.equal(await page.locator('#rank').innerText(), 'PRIMA RISONANZA');
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'awakened');
     assert.equal(await page.locator('#boss').isVisible(), true);

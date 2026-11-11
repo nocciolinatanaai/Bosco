@@ -1,3 +1,4 @@
+import { createArtifact, selectAttunement, activateArtifact } from './artifacts.js';
 import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
 import { createTrail, resonateTrail } from './trail.js';
@@ -23,7 +24,7 @@ export function createSession(id) {
   return { role, x: 0, z: 12, hp: role.hp, maxHp: role.hp, stamina: 100, staminaDelay: 0,
     cooldown: 0, dashCooldown: 0, returnShot: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
-    area: 'plaza', garden: createGarden(), evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
+    area: 'plaza', garden: createGarden(), artifact:createArtifact(), evolved: false, status: 'playing', explored: false, cleared: false, region: 'Piazza del ritorno',
     lesson: { distance: 0, hit: false, dodged: false }, resonanceReady: false, lastDamage: null, trail: createTrail(),
     time: 0, sequence: 0, events: [], targetId: null, projectiles: [],
     enemies: [enemy('shade-a', 'Eco errante', -5, 2, 52, false, 1.3), enemy('shade-b', 'Eco corazzato', 6, -1, 65, false, 1.8),
@@ -128,6 +129,7 @@ export function hurt(s, amount, source = null) {
   if (s.invulnerable > 0) {
     if (s.dodgeRemaining > 0) {
       emit(s, 'evaded');
+      const attunement=activateArtifact(s);if(attunement)emit(s,'artifact-triggered',{attunement});
       if (s.evolved && s.role.id === 'ranger') {
         s.returnShot = 4; emit(s, 'return-shot-ready');
       }
@@ -216,6 +218,7 @@ export function tickCooldowns(s, delta) {
   const dt = clamp(Number.isFinite(delta) ? delta : 0, 0, .05);
   if (s.status !== 'playing' || dt === 0) return 0;
   s.time += dt;
+  s.artifact.cooldown=Math.max(0,s.artifact.cooldown-dt);
   for (const key of ['cooldown', 'dashCooldown', 'returnShot', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
   if (s.staminaDelay === 0) s.stamina = Math.min(100, s.stamina + 20 * dt);
   if (s.dodgeRemaining > 0) {
@@ -300,4 +303,9 @@ export function interactGarden(s, id) {
   const result = gardenInteraction(s, id);
   if (!result) return false;
   emit(s, 'garden-progress', result); return true;
+}
+
+export function attuneArtifact(s,id){
+ if(!selectAttunement(s,id))return false;
+ emit(s,'artifact-attuned',{attunement:id});return true;
 }

@@ -454,3 +454,16 @@ texture del volto originale mantenuta. Mantello volumetrico più corto e
 materiali distinti. Variante base conservata per confronto a stessa camera/luci.
 Script prepare-daria-refined.py, ranger-fabric.js, variante del loader e studio.
 Verifica visiva in corso; test integrati pendenti. Nessun push/deploy o trailer.
+
+## Cambio di priorità del proprietario — contenuti
+
+La prova Daria 3f10905 è ancora giudicata molto lontana dal desiderato. Fermo
+il lavoro artistico; geometrie conservate come provvisorie, immagini/report in
+assets/daria-trial. Nessuna approvazione artistica. Il proprietario chiede trama,
+combattimento, artefatti, tecniche e mondo aperto, con verifiche visive continue.
+
+Blocco attivo: Sigillo di Liora, due scelte opzionali prima del Custode, effetto
+su schivata d'impatto e checkpoint v3 compatibile v1/v2. 105 test e UI dedicata
+passati; percorso completo con scelta nel ricordo e Giardino ancora da verificare.
+Spec: ARTIFACT_01. Espansione del mondo proposta in WORLD_AND_PROGRESSION, non
+nuove mappe già presenti. Nessun push, deploy, spesa o teaser.

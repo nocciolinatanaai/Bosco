@@ -39,7 +39,7 @@ try {
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 1, 'Reading must not write');
     await page.locator('#resume-saved').click();
     await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click();
-    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 2);
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).version), 3);
     report.step = 'entry'; await save();
     await page.locator('#world-interact').click();
     assert.equal(await page.locator('#quest-title').innerText(), 'La bussola dei dispersi');
@@ -98,7 +98,7 @@ try {
     assert.equal(checkpoint.garden.step, 4); assert.equal(checkpoint.garden.area, 'plaza');
     assert.deepEqual(external, []); assert.deepEqual(errors, []);
     report.runs.push({ name, viewport, status: 'passed', checkpointVersion: checkpoint.version, questStep: checkpoint.garden.step, externalRequests: 0, errors: 0, repeatedVisits: 3, newWebGLBuffersOnWarmRevisit: revisitBuffers });
-    await save(); await context.close(); console.log(`PASS ${name}: v1→v2, entry, compass, reload, signal, return and repeated visits`);
+    await save(); await context.close(); console.log(`PASS ${name}: v1→v3, entry, compass, reload, signal, return and repeated visits`);
   }
   report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.step; delete report.viewport; await save();
 } catch (error) {

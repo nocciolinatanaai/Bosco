@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, interactGarden, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
+import { CLASSES, createSession, attack, cast, dodge, movePlayer, tickCooldowns, advanceEnemies, interactGarden, attuneArtifact, evolve, canEvolve, selectedEnemy, setTarget, drainEvents } from './game.js';
 import { createCheckpointStore, restoreCheckpoint, checkpointLabel, checkpointFromSession } from './checkpoints.js';
 import { gardenObjective, GARDEN_ENTRY, inArea } from './garden.js';
 import { activeTrace, TRACE_RADIUS } from './trail.js';
@@ -8,6 +8,7 @@ import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
 import { journey, MEMORY } from './journey.js';
+import { ATTUNEMENTS, artifactUnlocked } from './artifacts.js';
 import { screenMovement, joystickVector } from './controls.js';
 import { createArtWorld, createPipeline } from './visuals/environment.js';
 import { updateTelegraph } from './visuals/telegraph.js';
@@ -25,7 +26,8 @@ export function startRuntime($) {
   $('audio-volume').addEventListener('input', () => audio.setVolume(Number($('audio-volume').value) / 100));
   window.addEventListener('pagehide', () => { void audio.setPaused(true); });
   let memoryKind = null, lastGuide = null, portraitFailed = false;
-  const memory = $('memory');
+  const memory = $('memory'),artifactMenu=$('artifact-menu');
+  let pendingAttunement=null,pausedBeforeArtifact=false;
   $('liora-portrait').addEventListener('error', () => { portraitFailed = true; $('liora-portrait').hidden = true; $('liora-frame').hidden = true; memory.classList.remove('with-portrait'); });
   let selected = 'fighter', state = null, paused = false, pausedBeforeInfo = false;
   let target = null, approachId = null, heldAttack = false, pointerId = null;
@@ -34,7 +36,7 @@ export function startRuntime($) {
   const keys = new Set(), selection = $('selection'), info = $('information'), result = $('result');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const motionReduced = () => reducedMotion.matches || motionOverride;
-  const active = () => state?.status === 'playing' && !paused && !selection.open && !info.open && !result.open && !memory.open;
+  const active = () => state?.status === 'playing' && !paused && !selection.open && !info.open && !result.open && !memory.open && !artifactMenu.open;
   const checkpointStore = createCheckpointStore();
   let saved = checkpointStore.load(), saveEnabled = Boolean(saved.checkpoint?.autoSave);
   function refreshSaveUI(message = '') {
@@ -118,25 +120,52 @@ export function startRuntime($) {
   $('help').addEventListener('click', () => showInfo('Leggi l’attacco. Trova l’apertura.', 'PC: WASD o frecce per muoverti rispetto allo schermo. J o Attacco per la combo; tieni premuto per continuarla. Q usa l’abilità di classe. Spazio scatta e consuma 30 vigore. Tocca il terreno per muoverti o un nemico per avvicinarti e attaccarlo. Touch: joystick a sinistra, azioni a destra. Esci dal cerchio durante la carica e colpisci nel recupero del nemico. E risveglia l’eco dopo aver liberato i due echi. Il nuovo scatto colpisce anche i nemici vicini; usalo contro il Custode. Il Ranger risvegliato può schivare un impatto all’ultimo istante e usare l’abilità entro 4 secondi per un tiro doppio. Dopo la vittoria segui le tracce e scatta vicino ai segni. F segue la traccia successiva oppure interagisce con il passaggio e gli oggetti del giardino; il movimento manuale interrompe il percorso. Esc mette in pausa.', true));
   $('guild').addEventListener('click', () => showInfo('Una storia da costruire insieme', 'Gilde, contributi asincroni e spedizioni cooperative fanno parte del design approvato. Questa prova è esclusivamente individuale: nessun altro giocatore è collegato.'));
   $('store').addEventListener('click', () => showInfo('Store Mythwood', 'Store chiuso durante il prototipo. Nessun prodotto, codice o pagamento attivo. Il catalogo precedente non viene caricato.'));
-  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe, stato della missione nel giardino e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
+  $('privacy').addEventListener('click', () => showInfo('Questa prova resta nel browser', 'Il prototipo non crea account, non usa cookie, non invia telemetria e non contatta Supabase. Solo se attivi il salvataggio conserva classe, tappe, tecnica del sigillo, stato della missione nel giardino e preferenza di autosalvataggio in questo browser. Puoi disattivarlo mantenendo la tappa o eliminarla da Comandi e audio. Non vengono salvati credenziali o combattimenti in corso. Il server locale riceve le normali richieste dei file. Non è ancora l’informativa del futuro servizio online.'));
   $('close-info').addEventListener('click', () => { info.close(); setPause(pausedBeforeInfo); });
   info.addEventListener('cancel', () => setPause(pausedBeforeInfo));
   memory.addEventListener('cancel', e => e.preventDefault());
   $('memory-continue').addEventListener('click', () => {
     const awakening = memoryKind === 'resonance'; memory.close(); memoryKind = null; const ready = setPause(false);
     if (!awakening) void ready.then(() => { if (active()) audio.play('victory'); });
-    if (awakening) evolve(state); consumeEvents(); updateUI();
+    if (awakening) {evolve(state);if(pendingAttunement)attuneArtifact(state,pendingAttunement);}
+    pendingAttunement=null;consumeEvents(); updateUI();
   });
   function showMemory(kind) {
-    memoryKind = kind; const text = MEMORY[kind];
+    memoryKind = kind;pendingAttunement=null;const text = MEMORY[kind];
+    $('memory-artifact').hidden=kind!=='resonance';$('memory-artifact-status').textContent='';
     $('memory-title').textContent = text.title; $('memory-body').textContent = text.body; $('memory-continue').textContent = text.button;
     if (!portraitFailed) {
       const portrait = $('liora-portrait');
       if (!portrait.getAttribute('src')) portrait.src = `${import.meta.env.BASE_URL}art/liora-portrait.png`;
       portrait.hidden = false; $('liora-frame').hidden = false; memory.classList.add('with-portrait');
     }
-    setPause(true); memory.showModal(); $('memory-title').focus({ preventScroll: true }); memory.scrollTop = 0;
+    setPause(true); memory.showModal();updateArtifactUI(); $('memory-title').focus({ preventScroll: true }); memory.scrollTop = 0;
   }
+  function updateArtifactUI(){
+    if(!state)return;
+    const chosen=memoryKind==='resonance'&&memory.open?pendingAttunement:state.artifact.attunement;
+    document.querySelectorAll('[data-attunement]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.attunement===chosen)));
+    $('artifact-open').hidden=!artifactUnlocked(state);
+    const attuned=ATTUNEMENTS.find(a=>a.id===state.artifact.attunement);
+    $('artifact-status').hidden=!artifactUnlocked(state);
+    $('artifact-status').textContent=attuned?`Sigillo · ${attuned.name} · ${state.artifact.cooldown>0?Math.ceil(state.artifact.cooldown)+' s':'pronto'}`:'Sigillo ritrovato · scegli una tecnica dal menu Sigillo';
+  }
+  document.querySelectorAll('[data-attunement]').forEach(button=>button.addEventListener('click',()=>{
+    if(!state)return;const id=button.dataset.attunement,choice=ATTUNEMENTS.find(a=>a.id===id);if(!choice)return;
+    if(memory.open&&memoryKind==='resonance'){
+      pendingAttunement=id;$('memory-artifact-status').textContent=`${choice.name} scelta. Accogli il ricordo per attivarla.`;
+    }else{
+      const changed=attuneArtifact(state,id);
+      $('artifact-menu-status').textContent=changed?`${choice.name} attiva.`:state.artifact.attunement===id?`${choice.name} è già attiva.`:'Torna alla spedizione per completare il recupero e trova un luogo sicuro prima di cambiare tecnica.';
+      consumeEvents();
+    }
+    updateArtifactUI();
+  }));
+  $('artifact-open').addEventListener('click',()=>{
+    if(!state||!artifactUnlocked(state))return;pausedBeforeArtifact=paused;setPause(true);updateArtifactUI();$('artifact-menu-status').textContent='';artifactMenu.showModal();
+  });
+  $('artifact-close').addEventListener('click',()=>{artifactMenu.close();setPause(pausedBeforeArtifact);});
+  artifactMenu.addEventListener('cancel',()=>setPause(pausedBeforeArtifact));
   selection.addEventListener('cancel', (e) => e.preventDefault());
   result.addEventListener('cancel', (e) => e.preventDefault());
   $('pause').addEventListener('click', () => { if (state?.status === 'playing') setPause(!paused); });
@@ -182,7 +211,7 @@ export function startRuntime($) {
   function consumeEvents() {
     if (!state) return;
     for (const event of drainEvents(state)) {
-      if (['evolved', 'cleared', 'trail-progress', 'garden-progress'].includes(event.type)) saveProgress();
+      if (['evolved', 'cleared', 'trail-progress', 'garden-progress','artifact-attuned'].includes(event.type)) saveProgress();
       effects.event(event, state, motionReduced());
       if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
       else audio.event(event);
@@ -194,6 +223,7 @@ export function startRuntime($) {
       }
       if (event.type === 'return-shot-ready') notice('TIRO DI RITORNO · Usa l’abilità entro 4 secondi per scoccare due frecce.', 4);
       if (event.type === 'return-shot-fired') notice('TIRO DI RITORNO · Due frecce, una sola apertura.', 3);
+      if(event.type==='artifact-triggered'){notice(event.attunement==='ward'?'CUSTODIA · Protezione del sigillo per 2,2 secondi':'IMPETO · Vigore recuperato e abilità anticipata',2.5);audio.play(event.attunement==='ward'?'guard':'echo');}
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
@@ -222,6 +252,7 @@ export function startRuntime($) {
 
   function updateUI() {
     if (!state) return;
+    updateArtifactUI();
     const guide = journey(state);
     $('quest-title').textContent = guide.title; $('journey-hint').textContent = guide.hint;
     const trace = activeTrace(state);
@@ -358,7 +389,7 @@ export function startRuntime($) {
     $('skill').setAttribute('aria-label', `${state.role.skill}. Abilità di classe.`); $('skill').title = state.role.skill;
     $('objective').textContent = 'Libera gli echi. Esci dai cerchi di carica e colpisci durante il recupero.';
     if (memory.open) memory.close(); memoryKind = null;
-    if (result.open) result.close(); if (selection.open) selection.close();
+    if (result.open) result.close(); if (selection.open) selection.close();if(artifactMenu.open)artifactMenu.close();pendingAttunement=null;
     setPause(false); notice('Attacca, osserva la carica, scatta fuori dal cerchio.', 5); updateUI();
     if (restoredState) notice('Tappa ripresa. Vita e vigore ripristinati; il combattimento in corso ricomincia.', 6);
     saveProgress(replaceSave);
@@ -394,7 +425,7 @@ export function startRuntime($) {
   });
   $('world').addEventListener('contextmenu', (event) => event.preventDefault());
   document.addEventListener('keydown', (event) => {
-    if (selection.open || info.open || result.open || memory.open || event.target.matches('input, textarea, select')) return;
+    if (selection.open || info.open || result.open || memory.open || artifactMenu.open || event.target.matches('input, textarea, select')) return;
     if (event.code === 'Escape') { if (state?.status === 'playing') setPause(!paused); return; }
     if (!active()) return;
     const nonCombatButton = event.target.closest('button:not([data-combat-action])');

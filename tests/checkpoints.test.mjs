@@ -27,7 +27,7 @@ test('pista ripristinata in ordine su un punto sicuro, senza condividere array d
 });
 test('salvataggio minimo: nessuna coordinata, identità personale, credenziale o preferenza audio', () => {
   const s = advanced('mage'); s.secret = 'not-to-store'; s.x = 987;
-  assert.deepEqual(Object.keys(checkpointFromSession(s)).sort(), ['autoSave','garden','role','stage','traces','version']);
+  assert.deepEqual(Object.keys(checkpointFromSession(s)).sort(), ['attunement','autoSave','garden','role','stage','traces','version']);
 });
 test('schema rigoroso: rifiuta versioni, classi, tappe, tracce e proprietà non supportate', () => {
   const valid = { version: 1, autoSave: true, role: 'fighter', stage: 'arrival', traces: 0 };
