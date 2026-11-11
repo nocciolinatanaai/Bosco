@@ -2,13 +2,19 @@ import * as THREE from 'three';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { curve, piece } from './geometry.js';
 import { createPoseSampler } from './pose-sampler.js';
+import { rangerFabric } from './ranger-fabric.js';
 
-let source;
-const loadSource = () => source ||= import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/ranger/ranger-base.glb`)).catch(error => { source=null; throw error; });
+const sources=new Map();
+const loadSource = variant => {
+  const name=variant==='base'?'ranger-base.glb':'daria-refined.glb';
+  if(!sources.has(name))sources.set(name,import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/ranger/${name}`)).catch(error=>{sources.delete(name);throw error;}));
+  return sources.get(name);
+};
 
 // Third-party CC0 anatomical/animation base, with original Mythwood accessories.
 // Loading stays local and lazy. Every actor gets its own skeleton and mixer.
-export function attachSkinnedRanger(root) {
+export function attachSkinnedRanger(root,{variant='refined'}={}) {
+  const refined=variant==='refined';
   const fallbackChildren=[...root.children], fallbackAnimate=root.userData.animate;
   let visual=null, pending=null;
   root.userData.visualStatus='placeholder';
@@ -16,7 +22,7 @@ export function attachSkinnedRanger(root) {
     if (typeof document==='undefined') return Promise.resolve(false);
     if (pending) return pending;
     root.userData.visualStatus='loading';
-    pending=loadSource().then(gltf=>{
+    pending=loadSource(variant).then(gltf=>{
       const model=clone(gltf.scene), presentation=new THREE.Group();presentation.name='Daria-skinned-presentation';
       presentation.add(model);
       const box=new THREE.Box3().setFromObject(model), height=box.max.y-box.min.y;
@@ -24,9 +30,11 @@ export function attachSkinnedRanger(root) {
       const scale=2.2/height;model.scale.multiplyScalar(scale);model.position.y=-box.min.y*scale;
       model.traverse(n=>{
         if(!n.isMesh)return;n.castShadow=true;n.receiveShadow=true;
-        n.material=n.material.clone();n.material.roughness=.85;
+        n.material=n.material.clone();if(!refined)n.material.roughness=.85;
+        if(refined&&/coat|undershirt|trousers|scarf/.test(n.material.name)){Object.assign(n.material,rangerFabric());n.material.normalScale=new THREE.Vector2(.18,.18);}
         if(n.material.name.includes('medium_armor'))n.material.color.set('#9bbbc0');
-        if(n.material.name.includes('head'))n.material.color.set('#e1bb98');
+        if(n.material.name.includes('head')){n.material.color.set(refined?'#dfb38b':'#e1bb98');if(refined)n.material.roughness=.65;}
+        
       });
       presentation.updateMatrixWorld(true);
       const mixer=new THREE.AnimationMixer(model), clips=Object.fromEntries(gltf.animations.map(c=>[c.name.replace('human_female_',''),c]));
@@ -44,22 +52,29 @@ export function attachSkinnedRanger(root) {
       const echo=new THREE.Group();bow.add(echo);
       for(const side of [-1,1])curve(echo,glowMat,[[0,side*.5,.21],[.04,side*.84,.18],[0,side*.95,0]],.014,12);
       const arrow=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.9,6),brass);arrow.rotation.x=Math.PI/2;arrow.position.set(0,0,.3);bow.add(arrow);
-      const capeGeo=new THREE.PlaneGeometry(.7,.95,8,10),vertices=capeGeo.attributes.position;
-      for(let i=0;i<vertices.count;i++){const x=vertices.getX(i),f=(.475-vertices.getY(i))/.95;vertices.setX(i,x*(.6+f*.6));vertices.setY(i,vertices.getY(i)+x*.12-f*f*Math.cos(x*9)*.035);vertices.setZ(i,-f*.16+Math.cos(x*19)*(.012+f*.025));}
+      const capeGeo=new THREE.PlaneGeometry(.7,.95,refined?24:8,refined?28:10),vertices=capeGeo.attributes.position;
+      for(let i=0;i<vertices.count;i++){
+        const x=vertices.getX(i),f=(.475-vertices.getY(i))/.95,u=x/.35;
+        if(refined){
+          vertices.setX(i,x*(.82+f*.50)+f*.035);
+          vertices.setY(i,(.475-f*.8)+u*.055+Math.cos(u*Math.PI)*.028-f*f*(.025+Math.sin(u*5)*.022));
+          vertices.setZ(i,.025-Math.cos(u*Math.PI/2)*.025-f*.10+Math.sin(u*Math.PI*3)*(.008+f*.045));
+        }else{vertices.setX(i,x*(.6+f*.6));vertices.setY(i,vertices.getY(i)+x*.12-f*f*Math.cos(x*9)*.035);vertices.setZ(i,-f*.16+Math.cos(x*19)*(.012+f*.025));}
+      }
       capeGeo.computeVertexNormals();const original=Float32Array.from(vertices.array);
-      const cape=piece(presentation,capeGeo,new THREE.MeshStandardMaterial({color:'#8e432e',roughness:.96,side:THREE.DoubleSide}),0,1.28,-.22);cape.name='daria-skinned-cape';
-      const scarf=piece(presentation,new THREE.TorusGeometry(.105,.032,7,20),new THREE.MeshStandardMaterial({color:'#7e8b69',roughness:1}));scarf.rotation.x=Math.PI/2;
+      const cape=piece(presentation,capeGeo,new THREE.MeshStandardMaterial({color:'#8e432e',roughness:.96,side:THREE.DoubleSide}),0,1.28,-.22);cape.name='daria-skinned-cape';if(refined){Object.assign(cape.material,rangerFabric());cape.material.normalScale=new THREE.Vector2(.2,.2);}
+      const scarf=piece(presentation,new THREE.TorusGeometry(.105,.032,7,20),new THREE.MeshStandardMaterial({color:'#7e8b69',roughness:1}));scarf.rotation.x=Math.PI/2;scarf.visible=!refined;
       const quiver=piece(presentation,new THREE.CylinderGeometry(.085,.07,.52,12),wood);quiver.rotation.z=-.22;
       const braid=new THREE.Group();presentation.add(braid);
       const hair=new THREE.MeshStandardMaterial({color:'#29201c',roughness:.92});
-      for(let strand=0;strand<3;strand++){const path=[];for(let n=0;n<14;n++){const a=n*1.4+strand*Math.PI*2/3;path.push([.08+Math.sin(a)*.023+n*.004,-n*.035,-.13+Math.cos(a)*.018]);}curve(braid,hair,path,.014,26);}
+      for(let strand=0;strand<(refined?0:3);strand++){const path=[];for(let n=0;n<14;n++){const a=n*1.4+strand*Math.PI*2/3;path.push([.08+Math.sin(a)*.023+n*.004,-n*.035,-.13+Math.cos(a)*.018]);}curve(braid,hair,path,.014,26);}
       const head=model.getObjectByName('head'),headPosition=new THREE.Vector3();
       const left=new THREE.Vector3(),right=new THREE.Vector3(),chest=new THREE.Vector3(),forward=new THREE.Vector3(),xAxis=new THREE.Vector3(),up=new THREE.Vector3(0,1,0),basis=new THREE.Matrix4();
       // Authored animation is sampled by normalized game action phase, never changes hit timing.
-      visual={presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
+      visual={refined,presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
       for(const node of fallbackChildren)node.visible=false;
       root.add(presentation);root.userData.visualStatus='ready';root.userData.visualSource='System G6 CC0 / Mythwood accessories';
-      root.userData.visualClips=Object.keys(clips);
+      root.userData.visualClips=Object.keys(clips);root.userData.visualVariant=variant;
       root.userData.animate(0,false,0,true,{});
       return true;
     }).catch(()=>{if(visual){root.remove(visual.presentation);visual=null;for(const node of fallbackChildren)node.visible=true;}root.userData.visualStatus='fallback';pending=null;return false;});
@@ -93,7 +108,7 @@ export function attachSkinnedRanger(root) {
     const draw=drawing?Math.min(1,action.elapsed/action.windup):0;
     v.lineGeo.attributes.position.setXYZ(1,0,0,-draw*.28);v.lineGeo.attributes.position.needsUpdate=true;
     v.arrow.visible=Boolean(drawing);v.arrow.position.z=.3-draw*.28;v.echo.visible=Boolean(combat.evolved);
-    v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));v.cape.position.set(v.chest.x,v.chest.y+.05,v.chest.z-.18);
+    v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));v.cape.position.set(v.chest.x,v.chest.y+.05,v.chest.z-(v.refined?.24:.18));v.cape.rotation.y=v.refined?v.yaw:0;
     v.presentation.worldToLocal(v.head.getWorldPosition(v.headPosition));v.braid.position.copy(v.headPosition);v.braid.rotation.y=v.model.rotation.y;
     v.scarf.position.set(v.chest.x,v.chest.y+.48,v.chest.z);v.quiver.position.set(v.chest.x+.16,v.chest.y+.1,v.chest.z-.3);
     for(let i=0;i<v.vertices.count;i++){const f=(.475-v.original[i*3+1])/.95;v.vertices.setZ(i,v.original[i*3+2]+(reducedMotion?0:Math.sin(time*4+v.original[i*3]*7)*.025*f));}

@@ -443,3 +443,14 @@ Valutazione artistica ancora aperta: nessuna approvazione del proprietario o
 risposta di Claude presunta. Modello generico invariato e ancora insufficiente.
 Nessuna nuova immagine generata o asset acquistato. Teaser rimane sospeso.
 File del blocco liberi, esperimenti cinematografici precedenti lasciati fermi.
+
+
+## Daria — prova di geometria attiva
+
+Il proprietario chiede di provare a migliorare il personaggio e mostrare il
+risultato. Nuovo daria-refined.glb derivato dalla base CC0: giacca/harness,
+capelli raccolti/treccia e sciarpa originali, ritocco topologia della testa;
+texture del volto originale mantenuta. Mantello volumetrico più corto e
+materiali distinti. Variante base conservata per confronto a stessa camera/luci.
+Script prepare-daria-refined.py, ranger-fabric.js, variante del loader e studio.
+Verifica visiva in corso; test integrati pendenti. Nessun push/deploy o trailer.

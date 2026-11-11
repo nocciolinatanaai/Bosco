@@ -8,17 +8,18 @@ try{
  await page.goto('http://127.0.0.1:5188/tools/visual-review/');await page.waitForFunction(()=>window.reviewReady);report.model=await page.evaluate(()=>window.reviewModel());assert.equal(report.model.status,'ready');assert.ok(report.model.skinned>=5);assert.ok(report.model.triangles<20000);
  report.motion=await page.evaluate(()=>window.reviewMotion());assert.ok(report.motion.startJump<1e-6);assert.ok(report.motion.interruptJump<1e-6);assert.ok(report.motion.pauseDrift<1e-6);assert.equal(report.motion.resetFinite,true);
  report.directions={};for(const pose of ['idle','run','draw','back']){report.directions[pose]=await page.evaluate(p=>window.reviewPose(p),pose);await page.screenshot({path:`${out}/${pose}.png`});}
+ await page.evaluate(()=>window.reviewView('portrait'));await page.screenshot({path:`${out}/portrait.png`});await page.evaluate(()=>window.reviewView('full'));
  const aim=report.directions.draw;assert.ok(aim.bowForward.reduce((sum,n,i)=>sum+n*aim.actorForward[i],0)>.99,'Arco diretto verso il bersaglio della simulazione');
  report.gameViews=[];
  for(const [name,width,height] of [['desktop',1440,900],['mobile',390,844]]){
   await page.setViewportSize({width,height});await page.goto('http://127.0.0.1:5188/');
   await page.locator('[data-class="ranger"]').click();
-  const loaded=page.waitForResponse(r=>r.url().endsWith('ranger-base.glb')&&r.status()===200);
+  const loaded=page.waitForResponse(r=>r.url().endsWith('daria-refined.glb')&&r.status()===200);
   await page.locator('#start').click();await loaded;await page.waitForLoadState('networkidle');
   await page.locator('#pause').click();await page.addStyleTag({content:'#pause-overlay{display:none!important}.is-paused #world{filter:none}'});await page.screenshot({path:`${out}/game-${name}.png`});report.gameViews.push(name);
  }
  // Failed local asset must keep a visible fallback and resolve, never stall the game.
- await page.route('**/ranger-base.glb',route=>route.abort());
+ await page.route('**/daria-refined.glb',route=>route.abort());
  await page.goto('http://127.0.0.1:5188/');
  report.assetFailure=await page.evaluate(async()=>{
   const {createRangerActor}=await import('/src/visuals/ranger.js');const actor=createRangerActor();

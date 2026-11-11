@@ -17,5 +17,25 @@
   ],
   "glb_sha256": "fc4006277b2507ceff21250070fc5da42a5a791950ae73ce5f83f4202b94bc23",
   "accessories": "Original Mythwood bow, cape, scarf, quiver and braid geometry in ranger-skinned.js",
-  "status": "Provisional base, not final approved Daria sculpt; no purchase"
+  "status": "Provisional base, not final approved Daria sculpt; no purchase",
+  "refined": {
+    "file": "daria-refined.glb",
+    "sha256": "8159ec117100c1d5359bdb8554083858732b3cf9a455ba4221e9c05edb08bba9",
+    "script": "scripts/prepare-daria-refined.py",
+    "derived_from": "Same System G6 CC0 human_female.blend archive documented above",
+    "original_geometry": [
+      "Fitted open-front expedition jacket and lapels",
+      "Leather harness, seams, belt and map notebook",
+      "Swept hair cap, directional locks and three-strand braid",
+      "Folded sage scarf"
+    ],
+    "changes_to_base": [
+      "Selected anatomical body instead of medium armor",
+      "Head topology subdivided once, lower face mildly narrowed/elongated; original facial texture retained",
+      "Clothing modules weighted to the original skeleton",
+      "Original five clips retained"
+    ],
+    "runtime_changes": "Folded shorter cape, fabric data maps and refined/base comparison; no raster pixels edited",
+    "status": "Local visual trial, not artistically approved; not a final sculpt"
+  }
 }

@@ -281,3 +281,13 @@ Statistiche pipeline corrette per conteggiare tutti i pass. Vedere SKILLS_WORKFL
 Checkpoint iniziale prima delle verifiche; esiti nel blocco corrente sopra.
 Asset Ranger generico invariato; non risolta la distanza artistica dal concept.
 Nessun push, deploy o post. Teaser sospeso; esperimenti preesistenti preservati.
+
+
+## In corso — prova Daria da mostrare al proprietario
+
+Nuova geometria di giacca/capelli e mantello rivisto: file daria-refined.glb,
+script prepare-daria-refined.py; originale ranger-base.glb conservato.
+Variante base/refined nello studio a stessa camera/luci, non più confronto
+con il vecchio segnaposto procedurale. Volto mantiene la texture CC0 iniziale,
+con topologia smussata e lieve variazione di forma: non un nuovo volto finale.
+Verifiche visive e integrate pendenti; nessuna pubblicazione.

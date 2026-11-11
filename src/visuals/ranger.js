@@ -35,7 +35,7 @@ function cloth(parent, material, width, height, position, tilt = 0) {
 }
 
 // Original procedural translation of the Daria concept, not a final sculpt/GLB.
-export function createRangerActor() {
+export function createRangerActor({variant='refined'}={}) {
   const standard = (color, roughness = .8) => new THREE.MeshStandardMaterial({ color, roughness });
   const m = {
     jacket: standard('#24454b'), trousers: standard('#444735'), boot: standard('#3c2e29'),
@@ -168,6 +168,6 @@ export function createRangerActor() {
       strip.vertices.needsUpdate = true;
     }
   };
-  attachSkinnedRanger(root);
+  attachSkinnedRanger(root,{variant});
   return { root, body: m.jacket, weapon: bow };
 }
