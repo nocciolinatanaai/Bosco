@@ -2,10 +2,18 @@
 
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Checkpoint iniziale delle Cave: **4783317**, rifiniture nel commit di questa
-consegna; verificare git log -1. Nessun invio al remoto.
-Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
-sempre git log/status prima di continuare. Main e servizio precedente separati.
+## Sincronizzazione richiesta dal proprietario
+
+Il proprietario richiede di rendere disponibili a Claude gli ultimi cambiamenti
+nel repository condiviso: autorizzato il push del ramo mythwood/collaboration-base.
+Base del prompt: 220462d, più questo aggiornamento della consegna. Verificare
+sempre git log e il riferimento remoto prima di continuare. Nessun merge su main,
+deploy, pubblicazione social, spesa o scrittura Supabase inclusi.
+
+I blocchi sotto riportano lo stato storico locale prima di questa sincronizzazione;
+le diciture precedenti «nessun push» non impediscono il push ora richiesto.
+Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
+La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
 ## Blocco corrente — ponte di revisione e orientamento
 

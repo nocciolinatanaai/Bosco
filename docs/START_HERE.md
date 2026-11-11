@@ -11,10 +11,12 @@ esplorazione. La prova grafica Daria non soddisfa il proprietario; niente nuovo
 teaser o rifinitura artistica in questo blocco. Sigillo e Cave: ARTIFACT_01 e
 CAVES_01. Stato dei test e ultimo checkpoint nella testa di HANDOFF.
 
-Gli ultimi checkpoint sono locali, non presumere che siano sul remoto. Nessun
+Il proprietario ha richiesto la sincronizzazione degli ultimi checkpoint sul
+ramo di collaborazione: confrontare il checkout con origin prima di procedere. Nessun
 collegamento automatico fra le chat; il checkout ricevuto deve contenere i file
 aggiornati prima di iniziare la revisione. Non riapplicare modifiche alla cieca.
-Nessun push, deploy, social, spesa o scrittura Supabase nel mandato corrente.
+Push sul ramo di collaborazione autorizzato per questa sincronizzazione. Nessun
+merge su main, deploy, social, spesa o scrittura Supabase autorizzati.
 
 ## Ponte di revisione predisposto
 

@@ -146,3 +146,10 @@ missione opzionale senza uccisione obbligatoria e ritorno anticipato senza cura.
 Per lo scambio con Claude leggere docs/AGENT_EXCHANGE.md e la skill locale
 .agents/skills/mythwood-collaboration/SKILL.md. La coda locale non è una connessione
 remota: non attribuire a Claude risposte simulate o una revisione non ricevuta.
+
+## Mandato più recente — sincronizzazione per Claude
+
+Il proprietario richiede di rendere disponibili gli ultimi commit a Claude nel
+repository condiviso: push autorizzato sul solo ramo mythwood/collaboration-base.
+Questo aggiorna il precedente divieto di push per tale sincronizzazione; non
+autorizza merge su main, deploy, social, spese o scritture Supabase.

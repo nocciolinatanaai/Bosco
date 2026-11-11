@@ -522,3 +522,12 @@ cifre: corretto il filtro e aggiunto il caso ai test. Richiesta successiva
 accodata localmente; deliveredToClaude=false. Attesa preferenza del proprietario
 fra nuova sessione Claude Code e conversazione web esistente. Nessun nuovo
 collegamento dichiarato attivo.
+
+## Sincronizzazione richiesta per il rientro di Claude
+
+Il proprietario richiede di rendere reperibili i file dell'ultimo prompt. Tutto
+il lavoro applicativo e la guida sono già nei commit locali fino a 220462d.
+Autorizzata la sincronizzazione del ramo mythwood/collaboration-base; main,
+deploy, servizi esterni e spese esclusi. Esito remoto verificato nel messaggio
+di consegna dopo il push, non presunto da questo checkpoint. Esperimenti
+cinematici e skill installate non tracciati preservati e non inclusi.
