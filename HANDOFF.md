@@ -3,6 +3,19 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Monitor consegne — controllo automatico Git, niente risveglio chat
+
+Richiesta del proprietario: meno passaggi manuali, notifiche/decisioni importanti.
+Creato scripts/delivery-monitor.mjs: controllo singolo o polling ogni 300 s,
+massimo 96 cicli predefiniti. Legge ref/SHA, salva baseline/eventi locali ignorati,
+nessun fetch/checkout/merge o chiamata modello. Tre test mirati superati, primo
+controllo reale riuscito. Procedura condivisa in docs/AGENT_MONITOR.md; AGENTS
+richiede controllo diretto all'avvio/checkpoint. Nessun scheduler capace di
+risvegliare questa chat o canale push disponibile, CLI Claude assente; non
+promettere prosecuzione AI a chat chiusa o notifiche inviate. Watch locale utile
+solo finché processo e ambiente restano attivi. Nessun servizio persistente
+o modifica al ramo main installati.
+
 ## Turno Codex — consegna verificata, codice e prove condivisi
 
 Integrata per fast-forward la PR #1 corretta alla testa 04f0ca9. Verifiche finali:

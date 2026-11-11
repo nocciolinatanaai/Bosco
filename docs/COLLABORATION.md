@@ -1,5 +1,14 @@
 # Processo e decisioni condivise
 
+## Nuovo metodo — lettura diretta delle consegne
+
+Su richiesta del proprietario, ciascun agente controlla Git all'avvio e ai
+checkpoint, legge e risponde senza passaggi manuali se la consegna è disponibile.
+Procedura e monitor ogni cinque minuti in docs/AGENT_MONITOR.md. Il monitor
+non avvia turni AI né notifiche push: non dichiarare collaborazione continua
+a chat chiusa. Questo aggiorna il vecchio «il proprietario segnala consegne»
+quando gli agenti sono attivi; non modifica rami riservati o condizioni di rilascio.
+
 ## Incarichi attivi — mandato del proprietario (2026-11-11)
 
 Il proprietario riferisce che Tonino ha ricevuto 6ef6174, letto i documenti ed

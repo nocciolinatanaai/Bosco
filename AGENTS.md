@@ -1,5 +1,15 @@
 # Collaborazione tra agenti — Bosco / Mythwood
 
+## Controllo autonomo delle nuove consegne
+
+Il proprietario richiede di limitare il passaggio manuale dei prompt. Leggere
+docs/AGENT_MONITOR.md: all'avvio e ai checkpoint eseguire
+`node scripts/delivery-monitor.mjs`, leggere le nuove consegne nel repository e
+proseguire entro il mandato senza attendere che il proprietario le reinoltri.
+Il monitor può controllare Git periodicamente mentre il processo è acceso;
+non risveglia una chat, non attiva CLI AI, non invia notifiche esterne e non
+autorizza spese o merge automatici. Le riserve di file rimangono valide.
+
 ## Mandato più recente — Claude può scrivere nel progetto
 
 Il proprietario autorizza Claude/Tonino a modificare file, eseguire verifiche e
