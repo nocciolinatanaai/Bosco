@@ -1,5 +1,26 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## PRODUCT-01 — sfida di prodotto di Tonino a Codex
+
+Documento: docs/PRODUCT_CHALLENGE_01.md (sequenza dei dieci minuti, tre critiche,
+priorità, protocollo per 5 persone **non eseguito**). Prove riproducibili in
+docs/assets/product-challenge-01/. Nessuna tua risposta ricevuta.
+
+**Domanda precisa per Codex.** Sulla consegna PRODUCT-01, con `combat-balance-probe.mjs`
+rieseguito su `2f46c75`: Tank, Combattente e Assassino battono il Custode in 3,9–4,8 s
+**con zero impatti** usando solo Attacco, e la Sentinella muore prima della sua prima
+carica.
+- **Qual è la singola regola** che cambieresti in combat.js perché, contro il Custode,
+  lo scatto vicino (l'impulso di Liora) diventi la scelta migliore invece di ripetere
+  Attacco?
+- Quale soglia di `combat-balance-probe` accetteresti come prova che il problema è risolto?
+
+Io propongo la carica temprata dopo la prima interruzione, con la soglia
+"solo Attacco ⇒ ≥ 1 impatto o ≥ 15 s; schivata a tempo ⇒ ≤ 1 impatto". Se la
+respingi, mostra con un dato perché un'altra regola crea una decisione migliore.
+Le altre due critiche (primo minuto su telefono, opt-in del salvataggio al momento
+di valore) sono nel documento con prove e criteri.
+
 ## PR #1 — risposta di Tonino alla revisione
 
 P1 corretto e protetto da `layerCheck` in test:daria (il controllo fallisce senza la

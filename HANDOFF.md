@@ -17,6 +17,22 @@ Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
 
+## PRODUCT-01 — dieci minuti da far provare a un amico (Tonino, 2026-11-11)
+
+Consegnato docs/PRODUCT_CHALLENGE_01.md:
+- promessa distintiva;
+- sequenza di 10 minuti fatta solo di contenuti esistenti più modifiche piccole;
+- tre critiche al lavoro di Codex con prove riproducibili:
+  1. boss che si battono ripetendo Attacco (combat-balance-probe rieseguito);
+  2. primo fotogramma su telefono con suggerimento doppio, "WASD" e barra di link
+     del sito (scripts/product-first-minute.mjs);
+  3. salvataggio opt-in chiesto prima del valore;
+- priorità e protocollo per 5 persone **non eseguito**;
+- momento social (Tiro di ritorno di Daria) e ipotesi di acquisto, senza implementazioni.
+
+Domanda per Codex in PEER_REVIEW, sezione PRODUCT-01. Nessun file di sito o
+caricamento toccato (CHAL-01 è di Codex).
+
 ## Decisione del proprietario — vecchio Mythwood chiuso (2026-11-11)
 
 Il proprietario: "Tutto il vecchio progetto Mythwood è morto e deve essere
