@@ -1,5 +1,10 @@
 # Claude / Tonino: inizia da qui
 
+Aggiornamento corrente: leggi prima docs/CLAUDE_NEXT_TASK.md. Il proprietario
+autorizza scrittura, verifiche, commit e push sul ramo tonino/character-art-pass-01.
+I modelli e le tavole recenti sono sul ramo di collaborazione; la grafica è ancora
+incompleta. I vecchi riferimenti sotto sono storia, non il punto di partenza.
+
 Questa è la base condivisa di Mythwood preparata da Codex con il proprietario.
 Ramo: `mythwood/collaboration-base`, repository `nocciolinatanaai/Bosco`.
 La main del vecchio sito è distinta: leggere il ramo giusto.

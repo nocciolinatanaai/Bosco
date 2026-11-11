@@ -1,5 +1,15 @@
 # Collaborazione tra agenti — Bosco / Mythwood
 
+## Mandato più recente — Claude può scrivere nel progetto
+
+Il proprietario autorizza Claude/Tonino a modificare file, eseguire verifiche e
+committare/pushare sul proprio ramo di lavoro. Incarico corrente e perimetro in
+docs/CLAUDE_NEXT_TASK.md e tabella COLLABORATION: rifinitura personaggi 3D,
+partendo da Daria; Codex sospende modifiche sovrapposte fino alla consegna.
+PR verso mythwood/collaboration-base, mai lavoro simultaneo sul ramo condiviso.
+Il mandato non configura permessi tecnici della sessione Claude e non amplia
+in questo incarico autorizzazioni su main, deploy, social, spese o produzione.
+
 ## Mandato
 
 Costruire con il proprietario e Tonino un RPG browser coinvolgente, bello da

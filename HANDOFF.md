@@ -3,6 +3,18 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Nuovo incarico Claude — scrittura autorizzata
+
+Il proprietario richiede commit del lavoro e nuovo prompt per Claude. Verificato
+39f4ad1 già presente sul remoto; prompt completo in docs/CLAUDE_NEXT_TASK.md.
+Claude autorizzato a modificare e verificare sul ramo tonino/character-art-pass-01,
+partendo dalla punta aggiornata del ramo condiviso. Priorità Daria fedele al
+concept e difetti tecnici del loader, non altre illustrazioni o palette.
+Area personaggi riservata a Claude fino a consegna/rilascio, Codex non sovrappone
+modifiche. Permessi tecnici della sua sessione non accessibili da qui: il
+repository registra il mandato, non una connessione o abilitazione remota.
+Nessun deploy/social/spesa/produzione incluso nel nuovo incarico.
+
 ## Asset 3D delle classi — base tecnica verificata, arte incompleta
 
 Il proprietario approva la direzione delle sei tavole e chiede personaggi reali.
