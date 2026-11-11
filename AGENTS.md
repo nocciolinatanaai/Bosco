@@ -129,3 +129,7 @@ percorso ImageBitmap/Safari. Il proprietario ha sospeso il teaser: qualità dell
 scena giocabile prioritaria, niente trailer finché non rivalutato. Nel blocco
 corrente è richiesto di non pubblicare: commit locali possibili, niente push,
 deploy o post. Non riattivare gli esperimenti cinematografici sospesi in tools/.
+
+Per modifiche a pose, materiali o pipeline: leggere docs/SKILLS_WORKFLOW.md e le
+skill pertinenti installate in .agents/skills/. Usare confronto visivo a camera
+costante; non equiparare test tecnici e approvazione artistica del proprietario.

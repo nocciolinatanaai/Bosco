@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { curve, piece } from './geometry.js';
+import { createPoseSampler } from './pose-sampler.js';
 
 let source;
 const loadSource = () => source ||= import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/ranger/ranger-base.glb`)).catch(error => { source=null; throw error; });
@@ -30,7 +31,7 @@ export function attachSkinnedRanger(root) {
       presentation.updateMatrixWorld(true);
       const mixer=new THREE.AnimationMixer(model), clips=Object.fromEntries(gltf.animations.map(c=>[c.name.replace('human_female_',''),c]));
       for(const name of ['idle','run','channel_two_handed_bow','cast_two_handed_bow','jump'])if(!clips[name])throw Error(`Missing Ranger motion: ${name}`);
-      const actions=Object.fromEntries(Object.entries(clips).map(([name,clip])=>[name,mixer.clipAction(clip)]));
+      const poseSampler=createPoseSampler(mixer,Object.entries(clips).map(([name,clip])=>{const named=clip.clone();named.name=name;return named;}));
       const palmL=model.getObjectByName('palm_L'),palmR=model.getObjectByName('palm_R'),torso=model.getObjectByName('torso');
       if(!palmL||!palmR||!torso)throw Error('Incomplete Ranger skeleton');
       const wood=new THREE.MeshStandardMaterial({color:'#563d2c',roughness:.65}),brass=new THREE.MeshStandardMaterial({color:'#b69a60',metalness:.65,roughness:.4});
@@ -55,7 +56,7 @@ export function attachSkinnedRanger(root) {
       const head=model.getObjectByName('head'),headPosition=new THREE.Vector3();
       const left=new THREE.Vector3(),right=new THREE.Vector3(),chest=new THREE.Vector3(),forward=new THREE.Vector3(),xAxis=new THREE.Vector3(),up=new THREE.Vector3(0,1,0),basis=new THREE.Matrix4();
       // Authored animation is sampled by normalized game action phase, never changes hit timing.
-      visual={presentation,model,mixer,actions,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,current:null,lastTime:null};
+      visual={presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
       for(const node of fallbackChildren)node.visible=false;
       root.add(presentation);root.userData.visualStatus='ready';root.userData.visualSource='System G6 CC0 / Mythwood accessories';
       root.userData.visualClips=Object.keys(clips);
@@ -68,19 +69,23 @@ export function attachSkinnedRanger(root) {
     if(!visual){fallbackAnimate(time,moving,attack,reducedMotion,combat);return;}
     const v=visual,action=combat.action,drawing=action&&action.elapsed<action.windup;
     const name=combat.dodge>0?'jump':action?(drawing?'channel_two_handed_bow':'cast_two_handed_bow'):moving?'run':'idle';
-    if(name!==v.current){for(const a of Object.values(v.actions))a.stop();v.actions[name].reset().play();v.current=name;}
-    const a=v.actions[name],duration=v.clips[name].duration;
+    const duration=v.clips[name].duration;
     let phase;
     if(action)phase=drawing?Math.min(.95,action.elapsed/action.windup):Math.min(.95,(action.elapsed-action.windup)/Math.max(.01,action.duration-action.windup));
+    else if(combat.dodge>0)phase=Math.min(.95,Math.max(0,1-combat.dodge/.24));
     else phase=reducedMotion&&!moving?0:((time*(moving?1.35:1))%duration)/duration;
-    a.time=phase*duration;v.mixer.update(0);v.model.rotation.y=0;v.model.updateWorldMatrix(true,true);
+    v.poseSampler.sample(name,phase,time,{immediate:reducedMotion});v.model.rotation.y=0;v.model.updateWorldMatrix(true,true);
     v.presentation.worldToLocal(v.palmL.getWorldPosition(v.left));v.presentation.worldToLocal(v.palmR.getWorldPosition(v.right));
+    let targetYaw=0;
     if(action){
       v.forward.subVectors(v.left,v.right);v.forward.y=0;
-      if(v.forward.lengthSq()>.001)v.model.rotation.y=-Math.atan2(v.forward.x,v.forward.z);
-      v.model.updateWorldMatrix(true,true);
-      v.presentation.worldToLocal(v.palmL.getWorldPosition(v.left));v.presentation.worldToLocal(v.palmR.getWorldPosition(v.right));
+      if(v.forward.lengthSq()>.001)targetYaw=-Math.atan2(v.forward.x,v.forward.z);
     }
+    const dt=v.lastTime===null?1/60:Math.max(0,Math.min(.05,time-v.lastTime));
+    const yawDelta=Math.atan2(Math.sin(targetYaw-v.yaw),Math.cos(targetYaw-v.yaw));
+    v.yaw=reducedMotion||(v.lastTime!==null&&time<v.lastTime)?targetYaw:v.yaw+yawDelta*(1-Math.exp(-18*dt));v.lastTime=time;
+    v.model.rotation.y=v.yaw;v.model.updateWorldMatrix(true,true);
+    v.presentation.worldToLocal(v.palmL.getWorldPosition(v.left));v.presentation.worldToLocal(v.palmR.getWorldPosition(v.right));
     // Model bow clips have a native aiming axis. Align it with simulation +Z.
     v.forward.set(0,0,1);
     v.xAxis.crossVectors(v.up,v.forward).normalize();v.basis.makeBasis(v.xAxis,v.up,v.forward);v.bow.quaternion.setFromRotationMatrix(v.basis);
@@ -92,6 +97,6 @@ export function attachSkinnedRanger(root) {
     v.presentation.worldToLocal(v.head.getWorldPosition(v.headPosition));v.braid.position.copy(v.headPosition);v.braid.rotation.y=v.model.rotation.y;
     v.scarf.position.set(v.chest.x,v.chest.y+.48,v.chest.z);v.quiver.position.set(v.chest.x+.16,v.chest.y+.1,v.chest.z-.3);
     for(let i=0;i<v.vertices.count;i++){const f=(.475-v.original[i*3+1])/.95;v.vertices.setZ(i,v.original[i*3+2]+(reducedMotion?0:Math.sin(time*4+v.original[i*3]*7)*.025*f));}
-    v.vertices.needsUpdate=true;
+    v.vertices.needsUpdate=true;v.cape.geometry.computeVertexNormals();
   };
 }

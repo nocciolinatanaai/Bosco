@@ -407,3 +407,18 @@ del proprietario. Da rifinire volto/abiti, contatti e transizioni/scatto; poi
 materiali e architettura del piccolo tratto di rovine e nemico. Altri cinque
 corpi e Custode ancora provvisori. Teaser sospeso. Nessuna risposta Claude
 presunta, nessun deploy, post, push o spesa esterna. File del blocco liberi.
+
+## Skill applicate — nuovo blocco locale attivo
+
+Il proprietario autorizza l'uso delle skill installate per proseguire Mythwood.
+Applicate threejs-animation (raccordi di pose e ripresa), threejs-materials
+(superfici PBR), threejs-performance (contatori di tutti i pass di rendering),
+e writing-for-agents di Matt Pocock (consegna e istruzioni). Frontend-design e
+asset-pipeline consultate come riferimento, senza cambiare HUD o formato GLB.
+Non eseguire skill estranee al problema solo perché installate.
+
+Nuovi pose-sampler.js e stone-surface.js; integrazione Ranger e materiali.
+Pausa, cambio di azione durante un raccordo e riavvio coperti da test sintetici
+con il vero AnimationMixer. Nessun cambiamento a hit timing o controlli.
+Confronto ambientale prima/dopo e verifica del modello in browser pendenti.
+Checkpoint locale prima delle verifiche lunghe; niente push, deploy o teaser.

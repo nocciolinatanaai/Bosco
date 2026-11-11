@@ -118,6 +118,9 @@ export function createArtWorld(renderer) {
     if (x > 10 && Math.abs(z - 4) > 2) continue;
     const tile = block(source, rand() > .3 ? m.paving : m.pavingDark, [1.23 + rand() * .06, .15, 1.6 + rand() * .09], [x * 1.32 + (z % 2) * .66, -.06 + rand() * .035, z * 1.75]);
     tile.rotation.y = (rand() - .5) * .025;
+    // Rotate UVs per block to break repeated cracks without cloning materials.
+    const uv=tile.geometry.attributes.uv,turn=((x*17+z*31)%4+4)%4;
+    for(let j=0;j<uv.count;j++){let u=uv.getX(j),v=uv.getY(j);for(let t=0;t<turn;t++){const old=u;u=1-v;v=old;}uv.setXY(j,u,v);}
   }
   // Sunken tracks and brass inlays break up the regular paving.
   for (const x of [-8.4, -6.7, 6.7, 8.4]) {
@@ -275,9 +278,17 @@ export function createPipeline(renderer, scene, camera) {
   const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), .32, .5, 1.15);
   composer.addPass(bloom); composer.addPass(new OutputPass());
   let postprocessing = true;
+  const frameStats={calls:0,triangles:0,geometries:0,textures:0,programs:0};
   return {
     configure(settings) { postprocessing = settings.bloom; bloom.enabled = settings.bloom; composer.setPixelRatio(settings.pixelRatio); },
     resize(width, height) { composer.setSize(width, height); },
-    render() { if (postprocessing) composer.render(); else renderer.render(scene, camera); },
+    render() {
+      const autoReset=renderer.info.autoReset;renderer.info.autoReset=false;renderer.info.reset();
+      try {
+        if (postprocessing) composer.render(); else renderer.render(scene, camera);
+        Object.assign(frameStats,{calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs.length});
+        return frameStats;
+      } finally {renderer.info.autoReset=autoReset;}
+    },
   };
 }

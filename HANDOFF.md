@@ -242,3 +242,15 @@ Prossima priorità: una sola scena giocabile convincente con personaggio,
 ambiente, illuminazione e animazioni da valutare visivamente col proprietario.
 Non riprendere il trailer o dedurre approvazione artistica da test tecnici.
 Nessun push, deploy o pubblicazione eseguiti in questo blocco.
+
+## In corso — raccordi e superfici con le nuove skill
+
+Pose sampler campionato su game time, raccordi 120 ms, pausa/interruzione/riavvio
+coperti da quattro test sintetici. Ranger usa il sampler e raccorda l'orientamento;
+fase dello scatto legata alla durata reale anziché al tempo globale della corsa.
+Nuove superfici procedurali coerenti per pietra, bordi consumati e umidità,
+mappe separate per muratura e pavimento, nessuna immagine o asset acquistato.
+Statistiche pipeline corrette per conteggiare tutti i pass. Vedere SKILLS_WORKFLOW.
+Checkpoint prima del confronto visivo e regressione browser: ancora pendenti.
+Asset Ranger generico invariato; non risolta la distanza artistica dal concept.
+Nessun push, deploy o post. Teaser sospeso; esperimenti preesistenti preservati.
