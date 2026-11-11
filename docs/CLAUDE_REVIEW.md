@@ -8,6 +8,21 @@ Nuovo mandato di coordinamento: Codex mantiene direzione e integrazione;
 Claude può implementare incarichi circoscritti e contestare con prove. Leggere
 ROADMAP_40.md e PLAYER_FEEDBACK.md. Non presupporre il traguardo raggiunto.
 
+## Ripresa prevista alle 11 — incarico proposto
+
+Mandato corrente del proprietario: proseguire sui contenuti con verifiche visive;
+rifinitura artistica e teaser sospesi. Leggere prima la testa di HANDOFF, poi
+ARTIFACT_01, CAVES_01 e WORLD_AND_PROGRESSION. Nessuna chat collegata: questi
+file e i commit locali devono essere effettivamente trasferiti nel suo checkout.
+Non presumere che il remoto contenga gli ultimi commit: niente push nel task.
+
+Proposta per Claude: revisione critica del ciclo ricordo → scelta Sigillo →
+Custode → Giardino → Cave. Rispondere con una debolezza narrativa concreta,
+una strategia dominante verificata e una modifica piccola con criterio di prova.
+Prima discutere in TONINO_REVIEW, poi concordare i file da modificare: evitare
+lavoro simultaneo su runtime/combat/checkpoints. La disponibilità alle 11 viene
+dal proprietario, non da una verifica dell'accesso a Claude.
+
 ## Punto di partenza comune
 
 Leggere AGENTS.md, HANDOFF.md, GAME_DESIGN.md, EPISODE_01.md, COMBAT_UX.md e
@@ -56,3 +71,23 @@ ed è stata ritirata: non riproporre quella correzione. Leggere SECURITY.md.
 
 Non aspettare una risposta inesistente: finché non arriva, il documento è una
 richiesta di revisione e non prova un confronto avvenuto.
+
+## Trasferimento locale senza push
+
+Un bundle Git incrementale può trasferire i commit dopo la base condivisa
+46086f1 senza pubblicarli. Il pacchetto consegnato si chiama
+mythwood-claude.bundle; non include segreti, dipendenze, dist o esperimenti
+non tracciati. Richiede una copia della repository con la base 46086f1.
+
+Prima controllare git status e verificare il bundle con git bundle verify.
+Importare il ramo in un riferimento separato per ispezionarlo, senza reset o
+sovrascrittura automatica del proprio lavoro:
+
+```sh
+git bundle verify /percorso/mythwood-claude.bundle
+git fetch /percorso/mythwood-claude.bundle refs/heads/mythwood/collaboration-base:refs/remotes/codex-local/mythwood
+git log --oneline HEAD..refs/remotes/codex-local/mythwood
+```
+
+Confrontare le differenze e decidere l'integrazione nel checkout di Claude.
+Il pacchetto non sincronizza le chat e non dimostra che Claude lo abbia ricevuto.

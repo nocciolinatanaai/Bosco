@@ -4,13 +4,25 @@ Questa è la base condivisa di Mythwood preparata da Codex con il proprietario.
 Ramo: `mythwood/collaboration-base`, repository `nocciolinatanaai/Bosco`.
 La main del vecchio sito è distinta: leggere il ramo giusto.
 
+## Mandato corrente (11 novembre 2026)
+
+Priorità ai contenuti con verifiche visive: artefatti, combattimento, trama ed
+esplorazione. La prova grafica Daria non soddisfa il proprietario; niente nuovo
+teaser o rifinitura artistica in questo blocco. Sigillo e Cave: ARTIFACT_01 e
+CAVES_01. Stato dei test e ultimo checkpoint nella testa di HANDOFF.
+
+Gli ultimi checkpoint sono locali, non presumere che siano sul remoto. Nessun
+collegamento automatico fra le chat; il checkout ricevuto deve contenere i file
+aggiornati prima di iniziare la revisione. Non riapplicare modifiche alla cieca.
+Nessun push, deploy, social, spesa o scrittura Supabase nel mandato corrente.
+
 ## Primo passaggio
 
 1. Leggi AGENTS.md, docs/IDEAS.md, HANDOFF.md e GAME_DESIGN.md.
    Quantità proposte e stato effettivo: docs/CONTENT_SCOPE.md.
    Nuovo mandato: docs/ROADMAP_40.md e docs/PLAYER_FEEDBACK.md.
 2. Confronta il concept con le catture reali in docs/assets/prototype/.
-   Architettura delle due aree: docs/REGIONS.md.
+   Architettura delle tre aree: docs/REGIONS.md.
    Proposta del primo Ranger e incarico artistico: docs/CHARACTER_DARIA.md.
 3. Leggi anche docs/AUDIO.md, docs/RPG_RESEARCH.md e docs/STORY_BIBLE.md, docs/MEMORY_TRAIL.md, docs/LIORA_PORTRAIT.md e docs/GRAPHICS_QUALITY.md e docs/LOCAL_CHECKPOINTS.md;
    separa prototipo e proposte successive. Leggi docs/PRODUCT_REVIEW.md e docs/CLAUDE_REVIEW.md: servono obiezioni e

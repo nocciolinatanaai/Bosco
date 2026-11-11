@@ -26,7 +26,11 @@ try {
   await page.locator('#world-interact').click();
   await page.waitForFunction(()=>document.getElementById('world-interact').textContent==='Recupera la lente'||document.getElementById('result').open,{}, {timeout:60000});
   assert.equal(await page.locator('#result').evaluate(e=>e.open),false,'Reach lens alive');await page.locator('#world-interact').click();
-  assert.ok((await page.locator('#quest-item').textContent()).includes('Lente · con te'));await page.locator('#pause').click();
+  assert.ok((await page.locator('#quest-item').textContent()).includes('Lente · con te'));
+  await page.locator('#world-interact').click();
+  await page.waitForFunction(()=>document.getElementById('world-interact').textContent==='Riporta la lente a Liora'||document.getElementById('result').open,{}, {timeout:60000});
+  assert.equal(await page.locator('#result').evaluate(e=>e.open),false,'Return to threshold alive');
+  await page.locator('#pause').click();
   await page.screenshot({path:`${out}/${name}-lens.png`});
   await page.reload({waitUntil:'networkidle'});assert.ok((await page.locator('#saved-summary').textContent()).includes('Lente recuperata'));await page.locator('#resume-saved').click();
   assert.ok((await page.locator('#region').textContent()).includes('Cave dei Sussurri'));assert.ok((await page.locator('#artifact-status').textContent()).includes('Custodia'));
@@ -36,7 +40,6 @@ try {
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.setViewportSize({width,height});
   }
   report.step='return';await save();await page.locator('#world-interact').click();
-  await page.waitForFunction(()=>document.getElementById('world-interact').textContent==='Riporta la lente a Liora',{}, {timeout:20000});await page.locator('#world-interact').click();
   assert.equal(await page.locator('#memory').evaluate(e=>e.open),true);assert.equal(await page.locator('#memory-title').textContent(),'Non erano dispersi.');await page.screenshot({path:`${out}/${name}-memory.png`});await page.locator('#memory-continue').click();
   cp=await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')));assert.equal(cp.caves.step,3);assert.equal(cp.caves.inside,false);
   await page.locator('#cave-travel').click();assert.ok((await page.locator('#region').textContent()).includes('Cave dei Sussurri'));await page.locator('#leave-garden').click();assert.equal(await page.locator('#memory').evaluate(e=>e.open),false,'Return reward not repeated');

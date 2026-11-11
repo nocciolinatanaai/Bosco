@@ -1,0 +1,46 @@
+{
+  "dateUtc": "2026-11-11",
+  "initialCheckpoint": "4783317",
+  "status": "passed",
+  "unitTests": 111,
+  "buildHtmlSha256": "b0470c83027a1c4579bab68f7cd939b90041d68c6c80fd14dfa47e1c0e2168e2",
+  "buildScriptSha256": "0f36090d97ce738e520bc3a495ca05e6f2703b7390592ed06cc4188f927df069",
+  "hashScopes": "Caves report buildEntrySha256 hashes JS entry; Garden/checkpoint reports hash dist/index.html. Both hashes recorded here.",
+  "sourceSha256": {
+    "src/caves.js": "e2183a8dbe07e7fbb5e699f26851a872428e2573b41332231b994635735ee925",
+    "src/visuals/caves.js": "c34f89e3d6cadf0dd3325b07d8c2fcc942ce7dce803689724e963c6b4850bd5c",
+    "src/combat.js": "4992aec1778457644c850f0133a23c454446e1bd810356d372eeacfb2f73d51a",
+    "src/checkpoints.js": "0d0afee0461be18e3933ebdf2c6733dc2364ecbcc8e5c9e77391675321f913eb",
+    "src/runtime.js": "450c21b4d1f94bc1a19c0b3d544f14b3de09094dc6d9b5e4ef171e5a8dd927e6",
+    "src/journey.js": "976abf7d5f6a0e7076b354ac63408b806f74826c4efe36dfe176082f5082d6cc",
+    "src/ui.js": "f3ce04f2991ff7defbd6ebef284be8a2dea649f8362a9ba477b503969451a9ae",
+    "src/style.css": "f4802618d2d20cc0c08703b8ef39c525fef388c3d170a6fd33a9d99aa0444a8f",
+    "src/garden.js": "40233c8513e2dfe39ba50a1e133cf5be76d9cb78c150b1140d950c141ed814e6",
+    "src/trail.js": "586d09065f4fa7ba52eb4c577b7996184bbccb730b0b3568b596bb5209ed2d61",
+    "src/visuals/environment.js": "6549e084fc811bd013b204068de4b42ff0991df330f7ca853446d8e42bccf5a3",
+    "src/visuals/memory-trail.js": "037490181f3af163582d04c8b46f0cf2cd4f72d25b4335d2a41a93ed313c29b1",
+    "scripts/caves-check.mjs": "5d229b26b9403bfde01961826dcf93d7c6cd09f63df8d8e2ca2e8c06b6e6a620",
+    "scripts/garden-check.mjs": "bfd1c78d74211c8fcff8cf6fba88dcdf2e95c2773ef13e71ee1b892ae770001e",
+    "scripts/checkpoint-ui-check.mjs": "b853d9e77a0e7ea689a6ef5d418ee59476dd072470b64227b01759b3542f96b4",
+    "tests/caves.test.mjs": "3a1feade3003f74f082ade9ba946b194daa3a78002a6e02e66754b273ca681a6"
+  },
+  "evidenceSha256": {
+    "checkpoint-ui-report.json": "6741958b1e29b8c7d3f266afb7c9a77c04549cb2525bd9a637fef08b6d5564ab",
+    "desktop-entry.png": "4327f0f5b43e2233b3d54da9c0dd1d0cc6850ce2f06ce78f76f6efb6cf04562b",
+    "garden-report.json": "6127f56d0bafaccdf201f3d5e0848e4a22842f2811bf49e389a82f9b5bcb30e6",
+    "mobile-entry.png": "cc714c6d76c1d2dcc41c83327380b4d8eda6ce33560c2aa6db1c56b69c5e62e5",
+    "mobile-landscape.png": "bc7ed6fd93ab46c6e85f497731ded4f6ec9843900361aac70512c538f3b7bc88",
+    "mobile-memory.png": "62b806151cd01dbb2f21729113977123714981c7402ae0b07c70889e7a487c28",
+    "report.json": "08f2844023636425bea531d7abf3f7d6491112ae562df155a234b9d464d8becd",
+    "unit-summary.json": "defdce90ac239e2b96daf19f70ada5d430c10f85140dff9d4f2067798fd87ccb"
+  },
+  "limitations": [
+    "Graphics provisional; borrowed enemy mesh; no owner art approval",
+    "Emulated mobile Chromium, not physical iPhone",
+    "Three local areas, no streaming or multiplayer",
+    "Initial runner expected walking after safe-entry reload; test corrected, gameplay not altered",
+    "First full episode not rerun for v4; prior full episode evidence is v3",
+    "Bundle over 500 kB warning unresolved",
+    "Balance not tested with external players"
+  ]
+}

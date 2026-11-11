@@ -1,0 +1,9 @@
+{
+  "command": "npm test",
+  "status": "passed",
+  "tests": 111,
+  "pass": 111,
+  "fail": 0,
+  "skipped": 0,
+  "logSha256": "a763527f0db20ff362143fe9bf3a67d3b58f3b13012eef17c64a70fc92d2a121"
+}

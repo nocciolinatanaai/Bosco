@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "finishedAtUtc": "2026-11-11T05:51:30.352Z",
+  "fixture": "synthetic v1 guardian and v2 garden compass checkpoints with autosave off; deletion cancelled; defeated sentry remains absent",
+  "runnerSha256": "b853d9e77a0e7ea689a6ef5d418ee59476dd072470b64227b01759b3542f96b4",
+  "buildEntrySha256": "b0470c83027a1c4579bab68f7cd939b90041d68c6c80fd14dfa47e1c0e2168e2",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "errors": 0
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "errors": 0
+    }
+  ]
+}

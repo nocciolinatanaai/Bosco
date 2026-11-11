@@ -16,7 +16,7 @@ export function createWarden() {
     stagger: 0, hitFlash: 0, facing: 0, aimX: 0, aimZ: -8 };
 }
 export function enterCaves(s) {
-  if (s.status !== 'playing' || s.area !== 'plaza' || s.garden.step !== 4 || !near(s, CAVE_GATE)) return false;
+  if (s.status !== 'playing' || s.area !== 'plaza' || !s.evolved || !s.cleared || !s.trail.complete || s.garden.step !== 4 || !near(s, CAVE_GATE)) return false;
   if (!s.enemies.some(e => e.type === 'warden')) {
     const e = createWarden(); if (s.caves.wardenDefeated) { e.hp = 0; e.phase = 'dead'; } s.enemies.push(e);
   }
@@ -27,7 +27,7 @@ export function caveObjective(s) {
   if (s.status !== 'playing' || s.area !== 'caves') return null;
   return s.caves.step === 1
     ? { id: 'lens', ...CAVE_LENS, label: 'Recupera la lente', approach: 'Raggiungi il banco del cartografo' }
-    : { id: 'return', ...CAVE_ENTRY, label: 'Riporta la lente a Liora', approach: 'Torna alla soglia' };
+    : { id: 'return', ...CAVE_ENTRY, label: s.caves.step === 3 ? 'Torna al sentiero' : 'Riporta la lente a Liora', approach: 'Torna alla soglia' };
 }
 export function interactCaves(s, id) {
   if (id === 'enter') { if (!enterCaves(s)) return null; return { interaction: id, completed: false }; }

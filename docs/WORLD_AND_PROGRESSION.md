@@ -6,19 +6,19 @@ non annuncia regioni già giocabili, cooperativa esistente o quantità completat
 
 ## Situazione implementata
 
-Piazza del ritorno → sentiero delle memorie → Giardino dei nomi: due aree con un
-collegamento locale. Echi, ricordo di Liora, Custode, pista Cartiglio e recupero
-bussola. Primo Sigillo di Liora con due accordature opzionali in questo blocco.
+Piazza del ritorno → sentiero delle memorie → Giardino dei nomi → Cave dei
+Sussurri: tre aree con collegamenti locali. Echi, ricordo di Liora, Custode, pista Cartiglio e recupero
+bussola, ricerca e restituzione della lente. Sigillo di Liora con due accordature
+opzionali; Guardiano del rintocco nelle Cave (vedere CAVES_01).
 Non è ancora un mondo aperto vasto: non chiamarlo tale nei testi promozionali.
 
 ## Arco narrativo proposto
 
 - **Ritorno:** il Custode impedisce a una voce di uscire. Liora ricorda una
   promessa, ma non tutti i nomi. Il sigillo rende quella promessa una scelta.
-- **Cave dei Sussurri:** prossima regione candidata. Una squadra scomparsa sta
-  lasciando segnali incompatibili; cercare un cartografo o recuperare una lente
-  permette due approcci allo stesso ostacolo. Personaggio nuovo e quest ancora
-  da realizzare, con obiettivo concreto, rischio e conseguenza osservabile.
+- **Cave dei Sussurri:** prima missione implementata: lente del cartografo,
+  rintocco circolare e prova delle due rotte sovrapposte. Il cartografo come
+  personaggio incontrabile e due approcci narrativi restano proposte future.
 - **Archivio Cartiglio:** una gilda certifica quali strade esistono. Alcuni
   membri cancellano nomi per contenere la Frattura; altri sfruttano l'autorità.
   Rivalità con motivazioni e alleati possibili, non una fazione tutta malvagia.
@@ -49,8 +49,8 @@ alla volta con costo, lettura del pericolo, controgioco e feedback chiari.
 
 1. Definizioni delle regioni e connessioni indipendenti dal rendering; progressi
    salvati come decisioni e tappe, non copie arbitrarie della simulazione.
-2. Terza regione con ingresso/ritorno e un ciclo completo. Prima di moltiplicare
-   mappe, verificare orientamento e motivo di tornarci.
+2. Le Cave hanno ingresso/ritorno e un primo ciclo completo. Prima di
+   moltiplicare mappe, verificare orientamento e motivo di tornarci.
 3. Caricamento di zone limitrofe con limiti a geometrie, texture e nemici attivi;
    rilascio verificato delle risorse, nessuna mappa enorme caricata tutta insieme.
 4. Missioni solo, contributi di gilda e spedizioni di squadra come categorie
@@ -58,6 +58,7 @@ alla volta con costo, lettura del pericolo, controgioco e feedback chiari.
 5. Espansione guidata dalle prove con giocatori. Il 35–40% resta un obiettivo
    qualitativo, non una percentuale ottenuta contando regioni o commit.
 
-Prossima fetta proposta: Cave dei Sussurri con un avversario che richieda una
-risposta diversa dalla Sentinella; usare l'artefatto appena ottenuto per offrire
-un motivo reale di scegliere la propria tecnica. Non implementato in questo file.
+Prossima fetta proposta: rendere il collegamento con l'Archivio una scelta
+con conseguenze verificabili, dopo il feedback sul ciclo delle Cave. Archivio,
+Selva e Cittadella non sono ancora aree implementate. Non moltiplicare mappe
+vuote prima della revisione di motivazione, combattimento e durata.

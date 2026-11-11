@@ -24,6 +24,6 @@ bersagli filtrati per area, transizioni azzerano azioni/proiettili senza curare.
 Checkpoint v4, stessa chiave; migra v1/v2/v3 solo in memoria. caves conserva
 step, inside, wardenDefeated. Nessuna coordinata o ricompensa economica.
 
-Verifiche iniziali: 110 test e build passati. Browser e catture della nuova
-missione ancora in verifica al checkpoint iniziale; consultare HANDOFF per
-l'esito definitivo. Nessun push, deploy, spesa o pubblicazione.
+Verifiche: 111 test e build passati. Cave e Giardino superati su desktop/mobile,
+con ripresa, ritorno e rivisite. Catture reali in assets/caves-pass/. Anche UI
+salvataggi superata su entrambe le dimensioni. Nessun push, deploy, spesa o pubblicazione.

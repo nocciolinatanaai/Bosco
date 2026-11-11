@@ -98,7 +98,7 @@ try {
     assert.equal(checkpoint.garden.step, 4); assert.equal(checkpoint.garden.area, 'plaza');
     assert.deepEqual(external, []); assert.deepEqual(errors, []);
     report.runs.push({ name, viewport, status: 'passed', checkpointVersion: checkpoint.version, questStep: checkpoint.garden.step, externalRequests: 0, errors: 0, repeatedVisits: 3, newWebGLBuffersOnWarmRevisit: revisitBuffers });
-    await save(); await context.close(); console.log(`PASS ${name}: v1→v3, entry, compass, reload, signal, return and repeated visits`);
+    await save(); await context.close(); console.log(`PASS ${name}: v1→v4, entry, compass, reload, signal, return and repeated visits`);
   }
   report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.step; delete report.viewport; await save();
 } catch (error) {

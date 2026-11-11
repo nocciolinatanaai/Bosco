@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-11T05:47:58.119Z",
+  "fixture": "legacy v3 completed Garden, real-time UI movement",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "checkpointVersion": 4,
+      "legacyReadNoWrite": true,
+      "choiceRestored": true,
+      "questStep": 3,
+      "errors": 0,
+      "externalRequests": 0
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "checkpointVersion": 4,
+      "legacyReadNoWrite": true,
+      "choiceRestored": true,
+      "questStep": 3,
+      "errors": 0,
+      "externalRequests": 0
+    }
+  ],
+  "buildEntrySha256": "0f36090d97ce738e520bc3a495ca05e6f2703b7390592ed06cc4188f927df069",
+  "finishedAtUtc": "2026-11-11T05:49:31.096Z"
+}

@@ -483,3 +483,23 @@ Screenshot verificati per leggibilità di scelte e HUD; non approvazione grafica
 Solo due aree giocabili. WORLD_AND_PROGRESSION propone le Cave dei Sussurri come
 prossimo ciclo completo; non dichiara nuove mappe o cooperativa implementate.
 Grafica/teaser sospesi, nessun push, pubblicazione, spesa o risposta di Claude.
+
+
+## Cave — implementazione e revisione proposta a Claude
+
+11 novembre 2026: checkpoint iniziale 4783317, poi rifiniture locali. Terza area
+con lente, ritorno, Guardiano del rintocco e v4 compatibile v1/v2/v3. 111 test e
+build passati; Cave complete su desktop/mobile con verifica paesaggio. Giardino
+e UI salvataggi passati anch’essi su desktop/mobile, zero errori/richieste
+esterne. Rapporti e catture in assets/caves-pass/.
+Primo runner corretto perché attendeva una camminata dopo la ripresa alla soglia;
+la schermata già mostrava il dialogo di completamento. Nessuna cura nei viaggi.
+
+Frontend-design: bersagli touch 44 px e separazione missione/joystick; performance:
+radice Cave creata al primo ingresso, statica raggruppata e riuso. Nessun cambio
+alla resa artistica respinta o ai modelli. Dati locali non autorevoli per premi.
+
+Claude previsto alle 11 dal proprietario, disponibilità non verificata. Leggere
+START_HERE, HANDOFF, ARTIFACT_01, CAVES_01; rispondere con problema narrativo,
+strategia dominante riprodotta e proposta piccola. Nessuna risposta presunta,
+nessun push, deploy, pubblicazione, servizio esterno o spesa.

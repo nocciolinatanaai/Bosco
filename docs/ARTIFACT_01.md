@@ -35,7 +35,7 @@ collezionabile o inventario completo viene dichiarato implementato.
 
 ## Salvataggio e verifica
 
-Checkpoint v3, stessa chiave storica mythwood.checkpoint.v1. Legge v1/v2 e li
+Introdotto nel checkpoint v3; ora incluso nel v4 delle Cave, stessa chiave storica mythwood.checkpoint.v1. Legge v1/v2/v3 e li
 normalizza senza scrivere; salva soltanto scelta, classe e tappe con opt-in.
 Non conserva cooldown, barriera o risorse del combattimento. Proprietà e valori
 extra rifiutati; scelta non nulla impossibile nella tappa arrival.

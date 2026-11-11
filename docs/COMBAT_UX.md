@@ -111,3 +111,10 @@ Sigillo in condizioni sicure. Custodia protegge dopo una schivata d'impatto;
 Impeto recupera vigore e anticipa l'abilità. Nessun quarto comando obbligatorio
 nel combattimento. Regole, limiti e numeri in ARTIFACT_01.md. La scelta provvisoria
 non è salvata prima di accogliere il ricordo. Checkpoint v3 con lettura v1/v2.
+
+## Guardiano del rintocco nelle Cave
+
+Volume circolare fermo, carica 1,6 s e recupero 2 s. Uscire dal volume evita il
+colpo; schivare mentre arriva attiva il Sigillo. L'impulso di risonanza può
+interromperlo da vicino, mentre le classi a distanza possono aggirarlo. Nessun
+obbligo di uccisione per la lente. Vedere CAVES_01 per numeri e limiti provvisori.

@@ -229,7 +229,7 @@ export function startRuntime($) {
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
       if (event.type === 'cave-progress') {
-        syncEnemyViews(); switchArea();
+        if (['enter', 'leave'].includes(event.interaction)) { syncEnemyViews(); switchArea(); }
         notice({ enter: 'Cave dei Sussurri · Recupera la lente. Il rintocco colpisce dentro il cerchio.', lens: 'Lente recuperata · Riportala a Liora.', leave: 'Sei tornato al sentiero.', warden: 'Guardiano del rintocco disattivato.' }[event.interaction], 6);
         if (event.completed) showMemory('caves');
       }

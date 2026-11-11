@@ -1,11 +1,11 @@
-# Due aree locali: struttura e vincoli
+# Tre aree locali: struttura e vincoli
 
-Giardino dei nomi implementato da Codex. Stato delle verifiche in HANDOFF;
+Giardino dei nomi e Cave dei Sussurri implementati da Codex. Stato delle verifiche in HANDOFF;
 nessun backend, streaming del mondo o nuova cooperativa.
 
 ## Simulazione
 
-createSession crea area plaza e garden.step 0. Le tre tracce sbloccano una
+createSession crea area plaza, garden.step 0 e caves.step 0. Le tre tracce sbloccano una
 interazione vicino a (38.5, 7), che porta al giardino in (0, 11). La transizione
 è esplicita, non un corridoio continuo fra coordinate delle due scene.
 
@@ -13,12 +13,12 @@ In garden.js: regole di accesso/ritorno, obiettivo corrente, missione, coperture
 e profilo della sentinella. combat.js conserva il ciclo di simulazione, danni,
 interruzioni e proiettili. L'elenco enemies conserva i nemici visitati; inArea
 filtra bersagli, danni e aggiornamenti. Le prime tre entità senza area esplicita
-appartengono alla piazza, la sentinella ha area garden.
+appartengono alla piazza, la sentinella ha area garden e il nuovo guardiano area caves.
 
 cleared indica il Custode della prima area; non l'eliminazione di tutti i nemici
 del gioco. Non reintrodurre un controllo globale enemies.every(dead). Per una
-terza regione aggiornare filtri, enum e checkpoint intenzionalmente: il codice
-attuale supporta due aree, non un registro generico di regioni arbitrarie.
+quarta regione aggiornare filtri, enum e checkpoint intenzionalmente: il codice
+attuale supporta tre aree esplicite, non un registro generico di regioni arbitrarie.
 
 La sentinella pattuglia tra due postazioni, prepara la linea per 1,4 secondi e
 poi infligge 20 danni se il centro del giocatore è nel rettangolo indicato. La
@@ -31,9 +31,9 @@ Non estendere implicitamente questo risultato a ogni ostacolo della piazza.
 
 ## Visuali
 
-createArtWorld conserva piazza e giardino come radici distinte. Il giardino è
+createArtWorld conserva piazza, giardino e cave come radici distinte. Ogni area secondaria è
 costruito al primo ingresso, poi viene riutilizzato cambiando visibilità. Si
-mantengono entrambe le aree in memoria: non si scaricano file o chunk al passaggio.
+mantengono le aree visitate in memoria: non si scaricano file o chunk al passaggio.
 Le geometrie statiche sono raggruppate per materiale. Luci principali, materiali
 e personaggio sono condivisi; sfondo/nebbia cambiano tonalità. I modelli nemici,
 indicatori e label sono filtrati anche nel rendering e nel raycast.
@@ -68,3 +68,8 @@ Test dedicati: garden.test.mjs (sei classi, collisioni, raggio, migrazione,
 missione e riuso), test:garden (UI desktop/mobile, normale), test:browser
 (regressione primo episodio). Il contatore WebGL createBuffer osserva solo
 nuovi buffer nelle rivisite a caldo, non tutte le risorse o eventuali perdite.
+
+Cave: accesso dopo garden.step 4, soglia sentiero (35,7), ingresso (0,12),
+banco (0,-13), limiti x±10/z[-15,14]. Missione e rintocco in CAVES_01.md;
+checkpoint v4 in LOCAL_CHECKPOINTS. Le pareti laterali sono fuori dai limiti
+giocabili; non dichiarare collisioni arbitrarie o occlusione dei proiettili.

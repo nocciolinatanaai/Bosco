@@ -2,18 +2,49 @@
 
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Ultimo checkpoint applicativo locale: **c4a2d88**, non inviato al remoto.
+Checkpoint iniziale delle Cave: **4783317**, rifiniture nel commit di questa
+consegna; verificare git log -1. Nessun invio al remoto.
 Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
 sempre git log/status prima di continuare. Main e servizio precedente separati.
 
-## In verifica — Cave dei Sussurri
+## Blocco corrente — Cave dei Sussurri
 
-Terza area, lente da recuperare/restituire, nemico con rintocco circolare e
-ritorno anticipato. V4 compatibile in lettura v1/v2/v3. 110 test e build passati;
-browser della missione e Giardino da concludere. docs/CAVES_01.md descrive regole
-e limiti. Nessun push o deploy. Il blocco Sigillo sotto è la base precedente.
+Terza area locale dopo il segnale del Giardino, con ingresso dal sentiero,
+recupero della lente e ritorno a Liora. Guardiano del rintocco fermo: carica
+circolare leggibile, uscita dal volume/interruzione/schivata come risposte.
+Uccisione facoltativa. Nuovo frammento narrativo sulle due rotte sovrapposte e
+la firma Archivio Cartiglio, revisione sette; proposta, non canone approvato.
 
-## Blocco corrente — Sigillo di Liora e priorità ai contenuti
+File: src/caves.js, visuals/caves.js, combat, runtime/ui e checkpoints.
+Checkpoint v4 conserva step/inside/wardenDefeated; legge v1/v2/v3 senza scrivere,
+con la stessa chiave. Filtri per plaza/garden/caves, combattimenti fuori area
+fermi. Viaggi senza cura; ripresa alla soglia con risorse piene come in precedenza.
+Niente rigenerazione del Guardiano sconfitto o completamenti duplicati.
+
+111 test e build passati. Percorso Cave completo desktop/mobile, ripresa v3→v4,
+scelta del Sigillo, ritorno a piedi e dopo ricarica, dialogo e rivisita passati.
+Controllo visivo anche in paesaggio mobile: pulsanti missione separati dal
+joystick. Giardino e UI salvataggi passati anch’essi su entrambe le dimensioni, senza
+errori browser o richieste esterne. Evidenze in docs/assets/caves-pass/.
+Il percorso intero del primo episodio non è stato rieseguito in questo blocco;
+l’ultima regressione completa resta quella v3 nel blocco Sigillo.
+Errore iniziale del nuovo runner: aspettava movimento dopo una ripresa già alla
+soglia; screenshot mostrava il dialogo corretto. Corretto il test, non il gioco.
+
+Grafica ancora respinta/provvisoria. Le pareti delimitano la zona ma non esiste
+pathfinding generico, streaming o modello nuovo del nemico. Bundle JS 778,72 kB
+(210,01 gzip), warning >500 kB aperto. Nessun playtest esterno o prova iPhone reale.
+Teaser fermo; nessun push, deploy, spesa, social o Supabase di produzione.
+
+Per Claude: docs/START_HERE.md e CLAUDE_REVIEW.md aggiornati. Richiesta revisione
+circostanziata di motivazione, strategia dominante e modifica minima con prova.
+Alle 11 è il rientro indicato dal proprietario, non una connessione automatica o
+una revisione ricevuta. Verificare che il suo checkout contenga i commit locali.
+
+Prossimo passo: feedback sul ciclo delle Cave e sulle tecniche prima di
+moltiplicare mappe. Archivio, Selva e Cittadella rimangono proposte future.
+
+## Blocco precedente — Sigillo di Liora e priorità ai contenuti
 
 Il proprietario giudica anche la prova Daria molto lontana dal concept e chiede
 trama, gameplay, personaggi, artefatti, magie, tecniche e mondo, mantenendo le

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CLASSES, createSession, interactCaves, interactGarden, movePlayer, advanceEnemies, tickCooldowns, dodge, drainEvents } from '../src/game.js';
+import { CLASSES, attack, createSession, interactCaves, interactGarden, movePlayer, advanceEnemies, tickCooldowns, dodge, drainEvents } from '../src/game.js';
 import { restoreCheckpoint, checkpointFromSession, validateCheckpoint } from '../src/checkpoints.js';
 import { caveObjective, CAVE_GATE, CAVE_ENTRY, CAVE_LENS } from '../src/caves.js';
 import { gardenObjective } from '../src/garden.js';
@@ -10,7 +10,7 @@ function cave(role) { const s=ready(role);assert.equal(interactCaves(s,'enter'),
 function step(s,seconds) { for(let t=0;t<seconds;t+=.02){tickCooldowns(s,.02);advanceEnemies(s,.02);} }
 
 test('Cave: accesso dopo il segnale, vicinanza, uscita anticipata e nessuna cura/duplicazione',()=>{
- const locked=createSession('tank');Object.assign(locked,CAVE_GATE);assert.equal(interactCaves(locked,'enter'),false);
+ const locked=createSession('tank');Object.assign(locked,CAVE_GATE);assert.equal(interactCaves(locked,'enter'),false);locked.garden.step=4;assert.equal(interactCaves(locked,'enter'),false);
  const s=ready();s.x=0;assert.equal(interactCaves(s,'enter'),false);Object.assign(s,CAVE_GATE);s.hp=40;
  assert.equal(interactCaves(s,'enter'),true);assert.equal(s.hp,40);assert.equal(gardenObjective(s),null);
  assert.equal(interactGarden(s,'enter'),false);assert.equal(interactCaves(s,'lens'),false);
@@ -46,4 +46,14 @@ test('Checkpoint v4: migrazione v3, tappe Cave e ritorno nel Giardino conservati
  assert.equal(restored.area,'garden');assert.equal(restored.z,11);assert.equal(restored.caves.step,3);
  for(const caves of [{...cp.caves,step:9},{...cp.caves,inside:'true'},{...cp.caves,extra:1},{step:0,inside:true,wardenDefeated:false}])assert.equal(validateCheckpoint({...cp,caves}),null);
  assert.equal(validateCheckpoint({...cp,garden:{...cp.garden,step:2}}),null);
+});
+
+test('Guardiano sconfitto: evento, salvataggio e rivisita non lo rigenerano',()=>{
+ const s=cave('mage'), e=s.enemies.find(e=>e.type==='warden');s.x=4;s.z=-8;
+ for(let i=0;i<50&&e.hp>0;i++){attack(s);for(let n=0;n<40;n++)tickCooldowns(s,.02);}
+ assert.equal(e.hp,0);assert.equal(s.caves.wardenDefeated,true);
+ assert.equal(drainEvents(s).filter(e=>e.interaction==='warden').length,1);
+ const restored=restoreCheckpoint(checkpointFromSession(s));assert.equal(restored.enemies.find(e=>e.type==='warden').hp,0);
+ Object.assign(restored,CAVE_ENTRY);interactCaves(restored,'leave');interactCaves(restored,'enter');
+ assert.equal(restored.enemies.filter(e=>e.type==='warden').length,1);assert.equal(restored.enemies.find(e=>e.type==='warden').hp,0);
 });

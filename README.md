@@ -9,6 +9,11 @@ classi, evoluzioni, esplorazione e cooperazione di gilda. **Questa build è una
 prova individuale con uno studio visivo procedurale**, non il gioco completo né
 la resa del concept artistico. La bozza social precedente è stata ritirata.
 
+La progressione locale comprende ricordo di Liora e Sigillo opzionale, Custode,
+Giardino dei nomi e Cave dei Sussurri con recupero della lente. Sono tre aree
+esplicite, senza streaming o multiplayer. Grafica ancora provvisoria.
+Prova delle Cave: `npm run test:caves`; regole in [CAVES_01.md](docs/CAVES_01.md).
+
 ## Avvio
 
 Richiede Node.js 22 o successivo e npm.
