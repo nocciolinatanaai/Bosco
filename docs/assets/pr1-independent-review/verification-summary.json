@@ -1,0 +1,13 @@
+{
+  "reviewedCommit": "241921873585cf2693ff31fcac72328ca7a76773",
+  "npmTest": {
+    "passed": 138,
+    "failed": 0
+  },
+  "build": "passed with >500kB chunk warning",
+  "daria": "passed independently",
+  "rangerDesktopMobile": "passed independently",
+  "decision": "changes requested; not merged",
+  "visualFinding": "upper-body run tracks overwrite moving bow pose",
+  "physicalDeviceTest": false
+}

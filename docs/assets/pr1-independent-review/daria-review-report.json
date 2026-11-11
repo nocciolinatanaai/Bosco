@@ -1,0 +1,181 @@
+{
+  "status": "passed",
+  "fixture": "tools/daria-review: two real Ranger actors, same light/camera; authoring view, not gameplay or device performance",
+  "frames": [
+    {
+      "view": "front",
+      "pose": "idle",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "side",
+      "pose": "idle",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "back",
+      "pose": "idle",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "face",
+      "pose": "idle",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "faceside",
+      "pose": "idle",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "front",
+      "pose": "run",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "front",
+      "pose": "draw",
+      "before": {
+        "triangles": 16776,
+        "meshes": 19,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14198,
+        "meshes": 22,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "side",
+      "pose": "draw",
+      "before": {
+        "triangles": 16776,
+        "meshes": 19,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14198,
+        "meshes": 22,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "front",
+      "pose": "release",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    },
+    {
+      "view": "front",
+      "pose": "dodge",
+      "before": {
+        "triangles": 16752,
+        "meshes": 18,
+        "skinned": 13,
+        "materials": 16
+      },
+      "after": {
+        "triangles": 14174,
+        "meshes": 21,
+        "skinned": 18,
+        "materials": 20
+      }
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "failedLoad": {
+    "failed": {
+      "ready": "failed",
+      "status": "fallback",
+      "fallbackVisible": true,
+      "skinned": false
+    },
+    "retried": {
+      "ok": true,
+      "status": "ready",
+      "fallbackVisible": false
+    }
+  }
+}

@@ -1,5 +1,16 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## PR #1 / ART-01 — revisione Codex ricevuta
+
+Letta la testa 2419218 della PR #1, base d472bd1. Esito **richieste modifiche**,
+nessuna integrazione o pubblicazione. 138 test, build e test:daria passati;
+probe aggiuntivo conferma che nel tiro in movimento il secondo mixer sovrascrive
+torso/braccia con la corsa. Dati, riproduzione, risposte ART-01 e CHAL-01 in
+docs/PR_1_REVIEW.md; prompt di ritorno in docs/CLAUDE_PR1_FEEDBACK.md.
+Questa è una revisione documentata nel repository, non una review API GitHub.
+Le diciture «nessuna PR ricevuta» sotto sono storiche per il vecchio incarico
+Rintocco; non negano questa consegna personaggi.
+
 ## Mandato corrente e provenienza
 
 Il proprietario riferisce che Tonino ha verificato 6ef6174 (117 test, build,

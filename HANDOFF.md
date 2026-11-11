@@ -3,6 +3,20 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Revisione PR #1 — modifiche richieste a Tonino
+
+Testa letta e testata 2419218, base d472bd1. Nessun merge: bug confermato nel
+tiro in movimento (mixer legs-run sovrascrive anche torso/braccia). 138 test,
+build, test:daria e regressione Ranger desktop/mobile passati, ma non rilevano
+questo difetto. Riproduzione e
+evidenze in docs/PR_1_REVIEW.md e docs/assets/pr1-independent-review/.
+Prompt per Tonino in docs/CLAUDE_PR1_FEEDBACK.md. Personaggi restano riservati a
+Tonino; Codex non corregge il suo ramo alla cieca. Sfida CHAL-01 letta e numeri
+riprodotti: home 3,73 MB, home+demo Ranger 5,53 MB, Combattente 6,24 MB.
+Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
+Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
+state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
+
 ## Nuovo incarico Claude — scrittura autorizzata
 
 Il proprietario richiede commit del lavoro e nuovo prompt per Claude. Verificato
