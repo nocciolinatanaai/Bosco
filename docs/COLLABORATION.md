@@ -10,7 +10,7 @@ ancora non consegnati al momento dell'assegnazione; non ricostruire la patch.
 | Responsabile | Incarico | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
 | Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | In preparazione secondo il proprietario; PR attesa verso mythwood/collaboration-base |
-| Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | In corso sulla base 6ef6174 |
+| Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | Concluso: 2 regressioni complete passate, timeout riprodotto/corretto nel runner, 62 scenari; PEER_REVIEW |
 
 Codex integra sul ramo di collaborazione; Tonino usa rami tonino/<incarico> e
 PR verso quel ramo. Non committare entrambi sullo stesso ramo. Finché la PR
@@ -552,3 +552,18 @@ Autorizzata la sincronizzazione del ramo mythwood/collaboration-base; main,
 deploy, servizi esterni e spese esclusi. Esito remoto verificato nel messaggio
 di consegna dopo il push, non presunto da questo checkpoint. Esperimenti
 cinematici e skill installate non tracciati preservati e non inclusi.
+
+## Esito Codex — incarico regressione e misure concluso
+
+Due regressioni complete, prima originale poi runner corretto, passate su
+desktop/mobile con la stessa build. 117 test passati; riproduttore di stallo
+controllato passato. Vecchia causa storica non accertata: documentata fragilità
+del gesto a tempo reale, nessun timeout aumentato o modifica del gioco.
+62 scenari Custode/Sentinella ripetuti identici; numeri e controesempi in
+PEER_REVIEW, evidenze in assets/peer-review-pass. File riservati a Tonino
+confrontati byte per byte con 6ef6174: invariati.
+
+Decisione: problemi/candidati di bilanciamento registrati, nessuna correzione
+applicata o PR Tonino approvata senza consegna. Prossimo passo: revisione della
+PR Rintocco quando il proprietario la segnala. Nessun merge main, deploy, social,
+spesa o produzione. Ramo condiviso aggiornato con commit di verifica.

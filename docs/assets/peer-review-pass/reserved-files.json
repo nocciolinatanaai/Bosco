@@ -1,0 +1,11 @@
+{
+  "comparedWith": "6ef6174",
+  "unchanged": true,
+  "sha256": {
+    "src/caves.js": "e2183a8dbe07e7fbb5e699f26851a872428e2573b41332231b994635735ee925",
+    "src/combat.js": "4992aec1778457644c850f0133a23c454446e1bd810356d372eeacfb2f73d51a",
+    "src/journey.js": "79188cda30637236bb36ce758b4838f2f487e1a8459183fef57dfb847ec394b2",
+    "src/runtime.js": "a8d55c273838c4648b1b2df9ee3ad9b0e158d152bb29a13c6934f955c0c450c2",
+    "tests/caves.test.mjs": "3a1feade3003f74f082ade9ba946b194daa3a78002a6e02e66754b273ca681a6"
+  }
+}

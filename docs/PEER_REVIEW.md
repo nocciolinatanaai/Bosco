@@ -8,6 +8,13 @@ una PR: i risultati del Rintocco e i cambiamenti proposti sono riferiti dal
 proprietario, non verificati autonomamente su codice consegnato. Nessuna
 approvazione della patch o risposta inventata. Il proprietario avviserà della PR.
 
+Risultato Rintocco riferito dal proprietario: 1,4–5 s con Attacco/Abilità,
+nessun rintocco completato e zero danni per cinque classi su sei; tiro remoto di
+Mago/Ranger/Guaritore e nessun uso del Sigillo nelle prove. Proposta di Tonino
+riferita: PV 360, prima carica più rapida, rintocco temprato dopo un'interruzione
+(non più interrompibile ma schivabile), raggio 6 sul banco e finale condizionato
+al Guardiano zittito. Non ricostruita né applicata da Codex.
+
 Assegnazioni e file riservati nella testa di COLLABORATION.md. Codex non modifica
 caves.js, hit, journey/runtime o caves.test; qui misura Custode e Sentinella e
 indaga il runner episodio. Nessun bilanciamento applicato da Codex in questo blocco.
@@ -74,6 +81,9 @@ zero cariche/impatti/danno. Contro la Sentinella la stessa posizione **statica**
 non basta: la pattuglia esce dal tiro (110 PV dopo 120 s). Seguendo invece a
 14,25 con movimento pubblico, Ranger la uccide in 4,88 s, zero cariche/impatti e
 danno; non si può descrivere questo secondo caso come «premendo solo attacco».
+È fuori **attivazione** (14), non fuori dalla lunghezza potenziale del raggio
+(22): se una linea fosse già in carica, stare a 14,25 da solo non garantirebbe
+sicurezza. Lo scenario evita che la Sentinella inizi la carica.
 
 Mago a distanza uccide il Custode senza danno ma il nemico si avvicina fino a
 circa 5,08: non è sempre fuori dal raggio. Guaritore lontano dal Custode riceve
@@ -88,6 +98,14 @@ Ranger evoluto; Sentinella eliminabile prima che il suo segnale produca un impat
 catene di interruzione possono cancellare il ciclo del Custode. Sono candidati
 per incarichi separati, non patch applicate durante la PR Rintocco.
 
+Un nemico opzionale che muore in fretta non è automaticamente un bug: potrebbe
+servire alla sensazione di crescita. Se la Sentinella deve rendere necessaria la
+lettura della linea/coperture, questi casi non la richiedono; se è una ricompensa
+di potenza, una parte del risultato può essere intenzionale. «Dominante» qui
+indica un candidato che evita la decisione prevista, non una dimostrazione di
+ottimalità globale. Il Custode invece non risponde affatto al tiro fuori aggancio:
+questo comportamento va discusso separatamente dalla durata della lotta.
+
 Quando arriva tonino/rintocco, verificare che PV 360/raggio 6/rintocco temprato
 cambino decisioni reali e non soltanto il tempo di uccisione. Coprire il banco
 non prova di eliminare il tiro da lontano: richiedere misure di distanza, cariche,
@@ -99,7 +117,7 @@ limitare la cancellazione ripetuta delle cariche e verificare il tempo disponibi
 alla Sentinella nel vero percorso di avvicinamento. Non imporre danni inevitabili:
 una risposta attiva riuscita deve poter evitare danno. Serve anche una prova UI.
 
-## REG-01 — episodio completo e timeout Sigillo (in verifica)
+## REG-01 — episodio completo e timeout Sigillo (concluso)
 
 Regressione **completa isolata passata** sulla build della base 6ef6174: desktop
 1440×900 e mobile 390×844, zero errori/richieste esterne; fallback storage corrotto
@@ -113,12 +131,61 @@ npm run build
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium node scripts/browser-check.mjs
 ```
 
-Indagine controllata in corso con episode-input-probe.mjs, senza altre prove GPU
-contemporanee. Nessuna modifica del gioco o aumento dei timeout. Il runner è
-stato predisposto a trattenere W fino alla tappa osservata «Rompi il primo
-sigillo», con rilascio anche in errore; attesa prima del ricordo resta 60 s.
-Esito del riproduttore e seconda regressione verranno registrati prima della
-consegna. Non attribuire lo stallo storico al rendering senza ulteriore evidenza.
+### Fragilità riprodotta e correzione del runner
+
+```sh
+MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium node scripts/episode-input-probe.mjs
+```
+
+Il riproduttore sospende esclusivamente i callback requestAnimationFrame durante
+il gesto W da 1600 ms. Non cambia stato, coordinate, HP o regole del gioco.
+Produce due casi, eseguiti senza altri test GPU concorrenti:
+
+| Caso | Frame durante W | Risultato dell'attesa ricordo (60 s) | HP nemici alla verifica |
+| --- | --- | --- | --- |
+| W rilasciato dopo 1600 ms reali | 0 (12→12) | Timeout, giocatore vivo e non in pausa | 0 / 65 / 280 |
+| W mantenuto fino alla tappa di movimento, dopo lo stesso stallo | 0 durante lo stallo (13→13), poi riprende | Ricordo aperto, nessuna sconfitta | 0 / 0 / 280 |
+
+Il primo caso è recuperabile muovendosi e attaccando dopo il timeout. Focus
+world, pausa disattivata, vita 100/100: non era una sconfitta o input finito in un
+campo testo. Screenshot mostrano «Eco corazzato · 65 PV · Avvicinati per attaccare».
+In condizioni iniziali il secondo eco è a sqrt(6²+13²) ≈14,32 unità: oltre
+aggancio nemico 14 e tiro Ranger iniziale 12. Il primo eco è invece raggiungibile.
+Se il breve movimento non viene simulato, tenere solo Attacco non chiude il ciclo.
+
+**Correzione limitata al test:** prima di rilasciare W aspettare la tappa UI
+«Rompi il primo sigillo» (distanza percorsa ≥1), con rilascio in finally. Nessuna
+scadenza aumentata: ricordo resta 60 s. Applicato anche al setup della prova di
+sconfitta; aggiunte fasi e tempi osservati nel rapporto. Non cambia un solo file
+src/ né i file riservati a Tonino.
+
+**Conclusione:** fragilità deterministica del gesto a durata reale riprodotta e
+corretta nel runner. È una spiegazione compatibile con il vecchio timeout, ma
+la causa storica precisa resta non accertata: mancano misura frame e snapshot di
+quell'esecuzione. Non è provato che fosse uno stallo GPU, un problema di focus o
+la concorrenza con Giardino. La ripetizione isolata originale è passata e non
+consente da sola di dichiarare il test privo di flakiness.
+
+Riproduttore passato: entrambe le condizioni attese, zero errori/richieste esterne.
+Evidenze in assets/peer-review-pass/input-stall-report.json e screenshot associati.
+Seconda regressione **completa** col runner corretto passata desktop/mobile,
+compresi storage corrotto/negato, zero errori/richieste esterne. Dal 11:39:36 al
+11:48:01 UTC. Rapporto: assets/peer-review-pass/episode-hardened.json. 117 test
+npm test passati indipendentemente dal risultato riferito per Tonino. I 62
+risultati di bilanciamento sono identici in due esecuzioni dello script, a parità
+di sorgenti applicativi. La build è la stessa per entrambi i percorsi completi.
+
+Tempi reali misurati dal runner per raggiungere la tappa (non una misura FPS):
+
+| Profilo | Movimento Ranger | Setup sconfitta Mago |
+| --- | ---: | ---: |
+| desktop | 3468 ms | 2326 ms |
+| mobile | 1223 ms | 586 ms |
+
+Non trasformare due regressioni passate e un caso controllato in una garanzia
+contro ogni futura scadenza. Le nuove fasi e snapshot del runner servono a
+localizzare un eventuale fallimento successivo. Rintocco rimane in revisione
+attesa: nessun merge o giudizio su una patch non ancora ricevuta.
 
 ---
 

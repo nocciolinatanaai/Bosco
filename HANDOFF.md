@@ -15,24 +15,37 @@ le diciture precedenti «nessun push» non impediscono il push ora richiesto.
 Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
 La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
-## In corso — revisione coordinata con Tonino
+## Blocco concluso — regressione e revisione coordinata con Tonino
 
 Mandato e tabella incarichi nella testa di COLLABORATION. Tonino/rintocco è
-riservato; consegna/PR attese su segnalazione del proprietario. Codex non cambia
-caves.js, hit o gli altri sorgenti assegnati a Tonino. Stato dei suoi test
-comunicato dal proprietario, non da una risposta ricevuta nel repository.
+riservato; consegna/PR attese su segnalazione del proprietario. Stato dei suoi
+test e della patch comunicato dal proprietario, non letto in una sua PR.
+Codex non ha modificato alcun file src/ né tests/caves.test.mjs: confronto byte
+per byte con 6ef6174 in assets/peer-review-pass/reserved-files.json.
 
-Regressione completa della base 6ef6174 passata desktop/mobile, zero errori o
-richieste esterne, inclusi fallback storage. BAL-01 in PEER_REVIEW: 62 scenari
-pubblici, Sentinella sconfitta da ferma senza impatti per tutte le classi;
-Custode senza impatti per tre classi da vicino; Ranger a 14,25 fuori aggancio
-uccide Custode senza attivarlo. Condizioni/counteresempi e numeri documentati,
-non una prova di difficoltà umana. Nessuna patch di bilanciamento applicata.
+Due regressioni complete dell'episodio passate desktop/mobile, prima col runner
+originale e poi con movimento basato sulla tappa osservata, sulla stessa build:
+zero errori/richieste esterne, inclusi sconfitta/riprova e fallback storage.
+117 test superati. Riproduttore controllato: 0 frame durante W da 1600 ms causa
+il timeout 60 s, secondo eco fermo a 65 PV; aspettando progresso reale la stessa
+condizione raggiunge il ricordo. Corretto solo il runner, non il gioco o i timeout.
+Causa storica precisa non accertata: la fragilità dimostrata è compatibile, non
+una prova delle condizioni GPU/focus di quella vecchia esecuzione.
 
-Riproduttore controllato del timeout e regressione del runner con movimento
-basato sulla tappa osservata in corso. Evidenze in assets/peer-review-pass/.
-Aggiornare l'esito prima di concludere. Push autorizzato al ramo di collaborazione,
-nessun merge main, deploy, social, spesa o produzione.
+BAL-01 in PEER_REVIEW: 62 scenari API pubblica ripetuti con risultati identici.
+Sentinella da ferma senza impatti per tutte le classi (1,43–3,25 s); Custode
+senza impatti per tre classi da vicino; Ranger da fermo a 14,25 uccide Custode
+in 5,70 s senza attivarlo. Distinti cariche, impatti, danno ricevuto e casi senza
+uccisione. Approccio iniziale escluso, non misura della difficoltà umana.
+Non chiamare ogni vittoria rapida un bug: discutere il ruolo dell'incontro.
+
+Evidenze e comandi in docs/PEER_REVIEW.md e docs/assets/peer-review-pass/.
+Script nuovi: combat-balance-probe.mjs e episode-input-probe.mjs; aggiornato
+browser-check.mjs. File di Tonino invariati, nessuna patch di bilanciamento.
+Prossimo passo: leggere la PR tonino/rintocco quando segnalata, contestare con
+prove e decidere integrazione/modifiche/rifiuto. Nessuna approvazione presunta.
+Push autorizzato sul ramo di collaborazione; nessun merge main, deploy, social,
+spesa o accesso alla produzione.
 
 ## Blocco corrente — ponte di revisione e orientamento
 

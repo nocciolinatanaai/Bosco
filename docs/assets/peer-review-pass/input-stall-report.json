@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "kind": "Controlled RAF suppression during the original 1600ms W gesture; not proof of the historical machine condition",
+  "runs": [
+    {
+      "strategy": "fixed-wall-time",
+      "before": {
+        "frames": 12,
+        "hp": "100 / 100",
+        "quest": "Trova gli echi",
+        "hint": "Muoviti con WASD, joystick o toccando il terreno.",
+        "focus": "help",
+        "paused": "Pausa",
+        "enemies": [
+          52,
+          65,
+          280
+        ],
+        "memory": false,
+        "result": false
+      },
+      "during": {
+        "frames": 12,
+        "hp": "100 / 100",
+        "quest": "Trova gli echi",
+        "hint": "Muoviti con WASD, joystick o toccando il terreno.",
+        "focus": "world",
+        "paused": "Pausa",
+        "enemies": [
+          52,
+          65,
+          280
+        ],
+        "memory": false,
+        "result": false
+      },
+      "after": {
+        "frames": 158,
+        "hp": "100 / 100",
+        "quest": "Libera l’ultimo eco",
+        "hint": "Aspetta la carica, esci dal cerchio e sfrutta il recupero.",
+        "focus": "world",
+        "paused": "Pausa",
+        "enemies": [
+          0,
+          65,
+          280
+        ],
+        "memory": false,
+        "result": false
+      },
+      "timeout60000": true,
+      "recoverable": true,
+      "errors": [],
+      "external": []
+    },
+    {
+      "strategy": "observed-progress",
+      "before": {
+        "frames": 13,
+        "hp": "100 / 100",
+        "quest": "Trova gli echi",
+        "hint": "Muoviti con WASD, joystick o toccando il terreno.",
+        "focus": "help",
+        "paused": "Pausa",
+        "enemies": [
+          52,
+          65,
+          280
+        ],
+        "memory": false,
+        "result": false
+      },
+      "during": {
+        "frames": 13,
+        "hp": "100 / 100",
+        "quest": "Trova gli echi",
+        "hint": "Muoviti con WASD, joystick o toccando il terreno.",
+        "focus": "world",
+        "paused": "Pausa",
+        "enemies": [
+          52,
+          65,
+          280
+        ],
+        "memory": false,
+        "result": false
+      },
+      "after": {
+        "frames": 99,
+        "hp": "100 / 100",
+        "quest": "Ascolta il ricordo",
+        "hint": "Risveglia l’eco: lo scatto diventerà anche un contrattacco.",
+        "focus": "memory-title",
+        "paused": "Riprendi",
+        "enemies": [
+          0,
+          0,
+          280
+        ],
+        "memory": true,
+        "result": false
+      },
+      "timeout60000": false,
+      "recoverable": false,
+      "errors": [],
+      "external": []
+    }
+  ]
+}

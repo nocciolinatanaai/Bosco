@@ -1,0 +1,41 @@
+{
+  "gameplayBase": "6ef617400dbf6742aa5b40ee1ec777bef9368388",
+  "checkpoint": "0789af7",
+  "node": "v24.22.1",
+  "chromium": "Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)",
+  "renderer": "SwiftShader software, mobile emulated",
+  "buildHtmlSha256": "69b7017b39fe2331bc80d3e9cc00da5c4e95a65b2a736e063f641e294de0d248",
+  "baselineRunnerSha256": "2c48597399a95d3046d67f8891cd896ab69386e6b3963e04731813485091fa97",
+  "currentRunnerSha256": "2b994cbbf55396abe0d9b8878692d4761ec4c820c9da5461d12c47c69f5a3e64",
+  "sourceSha256": {
+    "scripts/browser-check.mjs": "2b994cbbf55396abe0d9b8878692d4761ec4c820c9da5461d12c47c69f5a3e64",
+    "scripts/combat-balance-probe.mjs": "2f8a6aa569148452501e20f4942ccf69a1506a348449d01c4a99661f22f82286",
+    "scripts/episode-input-probe.mjs": "7e9dcd9b348953576814e02de26fe13a4f99d9c440d532b29825fa5683cfd357",
+    "src/combat.js": "4992aec1778457644c850f0133a23c454446e1bd810356d372eeacfb2f73d51a",
+    "src/garden.js": "40233c8513e2dfe39ba50a1e133cf5be76d9cb78c150b1140d950c141ed814e6",
+    "src/roles.js": "4964ac2f3c124eb4f2534eac552e1237f1aa844e6ccdcaa330ddd69356fe1093",
+    "src/enemy-attacks.js": "8adbbac3e191055675bd3f3898d715e89eb114b555c8c81631e22c97e8fe8010"
+  },
+  "evidenceSha256": {
+    "balance-report.json": "05b9a7af91c3bdf62fc86d0d8751b165855a55a950a7e6bb581888b5570250db",
+    "episode-baseline.json": "fcbdc9d462891e36359258ebe1c5f40f7b46ede4a16a3bfa40b3f6b8a8d6dcb2",
+    "episode-hardened.json": "18c1c3cdb3d050992a487481a6fcd95b9f3cb293193020980053633ef6821ad8",
+    "fixed-input-stall.png": "6792e27782b0e8f1334aa1a2351b9fa04fb233389d5edd5ab053b25e57e43a78",
+    "input-stall-report.json": "c20d4a509b0b0b7be58fbcf271ab724350d798ef442f21d6214194d02fcdb3ee",
+    "progress-input-memory.png": "3e1e07f7a8698e2e9d8479293dfff407f210fb6c74e5129732e8c7f0be0f62ac",
+    "reserved-files.json": "f63bcf1e5cced6a339ba9a779735df236076f579fd8006859acb974f2d4526fc",
+    "unit-summary.json": "2c7005394a9b96852b76f4936ab0c3c1861936e51d94abf9ea9773413050f6fc"
+  },
+  "unitTests": 117,
+  "balanceScenarios": 62,
+  "repeatedBalanceResultsIdentical": true,
+  "hardenedFullRegression": "passed desktop/mobile with corrupt/blocked storage fallbacks",
+  "limitations": [
+    "Historical timeout cause not established; controlled frame-stall mechanism reproduced",
+    "Balance probes start at controlled combat positions; entry/exploration and human skill not measured",
+    "No real device Safari/iPhone validation",
+    "Tonino proposal reported by owner, patch/PR not reviewed or integrated",
+    "No gameplay or reserved files modified",
+    "No deploy, main merge, spending or production access"
+  ]
+}
