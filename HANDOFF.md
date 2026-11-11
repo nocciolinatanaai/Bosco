@@ -15,6 +15,25 @@ le diciture precedenti «nessun push» non impediscono il push ora richiesto.
 Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
 La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
+## In corso — revisione coordinata con Tonino
+
+Mandato e tabella incarichi nella testa di COLLABORATION. Tonino/rintocco è
+riservato; consegna/PR attese su segnalazione del proprietario. Codex non cambia
+caves.js, hit o gli altri sorgenti assegnati a Tonino. Stato dei suoi test
+comunicato dal proprietario, non da una risposta ricevuta nel repository.
+
+Regressione completa della base 6ef6174 passata desktop/mobile, zero errori o
+richieste esterne, inclusi fallback storage. BAL-01 in PEER_REVIEW: 62 scenari
+pubblici, Sentinella sconfitta da ferma senza impatti per tutte le classi;
+Custode senza impatti per tre classi da vicino; Ranger a 14,25 fuori aggancio
+uccide Custode senza attivarlo. Condizioni/counteresempi e numeri documentati,
+non una prova di difficoltà umana. Nessuna patch di bilanciamento applicata.
+
+Riproduttore controllato del timeout e regressione del runner con movimento
+basato sulla tappa osservata in corso. Evidenze in assets/peer-review-pass/.
+Aggiornare l'esito prima di concludere. Push autorizzato al ramo di collaborazione,
+nessun merge main, deploy, social, spesa o produzione.
+
 ## Blocco corrente — ponte di revisione e orientamento
 
 Richiesta: automatizzare la collaborazione tramite skill e continuare il gioco.

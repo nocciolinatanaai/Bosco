@@ -33,6 +33,16 @@ try {
     const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: mobile ? 2 : 1 });
     const page = await context.newPage();currentPage=page;
     const errors = [], external = [], portraitRequests = [];
+    const inputChecks = [];
+    const stage = async name => { report.stage = name; await saveReport(); };
+    async function walkUntilTutorialProgress() {
+      const started = Date.now();
+      await page.keyboard.down('KeyW');
+      try {
+        await page.waitForFunction(() => document.getElementById('quest-title').textContent === 'Rompi il primo sigillo', {}, { timeout: 30000 });
+      } finally { await page.keyboard.up('KeyW'); }
+      inputChecks.push({ gesture: 'W until movement milestone', wallMs: Date.now() - started, milestone: await page.locator('#quest-title').textContent() });
+    }
     page.on('request', request => { if (new URL(request.url()).pathname.endsWith('/art/liora-portrait.png')) portraitRequests.push(request.url()); });
     page.on('pageerror', (error) => { errors.push(error.message); console.error(name, error.message); });
     page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
@@ -127,12 +137,14 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.screenshot({ path: `test-results/${name}-arena.png` });
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0, 'Nessuna persistenza senza opt-in');
+    await stage('ranger-start');
     await page.locator('#brand').click(); await page.locator('[data-class="ranger"]').click();
     await page.locator('#save-start').check(); await page.locator('#start').click();
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')).stage), 'arrival');
     assert.equal(await page.locator('#boss').isHidden(), true, 'Custode sigillato prima del ricordo');
     assert.ok((await page.locator('#journey-hint').innerText()).includes('Muoviti'));
-    await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
+    await walkUntilTutorialProgress();
+    await stage('first-memory');
     await page.keyboard.down('KeyJ');
     await page.waitForFunction(() => document.getElementById('memory').open||document.getElementById('result').open, { }, { timeout: 60000 });
     assert.equal(await page.locator('#result').evaluate(e=>e.open),false,'Sopravvive fino al ricordo');
@@ -161,6 +173,7 @@ try {
     await page.locator('#dash').click();
     assert.equal(await page.locator('#dash strong').innerText(), 'Risonanza');
     await page.screenshot({ path: `test-results/${name}-resonance.png` });
+    await stage('guardian');
     await page.keyboard.down('KeyW'); await page.keyboard.down('KeyJ');
     await page.waitForFunction(() => document.getElementById('boss-hp').value < 280, {}, { timeout: 30000 });
     await page.keyboard.up('KeyJ');
@@ -187,6 +200,7 @@ try {
       assert.ok(follow.y + follow.height <= stick.y || follow.x >= stick.x + stick.width, 'Missione e joystick separati in landscape');
       await page.setViewportSize(viewport);
     }
+    await stage('trail-and-checkpoints');
     for (let i = 0; i < 3; i++) {
       await page.locator('#follow-trail').click();
       await page.waitForFunction(() => document.getElementById('follow-trail').textContent.includes('Risuona'), {}, { timeout: 60000 });
@@ -233,8 +247,9 @@ try {
     if (mobile) {
       await page.locator('#start').click(); await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light'); await page.locator('#close-info').click(); await page.locator('#brand').click();
     }
+    await stage('idle-defeat');
     await page.locator('[data-class="mage"]').click(); await page.locator('#start').click();
-    await page.keyboard.down('KeyW'); await page.waitForTimeout(1600); await page.keyboard.up('KeyW');
+    await walkUntilTutorialProgress();
     await page.waitForFunction(() => document.getElementById('result').open, {}, { timeout: 90000 });
     assert.ok((await page.locator('#result-text').innerText()).includes('L’ultimo colpo'));
     assert.ok((await page.locator('#result-text').innerText()).includes('eco'));
@@ -246,7 +261,7 @@ try {
     assert.deepEqual(external, [], 'Nessuna richiesta remota');
     assert.deepEqual(errors, [], 'Nessun errore browser');
     console.log(`PASS ${name}: classi, 3D, impatto abilità, combo, schivata, pausa, controlli, echi → ricordo → evoluzione → Frattura/Onda → vittoria, tracce e ritratto Liora, salvataggio/ripresa/eliminazione, audio, qualità grafica, sconfitta e riprova, isolamento`);
-    report.runs.push({ name, viewport, status: 'passed', externalRequests: external.length, errors: errors.length, portraitRequests: portraitRequests.length, checkpoints: 'opt-in, milestones, reload, resume, pause preference, delete own key', persistentEntries: 0 });
+    report.runs.push({ name, viewport, status: 'passed', externalRequests: external.length, errors: errors.length, portraitRequests: portraitRequests.length, inputChecks, checkpoints: 'opt-in, milestones, reload, resume, pause preference, delete own key', persistentEntries: 0 });
     await saveReport();
     await context.close();
   }
@@ -277,7 +292,7 @@ try {
     assert.deepEqual(errors, []); report.storageFallbacks.push({ mode, status: 'passed', errors: 0 }); await saveReport();
     await context.close();
   }
-  report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.currentViewport; await saveReport();
+  report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); delete report.currentViewport; delete report.stage; await saveReport();
 } catch (error) {
   if (currentPage && !currentPage.isClosed()) {
     try {
