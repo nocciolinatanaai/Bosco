@@ -3,6 +3,25 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Giro notturno orario e nuove consegne intercettate
+
+Il proprietario rimanda alla mattina il confronto sull'automazione e chiede
+un giro ogni ora. Vecchio processo non trovato attivo; avviato monitor separato
+con intervallo 3600 s e 9 controlli (subito + otto ore), log/PID/piano in
+.agent-exchange/monitor/ ignorato. Sopravvive solo finché ambiente/processo restano
+attivi; niente risveglio chat o notifiche esterne. Controllare log e PID al rientro.
+
+Nuove consegne lette direttamente senza reinoltro del proprietario:
+- PR #2 / tonino/bow-transition-01, testa 8f485ee. Transizione arco e PRODUCT-02.
+  Tonino propone provocazione+portata per i ranged, Custodia a carica consumabile,
+  ritira i due echi dopo vittoria. Misure riferite nei documenti, da verificare.
+- origin/tonino/rintocco ora disponibile, commit 3222cd1, recuperato come ref
+  remoto locale. Letto TONINO_REVIEW: non più bloccato da bundle mancante.
+
+Nessuna integrazione delle due nuove consegne né test indipendenti su di esse
+in questo blocco. Priorità al rientro: revisione PR #2 e patch Rintocco prima
+di generalizzare hit/resolute. Nessun deploy/social/spesa/Supabase.
+
 ## Monitor consegne — controllo automatico Git, niente risveglio chat
 
 Richiesta del proprietario: meno passaggi manuali, notifiche/decisioni importanti.

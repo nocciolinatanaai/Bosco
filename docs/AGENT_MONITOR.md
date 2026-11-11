@@ -7,6 +7,25 @@ programmare un nuovo turno della chat tramite uno script Git.
 
 ## Implementato
 
+### Giro notturno richiesto dal proprietario
+
+Per la notte il proprietario chiede frequenza oraria. Comando attuale:
+
+```sh
+node scripts/delivery-monitor.mjs --watch --interval-seconds 3600 --cycles 9
+```
+
+Un controllo subito e otto successivi, per circa otto ore. Avviato in un processo
+separato con log locale `.agent-exchange/monitor/nightly.log` e piano/PID in
+`night-plan.json` nella stessa cartella ignorata da Git. Verificare l'esistenza
+del processo e le date dei log prima di dichiarare che ha continuato durante
+la notte. Non è un servizio installato e non sopravvive alla chiusura dell'ambiente.
+Le istruzioni a cinque minuti sotto restano un'opzione, non la frequenza notturna.
+
+Intercettate PR #2 testa 8f485ee e consegna Rintocco 3222cd1: riferimenti
+recuperati e documenti letti. Revisioni indipendenti non ancora svolte; non
+considerare approvate le misure o le modifiche solo perché il monitor le vede.
+
 ```sh
 node scripts/delivery-monitor.mjs
 node scripts/delivery-monitor.mjs --watch --interval-seconds 300 --cycles 96
