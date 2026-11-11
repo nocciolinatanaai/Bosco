@@ -1,3 +1,7 @@
+> RITIRATO: il proprietario giudica video, modello e presentazione insufficienti.
+> Non pubblicare i due MP4 esistenti. Aggiornamento nei sorgenti del sito;
+> Claude deve applicarlo anche alla pubblicazione. Nessun nuovo Reel approvato.
+
 # MYTHWOOD — nuovo kit gameplay della demo
 
 Nuovi file: mythwood-reel.mp4 (14 s, 720×1280, H.264/AAC), mythwood-story.mp4

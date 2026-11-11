@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "landingLazyGame": true,
+      "feedbackDownload": true,
+      "gameNavigation": true
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "landingLazyGame": true,
+      "feedbackDownload": true,
+      "gameNavigation": true
+    }
+  ],
+  "errors": [],
+  "external": []
+}

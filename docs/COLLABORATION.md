@@ -12,6 +12,7 @@ ancora non consegnati al momento dell'assegnazione; non ricostruire la patch.
 | Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | In preparazione secondo il proprietario; PR attesa verso mythwood/collaboration-base |
 | Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | Concluso: 2 regressioni complete passate, timeout riprodotto/corretto nel runner, 62 scenari; PEER_REVIEW |
 | Codex | Demo con riepilogo, sito statico, video gameplay e preparazione Pages | index.html; demo.html; vite.config.js; src/site/; src/demo-entry.js; src/demo-shell.css; script test/cattura; public/site; documenti di consegna | mythwood/collaboration-base (sorgenti), mythwood/pages (build) | Codice e verifiche concluse; attivazione Pages e nuovo Supabase mancanti; file Tonino invariati |
+| Codex | Rifare presentazione Custode e ritirare il video respinto | src/visuals/guardian-redesign.js; src/visuals/actors.js; tools/guardian-review; script studio/cattura; index.html; test presentazione e documenti | mythwood/collaboration-base | Prima revisione consegnata: 129 test, studio visivo, Ranger e sito desktop/mobile superati; approvazione artistica pendente. Nessuna modifica a bilanciamento o file di Tonino |
 
 Codex integra sul ramo di collaborazione; Tonino usa rami tonino/<incarico> e
 PR verso quel ramo. Non committare entrambi sullo stesso ramo. Finché la PR
@@ -600,3 +601,15 @@ verificati con ls-remote. Il Reel è scaricabile da raw.githubusercontent.com
 una risposta del sito, né permette di concludere che il token sia realmente
 non valido. Resta la selezione del ramo in Pages e la verifica pubblica da
 un ambiente con accesso. Il nuovo progetto Supabase non è ancora configurato.
+
+## Correzione del mandato e critica della presentazione
+
+Il proprietario chiarisce: Codex e Claude sviluppano entrambi; Claude gestisce
+anche pubblicazioni e social. Nessuna separazione esclusiva delle competenze.
+Video respinto per scatti, mostro, animazioni, controlli e testi poco chiari.
+Codex ritira il Reel dalla presentazione nei sorgenti; Claude deve applicare
+l'aggiornamento alla pubblicazione. Riferimenti richiesti: Solo Leveling e
+Signore degli Anelli come atmosfera/leggibilità, senza riprodurre personaggi.
+Custode rifatto come guardiano del sigillo con pose di carica/colpo/recupero.
+File Tonino e regole combattimento restano invariati; approvazione artistica
+non presunta. Nessun nuovo video promozionale finché non verificato.

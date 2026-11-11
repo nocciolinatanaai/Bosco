@@ -1,3 +1,4 @@
+import { createSealedGuardian } from './guardian-redesign.js';
 import { createRangerActor } from './ranger.js';
 import * as THREE from 'three';
 import { block, curve, ellipsoid, link, piece } from './geometry.js';
@@ -180,6 +181,7 @@ export function createAdventurer(m) {
 }
 
 export function createGuardian(m, boss = true) {
+  if(boss)return createSealedGuardian(m);
   const root = new THREE.Group(); root.name = boss ? 'Custode-vuoto' : 'Eco-corazzato';
   const surface = boss ? m.bone : m.iron;
   const torso = joint(root, [0, 2.3, 0]);

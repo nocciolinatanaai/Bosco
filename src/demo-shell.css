@@ -1,3 +1,26 @@
 #demo-complete{width:min(600px,94vw);padding:30px;max-height:90dvh;overflow:auto;background:#11212e;border:1px solid #b89c6b;color:#eee5d5}#demo-complete h2{font:38px/1.1 Georgia,serif;margin:20px 0}#demo-complete p,#demo-complete li{font-size:15px;line-height:1.65;color:#c2cdd6}#demo-complete .demo-note{font-size:12px;color:#dec08e}#demo-complete ul{padding-left:20px;margin:20px 0}.demo-finish-actions{display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin-top:25px}.demo-finish-actions a{font-size:14px;color:#dec08e;border-bottom:1px solid #dec08e}.demo-finish-actions .primary{min-height:48px}.demo-site-link{font-size:11px;color:#dec08e}@media(max-width:700px){#demo-complete{padding:24px}#demo-complete h2{font-size:32px}footer nav{gap:7px}.demo-finish-actions{align-items:stretch;flex-direction:column}}
 
 @media(max-width:700px){footer nav{flex-wrap:wrap;row-gap:2px}}
+/* Combat trial: separate primary attack, dodge and named class skill. */
+@media(max-width:700px) and (orientation:portrait){
+ #actions{display:block;width:180px;height:162px;right:16px;bottom:calc(70px + env(safe-area-inset-bottom))}
+ #actions button{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px;border:1px solid #a6b4bf80;background:#142431e8;box-shadow:none}
+ #actions #attack{right:0;bottom:0;width:80px;height:80px;min-height:80px;border-radius:50%;border-color:#dec08e;background:#59482eaa}
+ #actions #dash{left:0;bottom:0;width:68px;height:68px;min-height:68px;border-radius:50%}
+ #actions #dash strong{display:none}#actions #dash::after{content:'Schiva';font:11px system-ui;color:#ecdfc6}
+ #actions #dash span{font-size:8px}
+ #actions #skill{right:6px;bottom:92px;width:74px;height:70px;min-height:70px;border-radius:10px}
+ #actions #skill #skill-name{display:block;font-size:10px;line-height:1.15;max-width:66px}
+ #actions #skill .skill-short{display:none!important}
+ #actions #skill svg{width:19px;height:19px}
+ #actions #skill span{font-size:9px}
+ #joystick{width:116px;height:116px;bottom:calc(92px + env(safe-area-inset-bottom));background:#1424318c;border-color:#a6b4bf65}
+ #joystick-knob{width:48px;height:48px;margin:-24px;border-color:#dec08e80;background:#b2bdc233}
+ .build{display:none}
+}
+.video-pending{padding:36px;border:1px solid var(--line,#c9af7b40);background:#142430}
+@media(orientation:landscape) and (max-height:560px) and (max-width:1000px){
+ #hud{width:270px;padding:6px 10px}
+ #signature-status,#artifact-status,#target-status{font-size:9px;line-height:1.25;margin-top:3px}
+ .meters{row-gap:2px}
+}

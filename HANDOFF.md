@@ -15,6 +15,27 @@ le diciture precedenti «nessun push» non impediscono il push ora richiesto.
 Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
 La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
+## Consegna — prima revisione Custode, presentazione ancora provvisoria
+
+Il proprietario chiarisce sviluppo condiviso Codex/Claude, pubblicazioni/social
+a Claude. Chiede nemici ispirati ad atmosfera/leggibilità di Solo Leveling e
+Signore degli Anelli, senza copiare. Video corrente ritirato nei sorgenti del
+sito; niente aggiornamento Pages o upload social da Codex in questo blocco.
+
+Nuovo Custode procedurale in visuals/guardian-redesign.js, integrato solo per
+il boss in actors.js: pietra/ferro/tessuto e sigillo nel torace, pose legate
+a carica/colpo/recupero. Gli echi e Rintocco non ridisegnati. File di Tonino
+intatti. Studio comparativo e test presentazione, 129 test passati; verifica
+Ranger desktop/mobile superata (schivata e contrattacco, zero errori/connessioni
+esterne). Sito desktop/mobile superato. Una prima prova ha rilevato HUD sovrapposto
+ai comandi in orizzontale: corretto e riprovato. Layout mobile ancora da valutare
+su dispositivo fisico. Evidenze in docs/assets/guardian-redesign/.
+Non sono qualità artistica finale o animazioni del giocatore completamente rifatte.
+
+Video: sorgente 20 fps esportata a 30; ripetizioni incluse anche per menu/finale.
+La pipeline futura richiede cattura 60 fps e rifiuta input sotto 50; nessun nuovo
+Reel reso o approvato. Dettagli e criteri in ENEMY_ART_DIRECTION.md.
+
 ## Consegna — demo, sito, video, account e cookie
 
 Mandato: demo, video e sito GitHub Pages; registrazione email/Google su nuovo

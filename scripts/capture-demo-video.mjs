@@ -1,6 +1,6 @@
 // Montage from the playable demo and checkpoint fixtures, with simulation clock stepped for capture.
 import assert from 'node:assert/strict';import {spawn} from 'node:child_process';import {once} from 'node:events';import {mkdir,writeFile} from 'node:fs/promises';import {chromium} from 'playwright';
-const out='/workspace/artifacts/mythwood-demo-video';await mkdir(out,{recursive:true});const fps=20,seconds=12,report={status:'running',source:'Actual demo UI/combat, awakened Ranger checkpoint; browser time stepped; not an uncut player session',width:540,height:960,fps,frames:0,errors:[],external:[],dodge:false,returnShot:false};
+const out='/workspace/artifacts/mythwood-demo-video';await mkdir(out,{recursive:true});const fps=60,seconds=12,report={status:'running',source:'Actual demo UI/combat, awakened Ranger checkpoint; browser time stepped; not an uncut player session',width:540,height:960,fps,frames:0,errors:[],external:[],dodge:false,returnShot:false};
 const server=spawn(process.execPath,['node_modules/vite/bin/vite.js','preview','--host','127.0.0.1','--port','5197','--strictPort'],{stdio:['ignore','pipe','pipe']});let browser,encoder,page;
 try{
  await new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('Preview timeout')),15000);server.stdout.on('data',d=>{if(String(d).includes('5197')){clearTimeout(t);resolve();}});server.on('error',reject);});
@@ -21,7 +21,7 @@ try{
    if(charging&&!previousCharging)dodgedThisCharge=false;previousCharging=charging;
    if(charging&&!dodgedThisCharge&&/0\.1 s/.test(intent)){const before=parseInt(await page.locator('#stamina-text').textContent());await page.keyboard.press('Space');dodgedThisCharge=true;lastDashFrame=frame;await page.clock.runFor(1);report.dodge ||= parseInt(await page.locator('#stamina-text').textContent())<before;}
    if(await page.locator('#signature-status').isVisible())report.returnShot=true;
-   if(report.returnShot&&!shotUsed&&frame-lastDashFrame>6&&await page.locator('#skill').isEnabled()){await page.keyboard.press('KeyQ');shotUsed=true;}
+   if(report.returnShot&&!shotUsed&&frame-lastDashFrame>Math.ceil(fps*.3)&&await page.locator('#skill').isEnabled()){await page.keyboard.press('KeyQ');shotUsed=true;}
 
   }
   await page.clock.runFor(1000/fps);const bytes=await page.screenshot({type:'jpeg',quality:91});if(!encoder.stdin.write(bytes))await once(encoder.stdin,'drain');report.frames++;
