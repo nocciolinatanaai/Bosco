@@ -35,3 +35,27 @@ window.reviewMotion=()=>{
  window.reviewPose('idle');
  return {startJump:distance(idle,start),interruptJump:distance(midway,interrupted),pauseDrift:distance(interrupted,paused),resetFinite:reset.every(v=>v.every(Number.isFinite))};
 };
+
+
+// Opt-in movement study; no footage export or promotional trailer.
+const playButton=document.querySelector('#motion-play'),motionState=document.querySelector('#motion-state');
+let playing=false,animationFrame=null;
+function stopStudy(){playing=false;cancelAnimationFrame(animationFrame);playButton.setAttribute('aria-pressed','false');playButton.textContent='Riproduci movimenti';}
+playButton.addEventListener('click',()=>{
+ if(playing){stopStudy();motionState.textContent='Studio in pausa';return;}
+ playing=true;playButton.setAttribute('aria-pressed','true');playButton.textContent='Ferma movimenti';
+ const start=performance.now();
+ const step=()=>{
+  if(!playing)return;
+  const time=(performance.now()-start)/1000,t=time%6,shooting=t>=2.2&&t<2.9,dodging=t>=2.9&&t<3.14,moving=(t>=.8&&t<2.2)||(t>=3.14&&t<4.6);
+  const label=shooting?'Tiro con arco':dodging?'Scatto':moving?'Corsa':'Attesa';
+  if(motionState.textContent!==label)motionState.textContent=label;
+  for(const actor of [old,next]){
+   actor.root.rotation.y=.2;
+   actor.root.userData.animate(time,moving,0,matchMedia('(prefers-reduced-motion: reduce)').matches,{evolved:true,dodge:dodging?3.14-t:0,action:shooting?{elapsed:t-2.2,windup:.28,duration:.7}:null});
+  }
+  renderer.render(scene,camera);animationFrame=requestAnimationFrame(step);
+ };
+ animationFrame=requestAnimationFrame(step);
+});
+document.querySelectorAll('[data-pose]').forEach(b=>b.addEventListener('click',()=>{stopStudy();motionState.textContent='Posa ferma';}));

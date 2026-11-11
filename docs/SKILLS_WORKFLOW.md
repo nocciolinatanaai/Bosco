@@ -35,3 +35,19 @@ né accesso alla chat di Claude. Non installare altri pacchetti automaticamente.
   d'umidità coerenti; UV ruotate senza consumare il seed del layout del livello.
 - I contatori del pipeline sommano scena, ombre e postprocessing. Non confondere
   i triangoli dell'ultimo quad con quelli del mondo o i conteggi con byte/FPS.
+
+
+## Evidenze del blocco applicato
+
+99 test, build e regressioni Ranger/Giardino desktop/mobile passati. Manifest
+e immagini in assets/skills-visual-pass/. Il confronto a camera fissa conferma
+stessi draw call/triangoli e tre texture in più; atlante pavimento 512×512 con
+quattro varianti, mappe muratura 128×128. Più memoria rispetto alla base: circa
+4 MiB in più di soli texel RGBA con mipmap, stima dimensionale non misura GPU.
+8 frame a caldo senza crescita dei conteggi geometrie/texture nel confronto.
+
+`node scripts/surface-review.mjs` prepara la baseline bc25e7c in test-results/
+e genera le due viste prima/dopo; serve la storia Git che contiene quel commit.
+Non pubblicare test-results/ o tools/ come parte della build. Lo studio
+/tools/visual-review/ consente riproduzione esplicita; non esporta un trailer.
+Il codice del gioco continua a funzionare senza queste fixture e senza skill.

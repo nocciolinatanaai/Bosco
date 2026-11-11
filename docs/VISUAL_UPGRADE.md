@@ -83,3 +83,11 @@ in docs/assets/visual-review/. Warning bundle >500 kB aperto: main 763 kB
 (205 kB gzip), loader separato 45 kB (13 kB gzip). Nessun test iPhone reale.
 Il conteggio del solo nuovo personaggio/accessori è 5.794 triangoli, 18 mesh
 e sei primitive skinned; il fallback conservato comporta memoria aggiuntiva.
+
+
+## Seguito — skill applicate a raccordi e superfici
+
+Vedere SKILLS_WORKFLOW.md e HANDOFF per lo stato più recente (99 test). Il
+proprietario ha giudicato ancora insufficiente il modello: questo rimane aperto.
+Nuovi raccordi e superfici procedurali non equivalgono alla ricostruzione finale
+della direzione artistica. Confronti a camera costante in assets/skills-visual-pass/.

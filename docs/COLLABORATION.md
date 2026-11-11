@@ -429,3 +429,17 @@ pausa nelle tre ossa campionate. Confronto superfici: geometria/draw call identi
 prima/dopo, tre texture in più. Atlante 2×2 per variare pietra e crepe senza
 nuovi materiali per blocco. Verifiche finali combattimento/Giardino pendenti.
 Nessun risultato artistico dedotto dalle misure, nessun push o pubblicazione.
+
+
+## Blocco skill concluso — pronto per revisione
+
+Checkpoint applicativi locali b999087 e 70a1d20; niente push. 99 test e build
+passati; confronto reale delle superfici e raccordi sullo scheletro verificati.
+Regressioni finali Ranger/Giardino su desktop/mobile passate, zero errori o
+richieste esterne. Manifest, screenshot e rapporti in assets/skills-visual-pass/.
+Lo studio del personaggio include riproduzione opt-in dei movimenti.
+
+Valutazione artistica ancora aperta: nessuna approvazione del proprietario o
+risposta di Claude presunta. Modello generico invariato e ancora insufficiente.
+Nessuna nuova immagine generata o asset acquistato. Teaser rimane sospeso.
+File del blocco liberi, esperimenti cinematografici precedenti lasciati fermi.

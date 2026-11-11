@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "baseline": "bc25e7c",
+  "kind": "Material authoring comparison; identical camera, geometry placement, lights and shader time; not gameplay",
+  "errors": [],
+  "external": [],
+  "views": [
+    {
+      "version": "before",
+      "view": "wide",
+      "calls": 220,
+      "triangles": 352063,
+      "geometries": 105,
+      "textures": 31,
+      "programs": 24
+    },
+    {
+      "version": "before",
+      "view": "detail",
+      "calls": 181,
+      "triangles": 340655,
+      "geometries": 105,
+      "textures": 31,
+      "programs": 24
+    },
+    {
+      "version": "after",
+      "view": "wide",
+      "calls": 220,
+      "triangles": 352063,
+      "geometries": 105,
+      "textures": 34,
+      "programs": 23
+    },
+    {
+      "version": "after",
+      "view": "detail",
+      "calls": 181,
+      "triangles": 340655,
+      "geometries": 105,
+      "textures": 34,
+      "programs": 23
+    }
+  ]
+}

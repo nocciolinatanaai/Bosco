@@ -1,0 +1,22 @@
+{
+  "code_checkpoint": "70a1d20",
+  "baseline": "bc25e7c",
+  "game_build_entry_sha256": "8de2c1276e67600d48878ed0d869bb0449af3082b350b765d808e12431bb746b",
+  "unit_tests_passed": 99,
+  "source_sha256": {
+    "src/visuals/pose-sampler.js": "42692374c1756b0a12b27483bc420ddddd858049dc3878d7e7c5e51daebd65cc",
+    "src/visuals/ranger-skinned.js": "79a9bbe51ba0b3f6721bb41c321b53dac488d9fdb21ac0d41004c0c8f3e60187",
+    "src/visuals/stone-surface.js": "a43bf877077b95a82dd4200795186e78d346f3c0a6c8e80c9a65724861748d60",
+    "src/visuals/materials.js": "586ca9d6c8159382f6fdb397b21ddb0ea3ff34fb003d85ed36038dcdc03bdaaa",
+    "src/visuals/environment.js": "8c7df57e8caf62edc8357c037db49117823436f38e8bbef2572f9190584a32c9",
+    "tools/visual-review/review.js": "f752378202b161a9558738658e0d1a81b95495cd2fc0193be64e9b5d390f6d80",
+    "tools/surface-review/review.js": "c006b286d4ad14b2f6d3a37ca7ade0d0b8955b8688808b3efefe33c79e7c6f68"
+  },
+  "image_sha256": {
+    "before-wide.png": "d1e8956cef9ac66c7d2d9913488682ced4625563e46b935dc607546a0a6024bb",
+    "after-detail.png": "ebf67e2def10469cd5d75c5d5d16c299eb608cf8f7d35e5e243b304ce7084e5e",
+    "before-detail.png": "fd01eeaac1cb12cc867747c376b49101ea13452b99f4d5d4b669a67ad2541c6d",
+    "after-wide.png": "8237e91ca15d2b9e855f7d56a5b2b6ae00cf00fdc57100bd854633ff33b97db4"
+  },
+  "note": "Authoring comparisons, no raster editing, same geometry placement, camera and lighting. Renderer counters include shadow and postprocessing passes. No real-device FPS or human artistic approval."
+}

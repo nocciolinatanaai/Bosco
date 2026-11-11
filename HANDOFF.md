@@ -1,12 +1,39 @@
 # Mythwood — consegna corrente
 
-Aggiornato da Codex il 10 novembre 2026, fuso Europe/Rome.
+Aggiornato da Codex nella sessione corrente, fuso Europe/Rome.
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
-Ultimo checkpoint applicativo locale: **35868c3**, non inviato al remoto.
+Ultimo checkpoint applicativo locale: **70a1d20**, non inviato al remoto.
 Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
 sempre git log/status prima di continuare. Main e servizio precedente separati.
 
-## Blocco locale corrente — prima sostituzione grafica del Ranger
+## Blocco locale corrente — superfici e raccordi con le skill
+
+Il proprietario richiede di applicare le skill installate e proseguire. Raccordi
+campionati su game time (120 ms), posa continua anche con comandi interrotti,
+pausa congelata e riavvio senza residui. Il mixer campionato update(0) richiede
+pesi espliciti; la fase dello scatto usa il tempo rimanente della schivata.
+Nessun cambio di collisioni, danni, eventi o controlli.
+
+Pietra non metallica: atlante procedurale 2×2 per pavimenti, bordi consumati,
+crepe e umidità con roughness coerente; mappe separate per muratura. UV variate
+senza cambiare il seed del layout. Tre texture GPU in più; l'atlante 512 px e le
+mipmap richiedono più memoria. Non è un'ottimizzazione di memoria o prova di FPS.
+Pipeline ora misura tutti i pass: 220 draw / 352.063 triangoli nella vista larga
+fissa, incluse ombre e postprocessing; conteggi prima/dopo identici.
+
+99 test, build e studio reale passati. Zero salto al cambio/interruzione o deriva
+in pausa nelle tre ossa campionate; non una misura di qualità dell'intero rig.
+Ranger e Giardino superati su desktop/mobile, zero errori/richieste esterne.
+Confronti e manifest in docs/assets/skills-visual-pass/. Studio opt-in delle
+animazioni in /tools/visual-review/; superfici in /tools/surface-review/ dopo
+scripts/surface-review.mjs, che prepara la baseline locale da bc25e7c.
+
+Skill pertinenti e procedura in docs/SKILLS_WORKFLOW.md. Il modello CC0 e il
+Custode restano quelli già giudicati insufficienti: qualità artistica finale,
+identità di Daria e nuove risorse ambientali ancora aperte. Teaser sospeso.
+Nessun push, deploy, spesa o post. Esperimenti cinematografici preservati e fermi.
+
+## Blocco precedente — prima sostituzione grafica del Ranger
 
 Il proprietario chiede di iniziare a migliorare la scena giocabile; teaser fermo.
 Base GLB CC0 di System G6, con scheletro e cinque clip, integrata al primo Ranger
@@ -243,7 +270,7 @@ ambiente, illuminazione e animazioni da valutare visivamente col proprietario.
 Non riprendere il trailer o dedurre approvazione artistica da test tecnici.
 Nessun push, deploy o pubblicazione eseguiti in questo blocco.
 
-## In corso — raccordi e superfici con le nuove skill
+## Cronologia — avvio del blocco superfici e raccordi (concluso sopra)
 
 Pose sampler campionato su game time, raccordi 120 ms, pausa/interruzione/riavvio
 coperti da quattro test sintetici. Ranger usa il sampler e raccorda l'orientamento;
@@ -251,6 +278,6 @@ fase dello scatto legata alla durata reale anziché al tempo globale della corsa
 Nuove superfici procedurali coerenti per pietra, bordi consumati e umidità,
 mappe separate per muratura e pavimento, nessuna immagine o asset acquistato.
 Statistiche pipeline corrette per conteggiare tutti i pass. Vedere SKILLS_WORKFLOW.
-Checkpoint prima del confronto visivo e regressione browser: ancora pendenti.
+Checkpoint iniziale prima delle verifiche; esiti nel blocco corrente sopra.
 Asset Ranger generico invariato; non risolta la distanza artistica dal concept.
 Nessun push, deploy o post. Teaser sospeso; esperimenti preesistenti preservati.
