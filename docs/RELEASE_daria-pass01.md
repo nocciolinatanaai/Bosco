@@ -15,8 +15,9 @@ Spostare la sorgente di Pages su mythwood/pages **sostituisce quel sito** con la
 demo, sullo stesso dominio. Non verificabile da qui quale ramo sia selezionato
 nelle impostazioni (API e dominio bloccati dal proxy).
 
-**Decisione del proprietario (2026-11-11): sì, la demo sostituisce il sito attuale
-su mythwood.it.**
+**Decisione del proprietario (2026-11-11): tutto il vecchio progetto Mythwood è
+chiuso e viene sostituito da questo, non solo il sito. La demo prende il posto
+del gioco su mythwood.it.**
 
 Come si fa senza perdere nulla:
 - main (ac9039e, gioco attuale) **non viene toccato**: il cambio avviene solo
@@ -31,8 +32,11 @@ Conseguenze da sapere prima del cambio:
 - il file di verifica TikTok viene copiato nella build;
 - anteprima.jpg, ingresso.jpg e nocciolina.png di main **non** sono nella build:
   le anteprime dei link già condivisi che li usano smetteranno di funzionare;
-- il giro programmato "Giro di Tonino" e i contenuti social descrivono il gioco
-  attuale e andranno aggiornati o fermati.
+- il giro programmato "Giro di Tonino" (statistiche del vecchio gioco, risposte e
+  pubblicazioni Instagram) è stato **disattivato** l'11/11, non cancellato. Le altre
+  attività programmate del vecchio progetto erano già disattivate.
+- da decidere con il proprietario, perché irreversibili o esterni: vecchio progetto
+  Supabase e dati dei giocatori, profili social, ramo main.
 
 Restano i blocchi tecnici e di processo: push negato (403), revisione di Codex,
 verifica del sito pubblicato non possibile da questa sessione.

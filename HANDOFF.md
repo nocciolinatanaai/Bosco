@@ -3,6 +3,14 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Decisione del proprietario — vecchio Mythwood chiuso (2026-11-11)
+
+Il proprietario: "Tutto il vecchio progetto Mythwood è morto e deve essere
+sostituito da questo. Tutto." Questo repository/ramo è l'unico progetto Mythwood.
+La demo sostituirà il gioco su mythwood.it (procedura e ripristino in
+docs/RELEASE_daria-pass01.md). Il giro programmato del vecchio progetto è disattivato.
+Non riusare il vecchio backend. Vecchi dati, Supabase e social: decisioni aperte.
+
 ## Consegna di Tonino — Daria pass01 (2026-11-11)
 
 Ramo tonino/character-art-pass-01 da d472bd1. **Non ancora sul remoto**: il push
