@@ -18,10 +18,16 @@ try {
   await page.addInitScript(data=>{if(!localStorage.getItem('mythwood.checkpoint.v1'))localStorage.setItem('mythwood.checkpoint.v1',JSON.stringify(data));},legacy);
   await page.goto('http://127.0.0.1:5191/',{waitUntil:'networkidle'});assert.deepEqual(await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1'))),legacy);
   await page.locator('#resume-saved').click();await page.locator('#help').click();await page.locator('#quality-select').selectOption('light');await page.locator('#close-info').click();
-  await page.locator('#cave-travel').click();await page.waitForTimeout(1300);await page.locator('#cave-travel').click();
+  await page.locator('#cave-travel').click();await page.waitForFunction(()=>document.getElementById('cave-travel').textContent==='Entra nelle Cave dei Sussurri');await page.locator('#cave-travel').click();
   await page.waitForFunction(()=>document.getElementById('region').textContent.includes('Cave dei Sussurri'));
   assert.equal(await page.locator('#boss').isHidden(),true);assert.equal(await page.locator('#follow-trail').isHidden(),true);
   let cp=await page.evaluate(()=>JSON.parse(localStorage.getItem('mythwood.checkpoint.v1')));assert.equal(cp.version,4);assert.equal(cp.caves.inside,true);
+  if(name==='mobile') {
+   await page.waitForFunction(()=>{const q=document.querySelector('.quest').getBoundingClientRect(),t=document.getElementById('toast').getBoundingClientRect();return t.top>=q.bottom+8;});
+   await page.locator('#quest-toggle').click();
+   await page.waitForFunction(()=>{const q=document.querySelector('.quest').getBoundingClientRect(),t=document.getElementById('toast').getBoundingClientRect();return t.top>=q.bottom+8;});
+   await page.screenshot({path:`${out}/mobile-expanded.png`});await page.locator('#quest-toggle').click();
+  }
   await page.screenshot({path:`${out}/${name}-entry.png`});report.step='lens';await save();
   await page.locator('#world-interact').click();
   await page.waitForFunction(()=>document.getElementById('world-interact').textContent==='Recupera la lente'||document.getElementById('result').open,{}, {timeout:60000});

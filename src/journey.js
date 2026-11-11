@@ -30,3 +30,16 @@ export const MEMORY = Object.freeze({
   caves: { title: 'Non erano dispersi.', body: 'Liora posa la lente sulla bussola. Due strade occupano lo stesso spazio. «La squadra seguiva la rotta giusta. Qualcuno ha spostato l’uscita dopo il nostro passaggio.» Sul bordo riconosce un’incisione: Archivio Cartiglio, revisione sette. Il nome cancellato dal sigillo compare sotto una correzione. Hai recuperato una prova; non sai ancora chi abbia firmato l’ordine.', button: 'Conserva la prova' },
   complete: { title: 'Qualcuno ci ha nascosti.', body: 'Il Custode si spezza. Non custodiva un tesoro: impediva alla voce di uscire. «Altri ricordano», sussurra Liora. Sul frammento compare il simbolo di una gilda cancellata dalle mappe. Il sentiero a est è la prossima pista. Hai liberato una voce; la squadra è ancora da trovare.', button: 'Segui il sentiero' },
 });
+
+// Narrative detail follows the milestone instead of repeating an obsolete task.
+export function storyObjective(s) {
+  if (s.caves.step === 3) return 'La lente ha rivelato una rotta sovrapposta. Liora riconosce la firma dell’Archivio Cartiglio; la prova è conservata.';
+  if (s.caves.step === 2) return 'La lente è con te. Riportala a Liora attraverso la soglia delle cave.';
+  if (s.caves.step === 1) return 'La lente conserva due rotte sovrapposte. Recuperala al banco del cartografo: Liora potrà distinguere la strada dalla correzione.';
+  if (s.garden.step === 4) return 'Il segnale è stato riportato. La bussola indica le Cave dei Sussurri, dove cercare una prova della rotta corretta.';
+  if (s.garden.step > 0) return 'La bussola è uno strumento di spedizione. Riporta il segnale: Liora potrà capire se la rotta viene ancora corretta.';
+  if (s.trail.complete) return 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.';
+  if (s.cleared) return 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.';
+  if (s.evolved) return 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.';
+  return 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+}

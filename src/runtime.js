@@ -8,7 +8,7 @@ import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
-import { journey, MEMORY } from './journey.js';
+import { journey, storyObjective, MEMORY } from './journey.js';
 import { ATTUNEMENTS, artifactUnlocked } from './artifacts.js';
 import { screenMovement, joystickVector } from './controls.js';
 import { createArtWorld, createPipeline } from './visuals/environment.js';
@@ -182,6 +182,10 @@ export function startRuntime($) {
     $('quest-toggle').setAttribute('aria-expanded', String(expanded)); $('quest-details').hidden = !expanded;
     document.body.classList.toggle('quest-expanded', expanded);
   };
+  const questPanel = $('quest-toggle').closest('.quest');
+  const syncQuestBounds = () => document.documentElement.style.setProperty('--quest-bottom', `${questPanel.offsetTop + questPanel.offsetHeight}px`);
+  const questObserver = new ResizeObserver(syncQuestBounds); questObserver.observe(questPanel);
+  window.addEventListener('resize', syncQuestBounds);
   expandQuest(innerWidth > 700 && innerHeight > 560);
   $('quest-toggle').addEventListener('click', () => expandQuest($('quest-toggle').getAttribute('aria-expanded') !== 'true'));
 
@@ -271,6 +275,9 @@ export function startRuntime($) {
       $('world-interact').textContent = distance <= 2.2 ? objective.label : `${objective.approach} · ${Math.ceil(distance)} m`;
     }
     $('cave-travel').hidden = state.area !== 'plaza' || state.garden.step !== 4;
+    const caveDistance = Math.hypot(state.x - CAVE_GATE.x, state.z - CAVE_GATE.z);
+    $('cave-travel').textContent = caveDistance <= 2.2 ? 'Entra nelle Cave dei Sussurri' : `Raggiungi l’ingresso delle Cave · ${Math.ceil(caveDistance)} m`;
+    document.body.dataset.area = state.area;
     $('leave-garden').textContent = state.area === 'caves' ? 'Esci dalle cave' : 'Ritorna al sentiero';
     $('leave-garden').hidden = state.area === 'caves' ? false : state.area !== 'garden' || state.garden.step >= 3;
     $('leave-garden').disabled = Math.hypot(state.x - (state.area === 'caves' ? CAVE_ENTRY.x : GARDEN_ENTRY.x), state.z - (state.area === 'caves' ? CAVE_ENTRY.z : GARDEN_ENTRY.z)) > 2.2;
@@ -279,7 +286,7 @@ export function startRuntime($) {
     const traceNear = trace && Math.hypot(state.x - trace.x, state.z - trace.z) <= TRACE_RADIUS;
     $('follow-trail').disabled = Boolean(traceNear && (state.stamina < 30 || state.dashCooldown > 0));
     if (trace) $('follow-trail').textContent = traceNear ? 'Risuona con lo scatto · 30 vigore' : 'Raggiungi la prossima traccia';
-    $('objective').textContent = state.caves.step > 0 ? 'La lente conserva due rotte sovrapposte. Recuperala nelle cave: Liora potrà distinguere la strada dalla correzione.' : state.garden.step > 0 ? 'La bussola è uno strumento di spedizione. Riporta il segnale: Liora potrà capire se la rotta viene ancora corretta.' : state.trail.complete ? 'La firma Cartiglio non doveva trovarsi qui. Liora ha riconosciuto una strada verso i compagni.' : state.cleared ? 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.' : state.evolved ? 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.' : 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+    $('objective').textContent = storyObjective(state);
     if (guide.id !== lastGuide) {
       lastGuide = guide.id;
       if (!memory.open) notice(guide.hint, 6);

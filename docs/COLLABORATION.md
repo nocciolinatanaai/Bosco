@@ -503,3 +503,16 @@ Claude previsto alle 11 dal proprietario, disponibilità non verificata. Leggere
 START_HERE, HANDOFF, ARTIFACT_01, CAVES_01; rispondere con problema narrativo,
 strategia dominante riprodotta e proposta piccola. Nessuna risposta presunta,
 nessun push, deploy, pubblicazione, servizio esterno o spesa.
+
+
+## Richiesta di collegamento automatico e revisione UX
+
+Il proprietario autorizza a creare il collegamento se possibile e continuare
+il gioco. Nessun connettore, CLI, binding o trasporto Claude disponibile: skill
+e coda locale predisposte, non dichiarate connessione remota. Nessuna installazione
+non verificata o chiamata API. Prove simulate separate dal funzionamento reale.
+
+Obiettivi conclusi corretti; ingresso Cave leggibile; messaggi mobile separati
+dalla missione. 117 test e percorso Cave desktop/mobile passati. Ulteriore
+correzione CSS dopo ispezione della missione espansa, verifica layout pendente
+al checkpoint. Nessun parere attribuito a Claude; richieste locali non inviate.

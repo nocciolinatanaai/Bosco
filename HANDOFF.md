@@ -7,7 +7,22 @@ consegna; verificare git log -1. Nessun invio al remoto.
 Ultima base condivisa precedente: 46086f1 (applicativo 864f97f). Verificare
 sempre git log/status prima di continuare. Main e servizio precedente separati.
 
-## Blocco corrente — Cave dei Sussurri
+## Blocco corrente — ponte di revisione e orientamento
+
+Richiesta: automatizzare la collaborazione tramite skill e continuare il gioco.
+Skill locale mythwood-collaboration e coda di snapshot HEAD implementate; leggere
+AGENT_EXCHANGE. Nessuna connessione reale attiva: mancano CLI Claude autenticata
+e trasporto condiviso; nessuna risposta ricevuta o chiamata a pagamento. Cinque
+test con worker simulato, esclusione percorsi, hash/commit, claim e nessun retry.
+
+Gioco: obiettivi aggiornati alla consegna della lente, ingresso Cave con distanza
+e azione esplicita, messaggi sotto l'altezza reale della missione su telefono.
+117 test e percorso Cave desktop/mobile passati. Dopo controllo visivo aggiunto
+un limite scorrevole alla missione espansa per separarla da HUD e messaggi;
+verifica layout 390×844 e 360×740 in corso a questo checkpoint.
+Nessun nuovo contenuto narrativo o regione; nessun push/deploy/social/spesa.
+
+## Blocco precedente — Cave dei Sussurri
 
 Terza area locale dopo il segnale del Giardino, con ingresso dal sentiero,
 recupero della lente e ritorno a Liora. Guardiano del rintocco fermo: carica

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createSession, movePlayer, attack, dodge, tickCooldowns, evolve } from '../src/game.js';
-import { journey, MEMORY } from '../src/journey.js';
+import { journey, storyObjective, MEMORY } from '../src/journey.js';
 test('guida segue azioni reali, risveglio e conclusione senza bloccare controlli', () => {
   const s = createSession('fighter'); assert.equal(journey(s).id, 'move');
   for (let i = 0; i < 5; i++) movePlayer(s, 1, 0, .05); assert.equal(journey(s).id, 'attack');
@@ -12,4 +12,13 @@ test('guida segue azioni reali, risveglio e conclusione senza bloccare controlli
   evolve(s); assert.equal(journey(s).id, 'guardian'); s.cleared = true;
   assert.equal(journey(s).id, 'trail'); s.trail.complete = true; assert.equal(journey(s).id, 'complete'); assert.ok(MEMORY.resonance.body.includes('Liora'));
   assert.equal(journey(createSession('fighter')).id, 'move');
+});
+
+test('obiettivo narrativo distingue ricerca, trasporto e prova già consegnata',()=>{
+ const s=createSession('ranger');s.garden.step=4;
+ assert.ok(storyObjective(s).includes('Cave dei Sussurri'));
+ s.caves.step=1;assert.ok(storyObjective(s).includes('Recuperala'));
+ s.caves.step=2;assert.ok(storyObjective(s).includes('Riportala'));
+ s.caves.step=3;assert.ok(storyObjective(s).includes('prova è conservata'));
+ assert.equal(storyObjective(s).includes('Recuperala'),false);assert.equal(storyObjective(s).includes('Riportala'),false);
 });

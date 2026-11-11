@@ -51,3 +51,9 @@ e genera le due viste prima/dopo; serve la storia Git che contiene quel commit.
 Non pubblicare test-results/ o tools/ come parte della build. Lo studio
 /tools/visual-review/ consente riproduzione esplicita; non esporta un trailer.
 Il codice del gioco continua a funzionare senza queste fixture e senza skill.
+
+## Skill locale di collaborazione
+
+mythwood-collaboration è versionata separatamente dalle skill installate.
+Definisce il protocollo di review; non procura un connettore. Leggere
+AGENT_EXCHANGE per componenti reali mancanti e limiti delle prove simulate.
