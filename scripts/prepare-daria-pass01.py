@@ -201,9 +201,38 @@ def paint_face():
 old = bpy.data.images['tex_human_female_head_1']
 w, h = old.size
 px = np.array(old.pixels[:]).reshape(h, w, 4)[::-1, :, :3]
-head_image_rgb = px ** (1 / 2.2)  # back to display values for the colour mask
-face_tex = paint_face()
-face_mat = material('Daria face', tex=face_tex, roughness=.5)
+head_image_rgb = px  # Blender byte images expose sRGB display values already
+def upstream_face(tuned=True):
+    """The upstream CC0 face (owner: it reads as a face; the repaint did not), warmed like the
+    previous model (runtime tint #dfb38b baked in). tuned=True adds light, local edits only:
+    hazel-green iris, faint freckles, less saturated lips. Native 512 px, no resampling."""
+    img = np.array(head_image_rgb)                              # display values, y down
+    H, W = img.shape[:2]
+    yy, xx = np.mgrid[0:H, 0:W].astype(float)
+    if tuned:
+        for cx in (226, 286):                                   # iris: brown -> hazel green, luminance kept
+            d = np.sqrt((xx - cx) ** 2 + (yy - 260) ** 2)
+            lum = img.mean(2)
+            m = ((d < 5.5) & (lum < .45) & (lum > .08)).astype(float)[..., None]
+            green = np.stack([lum * .82, lum * 1.0, lum * .62], -1) * 1.25
+            img = img * (1 - m * .75) + np.clip(green, 0, 1) * m * .75
+        r = np.random.default_rng(7)
+        for _ in range(70):                                     # faint freckles over nose and cheeks
+            cx = 256 + r.normal(0, 30); cy = 284 + r.normal(0, 9)
+            if abs(cx - 256) < 7 and cy < 278: continue
+            d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2)
+            a = np.clip(1 - d / r.uniform(.7, 1.2), 0, 1)[..., None] * r.uniform(.12, .25)
+            img = img * (1 - a) + np.array([.55, .36, .27]) * a
+        lips = ((((xx - 256) / 22) ** 2 + ((yy - 320) / 7) ** 2) < 1)[..., None]
+        grey = img.mean(2, keepdims=True)
+        img = np.where(lips, img * .75 + grey * .25 * np.array([1.05, .9, .85]), img)
+    img = img * (np.array([223, 179, 139]) / 255)               # same warm tint as the previous model
+    return image('daria_face_pass01', W, np.dstack([np.clip(img, 0, 1)[::-1], np.ones((H, W, 1))]))
+
+import os
+FACE = os.environ.get('DARIA_FACE', 'tuned')                    # tuned | upstream | painted
+face_tex = paint_face() if FACE == 'painted' else upstream_face(FACE == 'tuned')
+face_mat = material('Daria face', tex=face_tex, roughness=.65)
 head.data.materials.clear(); head.data.materials.append(face_mat)
 
 # Adult face proportions: slightly longer midface, defined jaw, nose bridge.

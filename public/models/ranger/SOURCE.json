@@ -40,8 +40,8 @@
   },
   "pass01": {
     "file": "daria-pass01.glb",
-    "bytes": 1004408,
-    "sha256": "1968c3f00e5399d42ce5b6989b64d5884c622fc2a943288a60ef9b46ba3fa5b0",
+    "bytes": 941068,
+    "sha256": "cb21bb1b752ce680a0458f3018733f36e8533b8d98f5478b0a40f76b69da71e0",
     "triangles": 13598,
     "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
     "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
@@ -54,7 +54,7 @@
       "Bracers, belts, thigh straps (no rigid buckles), quiver strap, quiver with six arrows, pouch and map notebook"
     ],
     "original_pixels": [
-      "Face texture repainted procedurally at 2048 px, anti-aliased, no blur (skin, freckles, hazel-green eyes with limbal ring, lids, brows, lips) on the upstream UV layout; no upstream face pixels kept",
+      "Face: the upstream CC0 head texture (owner preferred it to a full repaint), warm tint of the previous model baked in, light local edits: hazel-green iris, faint freckles, less saturated lips. Native 512 px. Alternatives in the generator: DARIA_FACE=upstream (no edits) or painted (full procedural repaint, rejected by the owner)",
       "Fabric and leather textures generated procedurally"
     ],
     "changes_to_base": [

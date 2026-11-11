@@ -9,7 +9,7 @@ Ramo `tonino/character-art-pass-01`, base `d472bd1`. Incarico in
 
 | Elemento | Prima (`daria-refined.glb` + accessori runtime) | Dopo (pass01) |
 | --- | --- | --- |
-| Volto | texture generica CC0, tratti da bambola, labbra rosse | texture ridipinta in modo procedurale: pelle calda, lentiggini, occhi nocciola-verdi, sopracciglia scure, labbra naturali; mento/mascella leggermente adulti |
+| Volto | texture CC0 originale con tinta calda a runtime | **stessa texture CC0 originale** (preferita dal proprietario) con la stessa tinta calda, iride verde-nocciola, lentiggini leggere e labbra meno sature |
 | Capelli | calotta rigida a casco e due "bacchette" alle tempie | volume campionato sul cranio, onde laterali, ciocche sulla corona, due ciocche davanti alle orecchie e fronte scoperta |
 | Treccia | tubi intrecciati dietro la testa | treccia a tre capi sulla spalla sinistra fino al petto, legaccio e ciuffo; pesi testa→torso lungo la lunghezza |
 | Giacca | busto senza maniche, braccia coperte da guanti lunghi marroni | giacca petrolio con maniche lunghe e apertura a V sulla tunica di lino. Le falde in quattro pannelli sono state **tolte** dopo la prova di combattimento: in corsa entravano nelle cosce |
@@ -51,7 +51,7 @@ punti, non come pelle che buca il vestito.
 
 | | Prima | Dopo |
 | --- | --- | --- |
-| File GLB | 1.129.388 byte | 1.004.408 byte |
+| File GLB | 1.129.388 byte | 941.068 byte |
 | Triangoli nel GLB | — | 13.598 (budget 20k) |
 | Triangoli visibili dell'attore nello studio (con arco) | 16.752 | 14.174 |
 | Mesh visibili / skinned / materiali (studio) | 18 / 13 / 16 | 21 / 18 / 20 |
@@ -141,27 +141,32 @@ npm run test:daria      # studio prima/dopo + sonda di combattimento con soglie
 python3.11 scripts/daria-clip-penetration.py -- public/models/ranger/daria-refined.glb public/models/ranger/daria-pass01.glb out.json
 ```
 
-## Correzione del volto (segnalazione del proprietario)
+## Volto: decisione del proprietario
 
-Il proprietario ha notato che il volto era meno definito di prima. Aveva ragione. Le cause:
-- texture del volto in JPEG da 20 KB, contro il PNG da 135 KB precedente;
-- due passaggi di sfocatura;
-- solo 1024 px per un'area UV piccola.
+Il proprietario ha confrontato i volti nel motore. Quello del modello precedente
+"è un volto", il mio ridipinto no: prima risultava sfocato (JPEG da 20 KB e sfocatura),
+e anche nella versione nitida a 2048 px sembrava un disegno su una maschera.
 
-Ora il volto è dipinto a 2048 px con bordi anti-alias e senza sfocatura, ed è esportato in JPEG qualità 95.
-Dettagli aggiunti:
-- iride con anello e fibre, punto luce;
-- palpebre e ciglia nette, piega della palpebra;
-- narici;
-- labbra con arco di Cupido.
+Ora il volto è la texture CC0 originale, con la stessa tinta calda del modello
+precedente e ritocchi locali leggeri:
+- iride verde-nocciola;
+- lentiggini tenui;
+- labbra meno sature.
 
-Il GLB passa da 946.716 a 1.004.408 byte (sotto il limite di 1,5 MB del test).
+Durante la prova ho trovato anche un errore: la correzione gamma veniva applicata
+due volte ai pixel originali, e il volto risultava sbiadito. È corretto.
+
+Alternative ancora nel generatore:
+- `DARIA_FACE=upstream`: originale senza ritocchi;
+- `DARIA_FACE=painted`: ridipinto, bocciato.
+
+Confronto in `face-idle.jpg`. Nel volto la somiglianza con la tavola resta limitata:
+lineamenti e stile sono quelli della base CC0.
 
 ## Ancora lontano dal concept (onesto)
 
-- Il volto resta una testa low-poly con texture dipinta: niente scultura,
-  niente pelle SSS, niente capelli a ciocche fini. Da vicino è leggibile ma
-  stilizzato; il concept è semi-realistico.
+- Il volto è quello CC0 stilizzato, con pochi ritocchi: niente scultura né pelle SSS,
+  e non somiglia alla Daria semi-realistica della tavola.
 - Capelli in "card" piatte: da dietro si vedono come lamelle scure.
 - La mantellina è statica (nessuna simulazione di stoffa). Le falde della tavola non ci sono più.
 - Corsa: compenetrazioni leggermente sopra il modello precedente (vedi tabella).

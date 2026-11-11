@@ -29,7 +29,6 @@ test('Daria pass01: abiti, capelli e treccia nel GLB, tutto pesato sullo schelet
     assert.ok(json.animations.some(a => a.name === 'human_female_' + name), name);
   assert.ok(json.images.every(i => i.bufferView !== undefined && !i.uri));
   assert.ok(json.buffers.every(b => !b.uri));
-  assert.ok(json.images.some(i => i.name === 'daria_face_pass01'), 'Volto ridipinto, non la texture generica');
-  assert.ok(!json.images.some(i => i.name === 'tex_human_female_head_1'), 'La texture del volto generico non viene più spedita');
+  assert.ok(json.images.some(i => i.name === 'daria_face_pass01'), 'Volto CC0 originale con ritocchi leggeri, scelto dal proprietario');
   assert.ok(json.materials.some(m => m.doubleSided && /capelet/.test(m.name)), 'Mantellina visibile da entrambi i lati');
 });
