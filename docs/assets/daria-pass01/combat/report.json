@@ -35,7 +35,30 @@
         "plantedSamples": 22,
         "yawErrorMaxWhileRunning": 133.35,
         "arrowVisibleDuringDodge": false,
-        "drawFrames": 48
+        "drawFrames": 48,
+        "completedDraws": [
+          {
+            "start": 1.5,
+            "frames": 13,
+            "finalNockHand": 0.1011,
+            "lastQuarterMean": 0.148,
+            "midDrawMax": 0.5769
+          },
+          {
+            "start": 2.9,
+            "frames": 16,
+            "finalNockHand": 0.0869,
+            "lastQuarterMean": 0.11910000000000001,
+            "midDrawMax": 0.6296
+          },
+          {
+            "start": 4,
+            "frames": 13,
+            "finalNockHand": 0.1075,
+            "lastQuarterMean": 0.15755,
+            "midDrawMax": 0.6553
+          }
+        ]
       }
     },
     "pass01": {
@@ -43,8 +66,8 @@
         "frames": 312,
         "gripErrorMax": 0,
         "bowInHandFrames": 184,
-        "nockHandDuringDrawMean": 0.20770416666666666,
-        "nockHandDuringDrawMax": 0.6181,
+        "nockHandDuringDrawMean": 0.2471020833333333,
+        "nockHandDuringDrawMax": 0.5488,
         "impacts": [
           {
             "t": 1.7167,
@@ -66,15 +89,71 @@
           }
         ],
         "aimErrorDuringDrawMax": 50.87,
-        "plantedFootSlipMedian": 0.8062356975475684,
-        "plantedFootSlipP90": 2.8702647961468664,
-        "plantedSamples": 11,
+        "plantedFootSlipMedian": 0.836413773200748,
+        "plantedFootSlipP90": 4.079739697578775,
+        "plantedSamples": 16,
         "yawErrorMaxWhileRunning": 133.35,
         "arrowVisibleDuringDodge": false,
-        "drawFrames": 48
+        "drawFrames": 48,
+        "completedDraws": [
+          {
+            "start": 1.5,
+            "frames": 13,
+            "finalNockHand": 0.0807,
+            "lastQuarterMean": 0.134275,
+            "midDrawMax": 0.506
+          },
+          {
+            "start": 2.9,
+            "frames": 16,
+            "finalNockHand": 0.0277,
+            "lastQuarterMean": 0.046675,
+            "midDrawMax": 0.5361
+          },
+          {
+            "start": 4,
+            "frames": 13,
+            "finalNockHand": 0.0765,
+            "lastQuarterMean": 0.12742499999999998,
+            "midDrawMax": 0.5488
+          }
+        ]
       }
     }
   },
   "errors": [],
-  "external": []
+  "external": [],
+  "layer": {
+    "upperMovingVsStanding": {
+      "torso": 0.019,
+      "arm_upper_R": 0,
+      "arm_lower_R": 0,
+      "palm_R": 0,
+      "arm_upper_L": 0,
+      "arm_lower_L": 0,
+      "palm_L": 0
+    },
+    "upperMovingVsRun": {
+      "torso": 42.918,
+      "arm_upper_R": 73.902,
+      "arm_lower_R": 29.608,
+      "palm_R": 57.556,
+      "arm_upper_L": 134.009,
+      "arm_lower_L": 81.425,
+      "palm_L": 32.358
+    },
+    "legsMovingVsStanding": {
+      "leg_upper_L": 60.581,
+      "leg_lower_L": 45.22,
+      "leg_upper_R": 25.761,
+      "leg_lower_R": 14.446
+    },
+    "legsMovingVsRun": {
+      "leg_upper_L": 0,
+      "leg_lower_L": 0,
+      "leg_upper_R": 0.012,
+      "leg_lower_R": 0
+    },
+    "repeatDrift": 0
+  }
 }

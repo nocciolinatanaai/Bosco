@@ -51,9 +51,8 @@ movimento, e devono essere misurabili.
 - Piedi: scivolamento del piede d'appoggio in corsa con mediana < 1,5 m/s, come Daria.
 - Distinzione da Daria, misurata alla stessa camera:
   - larghezza delle spalle in silhouette frontale ≥ +15% rispetto a Daria;
-  - altezza del bacino in attesa ≤ −4%;
-  - distanza fra i piedi in attesa ≥ +20%;
-  - colori dominanti diversi (nessun terracotta o petrolio).
+  - postura più bassa e piedi più larghi **solo** se i piedi restano appoggiati (scivolamento e distanza dal suolo misurati) e le hitbox non cambiano;
+  - materiali diversi (metallo, imbottitura trapuntata), con la palette ruggine della tavola mantenuta. Obiezione di Codex accolta: niente divieto arbitrario sui colori caldi.
 - Budget: < 20.000 triangoli, GLB < 1,5 MB.
 - Test, build, controllo delle 30 pose del roster ed episodio completo desktop/mobile passati.
 

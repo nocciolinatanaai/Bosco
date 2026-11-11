@@ -41,7 +41,7 @@
   "pass01": {
     "file": "daria-pass01.glb",
     "bytes": 1065704,
-    "sha256": "e2f30440cfc8431adf62c82be796614d2890542dfa36ed0ae8298b4d8e5091bc",
+    "sha256": "b781ee73302e07eb449e35e3caeb7023613aa57b661a48b0445a277b88114432",
     "triangles": 16370,
     "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
     "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
@@ -50,7 +50,7 @@
       "Jacket skirt removed after combat measurement (panels entered the thighs while running)",
       "Ragged terracotta capelet with brass ring brooch",
       "Sage cowl scarf",
-      "Hair, locks and braid kept from daria-refined.glb (owner preferred them to new card hair, still available with DARIA_HAIR=cards)",
+      "Hair, locks and braid kept from daria-refined.glb (owner preferred them to new card hair, still available with DARIA_HAIR=cards); braid below the jaw re-weighted head->torso and lifted 12 cm off the body so it no longer swings through the chest",
       "Bracers, belts, thigh straps (no rigid buckles), quiver strap, quiver with six arrows, pouch and map notebook"
     ],
     "original_pixels": [

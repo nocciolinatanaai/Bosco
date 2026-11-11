@@ -3,62 +3,62 @@
  "clips": {
   "idle": {
    "before": {
-    "meanPct": 3.156,
-    "maxPct": 3.51,
-    "frames": 8
+    "meanPct": 3.129,
+    "maxPct": 3.557,
+    "samples": 8
    },
    "after": {
-    "meanPct": 1.572,
-    "maxPct": 1.675,
-    "frames": 8
+    "meanPct": 1.327,
+    "maxPct": 1.474,
+    "samples": 8
    }
   },
   "run": {
    "before": {
-    "meanPct": 2.825,
-    "maxPct": 3.541,
-    "frames": 8
+    "meanPct": 2.696,
+    "maxPct": 3.064,
+    "samples": 8
    },
    "after": {
-    "meanPct": 2.993,
-    "maxPct": 6.426,
-    "frames": 8
+    "meanPct": 1.484,
+    "maxPct": 2.457,
+    "samples": 8
    }
   },
   "channel_two_handed_bow": {
    "before": {
-    "meanPct": 2.723,
-    "maxPct": 2.741,
-    "frames": 8
+    "meanPct": 2.735,
+    "maxPct": 2.756,
+    "samples": 9
    },
    "after": {
-    "meanPct": 0.959,
-    "maxPct": 1.016,
-    "frames": 8
+    "meanPct": 0.973,
+    "maxPct": 1.006,
+    "samples": 9
    }
   },
   "cast_two_handed_bow": {
    "before": {
-    "meanPct": 2.882,
+    "meanPct": 2.869,
     "maxPct": 2.91,
-    "frames": 5
+    "samples": 9
    },
    "after": {
-    "meanPct": 0.967,
-    "maxPct": 1.016,
-    "frames": 5
+    "meanPct": 1.072,
+    "maxPct": 1.223,
+    "samples": 9
    }
   },
   "jump": {
    "before": {
-    "meanPct": 2.794,
-    "maxPct": 2.802,
-    "frames": 8
+    "meanPct": 2.795,
+    "maxPct": 2.818,
+    "samples": 9
    },
    "after": {
-    "meanPct": 1.629,
-    "maxPct": 1.785,
-    "frames": 8
+    "meanPct": 1.213,
+    "maxPct": 1.257,
+    "samples": 9
    }
   }
  }

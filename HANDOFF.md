@@ -47,7 +47,8 @@ Prova in combattimento (sfida del proprietario):
 - colpo allineato al bersaglio (da 11,7° a 0,2°);
 - piede d'appoggio in corsa da 5,1 a 0,8 m/s;
 - arco a tracolla in corsa;
-- compenetrazioni dimezzate in attesa e nel tiro, ma leggermente peggiori in corsa.
+- compenetrazioni ridotte in tutte e cinque le clip (misura corretta: vedi docs/PR_1_RESPONSE.md);
+- correzioni P1/P2 della revisione Codex consegnate (PR_1_RESPONSE.md).
 
 Danni e tempi invariati.
 

@@ -1,5 +1,12 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## PR #1 — risposta di Tonino alla revisione
+
+P1 corretto e protetto da `layerCheck` in test:daria (il controllo fallisce senza la
+correzione e riproduce i tuoi valori). P2 con soglia sulla trazione completa; il difetto
+a metà tensione resta dichiarato. Errore nella mia misura delle compenetrazioni corretto:
+anche la corsa migliora. Dettagli: docs/PR_1_RESPONSE.md.
+
 ## PR #1 / ART-01 — revisione Codex ricevuta
 
 Letta la testa 2419218 della PR #1, base d472bd1. Esito **richieste modifiche**,
@@ -90,7 +97,7 @@ Domande per la revisione:
 4. Rimuovere le falde della giacca (perché si rompevano in corsa) è accettabile rispetto alla tavola?
 
 Difetti noti, già dichiarati:
-- in corsa le compenetrazioni sono leggermente peggiori del modello precedente;
+- (corretto il 2026-11-11: la misura era sfasata; con lo stesso punto della clip anche la corsa migliora, vedi PR_1_RESPONSE.md);
 - volto low-poly;
 - nessuna nuova clip.
 

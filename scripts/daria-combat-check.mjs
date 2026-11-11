@@ -15,8 +15,12 @@ const stats=frames=>{
   for(let i=1;i<frames.length;i++){const a=frames[i-1],b=frames[i];since=b.phase===a.phase?since+1/60:0;if(b.phase!=='run'||a.phase!=='run'||since<.15||b.yawError>5)continue;
     for(const k of [0,1]){if(b.feet[k][1]<=ground+.03&&b.feet[k][1]<b.feet[1-k][1]-.03)slips.push(Math.hypot(b.feet[k][0]-a.feet[k][0],b.feet[k][2]-a.feet[k][2])*60);}}
   slips.sort((x,y)=>x-y);const q=p=>slips.length?slips[Math.min(slips.length-1,Math.floor(p*slips.length))]:null;
+  // Draw-hand on the string (review P2): judged on COMPLETED draws (followed by the impact frame),
+  // at full draw. Interrupted draws (dodge) are excluded. Units: scene units; the actor is 2.2 x 1.2 = 2.64 tall.
+  const draws=[];let cur=[];
+  for(let i=0;i<frames.length;i++){const f=frames[i];if(f.phase==='windup')cur.push(f);else{if(cur.length&&f.impactNow)draws.push(cur);cur=[];}}
+  const fullDraw=draws.map(d=>({start:d[0].t,frames:d.length,finalNockHand:d.at(-1).nockHand,lastQuarterMean:d.slice(Math.floor(d.length*.75)).reduce((a,x)=>a+x.nockHand,0)/Math.max(1,d.length-Math.floor(d.length*.75)),midDrawMax:Math.max(...d.map(x=>x.nockHand))}));
   const impacts=frames.filter(f=>f.impactNow);
-  const draws=frames.filter(f=>f.phase==='windup');
   return {
     frames:frames.length,
     gripErrorMax:max(pick(f=>f.gripError!==undefined&&f.phase!=='run','gripError')),bowInHandFrames:frames.filter(f=>f.phase!=='run').length,
@@ -26,7 +30,7 @@ const stats=frames=>{
     plantedFootSlipMedian:q(.5),plantedFootSlipP90:q(.9),plantedSamples:slips.length,
     yawErrorMaxWhileRunning:max(pick(f=>f.phase==='run','yawError')),
     arrowVisibleDuringDodge:frames.some(f=>f.phase==='dodge'&&f.arrowVisible),
-    drawFrames:draws.length,
+    drawFrames:frames.filter(f=>f.phase==='windup').length,completedDraws:fullDraw,
   };
 };
 try{
@@ -46,11 +50,18 @@ try{
     report.variants[variant]={summary:stats(frames)};
     await writeFile(`${out}/${variant}-frames.json`,JSON.stringify(frames));
   }
+  report.layer=await page.evaluate(()=>window.layerCheck('pass01'));
   // Acceptance criteria for the playable model (the previous model is measured for comparison only).
   const a=report.variants.pass01.summary;
   assert.ok(a.gripErrorMax<.01,'Arco nel punto di presa della mano');
   assert.ok(a.impacts.length===3&&a.impacts.every(i=>i.aimError<2),'Al colpo l\'arco punta il bersaglio (<2°)');
   assert.ok(a.plantedFootSlipMedian<1.5,'Piede d\'appoggio quasi fermo in corsa (mediana <1,5 m/s)');
+  const L=report.layer,mx=o=>Math.max(...Object.values(o));
+  assert.ok(mx(L.upperMovingVsStanding)<1,'Tiro in movimento: busto e braccia restano nella posa del tiro (review P1)');
+  assert.ok(mx(L.legsMovingVsStanding)>5,'Tiro in movimento: le gambe seguono la corsa');
+  assert.ok(L.repeatDrift<1e-6,'Stesso tempo ripetuto: nessuna deriva');
+  // 0.10 scene units = 3.8% of the actor height: the hand visibly holds the nock at release.
+  assert.ok(a.completedDraws.length===3&&a.completedDraws.every(d=>d.finalNockHand<=.10),'A trazione completa la mano destra è sulla cocca (≤0,10, review P2)');
   assert.equal(a.arrowVisibleDuringDodge,false,'La schivata interrompe tiro e freccia');
   assert.ok(a.impacts.every(i=>i.arrowVisibleOnImpactFrame===false),'Freccia incoccata solo fino al rilascio');
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.external,[]);report.status='passed';

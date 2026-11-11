@@ -101,31 +101,30 @@ Strumenti:
 | Arco rispetto al punto di presa del rig (max, fotogrammi con arco in mano) | 0,108 | **0** | arco sull'osso `wep_pos_L` |
 | Errore di mira nel fotogramma del colpo (3 colpi) | 11,7° / 0,6° / 0,0° | **0,2° / 0,4° / 0,0°** | durante l'azione la figura si orienta verso il bersaglio della simulazione (solo rendering) |
 | Errore di mira massimo durante la tensione | 99° | 51° (primi 2–3 fotogrammi della girata, poi < 3°) | come sopra |
-| Scivolamento del piede d'appoggio in corsa (mediana / 90° percentile) | 5,1 / 8,3 m/s | **0,8 / 2,9 m/s** | fase della corsa legata alla velocità reale (stride lock); gambe in corsa anche durante il tiro in movimento |
-| Distanza mano destra–corda in tensione (media) | 0,35 | 0,21 | corda e cocca seguono la mano anche in altezza; resta lo scarto laterale della clip |
+| Scivolamento del piede d'appoggio in corsa (mediana / 90° percentile) | 5,1 / 8,3 m/s | **0,8 / 4,1 m/s** | fase della corsa legata alla velocità reale (stride lock); gambe in corsa anche durante il tiro in movimento |
+| Mano destra–cocca a trazione completa (3 tiri) | 0,101 / 0,087 / 0,107 | **0,081 / 0,028 / 0,076** (soglia 0,10) | corda e cocca seguono la mano; a metà tensione la clip CC0 la porta fino a 0,55 (difetto aperto) |
+| Tiro in movimento: busto/braccia vs tiro da fermo | 42,9°–134,0° (difetto trovato da Codex) | **≤ 0,02°** | livello gambe con sole tracce delle gambe |
 | Freccia visibile durante la schivata | no | no | la schivata annulla l'azione nella simulazione |
 | Arco che attraversa le gambe in corsa | sì | **no** | in corsa a mani libere l'arco va a tracolla sulla schiena, come nella tavola |
 
-Compenetrazioni per clip, in % dei vertici di abiti e capelli dentro il corpo
-(media su tutti i fotogrammi; per il modello precedente il mantello a runtime è escluso):
+Compenetrazioni per clip, in % dei vertici di abiti e capelli dentro il corpo. Entrambi
+i modelli sono campionati nella **stessa fase** della clip: la prima versione dello script
+confrontava fotogrammi sfasati, vedi docs/PR_1_RESPONSE.md.
 
-| Clip | Prima | Dopo |
+| Clip | Prima (media / max) | Dopo (media / max) |
 | --- | --- | --- |
-| attesa | 3,16 | **1,57** |
-| tensione | 2,72 | **0,96** |
-| tiro | 2,88 | **0,97** |
-| salto (scatto) | 2,79 | **1,63** |
-| corsa | 2,83 (max 3,5) | 2,99 (max 6,4) |
+| attesa | 3,13 / 3,56 | **1,33 / 1,47** |
+| corsa | 2,70 / 3,06 | **1,48 / 2,46** |
+| tensione | 2,74 / 2,76 | **0,97 / 1,01** |
+| tiro | 2,87 / 2,91 | **1,07 / 1,22** |
+| salto (scatto) | 2,80 / 2,82 | **1,21 / 1,26** |
 
-Prima della correzione la corsa era al 5,3% e il salto al 5,2%. Le cause trovate:
-- le falde della giacca entravano nelle cosce: tolte;
-- borsa, taccuino e fibbie rigide entravano nelle cosce sollevate: spostati sui fianchi, e le fibbie che galleggiavano sono state tolte;
-- la mantellina veniva attraversata dalle braccia: i suoi lati ora seguono le braccia.
-
-**In corsa resta un leggero peggioramento rispetto a prima.** È distribuito tra
-attaccatura dei capelli, sciarpa e spalle nell'oscillazione delle braccia, e mani.
-Una parte potrebbe essere un errore della misura (la testa di pass01 è rimodellata,
-mentre il riferimento usa quella precedente): è un'ipotesi, non l'ho verificata.
+Interventi fatti per arrivarci:
+- tolte le falde della giacca, che in corsa entravano nelle cosce (verificato visivamente su un solo modello);
+- tolte le fibbie rigide che galleggiavano;
+- spostati borsa e taccuino sui fianchi;
+- i lati della mantellina seguono le braccia;
+- la treccia sotto la mandibola segue il busto ed è staccata dal corpo.
 
 Nessun cambiamento a simulazione, danni, tempi o collisioni: tutto avviene nel
 rendering di `ranger-skinned.js`, solo per il modello pass01.
@@ -169,7 +168,8 @@ lineamenti e stile sono quelli della base CC0.
   e non somiglia alla Daria semi-realistica della tavola.
 - Capelli in "card" piatte: da dietro si vedono come lamelle scure.
 - La mantellina è statica (nessuna simulazione di stoffa). Le falde della tavola non ci sono più.
-- Corsa: compenetrazioni leggermente sopra il modello precedente (vedi tabella).
+- Mano destra lontana dalla corda a metà tensione (clip CC0).
+- Passaggio istantaneo dell'arco fra schiena e mano.
 - La girata verso un bersaglio alle spalle richiede 2–3 fotogrammi all'inizio della tensione.
 - Stivali e silhouette delle gambe sono quelli CC0.
 - Nessuna nuova animazione: la posa di tensione CC0 non è la presa del concept

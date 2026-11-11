@@ -47,13 +47,17 @@ export function attachSkinnedRanger(root,{variant='pass01'}={}) {
       const legs=dressed?legNames.map(n=>model.getObjectByName(n)).filter(Boolean):[];
       let legMixer=null,legAction=null,stride=0;
       if(dressed){
-        const runClip=clips.run.clone();runClip.name='legs-run';legMixer=new THREE.AnimationMixer(model);legAction=legMixer.clipAction(runClip);legAction.play();
+        // Stride is measured on the full run clip; the runtime layer keeps ONLY leg tracks, so the
+        // upper body stays in the bow pose (PR #1 review P1: the full clip overwrote torso and arms).
+        const legSet=new Set(legNames),strideClip=clips.run.clone();strideClip.name='stride-run';
+        const runClip=clips.run.clone();runClip.name='legs-run';runClip.tracks=runClip.tracks.filter(t=>legSet.has(THREE.PropertyBinding.parseTrackName(t.name).nodeName));
+        legMixer=new THREE.AnimationMixer(model);legAction=legMixer.clipAction(strideClip);legAction.play();
         const fl=model.getObjectByName('foot_L'),fr=model.getObjectByName('foot_R'),a=new THREE.Vector3(),b=new THREE.Vector3(),samples=[];
         for(let i=0;i<=48;i++){legAction.time=i/48*runClip.duration;legMixer.update(0);model.updateWorldMatrix(true,true);presentation.worldToLocal(fl.getWorldPosition(a));presentation.worldToLocal(fr.getWorldPosition(b));samples.push([a.y,a.z,b.y,b.z]);}
         const low=Math.min(...samples.flatMap(q=>[q[0],q[2]])),rates=[];
         for(let i=1;i<samples.length;i++)for(const k of [0,2]){const q=samples[i],o=samples[i-1];if(q[k]<=low+.05&&q[k]<=q[2-k])rates.push(Math.abs(q[k+1]-o[k+1])*48);}
         rates.sort((x,y)=>x-y);stride=rates.length?rates[Math.floor(rates.length/2)]:0;
-        legAction.stop();legAction.play();
+        legAction.stop();legMixer.uncacheClip(strideClip);legAction=legMixer.clipAction(runClip);legAction.play();
       }
       const palmL=model.getObjectByName(dressed?'wep_pos_L':'palm_L'),palmR=model.getObjectByName(dressed?'wep_pos_R':'palm_R'),torso=model.getObjectByName('torso');
       if(!palmL||!palmR||!torso)throw Error('Incomplete Ranger skeleton');

@@ -67,4 +67,20 @@ window.combatRender=(close=false)=>{
   const p=actor.root.position;const off=close?new THREE.Vector3(2.4,1.9,3.1):new THREE.Vector3(8,9,13);
   camera.position.copy(p).add(off);camera.lookAt(p.x,p.y+(close?1.4:1),p.z);renderer.render(scene,camera);
 };
+// PR #1 review P1 (Codex's probe, kept as a regression check): three identical actors after 30 frames —
+// standing shot, moving shot, plain run. Upper body of the moving shot must match the standing shot,
+// legs must follow the run. Local bone rotations, so the turn toward the target does not count.
+window.layerCheck=async variant=>{
+  const actors=[createRangerActor({variant}),createRangerActor({variant}),createRangerActor({variant})];
+  await Promise.all(actors.map(a=>a.root.userData.loadVisual()));
+  const action={elapsed:.2,windup:.28,duration:.7,kind:'basic',facing:{x:0,z:1}};
+  for(let frame=1;frame<=30;frame++)for(let j=0;j<3;j++){const r=actors[j].root;r.position.x=frame*.05;r.userData.animate(frame/60,j!==0,0,false,{action:j===2?null:action});r.updateMatrixWorld(true);}
+  const deg=(name,a,b)=>actors[a].root.getObjectByName(name).quaternion.angleTo(actors[b].root.getObjectByName(name).quaternion)*180/Math.PI;
+  const upper=['torso','arm_upper_R','arm_lower_R','palm_R','arm_upper_L','arm_lower_L','palm_L'],legs=['leg_upper_L','leg_lower_L','leg_upper_R','leg_lower_R'];
+  const r=actors[1].root,snap=()=>{const s=[];r.traverse(n=>{if(n.isBone)s.push(...n.quaternion.toArray());});return s;};
+  r.userData.animate(.5,true,0,false,{action});const before=snap();r.userData.animate(.5,true,0,false,{action});const after=snap();
+  return {upperMovingVsStanding:Object.fromEntries(upper.map(n=>[n,+deg(n,1,0).toFixed(3)])),upperMovingVsRun:Object.fromEntries(upper.map(n=>[n,+deg(n,1,2).toFixed(3)])),
+    legsMovingVsStanding:Object.fromEntries(legs.map(n=>[n,+deg(n,1,0).toFixed(3)])),legsMovingVsRun:Object.fromEntries(legs.map(n=>[n,+deg(n,1,2).toFixed(3)])),
+    repeatDrift:Math.max(...before.map((v,i)=>Math.abs(v-after[i])))};
+};
 window.combatReady=true;

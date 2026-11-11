@@ -42,6 +42,16 @@ if old_outfit and HAIR == 'refined':
     drop = [f for f in bm.faces if 'hair' not in mats[f.material_index] and 'strands' not in mats[f.material_index]]
     bmesh.ops.delete(bm, geom=drop, context='FACES'); bm.to_mesh(old_outfit.data); bm.free()
     old_outfit.name = 'Daria refined hair'
+    # The previous braid followed the head only and swung through the chest while running:
+    # below the jaw it now blends from head to torso, and sits slightly off the body.
+    me = old_outfit.data
+    groups = {g.name: g for g in old_outfit.vertex_groups}
+    for v in me.vertices:
+        if v.co.z >= 3.45: continue
+        w = max(0., min(1., (v.co.z - 3.1) / .35))
+        for g in list(v.groups): old_outfit.vertex_groups[g.group].remove([v.index])
+        if w > 0: groups['head'].add([v.index], w, 'REPLACE')
+        if w < 1: groups['torso'].add([v.index], 1 - w, 'REPLACE')
 elif old_outfit:
     bpy.data.objects.remove(old_outfit, do_unlink=True)
 body = bpy.data.objects['human_female_body_default']
@@ -296,6 +306,11 @@ def weight_source():
     return parts[0]
 WSRC = weight_source()
 bvh_body = BVHTree.FromObject(WSRC, bpy.context.evaluated_depsgraph_get())
+if 'Daria refined hair' in bpy.data.objects:   # braid resting on the chest stays off scarf and capelet
+    for v in bpy.data.objects['Daria refined hair'].data.vertices:
+        if v.co.z < 3.35:
+            loc, normal, _, _ = bvh_body.find_nearest(v.co)
+            if (v.co - loc).dot(normal) < .12: v.co = v.co + normal * (.12 - (v.co - loc).dot(normal))
 
 def transfer_weights(obj, blend=None):
     """Nearest-surface skin weights from the body; optional blend toward fixed bones."""
