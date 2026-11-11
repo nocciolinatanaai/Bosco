@@ -18,3 +18,20 @@ window.reviewPose=(pose,time=1.25)=>{
 window.reviewModel=()=>{let triangles=0,meshes=0,skinned=0;const loaded=next.root.getObjectByName('Daria-skinned-presentation');loaded.traverse(n=>{if(n.isMesh){meshes++;triangles+=(n.geometry.index?.count||n.geometry.attributes.position.count)/3;if(n.isSkinnedMesh)skinned++;}});return {triangles,meshes,skinned,status:next.root.userData.visualStatus,clips:next.root.userData.visualClips,bounds:new THREE.Box3().setFromObject(loaded).getSize(new THREE.Vector3()).toArray()};};
 window.reviewPose('idle');window.reviewReady=true;
 document.querySelectorAll('button').forEach(b=>b.onclick=()=>window.reviewPose(b.dataset.pose));
+
+// Observe real skeleton output at action boundaries, not sampler internals.
+window.reviewMotion=()=>{
+ const actor=next.root;actor.rotation.y=.2;
+ const model=actor.getObjectByName('Daria-skinned-presentation');
+ const bones=['palm_L','palm_R','head'].map(name=>model.getObjectByName(name));
+ const snapshot=()=>bones.map(b=>b.getWorldPosition(new THREE.Vector3()).toArray());
+ const distance=(a,b)=>Math.max(...a.map((v,i)=>new THREE.Vector3(...v).distanceTo(new THREE.Vector3(...b[i]))));
+ const frame=(time,moving,combat={})=>{actor.userData.animate(time,moving,0,false,combat);renderer.render(scene,camera);return snapshot();};
+ const idle=frame(2,false),start=frame(2,false,{action:{elapsed:0,windup:.28,duration:.7}});
+ const midway=frame(2.06,false,{action:{elapsed:.06,windup:.28,duration:.7}});
+ const interrupted=frame(2.06,true);
+ const paused=frame(2.06,true);
+ const reset=frame(0,false);
+ window.reviewPose('idle');
+ return {startJump:distance(idle,start),interruptJump:distance(midway,interrupted),pauseDrift:distance(interrupted,paused),resetFinite:reset.every(v=>v.every(Number.isFinite))};
+};

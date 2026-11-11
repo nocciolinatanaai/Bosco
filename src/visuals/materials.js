@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createStoneSurface } from './stone-surface.js';
 
 export function createMaterials() {
-  const surface = createStoneSurface(), masonry = createStoneSurface(128,{paving:false});
+  const surface = createStoneSurface(512,{tiles:2}), masonry = createStoneSurface(128,{paving:false});
   const standard = (color, props = {}) => new THREE.MeshStandardMaterial({ color, roughness: .7, ...props });
   return {
     paving: standard('#8c98a3', { ...surface, normalScale: new THREE.Vector2(.65, .65), roughness: 1, metalness: 0 }),

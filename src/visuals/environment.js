@@ -119,8 +119,8 @@ export function createArtWorld(renderer) {
     const tile = block(source, rand() > .3 ? m.paving : m.pavingDark, [1.23 + rand() * .06, .15, 1.6 + rand() * .09], [x * 1.32 + (z % 2) * .66, -.06 + rand() * .035, z * 1.75]);
     tile.rotation.y = (rand() - .5) * .025;
     // Rotate UVs per block to break repeated cracks without cloning materials.
-    const uv=tile.geometry.attributes.uv,turn=((x*17+z*31)%4+4)%4;
-    for(let j=0;j<uv.count;j++){let u=uv.getX(j),v=uv.getY(j);for(let t=0;t<turn;t++){const old=u;u=1-v;v=old;}uv.setXY(j,u,v);}
+    const uv=tile.geometry.attributes.uv,uvHash=(Math.imul(x+73,73856093)^Math.imul(z+137,19349663))>>>0,turn=uvHash&3,slot=(uvHash>>>3)&3;
+    for(let j=0;j<uv.count;j++){let u=uv.getX(j),v=uv.getY(j);for(let t=0;t<turn;t++){const old=u;u=1-v;v=old;}uv.setXY(j,(u+(slot%2))/2,(v+Math.floor(slot/2))/2);}
   }
   // Sunken tracks and brass inlays break up the regular paving.
   for (const x of [-8.4, -6.7, 6.7, 8.4]) {

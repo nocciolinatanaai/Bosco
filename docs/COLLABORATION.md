@@ -422,3 +422,10 @@ Pausa, cambio di azione durante un raccordo e riavvio coperti da test sintetici
 con il vero AnimationMixer. Nessun cambiamento a hit timing o controlli.
 Confronto ambientale prima/dopo e verifica del modello in browser pendenti.
 Checkpoint locale prima delle verifiche lunghe; niente push, deploy o teaser.
+
+Checkpoint prima delle regressioni integrate: 99 test e build passati. Browser
+sullo scheletro reale: nessun salto alla commutazione/interruzione o deriva in
+pausa nelle tre ossa campionate. Confronto superfici: geometria/draw call identici
+prima/dopo, tre texture in più. Atlante 2×2 per variare pietra e crepe senza
+nuovi materiali per blocco. Verifiche finali combattimento/Giardino pendenti.
+Nessun risultato artistico dedotto dalle misure, nessun push o pubblicazione.
