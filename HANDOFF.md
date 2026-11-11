@@ -3,6 +3,19 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Skill pipeline personaggi — Agensi
+
+Aggiunta `.agents/skills/agensi-gamedev-characters/SKILL.md` con contratto comune
+e tre attività parallele: concept alta risoluzione, specifiche PBR, importer.
+Template eseguibile Three.js in templates/import-character.mjs: glTF/GLB,
+material slot espliciti, mappe colore/dati, normali OpenGL/DirectX, Subsurface
+conservata come metadata (nessuno shader SSS implementato). Specifiche Agensi
+ufficiali non fornite né verificate: conformità dichiarata unverified. Nessuna
+generazione, modello o texture creati; nessuna spesa. Verifica locale del template:
+sintassi Node e import del modulo; importazione grafica con asset reali ancora
+da provare. Skill documentale, non servizio in esecuzione automatica.
+
+
 ## Skill concept personaggi — Mage Space
 
 Creata su richiesta `.agents/skills/mage-character-gen/SKILL.md`: concept
