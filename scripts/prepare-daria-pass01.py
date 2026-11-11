@@ -28,9 +28,22 @@ bpy.ops.import_scene.gltf(filepath=SOURCE)
 scene = bpy.context.scene
 rig = next(o for o in bpy.data.objects if o.type == 'ARMATURE')
 rig.data.pose_position = 'REST'
-for name in ('Cube', 'Icosphere', 'Daria tailored outfit and swept hair'):
+import os
+HAIR = os.environ.get('DARIA_HAIR', 'refined')   # refined (owner's choice) | cards (rejected)
+HEAD_EDIT = os.environ.get('DARIA_HEAD_EDIT', '0') == '1'   # reshaping the head was rejected
+for name in ('Cube', 'Icosphere'):
     if name in bpy.data.objects:
         bpy.data.objects.remove(bpy.data.objects[name], do_unlink=True)
+old_outfit = bpy.data.objects.get('Daria tailored outfit and swept hair')
+if old_outfit and HAIR == 'refined':
+    # Keep only the swept hair cap, locks and braid of the previous model, with their weights.
+    bm = bmesh.new(); bm.from_mesh(old_outfit.data)
+    mats = [m.name if m else '' for m in old_outfit.data.materials]
+    drop = [f for f in bm.faces if 'hair' not in mats[f.material_index] and 'strands' not in mats[f.material_index]]
+    bmesh.ops.delete(bm, geom=drop, context='FACES'); bm.to_mesh(old_outfit.data); bm.free()
+    old_outfit.name = 'Daria refined hair'
+elif old_outfit:
+    bpy.data.objects.remove(old_outfit, do_unlink=True)
 body = bpy.data.objects['human_female_body_default']
 head = bpy.data.objects['human_female_head_default']
 gloves = bpy.data.objects['human_female_light_gloves_3']
@@ -235,8 +248,8 @@ face_tex = paint_face() if FACE == 'painted' else upstream_face(FACE == 'tuned')
 face_mat = material('Daria face', tex=face_tex, roughness=.65)
 head.data.materials.clear(); head.data.materials.append(face_mat)
 
-# Adult face proportions: slightly longer midface, defined jaw, nose bridge.
-for v in head.data.vertices:
+# Optional head reshaping (off: the owner judged the untouched head better).
+for v in (head.data.vertices if HEAD_EDIT else []):
     c = v.co
     if c.z < 3.72 and c.y < -.05:
         k = min(1, (3.72 - c.z) / .2)
@@ -529,140 +542,142 @@ def scarf():
 scarf()
 
 # ---------------------------------------------------------------- hair
-HC = Vector((0, .0, 3.73))  # head centre in rest space
-bvh_head = BVHTree.FromObject(head, bpy.context.evaluated_depsgraph_get())
-def scalp_point(direction, lift):
-    hit = bvh_head.ray_cast(HC + direction * 1.0, -direction)
-    loc = hit[0] if hit[0] else HC + direction * .2
-    return loc + direction * lift
+# Card hair and new braid (rejected by the owner) only with DARIA_HAIR=cards.
+if HAIR == 'cards':
+    HC = Vector((0, .0, 3.73))  # head centre in rest space
+    bvh_head = BVHTree.FromObject(head, bpy.context.evaluated_depsgraph_get())
+    def scalp_point(direction, lift):
+        hit = bvh_head.ray_cast(HC + direction * 1.0, -direction)
+        loc = hit[0] if hit[0] else HC + direction * .2
+        return loc + direction * lift
 
-def hairline(c):
-    """True for head faces covered by hair: high forehead edge, ears exposed."""
-    d = (c - HC)
-    if d.z > .14: return True
-    if d.y > .02 and d.z > -.2: return True                  # back of head down to the nape
-    if d.y > -.06 and d.z > .02 and abs(d.x) > .1: return True  # temples above the ears
-    return False
-def hair_cap():
-    """Hair volume as a dome sampled on the skull, closed by a smooth hairline curve."""
-    verts, faces, uvs = [], [], []
-    cols, rows = 40, 14
-    for r in range(rows + 1):
-        for i in range(cols + 1):
-            phi = i / cols * math.tau                      # 0 = her left, pi/2 = back, -pi/2 = face
-            front = max(0, -math.sin(phi)); back = max(0, math.sin(phi))
-            # Hairline elevation: high forehead, temples, down to the nape at the back.
-            edge = .62 * front ** 1.5 + .18 * (1 - front - back) - .55 * back ** 1.2
-            elev = math.pi / 2 - (r / rows) * (math.pi / 2 - edge)   # from crown to hairline
-            d = Vector((math.cos(elev) * math.cos(phi), math.cos(elev) * math.sin(phi), math.sin(elev)))
-            fall = 1 - r / rows
-            lift = .006 + (.03 + .03 * max(0, math.sin(elev)) + .03 * back) * min(1, fall * 2.2)
-            verts.append(tuple(scalp_point(d.normalized(), lift))); uvs.append((i / cols * 4, r / rows))
-    for r in range(rows):
-        for i in range(cols):
-            faces.append((r * (cols + 1) + i, (r + 1) * (cols + 1) + i, (r + 1) * (cols + 1) + i + 1, r * (cols + 1) + i + 1))
-    return new_mesh('Daria hair volume', verts, faces, M['hair'], uvs)
-cap = hair_cap()
-for g in cap.vertex_groups: g.remove(list(range(len(cap.data.vertices))))
-cap.vertex_groups['head'].add(list(range(len(cap.data.vertices))), 1, 'REPLACE')
+    def hairline(c):
+        """True for head faces covered by hair: high forehead edge, ears exposed."""
+        d = (c - HC)
+        if d.z > .14: return True
+        if d.y > .02 and d.z > -.2: return True                  # back of head down to the nape
+        if d.y > -.06 and d.z > .02 and abs(d.x) > .1: return True  # temples above the ears
+        return False
+    def hair_cap():
+        """Hair volume as a dome sampled on the skull, closed by a smooth hairline curve."""
+        verts, faces, uvs = [], [], []
+        cols, rows = 40, 14
+        for r in range(rows + 1):
+            for i in range(cols + 1):
+                phi = i / cols * math.tau                      # 0 = her left, pi/2 = back, -pi/2 = face
+                front = max(0, -math.sin(phi)); back = max(0, math.sin(phi))
+                # Hairline elevation: high forehead, temples, down to the nape at the back.
+                edge = .62 * front ** 1.5 + .18 * (1 - front - back) - .55 * back ** 1.2
+                elev = math.pi / 2 - (r / rows) * (math.pi / 2 - edge)   # from crown to hairline
+                d = Vector((math.cos(elev) * math.cos(phi), math.cos(elev) * math.sin(phi), math.sin(elev)))
+                fall = 1 - r / rows
+                lift = .006 + (.03 + .03 * max(0, math.sin(elev)) + .03 * back) * min(1, fall * 2.2)
+                verts.append(tuple(scalp_point(d.normalized(), lift))); uvs.append((i / cols * 4, r / rows))
+        for r in range(rows):
+            for i in range(cols):
+                faces.append((r * (cols + 1) + i, (r + 1) * (cols + 1) + i, (r + 1) * (cols + 1) + i + 1, r * (cols + 1) + i + 1))
+        return new_mesh('Daria hair volume', verts, faces, M['hair'], uvs)
+    cap = hair_cap()
+    for g in cap.vertex_groups: g.remove(list(range(len(cap.data.vertices))))
+    cap.vertex_groups['head'].add(list(range(len(cap.data.vertices))), 1, 'REPLACE')
 
-def hair_card(name, pts, width, mat, twist=0.):
-    """Two-sided ribbon strand of hair: wavy, tapering to a point."""
-    verts, faces, uvs = [], [], []
-    pts = [Vector(p) for p in pts]
-    for i, p in enumerate(pts):
-        t = i / (len(pts) - 1)
-        tan = (pts[min(i + 1, len(pts) - 1)] - pts[max(i - 1, 0)]).normalized()
-        out = (p - HC); out.z *= .3; out.normalize()
-        side = tan.cross(out).normalized()
-        side = (Matrix.Rotation(twist * t, 3, tan) @ side)
-        w = width * (1 - t ** 1.6 * .85)
-        verts += [tuple(p - side * w), tuple(p + side * w)]
-        uvs += [(0, t), (1, t)]
-    for i in range(len(pts) - 1):
-        faces.append((i * 2, i * 2 + 1, i * 2 + 3, i * 2 + 2))
-    return new_mesh(name, verts, faces, mat, uvs)
+    def hair_card(name, pts, width, mat, twist=0.):
+        """Two-sided ribbon strand of hair: wavy, tapering to a point."""
+        verts, faces, uvs = [], [], []
+        pts = [Vector(p) for p in pts]
+        for i, p in enumerate(pts):
+            t = i / (len(pts) - 1)
+            tan = (pts[min(i + 1, len(pts) - 1)] - pts[max(i - 1, 0)]).normalized()
+            out = (p - HC); out.z *= .3; out.normalize()
+            side = tan.cross(out).normalized()
+            side = (Matrix.Rotation(twist * t, 3, tan) @ side)
+            w = width * (1 - t ** 1.6 * .85)
+            verts += [tuple(p - side * w), tuple(p + side * w)]
+            uvs += [(0, t), (1, t)]
+        for i in range(len(pts) - 1):
+            faces.append((i * 2, i * 2 + 1, i * 2 + 3, i * 2 + 2))
+        return new_mesh(name, verts, faces, mat, uvs)
 
-strands = []
-# Loose waves at the sides: from the temples back to behind the ears, down to the jaw/neck.
-for k in range(22):
-    side = -1 if k % 2 else 1
-    s = (k // 2) / 10
-    start_dir = Vector((side * (.62 + .2 * s), -.42 + .9 * s, .62 - .25 * s)).normalized()
-    p0 = scalp_point(start_dir, .045)
-    pts = [p0]
-    length = .34 + .2 * s + rng.random() * .1
-    for i in range(1, 12):
-        t = i / 11
-        q = Vector(pts[-1]) + Vector((side * .012 * (1 - t), .006 + .01 * s, -length / 11))
-        q.x += side * math.sin(t * 6 + k) * .01
-        loc, normal, _, _ = bvh_head.find_nearest(q)
-        if (q - loc).dot(normal) < .04 and q.z > 3.46: q = loc + normal * .04
-        if q.y < -.06 and abs(q.x) < .2: q.x = side * .2
-        pts.append(q)
-    strands.append(hair_card(f'Daria hair wave {k}', pts, .045 + rng.random() * .015, M['hair2' if k % 3 == 0 else 'hair'], twist=0))
-# Two loose face-framing locks escaping in front of the ears (as in the concept).
-for side in (-1, 1):
-    pts = [scalp_point(Vector((side * .55, -.6, .58)).normalized(), .02)]
-    for i in range(1, 9):
-        t = i / 8
-        pts.append(pts[0] + Vector((side * (.025 + .02 * math.sin(t * 6)), -.02 * t, -.36 * t)))
-    strands.append(hair_card(f'Daria face lock {side}', pts, .022, M['hair2'], twist=.8 * side))
-# Swept-back top strands over the crown into the braid root.
-for k in range(16):
-    a = (k / 15 - .5) * 1.6
-    pts = []
-    for i in range(10):
-        t = i / 9
-        d = Vector((math.sin(a) * (1 - .6 * t) + .25 * t, -.42 + 1.4 * t, .9 - .95 * t ** 1.4)).normalized()
-        pts.append(scalp_point(d, .07 - .03 * t + .015 * math.sin(t * math.pi)))
-    strands.append(hair_card(f'Daria crown strand {k}', pts, .06, M['hair' if k % 4 else 'hair2'], twist=0))
-for obj in strands:
-    for g in obj.vertex_groups: g.remove(list(range(len(obj.data.vertices))))
-    obj.vertex_groups['head'].add(list(range(len(obj.data.vertices))), 1, 'REPLACE')
-
-# Three-strand braid: from behind the left ear, over the shoulder, onto the chest.
-def braid():
-    spine = [Vector(p) for p in [(.1, .17, 3.66), (.17, .14, 3.48), (.22, .03, 3.3), (.25, -.12, 3.12),
-                                 (.25, -.22, 2.95), (.24, -.26, 2.78), (.23, -.27, 2.62)]]
-    # Smooth Catmull-Rom spine.
-    path = []
-    for i in range(len(spine) - 1):
-        p0, p1, p2, p3 = spine[max(i - 1, 0)], spine[i], spine[i + 1], spine[min(i + 2, len(spine) - 1)]
-        for k in range(8):
-            t = k / 8
-            path.append(.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3))
-    path.append(spine[-1])
-    objs = []
-    lobes = 15
-    for strand in range(3):
+    strands = []
+    # Loose waves at the sides: from the temples back to behind the ears, down to the jaw/neck.
+    for k in range(22):
+        side = -1 if k % 2 else 1
+        s = (k // 2) / 10
+        start_dir = Vector((side * (.62 + .2 * s), -.42 + .9 * s, .62 - .25 * s)).normalized()
+        p0 = scalp_point(start_dir, .045)
+        pts = [p0]
+        length = .34 + .2 * s + rng.random() * .1
+        for i in range(1, 12):
+            t = i / 11
+            q = Vector(pts[-1]) + Vector((side * .012 * (1 - t), .006 + .01 * s, -length / 11))
+            q.x += side * math.sin(t * 6 + k) * .01
+            loc, normal, _, _ = bvh_head.find_nearest(q)
+            if (q - loc).dot(normal) < .04 and q.z > 3.46: q = loc + normal * .04
+            if q.y < -.06 and abs(q.x) < .2: q.x = side * .2
+            pts.append(q)
+        strands.append(hair_card(f'Daria hair wave {k}', pts, .045 + rng.random() * .015, M['hair2' if k % 3 == 0 else 'hair'], twist=0))
+    # Two loose face-framing locks escaping in front of the ears (as in the concept).
+    for side in (-1, 1):
+        pts = [scalp_point(Vector((side * .55, -.6, .58)).normalized(), .02)]
+        for i in range(1, 9):
+            t = i / 8
+            pts.append(pts[0] + Vector((side * (.025 + .02 * math.sin(t * 6)), -.02 * t, -.36 * t)))
+        strands.append(hair_card(f'Daria face lock {side}', pts, .022, M['hair2'], twist=.8 * side))
+    # Swept-back top strands over the crown into the braid root.
+    for k in range(16):
+        a = (k / 15 - .5) * 1.6
         pts = []
-        for i, p in enumerate(path):
-            t = i / (len(path) - 1)
-            tan = (path[min(i + 1, len(path) - 1)] - path[max(i - 1, 0)]).normalized()
-            a = tan.cross(Vector((0, 1, 0)) if abs(tan.y) < .9 else Vector((1, 0, 0))).normalized(); b = tan.cross(a)
-            phase = t * lobes * math.pi + strand * math.tau / 3
-            r = .034 * (1 - .45 * t)
-            pts.append(p + a * math.sin(phase) * r + b * math.cos(phase) * r * .6)
-        objs.append(tube(f'Daria braid strand {strand}', pts, .03, M['hair2' if strand == 1 else 'hair'], sides=7, taper=lambda t: 1 - .5 * t))
-    tie = tube('Daria braid tie', [path[-6] + Vector((0, 0, .02)), path[-6] - Vector((0, 0, .02))], .03, M['leather'], sides=8)
-    objs.append(tie)
-    tuft = []
-    for k in range(5):
-        a = k / 5 * math.tau
-        tuft.append(hair_card(f'Daria braid tuft {k}', [path[-6] + Vector((math.cos(a) * .01, math.sin(a) * .01, -.02 * i)) for i in range(5)], .018, M['hair']))
-    for obj in objs + tuft:
-        # Upper braid follows the head; resting part follows the chest.
-        me = obj.data
-        for g in obj.vertex_groups: g.remove(list(range(len(me.vertices))))
-        for v in me.vertices:
-            w = max(0., min(1., (v.co.z - 3.2) / .35))
-            if w > 0: obj.vertex_groups['head'].add([v.index], w, 'REPLACE')
-            if w < 1: obj.vertex_groups['torso'].add([v.index], 1 - w, 'REPLACE')
-        for v in me.vertices:  # keep the braid outside scarf and capelet
-            loc, normal, _, _ = bvh_body.find_nearest(v.co)
-            if v.co.z < 3.35 and (v.co - loc).dot(normal) < .16: v.co = loc + normal * .16
-braid()
+        for i in range(10):
+            t = i / 9
+            d = Vector((math.sin(a) * (1 - .6 * t) + .25 * t, -.42 + 1.4 * t, .9 - .95 * t ** 1.4)).normalized()
+            pts.append(scalp_point(d, .07 - .03 * t + .015 * math.sin(t * math.pi)))
+        strands.append(hair_card(f'Daria crown strand {k}', pts, .06, M['hair' if k % 4 else 'hair2'], twist=0))
+    for obj in strands:
+        for g in obj.vertex_groups: g.remove(list(range(len(obj.data.vertices))))
+        obj.vertex_groups['head'].add(list(range(len(obj.data.vertices))), 1, 'REPLACE')
+
+    # Three-strand braid: from behind the left ear, over the shoulder, onto the chest.
+    def braid():
+        spine = [Vector(p) for p in [(.1, .17, 3.66), (.17, .14, 3.48), (.22, .03, 3.3), (.25, -.12, 3.12),
+                                     (.25, -.22, 2.95), (.24, -.26, 2.78), (.23, -.27, 2.62)]]
+        # Smooth Catmull-Rom spine.
+        path = []
+        for i in range(len(spine) - 1):
+            p0, p1, p2, p3 = spine[max(i - 1, 0)], spine[i], spine[i + 1], spine[min(i + 2, len(spine) - 1)]
+            for k in range(8):
+                t = k / 8
+                path.append(.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3))
+        path.append(spine[-1])
+        objs = []
+        lobes = 15
+        for strand in range(3):
+            pts = []
+            for i, p in enumerate(path):
+                t = i / (len(path) - 1)
+                tan = (path[min(i + 1, len(path) - 1)] - path[max(i - 1, 0)]).normalized()
+                a = tan.cross(Vector((0, 1, 0)) if abs(tan.y) < .9 else Vector((1, 0, 0))).normalized(); b = tan.cross(a)
+                phase = t * lobes * math.pi + strand * math.tau / 3
+                r = .034 * (1 - .45 * t)
+                pts.append(p + a * math.sin(phase) * r + b * math.cos(phase) * r * .6)
+            objs.append(tube(f'Daria braid strand {strand}', pts, .03, M['hair2' if strand == 1 else 'hair'], sides=7, taper=lambda t: 1 - .5 * t))
+        tie = tube('Daria braid tie', [path[-6] + Vector((0, 0, .02)), path[-6] - Vector((0, 0, .02))], .03, M['leather'], sides=8)
+        objs.append(tie)
+        tuft = []
+        for k in range(5):
+            a = k / 5 * math.tau
+            tuft.append(hair_card(f'Daria braid tuft {k}', [path[-6] + Vector((math.cos(a) * .01, math.sin(a) * .01, -.02 * i)) for i in range(5)], .018, M['hair']))
+        for obj in objs + tuft:
+            # Upper braid follows the head; resting part follows the chest.
+            me = obj.data
+            for g in obj.vertex_groups: g.remove(list(range(len(me.vertices))))
+            for v in me.vertices:
+                w = max(0., min(1., (v.co.z - 3.2) / .35))
+                if w > 0: obj.vertex_groups['head'].add([v.index], w, 'REPLACE')
+                if w < 1: obj.vertex_groups['torso'].add([v.index], 1 - w, 'REPLACE')
+            for v in me.vertices:  # keep the braid outside scarf and capelet
+                loc, normal, _, _ = bvh_body.find_nearest(v.co)
+                if v.co.z < 3.35 and (v.co - loc).dot(normal) < .16: v.co = loc + normal * .16
+    braid()
 
 # ---------------------------------------------------------------- quiver
 def quiver():

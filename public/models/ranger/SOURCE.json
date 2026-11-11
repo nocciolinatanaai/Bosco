@@ -40,9 +40,9 @@
   },
   "pass01": {
     "file": "daria-pass01.glb",
-    "bytes": 941068,
-    "sha256": "cb21bb1b752ce680a0458f3018733f36e8533b8d98f5478b0a40f76b69da71e0",
-    "triangles": 13598,
+    "bytes": 1065704,
+    "sha256": "e2f30440cfc8431adf62c82be796614d2890542dfa36ed0ae8298b4d8e5091bc",
+    "triangles": 16370,
     "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
     "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
     "original_geometry": [
@@ -50,7 +50,7 @@
       "Jacket skirt removed after combat measurement (panels entered the thighs while running)",
       "Ragged terracotta capelet with brass ring brooch",
       "Sage cowl scarf",
-      "Hair volume sampled on the skull, side waves, crown strands and three-strand braid over the left shoulder",
+      "Hair, locks and braid kept from daria-refined.glb (owner preferred them to new card hair, still available with DARIA_HAIR=cards)",
       "Bracers, belts, thigh straps (no rigid buckles), quiver strap, quiver with six arrows, pouch and map notebook"
     ],
     "original_pixels": [
@@ -59,7 +59,7 @@
     ],
     "changes_to_base": [
       "Body faces covered by clothing removed (no skin can poke through)",
-      "Head mildly narrowed in the lower face, jaw widened",
+      "Head geometry kept exactly as in daria-refined.glb (reshaping rejected by the owner; DARIA_HEAD_EDIT=1 keeps it available)",
       "Boots and their upstream texture retained",
       "Clips retained unchanged"
     ],
