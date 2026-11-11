@@ -591,3 +591,12 @@ nocciolinatanaai.github.io. API GitHub non valida: resta la selezione del ramo
 Pages nell'account; il push del ramo compilato non prova che il dominio sia attivo.
 Nessun social, spesa, vecchio Supabase o file Tonino toccati. Proposta economica
 Codex: ridurre il perimetro prima di espandere contenuti, senza inventare incassi.
+
+## Invio finale verificato
+
+Push atomico riuscito: sorgenti 8052ae6 e build 6cfa401 su mythwood/pages,
+verificati con ls-remote. Il Reel è scaricabile da raw.githubusercontent.com
+(HTTP 200). Dominio e API GitHub negati dal proxy Cloud (CONNECT 403): non è
+una risposta del sito, né permette di concludere che il token sia realmente
+non valido. Resta la selezione del ramo in Pages e la verifica pubblica da
+un ambiente con accesso. Il nuovo progetto Supabase non è ancora configurato.

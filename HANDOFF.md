@@ -44,7 +44,9 @@ originale del montaggio; grafica provvisoria, nessuna cinematica finale promessa
 Caption in docs/social/DEMO_GAMEPLAY_KIT. Nessun upload social o spesa.
 
 GitHub Pages: ramo compilato mythwood/pages con CNAME mythwood.it e .nojekyll.
-Token API GitHub non valido: Git funziona, ma attivazione Pages non eseguita né
+Push remoto verificato: sorgenti applicativi 8052ae6, build Pages 6cfa401.
+API e dominio non verificabili per policy Cloud (CONNECT 403); gh auth status
+non stabilisce da solo se il token sia valido. Attivazione Pages non eseguita né
 verificata; il proprietario deve selezionare mythwood/pages / root nelle
 impostazioni Pages. PAGES_ACTIVATION descrive passo esatto. Non chiamarlo online
 prima di verifica pubblica. Non condividere la CTA social finché il dominio

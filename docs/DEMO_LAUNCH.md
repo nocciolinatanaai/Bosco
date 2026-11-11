@@ -21,7 +21,7 @@ Non è una partita in presa diretta. I vecchi esperimenti cinematici restano fer
 
 GitHub Pages: preparare ramo mythwood/pages con soli file dist, CNAME mythwood.it,
 .nojekyll. Il record DNS indicato dal proprietario punta a nocciolinatanaai.github.io;
-è la destinazione DNS, non il contenuto del file CNAME. API GitHub non autenticata:
+è la destinazione DNS, non il contenuto del file CNAME. Verifica API GitHub bloccata dalla rete Cloud:
 la scelta del ramo Pages va verificata/configurata dall'account del proprietario.
 Niente merge su main. I risultati finali e il commit sono nella testa di HANDOFF.
 
@@ -43,7 +43,7 @@ bottone non attivava la schivata; wrapper e cattura ora restituiscono il focus
 al mondo e verificano stamina e Tiro di ritorno prima di dichiarare riuscita.
 
 Sito compilato pronto per ramo Pages; attivazione effettiva non verificata,
-nessun accesso API GitHub valido. Registrazioni esplicitamente inattive finché
+nessun accesso API GitHub verificabile dalla rete Cloud. Registrazioni esplicitamente inattive finché
 il proprietario non crea/configura il progetto nuovo, SMTP/Google e informativa.
 Nessun incasso, lead raccolto automaticamente o conformità normativa certificata.
 
