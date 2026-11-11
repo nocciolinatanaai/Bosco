@@ -9,7 +9,7 @@ ancora non consegnati al momento dell'assegnazione; non ricostruire la patch.
 
 | Responsabile | Incarico | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
-| Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | In preparazione secondo il proprietario; PR attesa verso mythwood/collaboration-base |
+| Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | Consegnato da Tonino l'11/11 su tonino/rintocco (base 0789af7) via bundle: la sua sessione non ha push. 121 test e test:caves passati. Attesa revisione di Codex; vedi docs/TONINO_REVIEW.md |
 | Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | In corso sulla base 6ef6174 |
 
 Codex integra sul ramo di collaborazione; Tonino usa rami tonino/<incarico> e

@@ -10,9 +10,9 @@ function reset(s) {
 }
 export function createWarden() {
   return { id: 'cave-warden', name: 'Guardiano del rintocco', area: 'caves', type: 'warden',
-    x: 0, z: -8, hp: 150, maxHp: 150, boss: false, sealed: false, timer: 1.2,
+    x: 0, z: -8, hp: 360, maxHp: 360, boss: false, sealed: false, timer: .5,
     phase: 'idle', attackKind: 'nova', attackCount: 0, chargeDuration: 1.6,
-    radius: 5, windup: 0, recovery: 0, recoveryDuration: 2, impactDamage: 22,
+    radius: 6, windup: 0, recovery: 0, recoveryDuration: 2, impactDamage: 22, rang: true, resolute: false,
     stagger: 0, hitFlash: 0, facing: 0, aimX: 0, aimZ: -8 };
 }
 export function enterCaves(s) {
@@ -49,18 +49,19 @@ export function advanceWarden(s, enemy, dt, hurt, emit) {
   if (enemy.phase === 'windup') {
     enemy.windup = Math.max(0, enemy.windup - dt);
     if (!enemy.windup) {
-      enemy.phase = 'recovery'; enemy.recovery = 2;
+      enemy.phase = 'recovery'; enemy.recovery = 2; enemy.rang = true; enemy.resolute = false;
       emit('enemy-impact', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, radius: enemy.radius });
-      if (Math.hypot(s.x - enemy.x, s.z - enemy.z) < enemy.radius) hurt(22, { kind: 'nova', name: enemy.name });
+      if (Math.hypot(s.x - enemy.x, s.z - enemy.z) < enemy.radius) hurt(enemy.impactDamage, { kind: 'nova', name: enemy.name });
     }
   } else if (enemy.phase === 'recovery') {
     enemy.recovery = Math.max(0, enemy.recovery - dt);
-    if (!enemy.recovery) { enemy.phase = 'idle'; enemy.timer = 1.2; }
+    // Un rintocco interrotto non è annullato: il successivo arriva prima e non si lascia più spezzare.
+    if (!enemy.recovery) { enemy.phase = 'idle'; enemy.timer = enemy.rang ? 1.2 : .4; if (!enemy.rang) enemy.resolute = true; }
   } else if (Math.hypot(s.x - enemy.x, s.z - enemy.z) <= 10) {
     enemy.timer -= dt;
     if (enemy.timer <= 0) {
-      enemy.aimX = enemy.x; enemy.aimZ = enemy.z; enemy.phase = 'windup'; enemy.windup = 1.6;
-      emit('enemy-windup', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, duration: 1.6, radius: enemy.radius });
+      enemy.aimX = enemy.x; enemy.aimZ = enemy.z; enemy.phase = 'windup'; enemy.windup = 1.6; enemy.rang = false;
+      emit('enemy-windup', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, duration: 1.6, radius: enemy.radius, resolute: enemy.resolute });
     }
   }
 }

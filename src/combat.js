@@ -151,9 +151,9 @@ function hit(s, enemy, damage, stagger = 0, critical = false) {
   s.lesson.hit = true;
   const amount = Math.min(enemy.hp, Math.round(damage * (s.evolved ? 1.5 : 1)));
   enemy.hp -= amount; enemy.hitFlash = .16;
-  if (stagger > 0 && enemy.hp > 0) {
+  if (stagger > 0 && enemy.hp > 0 && !enemy.resolute) {
     enemy.stagger = Math.max(enemy.stagger, stagger * (enemy.boss ? .45 : 1));
-    enemy.windup = 0; enemy.phase = 'stagger';
+    enemy.windup = 0; enemy.phase = 'stagger'; enemy.rang = false;
   }
   emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical });
   if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }

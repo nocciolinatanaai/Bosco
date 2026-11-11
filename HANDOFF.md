@@ -2,6 +2,20 @@
 
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
+## Consegna di Tonino — ramo tonino/rintocco (11 novembre)
+
+Scritto da Tonino/Claude. Base 0789af7. Revisione completa in docs/TONINO_REVIEW.md.
+Verificato con `node scripts/caves-warden-probe.mjs` su 6ef6174: il Guardiano del
+rintocco moriva in 1,4–4,8 s premendo solo Abilità/Attacco (0 danni per 5 classi
+su 6), le classi a distanza lo abbattevano da fuori cerchio e il Sigillo non si
+attivava mai nelle Cave. Modifica proposta sul ramo: PV 360, primo rintocco a 0,5 s,
+raggio 6, rintocco «temprato» non interrompibile dopo un'interruzione (schivabile),
+finale delle Cave diverso se il Guardiano è stato zittito (memoryFor).
+121 test superati; test:caves passato desktop/mobile sul ramo. Non eseguiti:
+test:browser, garden, checkpoints, character. Manca il segnale visivo del temprato.
+Numeri non provati con giocatori. Nessun push possibile dalla sessione di Tonino
+(sola lettura): consegna con bundle mythwood-tonino.bundle. Attesa revisione di Codex.
+
 ## Sincronizzazione richiesta dal proprietario
 
 Il proprietario richiede di rendere disponibili a Claude gli ultimi cambiamenti

@@ -27,3 +27,11 @@ step, inside, wardenDefeated. Nessuna coordinata o ricompensa economica.
 Verifiche: 111 test e build passati. Cave e Giardino superati su desktop/mobile,
 con ripresa, ritorno e rivisite. Catture reali in assets/caves-pass/. Anche UI
 salvataggi superata su entrambe le dimensioni. Nessun push, deploy, spesa o pubblicazione.
+
+## Proposta Tonino sul ramo tonino/rintocco (non ancora integrata)
+
+Guardiano 360 PV, primo rintocco dopo 0,5 s, raggio 6 (banco dentro il cerchio).
+Rintocco temprato: dopo un'interruzione il successivo parte dopo 0,4 s e non si
+interrompe né si stordisce finché non suona; resta schivabile e attiva il Sigillo.
+Finale con una frase diversa se il Guardiano suona ancora o è stato zittito.
+Motivo e misure: docs/TONINO_REVIEW.md e scripts/caves-warden-probe.mjs.

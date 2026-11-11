@@ -2,7 +2,7 @@
 export function journey(s) {
   if (s.caves?.step > 0) {
     if (s.caves.step === 3) return { id: 'caves-done', title: 'Due strade nella stessa lente', hint: 'Liora distingue la rotta originale da quella corretta. La firma conduce all’Archivio Cartiglio. Le cave restano esplorabili.' };
-    return { id: 'caves-' + s.caves.step + '-' + s.area, title: s.caves.step === 1 ? 'Il banco del cartografo' : 'Una lente per Liora', hint: s.area !== 'caves' ? 'La ricerca è conservata. Torna alle cave per continuare.' : s.caves.step === 1 ? 'Recupera la lente in fondo alle cave. Il guardiano prepara un rintocco circolare: esci dal cerchio o schiva l’impatto.' : 'Lente con te. Torna alla soglia e riportala a Liora.' };
+    return { id: 'caves-' + s.caves.step + '-' + s.area, title: s.caves.step === 1 ? 'Il banco del cartografo' : 'Una lente per Liora', hint: s.area !== 'caves' ? 'La ricerca è conservata. Torna alle cave per continuare.' : s.caves.step === 1 ? 'Recupera la lente in fondo alle cave. Il guardiano suona un rintocco circolare che copre anche il banco: prendi la lente tra un rintocco e l’altro, oppure schiva l’impatto. Se lo interrompi, il rintocco dopo non si lascia più spezzare.' : 'Lente con te. Torna alla soglia e riportala a Liora.' };
   }
   if (s.garden?.step > 0) {
     if (s.garden.step === 4) return { id: 'garden-done', title: 'Una rotta restituita', hint: 'Il segnale è tornato al sentiero. La bussola punta dentro la frattura: qualcuno corregge ancora la rotta.' };
@@ -42,4 +42,15 @@ export function storyObjective(s) {
   if (s.cleared) return 'Il Custode tratteneva la voce di Liora. Una gilda cancellata dalle mappe è la prossima pista.';
   if (s.evolved) return 'Il ricordo di Liora è con te. Il Custode non può più nasconderlo.';
   return 'Due echi trattengono il frammento di una compagna scomparsa. Il Custode veglia sul sigillo.';
+}
+
+// Il finale delle Cave ricorda come hai trattato il Guardiano: scelta già salvata (wardenDefeated), ora con una conseguenza nel testo.
+const CAVES_ENDING = Object.freeze({
+  spared: ' Dalle cave arriva ancora un rintocco, regolare. «Suona l’appello», dice Liora. «Sette colpi, uno per ogni nome della squadra. Finché suona, qualcuno li sta ancora contando.»',
+  silenced: ' Le cave ora tacciono. Liora ascolta a lungo. «Suonava l’appello: sette colpi, uno per ogni nome della squadra. Adesso dovremo ricordarli noi.»',
+});
+export function memoryFor(s, kind) {
+  const text = MEMORY[kind];
+  if (kind !== 'caves' || !s?.caves) return text;
+  return Object.freeze({ ...text, body: text.body + (s.caves.wardenDefeated ? CAVES_ENDING.silenced : CAVES_ENDING.spared) });
 }
