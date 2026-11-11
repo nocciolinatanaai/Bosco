@@ -1,7 +1,10 @@
+import {initCookies} from '../privacy/cookies.js';import {privacyStore} from '../privacy/preferences.js';
 import { CLASSES } from '../roles.js';
 import './site.css';
+initCookies();
 const symbols={tank:'◇',fighter:'╱',assassin:'⋈',mage:'✧',ranger:'⌁',healer:'✣'};
 for(const button of document.querySelectorAll('[data-role]'))button.addEventListener('click',()=>{
+ privacyStore.setRole(button.dataset.role);
  const role=CLASSES.find(r=>r.id===button.dataset.role);
  for(const item of document.querySelectorAll('[data-role]'))item.setAttribute('aria-pressed',String(item===button));
  document.getElementById('class-symbol').textContent=symbols[role.id];document.getElementById('class-title').textContent=role.title;document.getElementById('class-skill').textContent=role.skill;document.getElementById('class-description').textContent=role.description;
@@ -14,3 +17,5 @@ form.addEventListener('submit',async event=>{event.preventDefault();if(!form.rep
  if(navigator.share){try{await navigator.share({title:'La mia prova di MYTHWOOD',text:response()});status.textContent='Condivisione completata con la destinazione scelta.';}catch(error){status.textContent=error.name==='AbortError'?'Condivisione annullata. La risposta resta qui.':'Condivisione non disponibile. Puoi scaricare il testo.';}}
  else download();
 });
+
+const remembered=privacyStore.getRole();if(remembered)document.querySelector(`[data-role="${remembered}"]`)?.click();

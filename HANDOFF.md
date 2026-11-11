@@ -15,23 +15,40 @@ le diciture precedenti «nessun push» non impediscono il push ora richiesto.
 Esperimenti cinematografici non tracciati e skill installate preesistenti esclusi.
 La skill locale mythwood-collaboration e i documenti citati nel prompt sono tracciati.
 
-## In corso — demo, sito, video e nuovi account
+## Consegna — demo, sito, video, account e cookie
 
-Mandato ampliato: demo con riepilogo, sito GitHub Pages, video da gioco reale;
-registrazione email e Google su **nuovo progetto Supabase** scelto dal proprietario.
-File di Tonino non toccati, bundle ancora mancante. Root diventa landing; gioco
-in demo.html. Sorgenti nuovi demo-entry/demo-shell, site/ e auth/, configurazione
-Vite multipagina. Script browser aggiornati al percorso della demo.
+Mandato: demo, video e sito GitHub Pages; registrazione email/Google su nuovo
+progetto Supabase, poi gestione cookie. Codice implementato su ramo condiviso,
+file di Tonino invariati (bundle 3222cd1 ancora non disponibile). Nessun merge main.
 
-Sito desktop/mobile testato, video in cattura (primo tentativo ha rilevato Space
-con focus ancora sul bottone del menu; aggiunto ritorno focus nel wrapper demo
-e nella cattura). Registrazione predisposta, non attiva: nessun nuovo progetto
-creato o credenziale disponibile. ACCOUNTS_SETUP spiega configurazione e prova
-reale necessarie. Test account solo con provider fittizio/intercettato.
+Root index.html sito; demo.html gioco con riepilogo dopo Custode e prosecuzione;
+account.html accesso email/password, Google PKCE, conferma e reset. Account
+inattivi senza URL nuovo progetto, Publishable key, responsabile e contatto.
+Nessun progetto Supabase creato: configurazione/Google/SMTP/informativa mancanti,
+leggere ACCOUNTS_SETUP. Test con SDK reale e risposte simulate, non login reale.
 
-Verifiche finali demo/video/auth e ramo Pages ancora da concludere al checkpoint.
-API GitHub non valida; Git push disponibile. Non chiamare il sito online prima
-dell'attivazione Pages e verifica. Nessuna spesa, social o produzione Supabase.
+Cookie: necessari e preferenza facoltativa del ruolo sul sito; nessun tracker.
+Default facoltativi spenti, modifica/revoca dal footer, record locale 180 giorni.
+Partita su opt-in e account richiesto gestiti separatamente; non si finge che
+Solo necessari cancelli sessione/partita. Dettagli in COOKIE_MANAGEMENT.
+
+126 test; regressione episodio completo desktop/mobile passata con riepilogo;
+smoke sito/video/navigazione, account simulati e cookie desktop/mobile passati.
+La regressione completa precede il solo nuovo link Cookie nel footer del gioco;
+nessuna modifica a simulazione o file riservati. Nessuna prova Safari fisica.
+Evidenze in docs/assets/demo-launch/. Build finale verificata anche con cookie.
+
+Video: public/site/mythwood-gameplay.mp4 (Reel 14 s) e mythwood-story.mp4 (8 s),
+720×1280 H.264/AAC. Gameplay da checkpoint e clock campionato, testi e audio
+originale del montaggio; grafica provvisoria, nessuna cinematica finale promessa.
+Caption in docs/social/DEMO_GAMEPLAY_KIT. Nessun upload social o spesa.
+
+GitHub Pages: ramo compilato mythwood/pages con CNAME mythwood.it e .nojekyll.
+Token API GitHub non valido: Git funziona, ma attivazione Pages non eseguita né
+verificata; il proprietario deve selezionare mythwood/pages / root nelle
+impostazioni Pages. PAGES_ACTIVATION descrive passo esatto. Non chiamarlo online
+prima di verifica pubblica. Non condividere la CTA social finché il dominio
+non serve il nuovo sito. Nessun pagamento o ricavo attivato.
 
 ## Blocco concluso — regressione e revisione coordinata con Tonino
 

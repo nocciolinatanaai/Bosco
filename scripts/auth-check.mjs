@@ -17,7 +17,7 @@ try{
   if(url.pathname.endsWith('/authorize'))return route.fulfill({status:200,contentType:'text/html',body:'<p>Mock provider redirect intercepted</p>'});
   return route.fulfill({status:200,contentType:'application/json',headers,body:JSON.stringify(data)});
  });
- await page.goto('http://127.0.0.1:5198/account.html',{waitUntil:'networkidle'});await page.waitForFunction(()=>!document.getElementById('google-login').disabled);
+ await page.goto('http://127.0.0.1:5198/account.html',{waitUntil:'networkidle'});await page.waitForFunction(()=>!document.getElementById('google-login').disabled);await page.locator('#cookie-necessary').click();
  await page.locator('[data-mode="signup"]').click();await page.locator('#auth-email').fill(user.email);await page.locator('#auth-password').fill('a-long-test-password');await page.locator('#auth-confirm').fill('different-password');await page.locator('#privacy-read').check();await page.locator('#auth-submit').click();assert.ok((await page.locator('#auth-status').textContent()).includes('non coincidono'));assert.equal(report.requests.some(r=>r.path.endsWith('/signup')),false);
  await page.locator('#auth-confirm').fill('a-long-test-password');await page.locator('#auth-submit').click();await page.waitForFunction(()=>document.getElementById('auth-status').textContent.includes('confermare'));assert.ok(report.requests.some(r=>r.path.endsWith('/signup')));
  await page.locator('[data-mode="login"]').click();await page.locator('#auth-password').fill('a-long-test-password');await page.locator('#auth-submit').click();await page.locator('#signed-in').waitFor({state:'visible'});assert.equal(await page.locator('#account-email').textContent(),user.email);

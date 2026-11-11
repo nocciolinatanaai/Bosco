@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-11T13:14:16.208Z",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 2,
+      "inputChecks": [
+        {
+          "gesture": "W until movement milestone",
+          "wallMs": 4155,
+          "milestone": "Rompi il primo sigillo"
+        },
+        {
+          "gesture": "W until movement milestone",
+          "wallMs": 2087,
+          "milestone": "Rompi il primo sigillo"
+        }
+      ],
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
+      "persistentEntries": 0
+    },
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": "passed",
+      "externalRequests": 0,
+      "errors": 0,
+      "portraitRequests": 2,
+      "inputChecks": [
+        {
+          "gesture": "W until movement milestone",
+          "wallMs": 1152,
+          "milestone": "Rompi il primo sigillo"
+        },
+        {
+          "gesture": "W until movement milestone",
+          "wallMs": 584,
+          "milestone": "Rompi il primo sigillo"
+        }
+      ],
+      "checkpoints": "opt-in, milestones, reload, resume, pause preference, delete own key",
+      "persistentEntries": 0
+    }
+  ],
+  "buildEntrySha256": "6e1d8ecc660034611cc14f19bdd647f765610181e3520d32aebdfa6cda3205c1",
+  "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
+  "runnerSha256": "9d7fcb6c84b26912fbde58ff3a5ab2683e54620987a68680643e1bf6363733e5",
+  "storageFallbacks": [
+    {
+      "mode": "corrupt",
+      "status": "passed",
+      "errors": 0
+    },
+    {
+      "mode": "blocked",
+      "status": "passed",
+      "errors": 0
+    }
+  ],
+  "finishedAtUtc": "2026-11-11T13:22:42.370Z"
+}

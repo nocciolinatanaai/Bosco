@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "source": "Actual demo UI/combat, awakened Ranger checkpoint; browser time stepped; not an uncut player session",
+  "width": 540,
+  "height": 960,
+  "fps": 20,
+  "frames": 240,
+  "errors": [],
+  "external": [],
+  "dodge": true,
+  "returnShot": true
+}

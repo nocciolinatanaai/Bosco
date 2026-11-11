@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "name": "desktop",
+      "status": "passed",
+      "defaultOptionalOff": true,
+      "reject": true,
+      "acceptAndRecall": true,
+      "revocation": true,
+      "separateDataPreserved": true
+    },
+    {
+      "name": "mobile",
+      "status": "passed",
+      "defaultOptionalOff": true,
+      "reject": true,
+      "acceptAndRecall": true,
+      "revocation": true,
+      "separateDataPreserved": true
+    }
+  ],
+  "errors": [],
+  "external": []
+}

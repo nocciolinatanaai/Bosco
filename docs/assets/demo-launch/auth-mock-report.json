@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "mode": "Mock Supabase Auth with actual SDK; no real backend or Google login",
+  "requests": [
+    {
+      "path": "/auth/v1/signup",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/token",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/logout",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/recover",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/verify",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/user",
+      "method": "PUT"
+    },
+    {
+      "path": "/auth/v1/logout",
+      "method": "POST"
+    },
+    {
+      "path": "/auth/v1/authorize",
+      "method": "GET"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "checks": [
+    "signup confirmation",
+    "password mismatch",
+    "email login",
+    "local logout preserves checkpoint",
+    "recovery email",
+    "token hash recovery and URL cleanup",
+    "password update",
+    "Google PKCE redirect intercepted"
+  ]
+}

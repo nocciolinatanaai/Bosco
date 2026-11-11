@@ -1,0 +1,53 @@
+{
+  "dateUtc": "2026-11-11",
+  "unitTests": 126,
+  "sourceSha256": {
+    "index.html": "7220ee8f7249138c3d69cc1f974908b782d97f791f66fd71ee8f9ff44d7a4316",
+    "demo.html": "7b86d9207cca1e4c5f0c101c7d1a59499394a94403542928f934e4722c5e3d13",
+    "account.html": "c0c71249c21435bea9ff2b9b91f05f6087d731e8a408c5671a9c2b6ebc6dd494",
+    "vite.config.js": "63dcdfaba2355ec66008d76e9797b3f8f440adbc97fa3c9aff5eab0feb03ea3a",
+    "src/demo-entry.js": "9e0a361e1f9089e0f29225dd478d050de8a426462b0be457f256c195cdbb0b75",
+    "src/demo-shell.css": "0ea4443f6a262d8a1a7f40efffd9a9c7be30602039fd626bf588a6690d25b981",
+    "src/site/site.js": "00e5bc475d65554a0cb6272d4b44873b1f54ef74a31ae5be757f915f3f537a93",
+    "src/site/site.css": "71521f41aa053af4e750d58efdf3cb49c2402a5c8cf09198667c187b35fbbedc",
+    "src/auth/account.js": "ddeffd0705ca60c91445da38fa31ee99b98d63f4c72c2923d10dbbdbe619376a",
+    "src/auth/config.js": "70918c4f1b540723946537aa9c50d16f6cac20cea1d612b8908bc990108d2776",
+    "src/privacy/preferences.js": "66aef3f3691831eb70a4683384acbe5cea911c1a7151476b19045a15fdc0bf88",
+    "src/privacy/cookies.js": "956cd4e5ff85fe954201d355295c06fe777b602fbb89acb2c0a8e07beb660e24",
+    "src/privacy/cookies.css": "53e3e952b81cd85068fa8a924a7d97733dfaa5a219fa7bd07198d9a5b99474bf",
+    "scripts/prepare-pages.mjs": "76e1fd45cb78b6ef100bb5d81359580c24bf392508f67745182b2d32a4eb10da"
+  },
+  "reservedUnchangedFrom6ef6174": {
+    "src/caves.js": "e2183a8dbe07e7fbb5e699f26851a872428e2573b41332231b994635735ee925",
+    "src/combat.js": "4992aec1778457644c850f0133a23c454446e1bd810356d372eeacfb2f73d51a",
+    "src/journey.js": "79188cda30637236bb36ce758b4838f2f487e1a8459183fef57dfb847ec394b2",
+    "src/runtime.js": "a8d55c273838c4648b1b2df9ee3ad9b0e158d152bb29a13c6934f955c0c450c2",
+    "tests/caves.test.mjs": "3a1feade3003f74f082ade9ba946b194daa3a78002a6e02e66754b273ca681a6"
+  },
+  "finalBuildHtmlSha256": "6d97753e154c208f78c5459a2d57e5b23ccdeb2d8ee807af99f533949e38d910",
+  "episodeTestBuildHtmlSha256": "6e1d8ecc660034611cc14f19bdd647f765610181e3520d32aebdfa6cda3205c1",
+  "evidenceSha256": {
+    "auth-mock-report.json": "4308c56db7c371cd74f5a7fe63c4be7b9c534d8806952ab1a7aef180dc40d420",
+    "episode-report.json": "108c9a0c7f7d6e2e87da5a209e9873dc7a5ca5091ffac927929bcb4b7d6bd513",
+    "mobile-account-inactive.png": "f11b7424deee63b6bdf43b7d283c40f00ee1b6e8ce1da288e62ec1b999e3f1d5",
+    "mobile-cookie-preferences.png": "9cf9183b64a656b5494a45c2ccd7929705d0cbc52b62f0b84fcbce0b785a4bc1",
+    "mobile-site.png": "00d799836ed3eac9b0e58d162cc2a2cf107ff1e769d70d5b12a111b6103db2aa",
+    "privacy-report.json": "73c57c43851a84e58b2a3d1799c74c2b9f08c0a79c0c681e65767a150f7dd3d7",
+    "site-report.json": "245471243a3d14674bf219a7ed464d0b976c703e9cc357a8a1a20cf2a1f542c2",
+    "unit-summary.json": "600650a6b93337680342bfe82aa9d0c724c9275e69777e002c41b3775e9b8008",
+    "video-capture-report.json": "b765e377a2d5529e5e2306a88ebb90eedf1c6c22b7a334ef236d5f7a23dc4aca"
+  },
+  "videoSha256": {
+    "mythwood-story.mp4": "91529e7304127eeaf7c18216dc431cc8671d9de7e7ce933e4f9f03cd2a42855c",
+    "mythwood-gameplay.mp4": "3030aa7906e2426ca10877107d04327905d0ff5e76c8f8a3a7cc57345ff69a2b"
+  },
+  "limitations": [
+    "No live GitHub Pages configuration verified; API token invalid",
+    "Accounts inactive until owner configures separate Supabase project, SMTP and Google",
+    "Auth browser tests use mocked HTTP; no real account/email/Google action",
+    "Episode full regression predates only extra Cookie footer link; final website smoke includes it",
+    "Mobile Chromium emulation, not physical Safari",
+    "Graphics/balance provisional; Tonino bundle not available",
+    "No payments, social upload, external spending or production Supabase access"
+  ]
+}

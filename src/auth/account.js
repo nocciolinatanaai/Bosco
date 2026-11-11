@@ -1,3 +1,4 @@
+import {initCookies} from '../privacy/cookies.js';
 import '../site/site.css';import './account.css';
 import {authConfig,callbackUrl,safeOAuthUrl,authError} from './config.js';
 const $=id=>document.getElementById(id),config=authConfig({VITE_SUPABASE_URL:import.meta.env.VITE_SUPABASE_URL,VITE_SUPABASE_PUBLISHABLE_KEY:import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,VITE_AUTH_OPERATOR:import.meta.env.VITE_AUTH_OPERATOR,VITE_AUTH_CONTACT:import.meta.env.VITE_AUTH_CONTACT});let client,mode='login',busy=false,recovery=false;
@@ -25,4 +26,4 @@ async function start(){if(!config){$('account-availability').textContent='Regist
  client.auth.onAuthStateChange((event,session)=>{if(event==='PASSWORD_RECOVERY'){recovery=true;setMode('reset');}render(session);});$('account-availability').textContent='Accesso al progetto MYTHWOOD disponibile.';setBusy(false);
  }catch(error){$('auth-status').textContent='Accesso non disponibile o link scaduto. Richiedi un nuovo link oppure riprova ad accedere.';setBusy(false);}
 }
-void start();
+initCookies();void start();

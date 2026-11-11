@@ -20,6 +20,8 @@ simulato; demo ospite e checkpoint locale restano indipendenti.
    schermata consenso e domini autorizzati. In Supabase, provider Google: inserire
    lì client ID e client secret. Nella console Google autorizzare il callback
    HTTPS /auth/v1/callback del nuovo progetto Supabase indicato dal pannello.
+   Se il progetto Google è in modalità test, verificare gli account di prova
+   autorizzati e lo stato di pubblicazione prima di aprire al pubblico.
    Il client secret Google NON va nel sito, in VITE_, nel repository o in chat.
 5. Impostare nel builder Cloud i quattro valori di .env.example: URL del nuovo
    progetto, **Publishable key** sb_publishable_…, nome del responsabile e email
