@@ -20,9 +20,9 @@ Blocchi reali, non aggirati:
 
 | | Commit |
 | --- | --- |
-| Sorgente candidato (PR) | 0601857 su tonino/character-art-pass-01, base d472bd1 |
+| Sorgente candidato (PR) | testa di tonino/character-art-pass-01 (vedi bundle), base d472bd1; prima versione 0601857 |
 | Pages attuale remoto (rollback) | **6cfa401** (build da 8052ae6) |
-| Pages candidato locale | e88a148, generato da 0601857 con `node scripts/prepare-pages.mjs`, genitore 6cfa401 |
+| Pages candidato locale | rigenerato dalla testa del ramo con `node scripts/prepare-pages.mjs`, genitore 6cfa401 (vedi bundle). Va comunque rigenerato dal commit **integrato** dopo la revisione |
 
 Rollback: `git push origin 6cfa401:refs/heads/mythwood/pages --force-with-lease=mythwood/pages:<commit pubblicato>`.
 Push previsto: `git push origin mythwood/pages --force-with-lease=mythwood/pages:6cfa401`
@@ -80,3 +80,10 @@ livello grafico è pubblicabile spetta alla revisione e al proprietario.
 4. Annotare il commit Pages remoto, push con --force-with-lease su quel commit.
 5. Impostazioni Pages: Deploy from a branch → mythwood/pages → / (root); dominio mythwood.it invariato.
 6. Verificare https://mythwood.it da un dispositivo reale.
+
+## Aggiornamento — prova in combattimento
+
+Dopo la sfida del proprietario, il modello e il rendering di Daria sono cambiati
+(DARIA_PASS_01.md, sezione combattimento). Ripetuti sulla nuova testa:
+npm test (138), build, test:daria, ranger-check, visual-review, roster, browser-check,
+site-check, privacy-check e checkpoint-ui-check: tutti passati. Il push resta negato (403).

@@ -1,0 +1,65 @@
+{
+ "threshold_model_units": 0.03085714285714286,
+ "clips": {
+  "idle": {
+   "before": {
+    "meanPct": 3.156,
+    "maxPct": 3.51,
+    "frames": 8
+   },
+   "after": {
+    "meanPct": 1.572,
+    "maxPct": 1.675,
+    "frames": 8
+   }
+  },
+  "run": {
+   "before": {
+    "meanPct": 2.825,
+    "maxPct": 3.541,
+    "frames": 8
+   },
+   "after": {
+    "meanPct": 2.993,
+    "maxPct": 6.426,
+    "frames": 8
+   }
+  },
+  "channel_two_handed_bow": {
+   "before": {
+    "meanPct": 2.723,
+    "maxPct": 2.741,
+    "frames": 8
+   },
+   "after": {
+    "meanPct": 0.959,
+    "maxPct": 1.016,
+    "frames": 8
+   }
+  },
+  "cast_two_handed_bow": {
+   "before": {
+    "meanPct": 2.882,
+    "maxPct": 2.91,
+    "frames": 5
+   },
+   "after": {
+    "meanPct": 0.967,
+    "maxPct": 1.016,
+    "frames": 5
+   }
+  },
+  "jump": {
+   "before": {
+    "meanPct": 2.794,
+    "maxPct": 2.802,
+    "frames": 8
+   },
+   "after": {
+    "meanPct": 1.629,
+    "maxPct": 1.785,
+    "frames": 8
+   }
+  }
+ }
+}

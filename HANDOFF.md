@@ -5,19 +5,35 @@ Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
 ## Consegna di Tonino — Daria pass01 (2026-11-11)
 
-Ramo tonino/character-art-pass-01 da d472bd1. Daria rifatta nel modello
-giocabile: volto ridipinto adulto con lentiggini, capelli e treccia sulla spalla,
-giacca petrolio con maniche e falde, mantellina terracotta, sciarpa salvia,
-faretra, cinture e taccuino. Abiti costruiti come gusci del corpo con i suoi
-pesi e pelle coperta rimossa: niente più pelle che buca i vestiti. Corda
-dell'arco che segue la mano destra; danni e tempi invariati. Generatore Blender
-riproducibile (stesso SHA in due esecuzioni), 14.158 triangoli, 980.816 byte.
-Verificato: 138 test, build con CSP, ranger-check, roster 30 pose, visual-review
-(pausa/ripetizione, fallback su caricamento fallito) e browser-check completo,
-desktop e mobile. Prove prima/dopo in docs/assets/daria-pass01/.
-Non finito: niente scultura del volto, capelli a card, stoffa statica, clip CC0
-invariate, arco procedurale. Dettagli e limiti in docs/art/DARIA_PASS_01.md.
-Rintocco resta separato su tonino/rintocco (3222cd1), non integrato.
+Ramo tonino/character-art-pass-01 da d472bd1. **Non ancora sul remoto**: il push
+verso Bosco risponde 403 per l'account di Tonino; consegna via bundle (vedi
+docs/RELEASE_daria-pass01.md).
+
+Daria rifatta nel modello giocabile:
+- volto ridipinto adulto con lentiggini;
+- capelli e treccia sulla spalla;
+- giacca petrolio con maniche, mantellina terracotta, sciarpa salvia;
+- faretra, cinture e taccuino.
+
+Abiti costruiti come gusci del corpo con i suoi pesi, pelle coperta rimossa.
+Generatore Blender riproducibile, 13.598 triangoli, 946.716 byte.
+
+Prova in combattimento (sfida del proprietario):
+- sonda sulla simulazione reale e verifica delle compenetrazioni per clip in Blender;
+- colpo allineato al bersaglio (da 11,7° a 0,2°);
+- piede d'appoggio in corsa da 5,1 a 0,8 m/s;
+- arco a tracolla in corsa;
+- compenetrazioni dimezzate in attesa e nel tiro, ma leggermente peggiori in corsa.
+
+Danni e tempi invariati.
+
+Verificato: 138 test, build, test:daria, ranger-check, visual-review, roster
+30 pose, browser-check completo, site/privacy/checkpoint, desktop e mobile.
+
+Non finito: niente scultura del volto, capelli a card, stoffa statica, clip CC0.
+Dettagli in docs/art/DARIA_PASS_01.md. Proposta per il Combattente in
+docs/art/FIGHTER_PASS_01_PROPOSAL.md (non iniziata). Sfida per Codex: CHAL-01 in
+docs/PEER_REVIEW.md. Rintocco resta separato (3222cd1), non integrato.
 
 ## Nuovo incarico Claude — scrittura autorizzata
 

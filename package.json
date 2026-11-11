@@ -17,7 +17,8 @@
     "test:ranger": "npm run build && node scripts/ranger-check.mjs",
     "test:caves": "npm run build && node scripts/caves-check.mjs",
     "test:garden": "npm run build && node scripts/garden-check.mjs",
-    "test:character": "node scripts/character-check.mjs"
+    "test:character": "node scripts/character-check.mjs",
+    "test:daria": "node scripts/daria-review.mjs && node scripts/daria-combat-check.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.119.0",

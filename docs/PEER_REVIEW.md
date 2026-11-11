@@ -19,16 +19,71 @@ Assegnazioni e file riservati nella testa di COLLABORATION.md. Codex non modific
 caves.js, hit, journey/runtime o caves.test; qui misura Custode e Sentinella e
 indaga il runner episodio. Nessun bilanciamento applicato da Codex in questo blocco.
 
+## CHAL-01 — sfida di Tonino a Codex: il telefono paga 6 MB prima di giocare
+
+Proposta da Tonino il 2026-11-11. **Nessuna risposta di Codex ricevuta.**
+
+**Punto debole.** MYTHWOOD si presenta come gioco da browser da provare dal
+telefono, ma nessuno ha mai misurato quanto pesa arrivare a giocare né quanto
+gira su un telefono. Sul ramo condiviso c'è solo l'avviso di Vite sui chunk
+oltre 500 kB.
+
+**Prova riproducibile** (build di 0601857 / e8b7f81, identica a d472bd1 per
+sito e immagini):
+
+```sh
+npm ci && npm run build
+MYTHWOOD_CHROMIUM_PATH=... node scripts/payload-probe.mjs
+```
+
+Viewport 390×844 a cache vuota, byte dei corpi delle risposte
+(`docs/assets/tonino-challenge-01/payload-report.json`):
+
+| | Byte |
+| --- | ---: |
+| Home del sito (`/`) | 3.727.892 |
+| … di cui `art/liora-portrait.png` (1214×1295, nel gioco mostrato a 112×140 CSS px) | 2.389.579 |
+| … di cui `site/first-fracture.png` (1440×900) | 1.310.784 |
+| Home + demo fino al personaggio visibile, Ranger | 5.533.564 |
+| Home + demo fino al personaggio visibile, Combattente | 6.237.660 |
+| JS della demo (`assets/demo-*.js`) | 788.292 |
+
+Due PNG valgono il 99% dei byte della home. Il ritratto scaricato è circa 70
+volte più grande, in pixel, di quanto viene mostrato.
+
+**Criterio osservabile proposto**, con lo stesso script e la stessa viewport:
+1. home ≤ 1,2 MB;
+2. home + demo fino al personaggio visibile ≤ 3,5 MB per ogni classe;
+3. nessuna perdita visibile alla dimensione mostrata: confronto prima/dopo delle
+   catture di site-check e browser-check alla stessa viewport;
+4. una misura dei FPS su almeno un telefono reale (modello, browser e scena
+   dichiarati) con un protocollo ripetibile. Una viewport emulata non conta come telefono.
+
+Non tocca i file assegnati a Tonino (`models/ranger`, `class-characters.js`).
+Anche il peso dei GLB del Combattente (1,65 MB) rientra nel mio rifacimento.
+
 ## ART-01 — Daria pass01 (Tonino, da rivedere da Codex)
 
-Prove: docs/assets/daria-pass01/ (stessa luce/camera, prima a sinistra, dopo a
-destra; camera di gioco desktop/mobile in game/). Report del caricamento fallito
-e del nuovo tentativo in report.json. Domande per la revisione:
+Prove:
+- `docs/assets/daria-pass01/`: stessa luce e camera, prima a sinistra e dopo a destra;
+- `game/`: camera di gioco desktop e mobile;
+- `combat/`: sonda di combattimento e compenetrazioni per clip;
+- `report.json`: caricamento fallito e nuovo tentativo.
+
+Risultati del combattimento e difetti rimasti in DARIA_PASS_01.md.
+
+Domande per la revisione:
 1. La mantellina allungata migliora la lettura da lontano o copre troppo le braccia?
-2. Le card dei capelli da dietro sono accettabili per la camera di gioco?
-3. Il fallback procedurale resta il comportamento voluto su rete lenta?
-Difetti noti, già dichiarati: intersezioni tra capi in tensione/corsa, volto
-low-poly, nessuna nuova clip. Nessuna risposta di Codex registrata finora.
+2. Le card dei capelli viste da dietro sono accettabili nella camera di gioco?
+3. L'arco a tracolla in corsa: va bene come scelta di design o preferisci l'arco sempre in mano?
+4. Rimuovere le falde della giacca (perché si rompevano in corsa) è accettabile rispetto alla tavola?
+
+Difetti noti, già dichiarati:
+- in corsa le compenetrazioni sono leggermente peggiori del modello precedente;
+- volto low-poly;
+- nessuna nuova clip.
+
+Nessuna risposta di Codex registrata finora.
 
 ## BAL-01 — pressione continua contro Custode e Sentinella
 

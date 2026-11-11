@@ -40,18 +40,18 @@
   },
   "pass01": {
     "file": "daria-pass01.glb",
-    "bytes": 980816,
-    "sha256": "39be919ae3fb00d088cdafc3e4cbc88a45d6a904aca733efd4f45771d5f7ae6a",
-    "triangles": 14158,
+    "bytes": 946716,
+    "sha256": "85bb6f1a8d0b66e16cd4618b8a877e59dd1a0da49cb2b21373cc6343dc53fe28",
+    "triangles": 13598,
     "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
     "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
     "original_geometry": [
       "Jacket, sleeves, tunic and trousers as offset shells of the body, with body skin weights",
-      "Four-panel jacket skirt split at front, back and sides",
+      "Jacket skirt removed after combat measurement (panels entered the thighs while running)",
       "Ragged terracotta capelet with brass ring brooch",
       "Sage cowl scarf",
       "Hair volume sampled on the skull, side waves, crown strands and three-strand braid over the left shoulder",
-      "Bracers, belts, thigh straps, quiver strap, quiver with six arrows, pouch and map notebook"
+      "Bracers, belts, thigh straps (no rigid buckles), quiver strap, quiver with six arrows, pouch and map notebook"
     ],
     "original_pixels": [
       "Face texture repainted procedurally (skin, freckles, hazel-green eyes, brows, lips) on the upstream UV layout; no upstream face pixels kept",

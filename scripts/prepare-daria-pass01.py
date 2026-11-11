@@ -310,7 +310,7 @@ def opening(c):  # front V opening of the jacket, wider toward the collar
 
 on_arm = lambda c: abs(c.x) > .27 and c.z > 2.75
 jacket_keep = lambda c, n: (2.05 < c.z < NECK_Z or on_arm(c)) and not opening(c)
-jacket = shell('Daria jacket', body, jacket_keep, lambda co: .03 + (.012 if co.z < 2.45 else 0), M['jacket'])
+jacket = shell('Daria jacket', body, jacket_keep, lambda co: .03 + (.03 if co.z < 2.45 else 0), M['jacket'])
 tunic = shell('Daria tunic', body, lambda c, n: opening(c) and c.z < NECK_Z, .012, M['tunic'])
 # Long sleeves continue over the glove forearm, which becomes the cuff below the bracer.
 forearm = shell('Daria sleeve forearm', gloves, lambda c, n: abs(c.x) < 1.06, .018, M['jacket'])
@@ -335,9 +335,9 @@ def jacket_skirt():
         t = r / rows
         for i, (p, out) in enumerate(ring):
             ang = math.atan2(p.y, p.x)
-            drop = .5 * t
+            drop = .42 * t
             if p.y < -.05: drop *= .85
-            q = p + out * (.04 + .14 * t) + Vector((0, 0, -drop))
+            q = p + out * (.06 + .2 * t) + Vector((0, 0, -drop))
             q.z += math.sin(ang * 9) * .012 * t
             verts.append(tuple(q)); uvs.append((i / n * 4, .4 - t * .3))
     splits = set()
@@ -353,11 +353,18 @@ def jacket_skirt():
             if abs(ring[i][0].x - ring[j][0].x) > .25: continue
             faces.append((r * n + i, r * n + j, (r + 1) * n + j, (r + 1) * n + i))
     obj = new_mesh('Daria jacket skirt', verts, faces, M['jacket'], uvs)
+    for v in obj.data.vertices:  # rest-pose clearance from the thighs
+        loc, normal, _, _ = bvh_body.find_nearest(v.co)
+        if (v.co - loc).dot(normal) < .05: v.co = loc + normal * .05
     # Each panel follows its own thigh softly, anchored to the pelvis near the belt.
-    transfer_weights(obj, blend=lambda co: ({'pelvis': 1}, max(0, min(.55, (co.z - 1.62) / .55 * .55))))
+    # Each panel follows the thigh on its own side toward the hem, the pelvis near the belt.
+    def side_leg(co):
+        t = max(0., min(1., (2.08 - co.z) / .46)) * .85
+        return {('leg_upper_L' if co.x > 0 else 'leg_upper_R'): t, 'pelvis': 1 - t}, 1.
+    transfer_weights(obj, blend=side_leg)
     obj.modifiers.new('Daria skirt thickness', 'SOLIDIFY').thickness = .012
     return obj
-skirt = jacket_skirt()
+# The split skirt was dropped: in the run clip its panels disappeared into the thighs (measured, see DARIA_PASS_01.md).
 
 # Belts, thigh straps and the diagonal quiver strap, all following the body surface.
 def band(name, zlo, zhi, offset, mat, xmin=0):
@@ -395,15 +402,14 @@ def rigid(obj, bone='pelvis', amount=.7):
     transfer_weights(obj, blend=lambda co: ({bone: 1}, amount))
 for name, c, s, mat, rot in [
     ('Daria belt buckle', (0, -.335, 2.23), (.1, .02, .08), 'brass', (0, 0, 0)),
-    ('Daria hip pouch', (-.31, -.2, 2.0), (.13, .08, .15), 'leather', (0, 0, .5)),
-    ('Daria hip pouch flap', (-.315, -.245, 2.06), (.135, .02, .07), 'darkleather', (0, 0, .5)),
-    ('Daria map notebook', (.33, -.2, 1.98), (.17, .06, .22), 'paper', (0, 0, -.45)),
-    ('Daria notebook cover', (.345, -.235, 1.98), (.18, .015, .235), 'leather', (0, 0, -.45)),
-    ('Daria notebook clasp', (.35, -.25, 1.98), (.035, .012, .05), 'brass', (0, 0, -.45)),
+    ('Daria hip pouch', (-.37, -.07, 2.02), (.13, .08, .15), 'leather', (0, 0, -1.0)),
+    ('Daria hip pouch flap', (-.37 - .84 * .045, -.07 - .54 * .045, 2.08), (.135, .02, .07), 'darkleather', (0, 0, -1.0)),
+    ('Daria map notebook', (.38, -.06, 1.99), (.17, .06, .22), 'paper', (0, 0, 1.0)),
+    ('Daria notebook cover', (.38 + .84 * .035, -.06 - .54 * .035, 1.99), (.18, .015, .235), 'leather', (0, 0, 1.0)),
+    ('Daria notebook clasp', (.38 + .84 * .046, -.06 - .54 * .046, 1.99), (.035, .012, .05), 'brass', (0, 0, 1.0)),
 ]:
-    rigid(box(name, c, s, M[mat], rot))
-for side in (-1, 1):
-    rigid(box(f'Daria thigh buckle {side}', (side * .22, -.2, 1.82), (.05, .015, .04), M['brass']), 'leg_upper_' + ('L' if side > 0 else 'R'), .8)
+    rigid(box(name, c, s, M[mat], rot), 'pelvis', 1.)
+# Thigh-strap buckles removed: as rigid boxes they floated off the thigh in the run clip.
 
 # ---------------------------------------------------------------- capelet
 def capelet():
@@ -438,7 +444,7 @@ def capelet():
         loc, normal, _, dist = bvh_body.find_nearest(v.co)
         if (v.co - loc).dot(normal) < .085:
             v.co = loc + normal * .085
-    transfer_weights(obj, blend=lambda co: ({'torso': 1}, .55))
+    transfer_weights(obj, blend=lambda co: ({'torso': 1}, .55 if abs(co.x) < .22 else .12))
     obj.modifiers.new('thickness', 'SOLIDIFY').thickness = .01
     return obj
 capelet()
@@ -604,7 +610,7 @@ def braid():
             if w < 1: obj.vertex_groups['torso'].add([v.index], 1 - w, 'REPLACE')
         for v in me.vertices:  # keep the braid outside scarf and capelet
             loc, normal, _, _ = bvh_body.find_nearest(v.co)
-            if v.co.z < 3.35 and (v.co - loc).dot(normal) < .12: v.co = loc + normal * .12 + (v.co - loc) * 0
+            if v.co.z < 3.35 and (v.co - loc).dot(normal) < .16: v.co = loc + normal * .16
 braid()
 
 # ---------------------------------------------------------------- quiver
