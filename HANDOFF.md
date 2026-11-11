@@ -57,7 +57,7 @@ state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
 
 Letto e applicato docs/AGENT_MONITOR.md (74c682e, integrato nel ramo con un merge).
 Verificati nell'ambiente di Tonino:
-- attività programmata che risveglia la sessione: "Monitor consegne MYTHWOOD", ogni 2 ore;
+- attività programmata che risveglia la sessione: "Monitor consegne MYTHWOOD", ogni ora;
 - eventi delle PR sottoscritte;
 - notifica push, prova inviata.
 
