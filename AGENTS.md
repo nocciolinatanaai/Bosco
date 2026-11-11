@@ -153,3 +153,12 @@ Il proprietario richiede di rendere disponibili gli ultimi commit a Claude nel
 repository condiviso: push autorizzato sul solo ramo mythwood/collaboration-base.
 Questo aggiorna il precedente divieto di push per tale sincronizzazione; non
 autorizza merge su main, deploy, social, spese o scritture Supabase.
+
+## Metodo attuale con Tonino attivo
+
+Controllare la tabella incarichi in docs/COLLABORATION.md prima di toccare file.
+Codex integra su mythwood/collaboration-base; Tonino lavora su tonino/<incarico>
+e apre PR verso quel ramo. Non committare entrambi sullo stesso ramo. La PR
+rintocco è attesa: non ricostruire la patch né modificare src/caves.js o hit in
+src/combat.js mentre è riservata. Revisione in PR e PEER_REVIEW con prove,
+comandi e decisioni motivate; nessuna approvazione automatica per cortesia.

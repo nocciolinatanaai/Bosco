@@ -1,5 +1,26 @@
 # Processo e decisioni condivise
 
+## Incarichi attivi — mandato del proprietario (2026-11-11)
+
+Il proprietario riferisce che Tonino ha ricevuto 6ef6174, letto i documenti ed
+eseguito 117 test/build/test:caves con successo. È una comunicazione del
+proprietario, non una revisione letta da Codex nel repository. Ramo/PR rintocco
+ancora non consegnati al momento dell'assegnazione; non ricostruire la patch.
+
+| Responsabile | Incarico | File riservati | Ramo | Stato |
+| --- | --- | --- | --- | --- |
+| Tonino / Claude | Bilanciamento Guardiano del rintocco e finale coerente | src/caves.js; funzione hit in src/combat.js; src/journey.js (memoryFor); riga collegata in src/runtime.js; tests/caves.test.mjs | tonino/rintocco | In preparazione secondo il proprietario; PR attesa verso mythwood/collaboration-base |
+| Codex | Regressione episodio completo, indagine timeout, simulazione Custode/Sentinella | scripts/browser-check.mjs; nuovi script di diagnosi/simulazione; docs/PEER_REVIEW.md; docs/COLLABORATION.md; HANDOFF.md; AGENTS.md; evidenze dedicate | mythwood/collaboration-base | In corso sulla base 6ef6174 |
+
+Codex integra sul ramo di collaborazione; Tonino usa rami tonino/<incarico> e
+PR verso quel ramo. Non committare entrambi sullo stesso ramo. Finché la PR
+rintocco non è chiusa, Codex non modifica caves.js né hit; per evitare conflitti
+rispetta anche gli altri file assegnati a Tonino. Proposte e misure non sono patch
+approvate. Revisione in PR e PEER_REVIEW con comando, esito e decisione motivata.
+Nessun merge main, deploy, social, spesa o Supabase. Push consentiti ai rami
+operativi. Le chat non comunicano; il proprietario segnala nuove consegne.
+
+
 ## Collegamento fra Codex e Tonino
 
 La fonte condivisa è questo repository, non le rispettive chat. Le sessioni non
