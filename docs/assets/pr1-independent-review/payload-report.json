@@ -1,0 +1,85 @@
+{
+  "fixture": "vite preview of dist, Chromium 390x844 mobile emulation, cold cache, no throttling; bytes = response body sizes",
+  "runs": [
+    {
+      "role": "ranger",
+      "landingBytes": 3727892,
+      "landingPlusDemoToPlayableBytes": 5533564,
+      "requests": 14,
+      "largest": [
+        {
+          "url": "/art/liora-portrait.png",
+          "bytes": 2389579
+        },
+        {
+          "url": "/site/first-fracture.png",
+          "bytes": 1310784
+        },
+        {
+          "url": "/models/ranger/daria-pass01.glb",
+          "bytes": 946716
+        },
+        {
+          "url": "/assets/demo-DSzPCylI.js",
+          "bytes": 788292
+        },
+        {
+          "url": "/assets/GLTFLoader-CbISNnOW.js",
+          "bytes": 45033
+        },
+        {
+          "url": "/assets/demo-DVCn9TCQ.css",
+          "bytes": 22844
+        },
+        {
+          "url": "/assets/site-DJIqKQZu.css",
+          "bytes": 9643
+        },
+        {
+          "url": "/",
+          "bytes": 8546
+        }
+      ]
+    },
+    {
+      "role": "fighter",
+      "landingBytes": 3727892,
+      "landingPlusDemoToPlayableBytes": 6237660,
+      "requests": 14,
+      "largest": [
+        {
+          "url": "/art/liora-portrait.png",
+          "bytes": 2389579
+        },
+        {
+          "url": "/models/characters/fighter.glb",
+          "bytes": 1650812
+        },
+        {
+          "url": "/site/first-fracture.png",
+          "bytes": 1310784
+        },
+        {
+          "url": "/assets/demo-DSzPCylI.js",
+          "bytes": 788292
+        },
+        {
+          "url": "/assets/GLTFLoader-CbISNnOW.js",
+          "bytes": 45033
+        },
+        {
+          "url": "/assets/demo-DVCn9TCQ.css",
+          "bytes": 22844
+        },
+        {
+          "url": "/assets/site-DJIqKQZu.css",
+          "bytes": 9643
+        },
+        {
+          "url": "/",
+          "bytes": 8546
+        }
+      ]
+    }
+  ]
+}

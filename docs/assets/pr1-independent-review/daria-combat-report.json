@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "fixture": "tools/daria-combat: combat.js session, runtime.js yaw/animate rule, fixed 1/60 s; Chromium/SwiftShader, not a device",
+  "variants": {
+    "refined": {
+      "summary": {
+        "frames": 312,
+        "gripErrorMax": 0.1083,
+        "bowInHandFrames": 184,
+        "nockHandDuringDrawMean": 0.3461604166666667,
+        "nockHandDuringDrawMax": 0.6553,
+        "impacts": [
+          {
+            "t": 1.7167,
+            "aimError": 11.73,
+            "yawError": 1.28,
+            "arrowVisibleOnImpactFrame": false
+          },
+          {
+            "t": 3.1667,
+            "aimError": 0.64,
+            "yawError": 0.64,
+            "arrowVisibleOnImpactFrame": false
+          },
+          {
+            "t": 4.2167,
+            "aimError": 0.01,
+            "yawError": 0.01,
+            "arrowVisibleOnImpactFrame": false
+          }
+        ],
+        "aimErrorDuringDrawMax": 99.3,
+        "plantedFootSlipMedian": 5.120883126961595,
+        "plantedFootSlipP90": 8.293825414125862,
+        "plantedSamples": 22,
+        "yawErrorMaxWhileRunning": 133.35,
+        "arrowVisibleDuringDodge": false,
+        "drawFrames": 48
+      }
+    },
+    "pass01": {
+      "summary": {
+        "frames": 312,
+        "gripErrorMax": 0,
+        "bowInHandFrames": 184,
+        "nockHandDuringDrawMean": 0.20770416666666666,
+        "nockHandDuringDrawMax": 0.6181,
+        "impacts": [
+          {
+            "t": 1.7167,
+            "aimError": 0.21,
+            "yawError": 1.28,
+            "arrowVisibleOnImpactFrame": false
+          },
+          {
+            "t": 3.1667,
+            "aimError": 0.37,
+            "yawError": 0.64,
+            "arrowVisibleOnImpactFrame": false
+          },
+          {
+            "t": 4.2167,
+            "aimError": 0,
+            "yawError": 0.01,
+            "arrowVisibleOnImpactFrame": false
+          }
+        ],
+        "aimErrorDuringDrawMax": 50.87,
+        "plantedFootSlipMedian": 0.8062356975475684,
+        "plantedFootSlipP90": 2.8702647961468664,
+        "plantedSamples": 11,
+        "yawErrorMaxWhileRunning": 133.35,
+        "arrowVisibleDuringDodge": false,
+        "drawFrames": 48
+      }
+    }
+  },
+  "errors": [],
+  "external": []
+}
