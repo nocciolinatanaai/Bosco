@@ -11,7 +11,7 @@ import { chromium } from 'playwright';
 const out = process.argv[2] || 'test-results/combat-pass-01'; await mkdir(out, { recursive: true });
 const PORT = 5193, ORIGIN = `http://127.0.0.1:${PORT}`;
 const report = { status: 'running', startedAtUtc: new Date().toISOString(), note: 'Input reali (tastiera) sulla build; tempi di schivata letti dall’HUD. Prova di presenza/disposizione, non di comprensione.', runs: [] };
-const save = () => writeFile(`${out}/report.json`, JSON.stringify(report, null, 2));
+const save = () => writeFile(`${out}/report${process.env.CAPTURE_VIEWPORTS ? '-' + process.env.CAPTURE_VIEWPORTS.replace(/,/g, '-') : ''}.json`, JSON.stringify(report, null, 2));
 const AWAKENED = { version: 4, attunement: 'surge', autoSave: true, role: 'ranger', stage: 'awakened', traces: 0, garden: { step: 0, area: 'plaza', sentryDefeated: false }, caves: { step: 0, inside: false, wardenDefeated: false } };
 const CAVES = { version: 3, attunement: 'ward', autoSave: true, role: 'ranger', stage: 'guardian', traces: 3, garden: { step: 4, area: 'plaza', sentryDefeated: false } };
 const SIGNALS = ['#boss-resolute', '#boss-reach', '#surge-state', '.enemy-label .resolute-tag'];
@@ -96,7 +96,9 @@ try {
   const html = await readFile('dist/demo.html', 'utf8'); report.csp = /Content-Security-Policy/.test(html);
   const entry = html.match(/src="([^"]+\.js)"/)[1]; report.buildEntrySha256 = createHash('sha256').update(await readFile(`dist/${entry.replace(/^\.?\//, '')}`)).digest('hex');
   browser = await chromium.launch({ executablePath: process.env.MYTHWOOD_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
-  for (const [name, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844], ['landscape', 844, 390]]) {
+  // CAPTURE_VIEWPORTS=mobile,landscape per ripetere solo alcuni formati.
+  const only = (process.env.CAPTURE_VIEWPORTS || '').split(',').filter(Boolean);
+  for (const [name, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844], ['landscape', 844, 390]].filter(([n]) => !only.length || only.includes(n))) {
     const run = { name, viewport: `${width}x${height}`, captures: [], measures: {} }; report.runs.push(run); await save();
     let ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop'); page = ctx.page;
     // Avvicinati fin dentro la gittata dell'arco (14,4) ma oltre 6 unità, poi colpisci: provocazione.
