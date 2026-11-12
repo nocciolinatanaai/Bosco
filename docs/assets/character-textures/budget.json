@@ -1,0 +1,208 @@
+{
+  "status": "passed",
+  "metric": "sum of response body bytes, cold context per role, mobile 390x844; not wire transfer or time to interactive",
+  "deviceScaleFactor": 1,
+  "enforce": true,
+  "runs": [
+    {
+      "role": "tank",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 1440836,
+      "expectedModel": "/models/characters/tank.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/tank.glb",
+          "bytes": 493984,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "fighter",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 1552904,
+      "expectedModel": "/models/characters/fighter.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/fighter.glb",
+          "bytes": 606052,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "assassin",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 1538208,
+      "expectedModel": "/models/characters/assassin.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/assassin.glb",
+          "bytes": 591356,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "mage",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 1534628,
+      "expectedModel": "/models/characters/mage.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/mage.glb",
+          "bytes": 587776,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "ranger",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2012556,
+      "expectedModel": "/models/ranger/daria-pass01.glb",
+      "largest": [
+        {
+          "url": "/models/ranger/daria-pass01.glb",
+          "bytes": 1065704,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "healer",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 1498744,
+      "expectedModel": "/models/characters/healer.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-vutR5lpA.js",
+          "bytes": 795484,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/healer.glb",
+          "bytes": 551892,
+          "status": 200
+        },
+        {
+          "url": "/assets/GLTFLoader-f7HH5f9N.js",
+          "bytes": 45033,
+          "status": 200
+        },
+        {
+          "url": "/site/first-fracture-480.webp",
+          "bytes": 25198,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-JI3rvTvQ.css",
+          "bytes": 24724,
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "external": []
+}

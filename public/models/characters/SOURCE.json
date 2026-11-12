@@ -6,8 +6,8 @@
   "characters": {
     "tank": {
       "file": "tank.glb",
-      "bytes": 883724,
-      "sha256": "6b461efeab3166bbfa41aca72d6cc39015c42e3bbbe2eaf0219118f55414056c",
+      "bytes": 440624,
+      "sha256": "2127adad996defccf3c0b6b9647ae6f212d600859cca73ffcc1f10442f5a0a59",
       "clips": [
         "attack",
         "dodge",
@@ -21,12 +21,14 @@
         "generic upstream face; concept likeness not sculpted",
         "source jump used provisionally for dodge",
         "coat needs motion/clipping review"
-      ]
+      ],
+      "generatorSha256": "6b461efeab3166bbfa41aca72d6cc39015c42e3bbbe2eaf0219118f55414056c",
+      "generatorBytes": 883724
     },
     "fighter": {
       "file": "fighter.glb",
-      "bytes": 1650812,
-      "sha256": "764c619e0973a4bedb381a534943ebffdf1a82947aef85add46a5974d8015ac5",
+      "bytes": 550476,
+      "sha256": "df76c62ce92186e7aaa8515a1b5466d35cba2f54fac2eaa355f0e6a968099cde",
       "clips": [
         "attack",
         "dodge",
@@ -40,12 +42,14 @@
         "generic upstream face; concept likeness not sculpted",
         "source jump used provisionally for dodge",
         "coat needs motion/clipping review"
-      ]
+      ],
+      "generatorSha256": "764c619e0973a4bedb381a534943ebffdf1a82947aef85add46a5974d8015ac5",
+      "generatorBytes": 1650812
     },
     "assassin": {
       "file": "assassin.glb",
-      "bytes": 1395316,
-      "sha256": "74d600aa2c0cb8a757ac9ab7c3c332b9c9a63607e771fdf373e218c762ed306f",
+      "bytes": 531280,
+      "sha256": "f6879f92561fe4a5e1f108c65ba5473b14263c83371c77d27bf53f43c60b8997",
       "clips": [
         "attack",
         "dodge",
@@ -59,12 +63,14 @@
         "generic upstream face; concept likeness not sculpted",
         "source jump used provisionally for dodge",
         "coat needs motion/clipping review"
-      ]
+      ],
+      "generatorSha256": "74d600aa2c0cb8a757ac9ab7c3c332b9c9a63607e771fdf373e218c762ed306f",
+      "generatorBytes": 1395316
     },
     "mage": {
       "file": "mage.glb",
-      "bytes": 1274420,
-      "sha256": "1f282800f626da9bd20cecb68f05e7ffabf169a2df63126c84d8b6ec842d0806",
+      "bytes": 537992,
+      "sha256": "0363dda6cbada1ec6f910e9ff870dea52cb673483259dd63dcf411b196d1c2f0",
       "clips": [
         "attack",
         "dodge",
@@ -78,12 +84,14 @@
         "generic upstream face; concept likeness not sculpted",
         "source jump used provisionally for dodge",
         "coat needs motion/clipping review"
-      ]
+      ],
+      "generatorSha256": "1f282800f626da9bd20cecb68f05e7ffabf169a2df63126c84d8b6ec842d0806",
+      "generatorBytes": 1274420
     },
     "healer": {
       "file": "healer.glb",
-      "bytes": 1128556,
-      "sha256": "9a9fddb8bff42ff6ffa6efbf27dc35ad1909fd6718fd4ee723a550aa1f71f00f",
+      "bytes": 493736,
+      "sha256": "ae2ef717100915c3a4d78c0d1f84285aacb18993e475d6073cad27250daaf0db",
       "clips": [
         "attack",
         "dodge",
@@ -97,7 +105,18 @@
         "generic upstream face; concept likeness not sculpted",
         "source jump used provisionally for dodge",
         "coat needs motion/clipping review"
-      ]
+      ],
+      "generatorSha256": "9a9fddb8bff42ff6ffa6efbf27dc35ad1909fd6718fd4ee723a550aa1f71f00f",
+      "generatorBytes": 1128556
     }
+  },
+  "textureRecompression": {
+    "script": "scripts/recompress-character-textures.py",
+    "command": "python3 -I scripts/recompress-character-textures.py 88 public/models/characters/*.glb",
+    "note": "PNG di colore base ricodificate in JPEG q88 4:4:4 dentro il GLB; geometria, pesi e clip invariati. Materiali OPAQUE: alfa ignorata da glTF. Ricodifica con perdita, confronto a camere fisse nel rapporto."
+  },
+  "vertexQuantization": {
+    "script": "scripts/quantize-glb.py",
+    "note": "Normali int8 (KHR_mesh_quantization), UV uint16, pesi e colori uint8 normalizzati; posizioni, indici e animazioni invariati. Con perdita, confronto a camere fisse."
   }
 }
