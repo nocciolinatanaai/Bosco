@@ -21,9 +21,8 @@ Verifiche passate:
 - caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check
   desktop/mobile.
 
-Catture 1440×900 complete in docs/assets/combat-pass-01/. Su telefono le catture hanno
-corretto due difetti del riquadro Impeto; le immagini 390×844 e 844×390 arrivano nella
-stessa PR.
+Catture 1440×900, 390×844 e 844×390 complete in docs/assets/combat-pass-01/. Su
+telefono le catture hanno fatto correggere due difetti del riquadro Impeto.
 
 **Direzione grafica del proprietario (12/11).** Restare su Three.js per il web, senza
 passare a Godot, ma migliorare la grafica «di tanto». Sul mobile oggi gli standard sono

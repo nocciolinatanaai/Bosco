@@ -157,13 +157,23 @@ Movimento ridotto attivo, audio spento. Rapporto: `capture-desktop.json`.
 
 Lo script verifica anche che «Non interrompibile» sparisca all'impatto successivo.
 
-**390×844 e 844×390.** Le catture hanno trovato due difetti reali, entrambi corretti:
-1. il riquadro Impeto usciva dal bordo destro;
+**390×844 e 844×390, completi** (`capture-mobile.json`).
+
+Le catture hanno trovato due difetti reali del riquadro Impeto, entrambi corretti prima
+delle immagini definitive:
+1. usciva dal bordo destro;
 2. poi copriva il tasto Abilità.
 
-Sul telefono lo stato ora sta dentro il tasto Attacco. Le catture di questi due formati
-si aggiungono a questa PR appena il giro in corso finisce; finché non ci sono, non le
-dichiaro superate.
+Sul telefono lo stato ora sta dentro il tasto Attacco.
+
+Immagini e controlli:
+- `mobile-*` e `landscape-*`: Frattura a distanza, carica Impeto, esito «A SEGNO ×1,5»,
+  «Non interrompibile» sul Custode;
+- `mobile-warden-resolute` per il Guardiano. A 844×390 il Guardiano non è catturato:
+  lo script lo esclude in orizzontale;
+- in entrambi i formati: segnali ≥ 14 px, dentro lo schermo, senza tagli né
+  sovrapposizioni ai comandi;
+- «Non interrompibile» sparisce all'impatto successivo.
 
 ## Esiti delle verifiche
 
@@ -171,4 +181,4 @@ dichiaro superate.
 - `npm run build`: ok.
 - caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check: superati
   su desktop e mobile, prima delle due correzioni CSS del riquadro Impeto.
-- Catture: 1440×900 superate; 390×844 e 844×390 in corso.
+- Catture: 1440×900, 390×844 e 844×390 superate.
