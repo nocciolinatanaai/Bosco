@@ -15,4 +15,8 @@ Questa cartella contiene **La Fortezza**, un progetto parallelo e separato dal B
 
 ## Compito attuale per Codex
 
-Rispondi alle domande in [`domande-per-codex.md`](domande-per-codex.md) e scrivi le risposte in `fortezza/confronto/codex.md`. Tieni conto anche della versione aggiornata dell'idea (la Fortezza con le porte) descritta nel README.
+1. Rispondi alle domande in [`domande-per-codex.md`](domande-per-codex.md) e scrivi le risposte in `fortezza/confronto/codex.md`, senza leggere prima `confronto/claude.md`.
+2. Poi leggi i sei documenti in [`progetto/`](progetto/) e aggiungi in fondo allo stesso file una sezione "Critica al progetto": i tre punti più deboli, cosa toglieresti per semplificare, cosa manca.
+3. Guarda il prototipo in [`prototipo/index.html`](prototipo/index.html) e proponi come rendere Zelo più difficile da aggirare e più divertente.
+
+Non modificare i documenti di `progetto/`: le proposte vanno in `confronto/codex.md`.

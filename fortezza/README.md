@@ -1,73 +1,71 @@
-# 🏰 La Fortezza (bozza di progetto)
+# 🏰 La Fortezza: Roccaserrata
 
-> **Una fortezza. Sette porte. Ogni porta ha un guardiano AI. Dietro l'ultima c'è la cassaforte, ma nessuno sa quale sia l'ultima.**
+> **Da cento anni nessuno ha aperto Berta.**
+> Una rocca, alcune porte, un guardiano AI per ogni porta. In fondo c'è una cassaforte del 1926. Hai 3 tentativi al giorno per convincere un guardiano a farti passare.
 
-Progetto parallelo, separato dal Bosco di Nocciolina. È una bozza da criticare e migliorare: tutto quello che c'è qui può cambiare.
+![Roccaserrata](arte/fortezza.jpg)
 
----
+Progetto parallelo, separato dal Bosco di Nocciolina. È una bozza da criticare e migliorare: tutto può cambiare.
 
-## 1. L'idea in breve
+## L'idea in breve
 
-- Un sito in cui il pubblico sfida delle AI.
-- Per arrivare alla cassaforte bisogna superare delle **porte**, ognuna custodita da un **guardiano AI** con carattere e punto debole diversi.
-- **La mappa è nascosta:** nessuno sa quante porte ci siano né dove sia la cassaforte. Si scopre insieme, man mano che qualcuno avanza.
-- Chi apre la cassaforte vince il premio. Poi si riparte con una nuova stagione.
+- **Il pubblico sfida le AI.** Ogni porta è custodita da un automa con un carattere e un punto debole. Non si forza: si convince.
+- **La cassaforte è nascosta.** La mappa della rocca si scopre insieme, una stanza alla volta.
+- **La rocca cambia ogni notte.** Un personaggio misterioso, l'Architetto, studia i tentativi e rinforza le difese.
+- **La protagonista è la cassaforte.** Berta racconta ogni sera sui social cosa è successo, con immagini e testo. Niente video.
+- **Le difese sono spazi per aziende vere.** Allarmi, telecamere, serrature, casseforti: ogni difesa può avere un fornitore del settore sicurezza.
 
-## 2. Cosa deve dare a chi gioca
+## I documenti
 
-Sono le quattro cose da tenere sempre (vengono dal confronto con Mimmo AI):
+| # | Documento | Contenuto |
+|---|---|---|
+| 1 | [Il mondo e i personaggi](progetto/01-mondo-e-personaggi.md) | La storia, Roccaserrata, Berta, Zelo, Nonna Ines, Cavillo, l'Architetto |
+| 2 | [Le regole del gioco](progetto/02-regole-del-gioco.md) | Tentativi, difese e allarmi, quest, attrezzi, bande e città, chi usa l'AI, chi imbroglia |
+| 3 | [La stagione 1](progetto/03-stagione-1.md) | I tre atti, i colpi di scena, il ritmo quotidiano, i social senza video, il confronto con Mimmo |
+| 4 | [Le aziende e il guadagno](progetto/04-aziende-e-guadagno.md) | Cosa offrire alle aziende della sicurezza, chi contattare, come vendere senza essere venditori |
+| 5 | [Gli sviluppi futuri](progetto/05-sviluppi-futuri.md) | Nuove porte, giocatori che entrano nella storia, stagioni, scuole e aziende |
+| 6 | [I rischi, la legge e i precedenti](progetto/06-rischi-e-legge.md) | Gandalf, Freysa, Mimmo; concorsi a premi in Italia; dati personali; i rischi |
 
-| Ingrediente | Come lo realizza la Fortezza |
+## Il prototipo
+
+In [`prototipo/`](prototipo/) c'è la Porta 1 giocabile: una conversazione con il Caporale Zelo, con l'allarme perimetrale e un indizio fuori dalla chat. Funziona come pagina pubblicata su claude.ai. Non è sicuro: le regole di Zelo sono leggibili nel codice.
+
+## Le immagini
+
+In [`arte/`](arte/) ci sono le prime prove dei personaggi, generate con l'AI in uno stile dipinto a mano.
+
+## Le decisioni prese finora
+
+| Decisione | Motivo |
 |---|---|
-| Una storia che va avanti ogni giorno | Il diario quotidiano: chi ha superato cosa, la mappa che si rivela |
-| Una posta in gioco reale | Il premio nella cassaforte |
-| Il pubblico che decide | Voti settimanali su regole e debolezze dei guardiani |
-| I personaggi | I guardiani, ognuno riconoscibile e citabile |
+| Si parte con 3 porte, non 7 | Semplicità, e meno da bilanciare |
+| Una sola rocca per tutti, un solo vincitore | Crea una storia comune e un evento finale |
+| Nessun video | Vincolo del progetto: solo immagini e testo |
+| La cassaforte è il personaggio principale | Distingue il progetto da Mimmo e dal Bosco |
+| I tentativi non si pagano | Legge italiana e credibilità del gioco |
+| Si batte il guardiano, mai il prodotto dello sponsor | Rende il gioco accettabile per le aziende |
 
-**I vincoli:** niente video e niente volti. Deve essere semplice da capire in 5 secondi, deve far tornare ogni giorno e, se possibile, deve guadagnare da sola.
+## I punti ancora aperti
 
-## 3. Le due AI e i loro ruoli
+| # | Problema | Stato |
+|---|---|---|
+| 1 | Diverte davvero? Fa tornare? Si diffonde? | 🔴 Da provare con 20–30 persone |
+| 2 | Quale premio, e con quale procedura legale | 🔴 Serve un professionista |
+| 3 | Costo delle AI per tentativo | 🟡 Da calcolare |
+| 4 | Dove tenere i segreti dei guardiani (questo repository è probabilmente pubblico) | 🟡 Da decidere prima del lancio |
+| 5 | Il nome definitivo | 🟡 "La Fortezza" e "Roccaserrata" sono nomi di lavoro |
+| 6 | Il parere di Codex | ⏳ Atteso da lunedì |
 
-- **I Guardiani** (AI n. 1): danno voce ai personaggi delle porte e conversano con chi gioca.
-- **L'Architetto** (AI n. 2): ogni notte analizza i tentativi del giorno e rinforza le porte sfondate troppo facilmente. Così la fortezza di domani è diversa da quella di oggi.
+## Prossimi passi
 
-Anche lo sviluppo è a quattro mani: Claude e Codex lavorano sullo stesso branch, con le regole scritte in [`AGENTS.md`](AGENTS.md).
+- [x] Mondo, personaggi, regole, stagione, aziende, sviluppi, rischi
+- [x] Prime immagini dei personaggi
+- [x] Prototipo giocabile della Porta 1
+- [ ] Provare il prototipo e regolare la difficoltà di Zelo
+- [ ] Codex critica il progetto ([istruzioni](AGENTS.md))
+- [ ] Prototipi di Nonna Ines e del Professor Cavillo
+- [ ] Prova privata con 20–30 persone
 
-## 4. Le porte (prima versione: 3, non 7)
+## Lavoro a quattro mani
 
-Si parte piccoli. Se funziona, la fortezza cresce.
-
-| Porta | Guardiano | Come si convince (segreto) | Tipo di prova |
-|---|---|---|---|
-| 1 | **Il Soldato** | Obbedisce solo a un ordine "legittimo": bisogna capire chi lo comanda | Conversazione |
-| 2 | **La Vecchia** | Apre solo a chi le racconta una storia che la commuove *davvero* | Conversazione + giudizio |
-| 3 | **Il Filosofo** | Si arrende solo davanti a una contraddizione nella sua logica | Conversazione + indizio dal diario del giorno |
-
-Dietro la terza porta c'è (forse) la cassaforte.
-
-**Da decidere:** almeno una prova **non solo di chat** (un indovinello, un indizio in un'immagine, una prova da risolvere in più persone), per rendere difficili gli attacchi automatici.
-
-## 5. Il ciclo quotidiano
-
-1. **Giorno:** il pubblico tenta. Ci sono pochi tentativi al giorno per persona.
-2. **Sera:** esce il diario (card con immagine e testo): i tentativi migliori, chi è avanzato, un indizio.
-3. **Notte:** l'Architetto rinforza le difese.
-4. **Settimana:** il pubblico vota una nuova regola o debolezza per un guardiano.
-
-## 6. Punti deboli aperti
-
-| # | Problema | Idee finora | Stato |
-|---|---|---|---|
-| 1 | **Portare il pubblico** senza video né budget | Card condivisibili con i tentativi più divertenti; condividere il proprio tentativo; il premio che cresce come notizia | 🔴 Aperto |
-| 2 | **Attacchi generati con l'AI** | Pochi tentativi al giorno, difese che cambiano ogni notte, prove non solo di chat; raccontarlo come "uomini e AI contro AI" | 🟡 Parziale |
-| 3 | **Legge italiana** (gioco d'azzardo, concorsi a premi) | Partire con tentativi gratuiti e un premio simbolico; poi sponsor; denaro a pagamento solo dopo un parere legale | 🔴 Serve un esperto |
-| 4 | **Costi delle AI** per ogni tentativo | Modello economico per i guardiani; limite di tentativi | 🟡 Da calcolare |
-| 5 | **Complessità** contro semplicità | 3 porte all'inizio, una frase per spiegare tutto | 🟢 Deciso |
-| 6 | **Imbrogli** (più account, condivisione delle soluzioni) | Da studiare | 🔴 Aperto |
-
-## 7. Prossimi passi
-
-- [ ] Claude e Codex rispondono, ognuno per conto suo, alle [domande critiche](domande-per-codex.md)
-- [ ] Confronto delle risposte e aggiornamento di questo documento
-- [ ] Scrittura dei tre guardiani (carattere, segreto, regole)
-- [ ] Prototipo minimo: una sola porta giocabile, da provare in privato
+Claude e Codex lavorano sullo stesso branch, con le regole scritte in [`AGENTS.md`](AGENTS.md). Le opinioni indipendenti di ciascuno sono in [`confronto/`](confronto/).
