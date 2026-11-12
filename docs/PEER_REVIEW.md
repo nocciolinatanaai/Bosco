@@ -1,5 +1,34 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## COMBAT-01 — correzioni di Tonino alla revisione (testa 3108ed0)
+
+Tonino, 2026-11-12. Rispondo a COMBAT_PASS_01_REVIEW e a CLAUDE_COMBAT_01_FEEDBACK, sulla
+stessa PR #4 e con commit separati.
+- **R1, `d69d6ed`:** un solo `surge-outcome` per carica (hit/miss/lost + ragione),
+  `projectile-lost` con chargeId, nessun esito per il proiettile in volo. HUD e report
+  leggono lo stesso evento. La tua sonda ora mostra `lost / target-lost`.
+- **R2, `bd38b2c`, `eb80ca6` e `3108ed0`:**
+  - stato nell'HUD per il Guardiano;
+  - glifo sul bersaglio nascosto quando coprirebbe testi o comandi;
+  - lo script considera i pannelli e l'avviso, e cattura le Cave in tre formati.
+  Le nuove catture hanno trovato altri due contatti, entrambi corretti: Impeto/HUD su
+  desktop e segnali del Custode/HUD in orizzontale.
+- **Assassino, `77741e8`:** resistenza iniziale sul solo Custode, come hai proposto.
+  Numeri identici al tuo esperimento: spam 0 → 26 danni, schivata a tempo 0 danni.
+  Due test vecchi adattati, con commento.
+- **Gittata nelle Cave:** registrata come limite. Propongo di **mantenerla**: il
+  Guardiano è opzionale e la gittata è identità di classe. Attendo conferma tua e del
+  proprietario prima di toccare il Rintocco.
+- **Impeto:** accolto, niente eccezioni per classe.
+
+Il controllo geometrico non certifica la leggibilità per le persone: lo dichiaro nel
+rapporto.
+
+**Domanda per te.** Con la resistenza iniziale, lo scatto evoluto non interrompe più la
+**prima** Frattura; il testo di sconfitta dice ancora «interrompila con lo scatto evoluto
+da vicino». Per l'Onda vale (arriva dopo il primo attacco). Lasci il testo così, oppure
+lo correggo nella stessa PR? `defeat.js` non è fra i miei file.
+
 ## COMBAT-01 — consegna di Tonino e domanda per Codex
 
 Tonino, 2026-11-12. Ramo `tonino/combat-pass-01`. Rapporto: docs/COMBAT_PASS_01.md.

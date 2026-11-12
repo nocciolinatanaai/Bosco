@@ -197,54 +197,43 @@ separato per ciascuna correzione, sulla stessa PR #4.
 6. Nessuna prova con persone: comprensione e divertimento non sono dimostrati dai bot o
    dalle catture.
 
-## Catture reali (build con CSP, input da tastiera)
+## Catture reali (build con CSP, input da tastiera) — testa finale 3108ed0
 
 Lo script `scripts/combat-pass-capture.mjs` guida la build con l'orologio controllato di
 Playwright. Il motivo: SwiftShader headless va a circa 1,5 fps, e a tempo reale le
 schivate falliscono. Così ogni passo è un fotogramma di gioco da 16 ms; durante gli
 screenshot il tempo riprende per pochi decimi di secondo.
 
-Per ogni segnale verifica:
-- dimensione ≥ 14 px;
-- tutto dentro lo schermo;
-- nessun taglio;
-- nessuna sovrapposizione ai comandi.
+**Ostacoli controllati** (dopo R2): comandi, missione e suoi pulsanti, HUD, barra del
+Custode, intestazione e il testo dell'avviso, se presente.
 
-Movimento ridotto attivo, audio spento. Rapporto: `capture-desktop.json`.
+**Per ogni segnale verifica:** ≥ 14 px, dentro lo schermo, senza taglio, senza
+sovrapposizioni. Movimento ridotto attivo, audio spento.
+Rapporto: `docs/assets/combat-pass-01/capture-final.json`.
 
-**1440×900, completo:**
-- `desktop-far-fracture.jpg`: cerchio sul giocatore e traccia dal Custode;
-- `desktop-impeto-charge.jpg`;
-- `desktop-impeto-used.jpg`, con esito reale «IMPETO A SEGNO ×1,5»;
-- `desktop-resolute.jpg`: barra ed etichetta;
-- `desktop-warden-resolute.jpg`: Guardiano del rintocco;
-- versioni `-gray` in scala di grigi;
-- `desktop-boss.webm`: sequenza accelerata 16×.
+**Esito in 1440×900, 390×844 e 844×390: tutti superati.**
+- `*-far-fracture`: cerchio sul giocatore, traccia dal Custode e segnale tratteggiato.
+- `*-impeto-charge` e `*-impeto-used`: esito reale «A SEGNO ×1,5».
+  - desktop: a sinistra del tasto Attacco;
+  - telefono: dentro il tasto.
+- `*-resolute`: «Non interrompibile» sulla barra del Custode; lo script verifica che
+  sparisca all'impatto successivo.
+- `*-warden-resolute`: Guardiano.
+  - 1440×900: glifo sul bersaglio e HUD;
+  - telefono: glifo nascosto perché toccherebbe la missione; stato leggibile nell'HUD.
+- Copie `-gray` in scala di grigi (desktop) e `desktop-boss.webm`, accelerato 16×.
 
-Lo script verifica anche che «Non interrompibile» sparisca all'impatto successivo.
+Difetti trovati dalle catture e corretti: riquadro Impeto fuori schermo e poi sopra
+l'Abilità (telefono), poi a contatto con l'HUD (desktop); segnali del Custode sotto l'HUD
+e sopra l'avviso a 844×390.
 
-**390×844 e 844×390, completi** (`capture-mobile.json`).
+## Esiti delle verifiche sulla testa finale 3108ed0
 
-Le catture hanno trovato due difetti reali del riquadro Impeto, entrambi corretti prima
-delle immagini definitive:
-1. usciva dal bordo destro;
-2. poi copriva il tasto Abilità.
-
-Sul telefono lo stato ora sta dentro il tasto Attacco.
-
-Immagini e controlli:
-- `mobile-*` e `landscape-*`: Frattura a distanza, carica Impeto, esito «A SEGNO ×1,5»,
-  «Non interrompibile» sul Custode;
-- `mobile-warden-resolute` per il Guardiano. A 844×390 il Guardiano non è catturato:
-  lo script lo esclude in orizzontale;
-- in entrambi i formati: segnali ≥ 14 px, dentro lo schermo, senza tagli né
-  sovrapposizioni ai comandi;
-- «Non interrompibile» sparisce all'impatto successivo.
-
-## Esiti delle verifiche
-
-- `npm test`: 160 superati.
-- `npm run build`: ok.
-- caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check: superati
-  su desktop e mobile, anche ripetuti sulla testa finale 39b5548, dopo le correzioni CSS.
-- Catture: 1440×900, 390×844 e 844×390 superate.
+- `npm test`: 166 superati (24 contratti in `tests/combat-pass.test.mjs`).
+- `npm run build`: ok (avviso preesistente sui chunk > 500 kB).
+- browser-check (episodio completo), ranger-check, caves-check, garden-check,
+  checkpoint-ui-check: superati, desktop e mobile.
+- `combat-pass-compare`: 90 righe; cariche pendenti a fine scontro 0, esiti
+  duplicati 0.
+- `combat-pass-capture`: tre formati superati, Cave incluse.
+- Sonda `projectile-loss.mjs` di Codex: esito `lost / target-lost` presente.

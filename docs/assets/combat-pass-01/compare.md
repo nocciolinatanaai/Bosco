@@ -1,4 +1,4 @@
-# COMBAT-01 prima (86dbe4c) / dopo (bd38b2c)
+# COMBAT-01 prima (86dbe4c) / dopo (3108ed0)
 
 V = vittoria, S = sconfitta o tempo scaduto (60 s). att = attacchi completati del nemico; colpi = colpi subiti.
 

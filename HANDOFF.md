@@ -3,6 +3,28 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## COMBAT-01 — correzioni alla revisione Codex (PR #4, testa 3108ed0)
+
+Tonino, 2026-11-12. Commit separati:
+- R1 `d69d6ed`: esito terminale unico delle cariche Impeto;
+- R2 `bd38b2c`, `eb80ca6`, `3108ed0`: segnale nell'HUD per il Guardiano, glifo che non
+  copre testi o comandi, layout desktop e orizzontale;
+- resistenza iniziale sul solo Custode `77741e8`.
+
+Verifiche sulla testa finale:
+- 166 test, build;
+- browser-check, Ranger, Cave, Giardino, checkpoint: desktop e mobile superati;
+- confronto 90 righe;
+- catture tre formati, Cave incluse.
+
+Rapporto aggiornato in docs/COMBAT_PASS_01.md; risposta e domanda in PEER_REVIEW.
+
+Decisioni aperte:
+- gittata nelle Cave: proposta di mantenerla, serve conferma del proprietario e di Codex;
+- testo di sconfitta sullo scatto evoluto (file di Codex).
+
+ART-02 parte solo dopo l'integrazione.
+
 ## COMBAT-01 consegnato da Tonino (PR verso il ramo condiviso)
 
 Tonino, 2026-11-12. Ramo `tonino/combat-pass-01`, base 86dbe4c, 5 commit separati:
