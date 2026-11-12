@@ -1,0 +1,4535 @@
+{
+  "scope": "Isolated copies; tempered + provocation + reach (Tonino 02) with two explicit far-Onda specs, and Codex's charged-strike Impeto at two sensitivity values. Six evolved classes, 1/60 s, 120 s cap, perfect-timer dodge bot. Boss HP x3 runs are stress observations only.",
+  "sourceSha256": {
+    "combat": "4992aec1778457644c850f0133a23c454446e1bd810356d372eeacfb2f73d51a",
+    "artifacts": "becca030ae25665eb54d0678267360df5007cef2e03d18ebec51217cc6a5b363"
+  },
+  "reach": [
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.68,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.88,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          },
+          {
+            "t": 6.18,
+            "kind": "nova",
+            "distance": 14.24,
+            "threatening": false
+          },
+          {
+            "t": 10.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          },
+          {
+            "t": 14.18,
+            "kind": "nova",
+            "distance": 14.24,
+            "threatening": false
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 2,
+        "damage": 52,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 2
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "kite",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.95,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 1,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "kite",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 15.18,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          },
+          {
+            "t": 6.1,
+            "kind": "nova",
+            "distance": 12.02,
+            "threatening": false
+          },
+          {
+            "t": 10.12,
+            "kind": "fracture",
+            "distance": 12.05,
+            "threatening": true
+          },
+          {
+            "t": 13.98,
+            "kind": "nova",
+            "distance": 12.03,
+            "threatening": false
+          }
+        ],
+        "completedAttacks": 3,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 2,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 2
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.63,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.78,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          },
+          {
+            "t": 6.13,
+            "kind": "nova",
+            "distance": 12.53,
+            "threatening": false
+          },
+          {
+            "t": 10.1,
+            "kind": "fracture",
+            "distance": 12.02,
+            "threatening": true
+          },
+          {
+            "t": 14.08,
+            "kind": "nova",
+            "distance": 12.06,
+            "threatening": false
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 2,
+        "damage": 52,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 2
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "mage",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.17,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 4.98,
+            "kind": "nova",
+            "distance": 11.82,
+            "threatening": false
+          },
+          {
+            "t": 6.47,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 52,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 1
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "mage",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "lost",
+        "seconds": 21.87,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 4.98,
+            "kind": "nova",
+            "distance": 11.82,
+            "threatening": false
+          },
+          {
+            "t": 6.47,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 9.73,
+            "kind": "nova",
+            "distance": 11.82,
+            "threatening": false
+          },
+          {
+            "t": 11.22,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 14.48,
+            "kind": "nova",
+            "distance": 11.82,
+            "threatening": false
+          },
+          {
+            "t": 15.97,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 19.23,
+            "kind": "nova",
+            "distance": 11.82,
+            "threatening": false
+          },
+          {
+            "t": 20.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 5,
+        "hitsTaken": 5,
+        "damage": 111,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 5,
+        "emptyAttacks": 4
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "healer",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 11.7,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 4.72,
+            "kind": "nova",
+            "distance": 10.62,
+            "threatening": false
+          },
+          {
+            "t": 9,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 3,
+        "hitsTaken": 2,
+        "damage": 52,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 1
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "healer",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 32.65,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 4.72,
+            "kind": "nova",
+            "distance": 10.62,
+            "threatening": false
+          },
+          {
+            "t": 9,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 12.27,
+            "kind": "nova",
+            "distance": 10.64,
+            "threatening": false
+          },
+          {
+            "t": 16.55,
+            "kind": "fracture",
+            "distance": 10.65,
+            "threatening": true
+          },
+          {
+            "t": 19.82,
+            "kind": "nova",
+            "distance": 10.64,
+            "threatening": false
+          },
+          {
+            "t": 24.1,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 27.37,
+            "kind": "nova",
+            "distance": 10.63,
+            "threatening": false
+          },
+          {
+            "t": 31.65,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 8,
+        "hitsTaken": 4,
+        "damage": 104,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 5,
+        "emptyAttacks": 4
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "tank",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.75,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.65,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "fighter",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 3.92,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "assassin",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.53,
+        "attacks": [
+          {
+            "t": 2.02,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "mage",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.6,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "ranger",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 6.95,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach (02)",
+      "role": "healer",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 9.15,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 8.75,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 3,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.68,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.88,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          },
+          {
+            "t": 6.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          },
+          {
+            "t": 10.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          },
+          {
+            "t": 14.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 4,
+        "damage": 104,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 4,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "kite",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.95,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 1,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "kite",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 18.33,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          },
+          {
+            "t": 6.1,
+            "kind": "fracture",
+            "distance": 12.02,
+            "threatening": true
+          },
+          {
+            "t": 9.37,
+            "kind": "fracture",
+            "distance": 15.29,
+            "threatening": true
+          },
+          {
+            "t": 13.82,
+            "kind": "fracture",
+            "distance": 12.05,
+            "threatening": true
+          },
+          {
+            "t": 17.67,
+            "kind": "fracture",
+            "distance": 12.02,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 2,
+        "misses": 5,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 5,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.63,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.78,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          },
+          {
+            "t": 6.13,
+            "kind": "fracture",
+            "distance": 12.53,
+            "threatening": true
+          },
+          {
+            "t": 10.1,
+            "kind": "fracture",
+            "distance": 12.02,
+            "threatening": true
+          },
+          {
+            "t": 14.08,
+            "kind": "fracture",
+            "distance": 12.06,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 4,
+        "damage": 104,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 4,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "mage",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.17,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 4.98,
+            "kind": "fracture",
+            "distance": 11.82,
+            "threatening": true
+          },
+          {
+            "t": 6.47,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 52,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 3,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "mage",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "lost",
+        "seconds": 21.87,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 4.98,
+            "kind": "fracture",
+            "distance": 11.82,
+            "threatening": true
+          },
+          {
+            "t": 6.47,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 9.73,
+            "kind": "fracture",
+            "distance": 11.82,
+            "threatening": true
+          },
+          {
+            "t": 11.22,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 14.48,
+            "kind": "fracture",
+            "distance": 11.82,
+            "threatening": true
+          },
+          {
+            "t": 15.97,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 19.23,
+            "kind": "fracture",
+            "distance": 11.82,
+            "threatening": true
+          },
+          {
+            "t": 20.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 5,
+        "hitsTaken": 5,
+        "damage": 111,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 9,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "healer",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 11.68,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 4.72,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 7.98,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 11.25,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 3,
+        "hitsTaken": 3,
+        "damage": 78,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 4,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "healer",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 32.65,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 4.72,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 7.98,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 11.25,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 14.52,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 17.78,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 21.05,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 24.32,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 27.58,
+            "kind": "fracture",
+            "distance": 10.64,
+            "threatening": true
+          },
+          {
+            "t": 30.85,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 10,
+        "hitsTaken": 10,
+        "damage": 260,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 10,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "tank",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.75,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.65,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "fighter",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 3.92,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "assassin",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.53,
+        "attacks": [
+          {
+            "t": 2.02,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "mage",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.6,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "ranger",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 6.95,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+substitute",
+      "role": "healer",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 9.15,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 8.75,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 3,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.68,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "outside-aggro",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.7,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 14.24,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "kite",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.95,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 1,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "kite",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.27,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 0,
+        "damage": 0,
+        "sigil": 1,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "normal": {
+        "outcome": "won",
+        "seconds": 5.63,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "kite-no-dodge",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 16.7,
+        "attacks": [
+          {
+            "t": 2.18,
+            "kind": "fracture",
+            "distance": 13.4,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "mage",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.12,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "mage",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 23.13,
+        "attacks": [
+          {
+            "t": 1.72,
+            "kind": "fracture",
+            "distance": 11.84,
+            "threatening": true
+          },
+          {
+            "t": 18.47,
+            "kind": "nova",
+            "distance": 6,
+            "threatening": false
+          },
+          {
+            "t": 22.75,
+            "kind": "fracture",
+            "distance": 5.13,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 1
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "healer",
+      "policy": "max-range",
+      "normal": {
+        "outcome": "won",
+        "seconds": 11.65,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "healer",
+      "policy": "max-range",
+      "stressHp840": {
+        "outcome": "won",
+        "seconds": 29.35,
+        "attacks": [
+          {
+            "t": 1.45,
+            "kind": "fracture",
+            "distance": 10.62,
+            "threatening": true
+          },
+          {
+            "t": 17.17,
+            "kind": "nova",
+            "distance": 6,
+            "threatening": false
+          },
+          {
+            "t": 21.92,
+            "kind": "fracture",
+            "distance": 5.13,
+            "threatening": true
+          },
+          {
+            "t": 25.18,
+            "kind": "nova",
+            "distance": 4.26,
+            "threatening": true
+          },
+          {
+            "t": 27.02,
+            "kind": "fracture",
+            "distance": 3.58,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 4,
+        "hitsTaken": 3,
+        "damage": 78,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 4,
+        "emptyAttacks": 1
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "tank",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.75,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.65,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "fighter",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 3.92,
+        "attacks": [
+          {
+            "t": 2.15,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "assassin",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 4.53,
+        "attacks": [
+          {
+            "t": 2.02,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 1,
+        "hitsTaken": 1,
+        "damage": 26,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 1,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "mage",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 8.6,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "ranger",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 6.95,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 2,
+        "emptyAttacks": 0
+      }
+    },
+    {
+      "variant": "reach+walk",
+      "role": "healer",
+      "policy": "basic",
+      "normal": {
+        "outcome": "won",
+        "seconds": 9.15,
+        "attacks": [
+          {
+            "t": 1.2,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 4.47,
+            "kind": "nova",
+            "distance": 2.5,
+            "threatening": true
+          },
+          {
+            "t": 8.75,
+            "kind": "fracture",
+            "distance": 2.5,
+            "threatening": true
+          }
+        ],
+        "completedAttacks": 2,
+        "hitsTaken": 2,
+        "damage": 58,
+        "sigil": 0,
+        "misses": 0,
+        "chargedMisses": 0,
+        "chargedUsed": 0,
+        "threateningAttacks": 3,
+        "emptyAttacks": 0
+      }
+    }
+  ],
+  "impeto": [
+    {
+      "variant": "tempered (impeto now)",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5.57,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.28,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.18,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5.28,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.18,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.93,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.08,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.8,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.8,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.77,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.83,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.97,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.5,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5.5,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 8.15,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.57,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered (impeto now)",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.28,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.18,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.87,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.93,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.8,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.5,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.95,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 8.15,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.7,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.28,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.18,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.87,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.93,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.8,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.55,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.55,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 6.45,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 6.57,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.5,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.95,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 8.15,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.7,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike2",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.12,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "tank",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 5.15,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.28,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.18,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "tank",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.87,
+      "attacks": [
+        {
+          "t": 1.75,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.93,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "fighter",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.8,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 1,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "fighter",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 2.97,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "assassin",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.23,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "assassin",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.92,
+      "attacks": [
+        {
+          "t": 1.4,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 6.38,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "mage",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.83,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "mage",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 6.65,
+      "attacks": [
+        {
+          "t": 1.72,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 4.43,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "ranger",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 3.82,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 1,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 5.5,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "ranger",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 4.95,
+      "attacks": [
+        {
+          "t": 1.67,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.93,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 8.15,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.08,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "healer",
+      "schedule": "eager",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.57,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 5.98,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 2,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "ward",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 0,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    },
+    {
+      "variant": "tempered+strike1.5+cooldown",
+      "role": "healer",
+      "schedule": "finish-combo",
+      "attunement": "surge",
+      "outcome": "won",
+      "seconds": 7.55,
+      "attacks": [
+        {
+          "t": 1.52,
+          "kind": "fracture",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 4.78,
+          "kind": "nova",
+          "distance": 2.5,
+          "threatening": true
+        },
+        {
+          "t": 7.53,
+          "kind": "fracture",
+          "distance": 3,
+          "threatening": true
+        }
+      ],
+      "completedAttacks": 1,
+      "hitsTaken": 0,
+      "damage": 0,
+      "sigil": 1,
+      "misses": 0,
+      "chargedMisses": 0,
+      "chargedUsed": 1,
+      "threateningAttacks": 3,
+      "emptyAttacks": 0
+    }
+  ]
+}

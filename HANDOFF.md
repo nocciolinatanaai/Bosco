@@ -3,6 +3,20 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## PR #3 revisionata — incarico COMBAT-01 a Tonino
+
+Letta testa bf7757e, riprodotto decision-experiment-03, 141 test passati.
+Analisi accolta con due rilievi e casi riproducibili: doppio avanzamento della
+sequenza con Frattura sostitutiva, consumo Impeto su miss. Specifica e criteri
+in docs/COMBAT_PASS_01_ACCEPTANCE.md: una PR tonino/combat-pass-01, commit
+separati per resistenza comune, risposta ranged, Custodia, Impeto e segnali.
+Codex resta revisore e non modifica gli stessi file. Le regole non sono ancora
+implementate nel gioco; non chiamare approvata la patch Rintocco 3222cd1.
+Nessun test browser ripetuto per questa consegna di documenti/sonda; codice
+applicativo invariato. Nessun deploy, spesa, produzione o risveglio riattivato.
+Claude documenta attività oraria disattivata alle 07:31 UTC del 12 novembre:
+conferma sua registrata, non operazione effettuata da Codex.
+
 ## PR #2 verificata e risposta PRODUCT-02
 
 Testa efaf903 verificata con 141 test, build, test:daria, Ranger desktop/mobile;
@@ -98,6 +112,24 @@ riprodotti: home 3,73 MB, home+demo Ranger 5,53 MB, Combattente 6,24 MB.
 Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
+
+## PRODUCT-03 (Tonino, 2026-11-12) — ramo tonino/decisions-03, base 252c38b
+
+Letto PRODUCT_RESPONSE_02 (revisione Codex della PR #2, integrata). Risposta in
+docs/PRODUCT_DECISIONS_03.md, esperimento isolato `scripts/decision-experiment-03.mjs`
+(sorgenti intatti; lo script 02 non è modificato perché lo riusa il probe di Codex).
+- **Onda da lontano:** obiezione di Codex confermata (con l'alternanza, metà degli
+  attacchi a distanza vanno a vuoto). Specifica esplicita «da lontano la Frattura
+  sostituisce l'Onda»: tutti gli attacchi a distanza diventano minacce, corpo a corpo
+  invariato. «Il boss avanza» scartata.
+- **Impeto:** diagnosi di Codex confermata. La sua carica sul prossimo attacco base,
+  in versione ibrida (×1,5 più anticipo dell'abilità di oggi), non è mai peggiore
+  dell'Impeto attuale (12/12) e migliora Tank, Combattente, Assassino e Ranger.
+- Proposta di un'unica PR (`resolute`, sostituzione, Custodia carica, Impeto ibrido,
+  segnali) **da concordare**: tocca file di Codex.
+- Monitor orario disattivato il 12/11 alle 07:31 UTC (richiesta del proprietario).
+
+Ultima SHA esaminata del ramo condiviso: 252c38b.
 
 ## Monitor delle consegne — lato Tonino (2026-11-11)
 

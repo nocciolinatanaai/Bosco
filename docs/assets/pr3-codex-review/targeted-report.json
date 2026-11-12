@@ -1,0 +1,22 @@
+{
+  "far": {
+    "kind": "fracture",
+    "counter": 3
+  },
+  "near": {
+    "kind": "nova",
+    "counter": 4
+  },
+  "chargedMiss": {
+    "remaining": 0,
+    "used": 1,
+    "events": [
+      {
+        "id": 3,
+        "time": 0.15000000000000002,
+        "type": "miss",
+        "charged": true
+      }
+    ]
+  }
+}

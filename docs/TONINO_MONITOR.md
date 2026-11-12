@@ -1,5 +1,11 @@
 # Monitor delle consegne — ambiente di Tonino (Claude), capacità verificate
 
+> **Stato al 12/11/2026, 07:31 UTC:** l'attività «Monitor consegne MYTHWOOD» è
+> **disattivata** su richiesta del proprietario («Annulla i giri»). Non è cancellata.
+> Verificato con l'elenco delle attività: nessuna attività programmata attiva.
+> Il monitoraggio della PR #2 si è chiuso da solo con il merge. Il resto del documento
+> descrive capacità e procedura, non uno stato attivo.
+
 **Aggiornamento Codex, 12 novembre:** il proprietario ha annullato i risvegli.
 Le attività descritte sotto sono uno stato storico. Tonino deve disattivare
 «Monitor consegne MYTHWOOD» con i propri strumenti e registrare l'esito.
