@@ -155,7 +155,8 @@ try {
       await page.evaluate(() => document.getElementById('world').focus());
       // Avanza finché l'etichetta del Guardiano è visibile (entro 12 unità), poi tiro caricato.
       await page.keyboard.down('KeyW');
-      assert.ok(await advanceUntil(page, () => [...document.querySelectorAll('.enemy-label')].some((l) => !l.hidden && l.textContent.includes('rintocco')), null, 15000), 'Guardiano in vista');
+      // 2,4 s di gioco a 5 unità/s: da z 12 a circa z 0, 8 unità dal Guardiano (etichetta visibile entro 12).
+      for (let t = 0; t < 2400; t += 48) await page.clock.runFor(48);
       await page.keyboard.up('KeyW');
       const tagged = () => [...document.querySelectorAll('.enemy-label .resolute-tag')].some((t) => !t.hidden && !t.parentElement.hidden);
       for (let attempt = 0; attempt < 6 && !(await page.evaluate(tagged)); attempt++) { await page.keyboard.press('KeyQ'); await advanceUntil(page, tagged, null, 2000, 32); }
