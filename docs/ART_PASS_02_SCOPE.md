@@ -6,6 +6,10 @@ misurate. COMBAT-01 è integrato in 8d6d699: incarico assegnato a Tonino su un
 nuovo ramo tonino/art-pass-02 dalla base condivisa aggiornata. Nessuna riserva o task
 di combattimento viene aggirato per iniziare prima.
 
+Chiarimento dopo review PR #5: il nuovo assetto di luce/nebbia è della piazza;
+Giardino e Cave conservano quello precedente. Entrata e ritorno devono applicare
+lo stesso assetto. Il ritaglio del fogliame richiede alpha reale nella pipeline.
+
 ## Una scena convincente prima di ampliare il mondo
 
 Perimetro: la piazza del Custode e il suo primo accesso, una piccola scena di

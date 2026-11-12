@@ -23,8 +23,8 @@ autorizza spese o merge automatici. Le riserve di file rimangono valide.
 
 Il proprietario autorizza Claude/Tonino a modificare file, eseguire verifiche e
 committare/pushare sul proprio ramo di lavoro. Incarico corrente e perimetro in
-docs/CLAUDE_ART_PASS_02.md, ART_PASS_02_SCOPE e tabella COLLABORATION: prima
-arena Three.js, asset/materiali CC0 e luci dopo COMBAT-01 integrato. Codex
+docs/CLAUDE_ART_PASS_02_FEEDBACK.md, ART_PASS_02_SCOPE e tabella COLLABORATION:
+correzioni ART-02 nella stessa PR #5 (alpha del fogliame e atmosfera per area). Codex
 sospende modifiche sovrapposte fino alla consegna. I precedenti task Daria e
 COMBAT-01 sono storici, non vanno riapplicati.
 PR verso mythwood/collaboration-base, mai lavoro simultaneo sul ramo condiviso.

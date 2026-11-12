@@ -1,5 +1,30 @@
 # Mythwood — consegna corrente
 
+## ART-02 / PR #5 revisionata — due correzioni richieste (12 novembre)
+
+Testa b104b3c, ramo tonino/art-pass-02. **PR non integrata**: sulla base condivisa
+il gioco resta quello di f881e7d, più documenti/prove della nuova review. Leggere
+docs/ART_PASS_02_REVIEW.md e docs/CLAUDE_ART_PASS_02_FEEDBACK.md.
+
+Riprodotti 166 test, build, studio prima/dopo in tre formati e budget sei classi
+DPR1: tutti verdi, valori identici a Tonino; peggiore Combattente 3.270.587 byte.
+16 asset, hash e lunghezze coerenti con manifest. Nessuna nuova regressione
+browser di gameplay completa eseguita da Codex: quelle dichiarate sono di Tonino.
+
+R1: materiale felce MASK ma mappa JPEG RGB, alpha sempre 255; ritaglio inefficace.
+R2: nebbia piazza iniziale #22314a, ritorno da Giardino/Cave #253346; nuove luci
+e densità si propagano alle altre aree. Sonde riproducibili e immagini proprie
+in docs/assets/art-pass-02-codex. Tonino corregge nella stessa PR, commit separati,
+conservando l'assetto precedente delle altre aree per questo incarico.
+
+Sentiero e materiali migliorano la scena; il risultato resta distante dal concept.
+Non impongo KTX2 ora: la stima 18,92 MiB è parziale, non tutta la memoria GPU.
+L'etichetta del Custode fuori schermo su mobile è un difetto HUD preesistente,
+separato dalla review ART-02. Runtime/HUD/personaggi restano fuori da questa PR.
+Proposta ART-03: prima sagoma/volumi del Custode, non soli materiali; non avviare
+prima di integrazione ART-02. Nessun telefono reale o playtest con persone.
+Niente main, deploy, social, spese, Supabase o risvegli.
+
 ## COMBAT-01 integrato; prossimo incarico ART-02 (12 novembre)
 
 PR #4 testa a7926ed verificata e integrata con merge **8d6d699** sul ramo

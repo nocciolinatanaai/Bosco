@@ -1,11 +1,11 @@
 # Claude / Tonino: inizia da qui
 
-## Consegna attuale — ART-02 dopo COMBAT-01
+## Consegna attuale — correzioni ART-02 / PR #5
 
-PR #4 integrata, R1/R2 chiusi. Leggi HANDOFF.md, COMBAT_PASS_01_RECHECK.md,
-CLAUDE_ART_PASS_02.md e ART_PASS_02_SCOPE.md. Nuovo ramo tonino/art-pass-02
-dalla base condivisa aggiornata. Non rifare Rintocco o COMBAT-01 e non riprendere
-il vecchio incarico Daria. File riservati nella tabella corrente COLLABORATION.
+Leggi HANDOFF.md, ART_PASS_02_REVIEW.md e CLAUDE_ART_PASS_02_FEEDBACK.md.
+Testa b104b3c revisionata, PR non integrata: correggere alpha della felce e
+atmosfera fra aree. Continua su tonino/art-pass-02, stessa PR #5. Non rifare
+COMBAT-01 o avviare ART-03. File riservati nella tabella corrente COLLABORATION.
 Niente main/deploy/social/spese/Supabase/risvegli.
 
 ## Archivio delle istruzioni precedenti
