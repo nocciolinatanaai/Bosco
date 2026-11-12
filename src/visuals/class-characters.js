@@ -7,7 +7,7 @@ const sources = new Map();
 function source(role) {
   if (!sources.has(role)) {
     sources.set(role, import('three/addons/loaders/GLTFLoader.js')
-      .then(({ GLTFLoader }) => new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/characters/${role}.glb`))
+      .then(({ GLTFLoader }) => new GLTFLoader().loadAsync(`${import.meta.env?.BASE_URL || '/'}models/characters/${role}${role === 'fighter' && typeof location !== 'undefined' && new URLSearchParams(location.search).has('hero') ? '-probe' : ''}.glb`))
       .catch(error => { sources.delete(role); throw error; }));
   }
   return sources.get(role);
@@ -40,7 +40,7 @@ function equipment(model, role) {
   };
   const left = model.getObjectByName('palm_L'), right = model.getObjectByName('palm_R');
   if (!left || !right) throw Error('Missing character hand bones');
-  if (role === 'tank' || role === 'fighter') makeBlade(right, role === 'tank' ? .9 : 1.35);
+  if (role === 'tank' || (role === 'fighter' && !model.getObjectByName('fighter-sword-blade'))) makeBlade(right, role === 'tank' ? .9 : 1.35);
   if (role === 'assassin') { makeBlade(left, .5); makeBlade(right, .5); }
   if (role === 'tank') {
     const shield = new THREE.Mesh(new THREE.CylinderGeometry(.52, .44, .09, 8), brass);

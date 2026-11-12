@@ -21,6 +21,9 @@ function plate(parent,material,outline,depth,position){
 }
 function joint(parent,name,x,y,z){const node=new THREE.Group();node.name=name;node.position.set(x,y,z);parent.add(node);return node;}
 function merge(node){const source=new THREE.Group();for(const child of [...node.children])if(child.isMesh)source.add(child);node.add(batchArchitecture(source));}
+const STONE_TINT='#6f7784';
+let pendingGlb=Promise.resolve();
+export const guardianGlbReady=()=>pendingGlb;
 export function createSealedGuardian(m){
  const root=new THREE.Group();root.name='Custode-della-voce';
  const torso=joint(root,'guardian-torso',0,2.15,0);
@@ -62,13 +65,24 @@ export function createSealedGuardian(m){
  const left=root.getObjectByName('guardian-left-arm'),right=root.getObjectByName('guardian-right-arm');
  const leftLeg=root.getObjectByName('guardian-left-leg'),rightLeg=root.getObjectByName('guardian-right-leg');
  const leftElbow=root.getObjectByName('guardian-left-elbow'),rightElbow=root.getObjectByName('guardian-right-elbow');
+ let rig={left,right,leftLeg,rightLeg,leftElbow,rightElbow,torso,core};
  root.userData.leftArm=left;root.userData.rightArm=right;root.userData.design='sealed-stone-warden';
+ // Prova locale: Custode modellato in Blender (GLB) con le stesse giunture; il procedurale resta di ripiego.
+ if(typeof document!=='undefined'&&new URLSearchParams(location.search).has('glb')){
+  pendingGlb=import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync((import.meta.env?.BASE_URL||'/')+'art/custode-probe/custode.glb')).then((gltf)=>{
+   const g=gltf.scene;g.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(o.material.name==='custode-stone')o.material.color.set(STONE_TINT);}});
+   const n=(k)=>g.getObjectByName(k);
+   rig={left:n('guardian-left-arm'),right:n('guardian-right-arm'),leftLeg:n('guardian-left-leg'),rightLeg:n('guardian-right-leg'),leftElbow:n('guardian-left-elbow'),rightElbow:n('guardian-right-elbow'),torso:n('guardian-torso'),core:n('guardian-voice-seal')};
+   torso.visible=false;leftLeg.visible=false;rightLeg.visible=false;root.add(g);
+   root.userData.leftArm=rig.left;root.userData.rightArm=rig.right;root.userData.design='blender-probe';root.userData.animate(0,0,false,true,{phase:'idle'});
+  }).catch(()=>{});
+ }
  root.userData.animate=(time,windup,moving,reducedMotion,combat={})=>{
-  const pose=guardianPose(time,{...combat,windup},moving,reducedMotion);
-  right.rotation.set(pose.rightArm,0,pose.rightSpread);left.rotation.set(pose.leftArm,0,pose.leftSpread);
-  leftElbow.rotation.x=pose.elbow;rightElbow.rotation.x=pose.elbow;
-  leftLeg.rotation.x=pose.leftLeg;rightLeg.rotation.x=pose.rightLeg;
-  torso.rotation.set(pose.lean,pose.twist,0);torso.position.y=2.15+pose.bob-pose.impact*.3;core.scale.setScalar(pose.core);
+  const pose=guardianPose(time,{...combat,windup},moving,reducedMotion),r=rig;
+  r.right.rotation.set(pose.rightArm,0,pose.rightSpread);r.left.rotation.set(pose.leftArm,0,pose.leftSpread);
+  r.leftElbow.rotation.x=pose.elbow;r.rightElbow.rotation.x=pose.elbow;
+  r.leftLeg.rotation.x=pose.leftLeg;r.rightLeg.rotation.x=pose.rightLeg;
+  r.torso.rotation.set(pose.lean,pose.twist,0);r.torso.position.y=2.15+pose.bob-pose.impact*.3;r.core.scale.setScalar(pose.core);
  };
  root.userData.animate(0,0,false,true,{phase:'idle'});return root;
 }

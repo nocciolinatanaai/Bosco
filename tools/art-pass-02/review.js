@@ -14,10 +14,14 @@ renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadow
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 const world = createArtWorld(renderer);
 if (!before) { await (await import('/src/visuals/plaza-surfaces.js')).plazaSurfacesReady(); await (await import('/src/visuals/plaza-props.js')).plazaPropsReady(); }
-world.player.userData.setClass(CLASSES.find((r) => r.id === 'ranger'));
+const cls = params.get('cls') || 'ranger';
+world.player.userData.setClass(CLASSES.find((r) => r.id === cls));
+if (cls !== 'ranger') { const ready = () => { let ok = false; world.player.traverse((o) => { if (o.userData.visualStatus === 'ready') ok = true; }); return ok; };
+  for (let i = 0; i < 600 && !ready(); i++) await new Promise((r) => setTimeout(r, 100)); }
 const daria = world.player.getObjectByName('Daria-ranger-prototype'); if (daria?.userData.loadVisual) await daria.userData.loadVisual();
 const enemy = { x: 0, z: -9, boss: true, phase: 'idle', windup: 0, chargeDuration: 1.15, recoveryDuration: 1.5, recovery: 0, attackKind: 'fracture', radius: 3.6, aimX: 0, aimZ: -9, hp: 280, sealed: false, reach: false };
 const view = world.addEnemy(enemy);
+if (!before && new URLSearchParams(location.search).has('glb')) await (await import('/src/visuals/guardian-redesign.js')).guardianGlbReady();
 const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, .1, 160);
 const pipeline = createPipeline(renderer, world.scene, camera); pipeline.configure({ bloom: true, pixelRatio: 1 }); pipeline.resize(innerWidth, innerHeight);
 world.setShadowQuality?.(true, 1024);
@@ -29,7 +33,24 @@ const POSES = {
 };
 function frame(name) {
   const narrow = innerWidth < 700;
-  if (name === 'materiali') {
+  if (name.startsWith('eroe-')) {
+    // Primo piano dell'eroe: fermo e a metà attacco (stessa funzione di posa del gioco).
+    view.group.visible = false; view.marker.visible = false; world.player.visible = true;
+    world.player.position.set(0, 0, 4); world.player.rotation.y = Math.PI - .35;
+    const combat = name === 'eroe-attacco' ? { action: { elapsed: .3, windup: .18, duration: .5, kind: 'attack' } } : name === 'eroe-carica' ? { action: { elapsed: .12, windup: .18, duration: .5, kind: 'attack' } } : {};
+    world.player.userData.animate(4, false, 0, true, combat);
+    const narrow = innerWidth < 700;
+    camera.position.set(narrow ? .5 : .9, 1.5, narrow ? 1.1 : 1.6); camera.lookAt(0, 1.05, 4);
+  } else   if (name.startsWith('custode-')) {
+    // Primo piano del Custode: fermo, a metà carica, appena dopo l'impatto (stessa posa di gioco).
+    const phase = { 'custode-fermo': ['idle', 0, 0], 'custode-carica': ['windup', .35, 0], 'custode-impatto': ['recovery', 0, 1.35] }[name];
+    world.player.visible = false; view.marker.visible = false; view.group.visible = true;
+    Object.assign(enemy, { x: 0, z: -9, phase: phase[0], windup: phase[1], recovery: phase[2], reach: false });
+    view.group.position.set(0, 0, -9); view.group.rotation.y = .35;
+    view.group.userData.animate(4, enemy.windup, false, true, enemy);
+    const narrow = innerWidth < 700;
+    camera.position.set(narrow ? 2.2 : 3.4, 3.1, narrow ? -1.2 : -2.6); camera.lookAt(0, 2.3, -9);
+  } else if (name === 'materiali') {
     world.player.visible = false; view.group.visible = false; view.marker.visible = false;
     camera.position.set(-11.4, 1.7, -6.2); camera.lookAt(-15.6, .9, -10.6);
   } else {
