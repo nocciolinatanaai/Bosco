@@ -28,7 +28,10 @@ function measure(page) {
     for (const sel of signals) for (const el of document.querySelectorAll(sel)) {
       if (!visible(el)) continue;
       const r = rect(el), fontSize = parseFloat(getComputedStyle(el).fontSize);
-      const overlaps = ctrl.filter((c) => !c.el.contains(el) && overlap(r, c.r)).map((c) => c.sel);
+      // L'avviso temporaneo conta solo quando mostra testo.
+      const toast = document.getElementById('toast'), range = document.createRange(); if (toast) range.selectNodeContents(toast);
+      const tb = toast && toast.textContent.trim() && visible(toast) ? range.getBoundingClientRect() : null, tr = tb && tb.width ? { x: tb.x, y: tb.y, w: tb.width, h: tb.height } : null; // area del testo, non del riquadro
+      const overlaps = ctrl.filter((c) => !c.el.contains(el) && overlap(r, c.r)).map((c) => c.sel).concat(tr && overlap(r, tr) ? ['#toast'] : []);
       items.push({ sel, text: el.textContent.trim(), fontSize, rect: r, inside: r.x >= 0 && r.y >= 0 && r.x + r.w <= innerWidth && r.y + r.h <= innerHeight, clipped: el.scrollWidth > el.clientWidth + 1, overlaps });
     }
     return { viewport: { w: innerWidth, h: innerHeight }, items };

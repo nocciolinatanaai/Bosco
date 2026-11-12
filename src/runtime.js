@@ -235,7 +235,8 @@ export function startRuntime($) {
       if (event.type === 'surge-outcome' && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: SURGE_OUTCOME_TEXT[event.outcome], until: state.time + 1.2 };
       if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Esci dal cerchio o schiva', 2.5);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
-      if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : event.reach ? 'FRATTURA A DISTANZA · Il Custode ti prende di mira: esci dal cerchio sotto di te' : 'FRATTURA · Spostati dal punto segnato', 2.2);
+      // La Frattura a distanza ha già il suo segnale persistente nella barra del Custode: nessun avviso doppio sopra.
+      if (event.type === 'enemy-windup' && event.boss && !event.reach) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
       if (event.type === 'cave-progress') {
         if (['enter', 'leave'].includes(event.interaction)) { syncEnemyViews(); switchArea(); }

@@ -318,3 +318,7 @@ footer { z-index: 9; }
    si nasconde quando coprirebbe pannelli o comandi, invece di sovrapporre due testi. */
 #hud #hud-resolute:not([hidden]) { display: flex; width: fit-content; margin-top: 6px; }
 .enemy-label.tag-occluded .resolute-tag { visibility: hidden; }
+/* Telefono orizzontale: l'HUD occupa la colonna destra; i segnali del Custode restano nello spazio libero a sinistra. */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  #boss-signals { justify-content: flex-start; max-width: min(300px, calc(100vw - 30% - 280px)); }
+}
