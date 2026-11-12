@@ -8,7 +8,7 @@ import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
-import { journey, storyObjective, MEMORY } from './journey.js';
+import { journey, storyObjective, memoryFor } from './journey.js';
 import { ATTUNEMENTS, artifactUnlocked } from './artifacts.js';
 import { screenMovement, joystickVector } from './controls.js';
 import { createArtWorld, createPipeline } from './visuals/environment.js';
@@ -132,7 +132,7 @@ export function startRuntime($) {
     pendingAttunement=null;consumeEvents(); updateUI();
   });
   function showMemory(kind) {
-    memoryKind = kind;pendingAttunement=null;const text = MEMORY[kind];
+    memoryKind = kind;pendingAttunement=null;const text = memoryFor(state, kind);
     $('memory-artifact').hidden=kind!=='resonance';$('memory-artifact-status').textContent='';
     $('memory-title').textContent = text.title; $('memory-body').textContent = text.body; $('memory-continue').textContent = text.button;
     if (!portraitFailed) {

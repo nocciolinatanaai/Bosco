@@ -21,7 +21,7 @@ export function createSession(id) {
   const enemy = (id, name, x, z, hp, boss, timer) => ({ id, name, x, z, hp, maxHp: hp, boss, timer,
     sealed: boss, attackCount: 0, attackKind: boss ? 'fracture' : 'strike',
     impactDamage: boss ? 26 : 12, recoveryDuration: boss ? 1.5 : 1, phase: 'idle', windup: 0, chargeDuration: boss ? 1.15 : .9, recovery: 0, stagger: 0, hitFlash: 0, facing: 0,
-    aimX: x, aimZ: z, radius: boss ? 3.6 : 1.8 });
+    aimX: x, aimZ: z, radius: boss ? 3.6 : 1.8, tempered: boss, resolute: false });
   return { role, x: 0, z: 12, hp: role.hp, maxHp: role.hp, stamina: 100, staminaDelay: 0,
     cooldown: 0, dashCooldown: 0, returnShot: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
@@ -146,17 +146,30 @@ export function hurt(s, amount, source = null) {
   return actual;
 }
 
+export function clearResolute(s, enemy) {
+  if (!enemy.resolute) return;
+  enemy.resolute = false; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: false });
+}
+
 function hit(s, enemy, damage, stagger = 0, critical = false) {
   if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return;
   s.lesson.hit = true;
   const amount = Math.min(enemy.hp, Math.round(damage * (s.evolved ? 1.5 : 1)));
   enemy.hp -= amount; enemy.hitFlash = .16;
+  // Resistenza unica (Custode e Guardiano del rintocco): la prima interruzione vale,
+  // poi l'avversario non si lascia più interrompere finché non completa un attacco.
+  // Il danno passa sempre; la resistenza non è invulnerabilità.
+  let resisted = false;
   if (stagger > 0 && enemy.hp > 0) {
-    enemy.stagger = Math.max(enemy.stagger, stagger * (enemy.boss ? .45 : 1));
-    enemy.windup = 0; enemy.phase = 'stagger';
+    if (enemy.resolute) resisted = true;
+    else {
+      enemy.stagger = Math.max(enemy.stagger, stagger * (enemy.boss ? .45 : 1));
+      enemy.windup = 0; enemy.phase = 'stagger';
+      if (enemy.tempered) { enemy.resolute = true; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: true }); }
+    }
   }
-  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical });
-  if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
+  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical, resisted });
+  if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; clearResolute(s, enemy); emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
   if (!s.resonanceReady && !s.evolved && s.enemies.filter(e => !e.boss && (e.area || 'plaza') === 'plaza').every(e => e.hp <= 0)) {
     s.resonanceReady = true; emit(s, 'resonance-ready');
   }
@@ -262,12 +275,12 @@ export function advanceEnemies(s, dt) {
     enemy.hitFlash = Math.max(0, enemy.hitFlash - dt);
     if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) continue;
     if (enemy.stagger > 0) { enemy.stagger = Math.max(0, enemy.stagger - dt); enemy.phase = 'stagger'; if (enemy.stagger === 0) { enemy.phase = 'recovery'; enemy.recovery = .4; } continue; }
-    if (enemy.type === 'warden') { advanceWarden(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
+    if (enemy.type === 'warden') { advanceWarden(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload), () => clearResolute(s, enemy)); continue; }
     if (enemy.type === 'sentry') { advanceSentry(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
     if (enemy.phase === 'windup') {
       enemy.windup = Math.max(0, enemy.windup - dt);
       if (enemy.windup === 0) {
-        enemy.phase = 'recovery'; enemy.recovery = enemy.recoveryDuration;
+        enemy.phase = 'recovery'; enemy.recovery = enemy.recoveryDuration; clearResolute(s, enemy);
         emit(s, 'enemy-impact', { enemyId: enemy.id, x: enemy.aimX, z: enemy.aimZ, radius: enemy.radius, kind: enemy.attackKind });
         if (Math.hypot(s.x - enemy.aimX, s.z - enemy.aimZ) < enemy.radius) hurt(s, enemy.impactDamage, { kind: enemy.attackKind, name: enemy.name });
       }
@@ -287,7 +300,7 @@ export function advanceEnemies(s, dt) {
     }
     if (enemy.timer <= 0 && d < (enemy.boss ? 6 : 3.8)) {
       prepareEnemyAttack(enemy, s);
-      emit(s, 'enemy-windup', { enemyId: enemy.id, boss: enemy.boss, x: enemy.aimX, z: enemy.aimZ, duration: enemy.chargeDuration, kind: enemy.attackKind, radius: enemy.radius });
+      emit(s, 'enemy-windup', { enemyId: enemy.id, boss: enemy.boss, x: enemy.aimX, z: enemy.aimZ, duration: enemy.chargeDuration, kind: enemy.attackKind, radius: enemy.radius, resolute: enemy.resolute });
     }
   }
 }

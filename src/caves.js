@@ -7,12 +7,14 @@ const near = (s, p) => Math.hypot(s.x - p.x, s.z - p.z) <= 2.2;
 function reset(s) {
   s.action = null; s.projectiles = []; s.targetId = null; s.inputBuffer = 0; s.skillBuffer = 0;
   s.dodgeRemaining = 0; s.invulnerable = 0; s.returnShot = 0;
+  // Nessuna resistenza trascinata fra aree: chi cambia zona ritrova avversari interrompibili.
+  for (const enemy of s.enemies) enemy.resolute = false;
 }
 export function createWarden() {
   return { id: 'cave-warden', name: 'Guardiano del rintocco', area: 'caves', type: 'warden',
-    x: 0, z: -8, hp: 150, maxHp: 150, boss: false, sealed: false, timer: 1.2,
+    x: 0, z: -8, hp: 360, maxHp: 360, boss: false, sealed: false, timer: .5,
     phase: 'idle', attackKind: 'nova', attackCount: 0, chargeDuration: 1.6,
-    radius: 5, windup: 0, recovery: 0, recoveryDuration: 2, impactDamage: 22,
+    radius: 6, windup: 0, recovery: 0, recoveryDuration: 2, impactDamage: 22, tempered: true, resolute: false,
     stagger: 0, hitFlash: 0, facing: 0, aimX: 0, aimZ: -8 };
 }
 export function enterCaves(s) {
@@ -45,22 +47,23 @@ export function interactCaves(s, id) {
 export function cavePosition(x, z) {
   return { x: Math.max(-10, Math.min(10, x)), z: Math.max(-15, Math.min(14, z)) };
 }
-export function advanceWarden(s, enemy, dt, hurt, emit) {
+export function advanceWarden(s, enemy, dt, hurt, emit, clearResolute = () => { enemy.resolute = false; }) {
   if (enemy.phase === 'windup') {
     enemy.windup = Math.max(0, enemy.windup - dt);
     if (!enemy.windup) {
-      enemy.phase = 'recovery'; enemy.recovery = 2;
+      enemy.phase = 'recovery'; enemy.recovery = 2; clearResolute();
       emit('enemy-impact', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, radius: enemy.radius });
-      if (Math.hypot(s.x - enemy.x, s.z - enemy.z) < enemy.radius) hurt(22, { kind: 'nova', name: enemy.name });
+      if (Math.hypot(s.x - enemy.x, s.z - enemy.z) < enemy.radius) hurt(enemy.impactDamage, { kind: 'nova', name: enemy.name });
     }
   } else if (enemy.phase === 'recovery') {
     enemy.recovery = Math.max(0, enemy.recovery - dt);
-    if (!enemy.recovery) { enemy.phase = 'idle'; enemy.timer = 1.2; }
+    // Un rintocco interrotto non è annullato: il successivo arriva prima e (resistenza ancora attiva) non si lascia spezzare.
+    if (!enemy.recovery) { enemy.phase = 'idle'; enemy.timer = enemy.resolute ? .4 : 1.2; }
   } else if (Math.hypot(s.x - enemy.x, s.z - enemy.z) <= 10) {
     enemy.timer -= dt;
     if (enemy.timer <= 0) {
       enemy.aimX = enemy.x; enemy.aimZ = enemy.z; enemy.phase = 'windup'; enemy.windup = 1.6;
-      emit('enemy-windup', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, duration: 1.6, radius: enemy.radius });
+      emit('enemy-windup', { enemyId: enemy.id, kind: 'nova', x: enemy.x, z: enemy.z, duration: 1.6, radius: enemy.radius, resolute: enemy.resolute });
     }
   }
 }
