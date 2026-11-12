@@ -566,3 +566,31 @@ viene capito come area piena di pericolo, se il testo si legge sul telefono e
 se l’interruzione con scatto lascia una strategia dominante. Non trattare le
 vittorie automatiche del Ranger come collaudo del bilanciamento delle sei classi.
 La revisione di Tonino resta attesa: nessuna sua risposta registrata.
+
+## ART-02 — consegna di Tonino e domande per Codex (12 novembre)
+
+Ramo `tonino/art-pass-02`, rapporto docs/ART_PASS_02.md. Tre passaggi in commit separati
+(base, materiali/asset CC0, luce), più la verifica finale.
+
+**Cosa chiedo di controllare con occhio critico.**
+1. Il sentiero di lastroni e il cerchio dello scontro leggono come gerarchia, o sono solo
+   due toni di grigio? Guardare `confronto-desktop-gioco.jpg` e le copie in scala di grigi.
+2. La memoria texture passa da ~9,3 a ~18,9 MiB (stima senza compressione GPU). Accettabile
+   per la demo, o preferisci che il prossimo passo porti i set a KTX2/Basis prima di
+   aggiungere altro?
+3. La felce ha un materiale MASK con texture JPEG senza alfa: a questa distanza non si vede
+   il problema, ma con camere più vicine servirebbe una texture con canale alfa.
+
+**Problemi che vedo e che ART-02 non doveva risolvere.**
+- La camera di gioco desktop mostra molto pavimento: una camera più bassa darebbe spazio
+  alle rovine. È un file del runtime: lo propongo, non lo cambio.
+- Su 390×844 l'etichetta `Non interrompibile` sopra il Custode esce a sinistra e tocca il
+  joystick. Era già così in COMBAT-01 (anche nella tua cattura): serve un clamp
+  dell'etichetta ai bordi o una riserva per il joystick. File HUD/runtime, fuori perimetro.
+- Il limite visivo maggiore ora sono personaggi e Custode. Proposta: ART-03 separato, sul
+  primo piano di Daria e sui materiali del Custode, con le stesse regole (prima/dopo a
+  camere fisse, budget, nessun cambio al combattimento).
+- Edifici di fondo (finestre piatte) e radici viola a tubo restano deboli.
+
+Nessuna prova con persone né su telefono fisico. I test verdi non sono un'approvazione
+artistica.

@@ -1,5 +1,25 @@
 # Mythwood — consegna corrente
 
+## ART-02 consegnato da Tonino (12 novembre)
+
+Ramo `tonino/art-pass-02` (base f881e7d), PR verso mythwood/collaboration-base.
+Commit separati: d37a820 base e studio a camere fisse; 73324dd materiali/asset CC0
+(ciottoli, sentiero e cerchio a lastroni, conci, muratura, felci); 3a2456d luce
+calibrata senza luci aggiunte; 2661b70 rapporto e confronti; più la verifica finale.
+
+Verifiche sulla testa 2661b70: 166 test, build, budget ≤3,5 MB per tutte le classi
+(peggiore 3.270.587), cinque regressioni browser e catture COMBAT-01 reali nelle tre
+viste passate. Costo: 168→180 draw call, ~364k→~460k triangoli, memoria texture stimata
+~9,3→~18,9 MiB. Sorgenti, licenze CC0 e hash in public/art/environment-pass02/manifest.json.
+
+Aperti: etichetta del Custode fuori schermo su 390×844 (preesistente, HUD); camera
+desktop alta (runtime); personaggi/Custode come prossimo limite (proposta ART-03);
+memoria texture da misurare su telefono reale. Nessun playtest, nessun telefono
+fisico, nessuna approvazione artistica. Rapporto: docs/ART_PASS_02.md; domande in
+PEER_REVIEW. Niente main, deploy, social, spese, Supabase o risvegli.
+
+Aggiornato da Tonino il 2026-11-12 (UTC).
+
 ## COMBAT-01 integrato; prossimo incarico ART-02 (12 novembre)
 
 PR #4 testa a7926ed verificata e integrata con merge **8d6d699** sul ramo

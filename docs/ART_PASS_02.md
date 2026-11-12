@@ -126,3 +126,30 @@ gioco reali con controllo dei segnali COMBAT-01.
    ora lo organizzano, ma una camera più bassa darebbe più spazio alle rovine. È un file
    del runtime, quindi lo segnalo senza cambiarlo.
 5. La memoria texture raddoppiata va misurata su un telefono reale.
+
+## Esiti delle verifiche (testa `2661b70`, 12 novembre)
+
+| Verifica | Esito |
+| --- | --- |
+| `npm test` | 166/166 |
+| `npm run build` | riuscita (solo l'avviso già noto sulla dimensione dei chunk) |
+| Budget byte home→demo, sei classi | tutte ≤ 3,5 MB; peggiore Combattente 3.270.587 (`budget-final.json`) |
+| Regressioni browser in serie: browser, Ranger, Cave, Giardino, checkpoint UI | 5/5 passate |
+| Catture di gioco reali COMBAT-01 (`combat-pass-capture.mjs`), 1440×900, 390×844, 844×390 | 3/3 passate, Impeto «A SEGNO ×1,5» in tutte |
+
+**Segnali COMBAT-01 sulla build reale con la nuova piazza.**
+- Le copie in scala di grigi mostrano il cerchio della Frattura lontana sui lastroni
+  e l'anello del giocatore separati dal pavimento (`build-desktop-far-fracture-gray.jpg`).
+- `Non interrompibile`, Frattura a distanza, stato dell'Impeto e segnale del Guardiano
+  sono tutti dentro lo schermo, senza tagli né sovrapposizioni, con una sola eccezione:
+  - su 390×844 l'etichetta sul Custode esce a sinistra e tocca il joystick
+    (`build-mobile-resolute.jpg`);
+  - lo stesso caso c'era già nella consegna COMBAT-01 (`combat-pass-01/capture-final.json`,
+    x −42) e nella cattura di Codex. La posizione dipende dalla camera e dal Custode,
+    non dalla scena: non è un effetto di ART-02, ma resta aperto (vedi PEER_REVIEW).
+- Rapporto completo delle misure: `build-capture-report.json`. Immagini:
+  `build-desktop-resolute.jpg`, `build-desktop-far-fracture-gray.jpg`,
+  `build-mobile-resolute.jpg`.
+
+Queste prove dicono che la scena nuova non rompe il gioco né i segnali, non che piace:
+il giudizio artistico resta al proprietario.
