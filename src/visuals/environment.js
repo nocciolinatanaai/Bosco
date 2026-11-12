@@ -8,7 +8,9 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { createMaterials } from './materials.js';
-import { batchArchitecture, block, curve, ellipsoid, link, piece, random } from './geometry.js';
+import { batchArchitecture, block, curve, ellipsoid, link, piece, random, worldBoxUV, worldPlane, worldDisc } from './geometry.js';
+import { createPlazaSurfaces } from './plaza-surfaces.js';
+import { addFerns } from './plaza-props.js';
 import { createAdventurer, createGuardian } from './actors.js';
 
 function arch(root, m, x, y, z, radius, thickness = .65, depth = 1, count = 21, rotation = 0) {
@@ -52,20 +54,6 @@ function ivy(root, m, base, height, seed) {
   }
 }
 
-function shrub(root, m, x, z, rand) {
-  for (let i = 0; i < 10; i++) {
-    const angle = rand() * Math.PI * 2, length = .3 + rand() * .7;
-    const leaf = piece(root, new THREE.SphereGeometry(1, 6, 4), i % 2 ? m.leaf : m.leafLight, x + Math.sin(angle) * .2, .16 + length * .3, z + Math.cos(angle) * .2);
-    leaf.scale.set(.08, length / 2, .025); leaf.rotation.set(Math.cos(angle) * .9, angle, Math.sin(angle) * .9);
-  }
-  if (rand() > .4) {
-    for (let i = 0; i < 5; i++) {
-      const angle = rand() * Math.PI * 2;
-      ellipsoid(root, m.blossom, [.15, .04, .09], [x + Math.sin(angle) * .3, .15, z + Math.cos(angle) * .3], 6);
-    }
-  }
-}
-
 function portal(root, m) {
   const shape = new THREE.Shape();
   shape.moveTo(-3.5, 0); shape.lineTo(3.5, 0); shape.lineTo(3.5, 5.4);
@@ -97,42 +85,66 @@ function portal(root, m) {
   return { material, rings: front };
 }
 
+// Atmosfera per area, un solo punto di verità: applicata all'avvio e a ogni cambio d'area, anche
+// al ritorno. ART-02 cambia solo la piazza (nebbia più densa per la prospettiva aerea; chiave
+// lunare più bassa e fredda, riempimento meno piatto); Giardino e Cave conservano l'assetto
+// precedente (f881e7d) finché un incarico non le ridisegna con confronti propri.
+const BEFORE_ART02 = { fogDensity: .018, environment: .22, hemi: ['#93adc9', '#25202d', .45], sun: ['#b3c9e4', 1.45, [-10, 22, 14]], rim: ['#b38acb', 1.2] };
+export const AREA_ATMOSPHERE = {
+  plaza: { background: '#101e30', fog: '#22314a', fogDensity: .022, environment: .3, hemi: ['#8ea7c7', '#2a2433', .32], sun: ['#c7d6ef', 2.1, [-15, 16, 11]], rim: ['#a98bcf', .75] },
+  garden: { ...BEFORE_ART02, background: '#152e32', fog: '#24483f' },
+  caves: { ...BEFORE_ART02, background: '#141523', fog: '#242338' },
+};
+
 export function createArtWorld(renderer) {
-  const scene = new THREE.Scene(); scene.background = new THREE.Color('#101e30'); scene.fog = new THREE.FogExp2('#253346', .018);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(); scene.fog = new THREE.FogExp2('#000000', .02);
   const room = new RoomEnvironment();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromScene(room, .04);
-  scene.environment = environment.texture; scene.environmentIntensity = .22;
+  scene.environment = environment.texture;
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
+  // ART-02: architettura e terreno della piazza con materiali PBR CC0; personaggi invariati.
+  const ps = createPlazaSurfaces(), a = { ...m, stone: ps.ashlar, trim: ps.ashlarTrim };
   const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
   let caveWorld = null, gardenWorld = null, area = 'plaza';
   const rand = random(215);
-  scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .45));
-  const sun = new THREE.DirectionalLight('#b3c9e4', 1.45);
-  sun.position.set(-10, 22, 14); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+  // Luci create una volta; colori, intensità e posizione della chiave vengono da AREA_ATMOSPHERE.
+  const hemi = new THREE.HemisphereLight(); scene.add(hemi);
+  const sun = new THREE.DirectionalLight();
+  sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -25, right: 25, top: 25, bottom: -25, near: .5, far: 70 });
   sun.shadow.bias = -.0005; sun.shadow.normalBias = .035; scene.add(sun);
-  const rim = new THREE.DirectionalLight('#b38acb', 1.2); rim.position.set(10, 7, -10); scene.add(rim);
+  const rim = new THREE.DirectionalLight(); rim.position.set(10, 7, -10); scene.add(rim);
+  function applyAtmosphere(id) {
+    const at = AREA_ATMOSPHERE[id] || AREA_ATMOSPHERE.plaza;
+    scene.background.set(at.background); scene.fog.color.set(at.fog); scene.fog.density = at.fogDensity;
+    scene.environmentIntensity = at.environment;
+    hemi.color.set(at.hemi[0]); hemi.groundColor.set(at.hemi[1]); hemi.intensity = at.hemi[2];
+    sun.color.set(at.sun[0]); sun.intensity = at.sun[1]; sun.position.set(...at.sun[2]); sun.shadow.needsUpdate = true;
+    rim.color.set(at.rim[0]); rim.intensity = at.rim[1];
+  }
+  applyAtmosphere('plaza');
   block(source, m.dark, [78, .5, 70], [7, -.4, 0]);
-  for (let x = -10; x < 20; x++) for (let z = -14; z < 13; z++) {
-    if (x > 10 && Math.abs(z - 4) > 2) continue;
-    const tile = block(source, rand() > .3 ? m.paving : m.pavingDark, [1.23 + rand() * .06, .15, 1.6 + rand() * .09], [x * 1.32 + (z % 2) * .66, -.06 + rand() * .035, z * 1.75]);
-    tile.rotation.y = (rand() - .5) * .025;
-    // Rotate UVs per block to break repeated cracks without cloning materials.
-    const uv=tile.geometry.attributes.uv,uvHash=(Math.imul(x+73,73856093)^Math.imul(z+137,19349663))>>>0,turn=uvHash&3,slot=(uvHash>>>3)&3;
-    for(let j=0;j<uv.count;j++){let u=uv.getX(j),v=uv.getY(j);for(let t=0;t<turn;t++){const old=u;u=1-v;v=old;}uv.setXY(j,(u+(slot%2))/2,(v+Math.floor(slot/2))/2);}
+  // Terreno: ciottoli a ventaglio continui (la scala dei ciottoli dice la distanza), lastroni nel
+  // cerchio dello scontro, corridoio verso le Cave. UV nel mondo: nessuna cucitura fra pezzi.
+  worldPlane(source, ps.cobble, [-17.8, -24.5, 17.8, 32], .01, 2.6);
+  worldPlane(source, ps.cobble, [17.8, 3.4, 41, 10.6], .01, 2.6);
+  worldDisc(source, ps.flagstone, 0, -9, 6.3, .02, 3.2, 72);
+  // Sentiero di lastroni dall'ingresso al cerchio: la piazza ha una direzione, non solo una superficie.
+  worldPlane(source, ps.flagstone, [-2.1, -2.8, 2.1, 32], .018, 3.2);
+  for (const x of [-2.25, 2.25]) block(source, a.trim, [.3, .1, 34.8], [x, .05, 14.6]);
+  for (let i = 0; i < 48; i++) { // cordolo di conci attorno al cerchio
+    const angle = i * Math.PI / 24, kerb = block(source, a.trim, [.95, .12, .38], [Math.sin(angle) * 6.45, .06, -9 + Math.cos(angle) * 6.45]);
+    kerb.rotation.y = angle;
   }
-  // Sunken tracks and brass inlays break up the regular paving.
-  for (const x of [-8.4, -6.7, 6.7, 8.4]) {
-    block(source, m.iron, [.1, .08, 39], [x, .04, -1]);
-    for (let z = -19; z < 18; z += .9) block(source, m.wood, [2, .06, .14], [x + .8, .01, z]);
-  }
+  // Binari incassati (solo il ferro: le traversine in legno moltiplicavano le linee senza dare scala).
+  for (const x of [-8.4, -6.7, 6.7, 8.4]) block(source, m.iron, [.1, .05, 39], [x, .03, -1]);
   for (const x of [-16.5, 16.5]) {
     for (let i = 0; i < 5; i++) {
       const z = -20 + i * 9;
-      column(source, m, x, z, 7.7);
-      if (i < 4) arch(source, m, x, 4.3, z + 4.5, 3.65, .55, .9, 15, Math.PI / 2);
+      column(source, a, x, z, 7.7);
+      if (i < 4) arch(source, a, x, 4.3, z + 4.5, 3.65, .55, .9, 15, Math.PI / 2);
       if (i % 2 === 0) ivy(source, m, [x - .65, z - .5], 7, i * 17 + (x > 0 ? 9 : 2));
       block(source, m.brass, [.5, .08, .5], [x, 5.15, z + .9]);
       const lamp = piece(source, new THREE.SphereGeometry(.14, 8, 6), m.luminous, x, 4.8, z + .95);
@@ -140,35 +152,35 @@ export function createArtWorld(renderer) {
       link(source, m.iron, [x, 5.3, z + .7], [x, 4.6, z + .7], .025);
     }
     for (let z = -20; z < 18; z += 3) {
-      block(source, m.stone, [1.5, 1, 2.7], [x + Math.sign(x), .5, z]);
-      block(source, m.trim, [1.8, .2, 2.9], [x + Math.sign(x), 1.05, z]);
+      block(source, a.stone, [1.5, 1, 2.7], [x + Math.sign(x), .5, z]);
+      block(source, a.trim, [1.8, .2, 2.9], [x + Math.sign(x), 1.05, z]);
     }
   }
   for (const x of [-5.1, 5.1]) {
-    column(source, m, x, -18, 6.3);
-    for (let i = 0; i < 3; i++) block(source, m.trim, [2.4 - i * .3, .3, 2.3 - i * .3], [x, i * .3 + .15, -18]);
-    block(source, m.stone, [1.7, 2, 1.5], [x, 7.2, -18]);
-    piece(source, new THREE.ConeGeometry(1.1, 1.1, 4), m.trim, x, 8.7, -18).rotation.y = Math.PI / 4;
+    column(source, a, x, -18, 6.3);
+    for (let i = 0; i < 3; i++) block(source, a.trim, [2.4 - i * .3, .3, 2.3 - i * .3], [x, i * .3 + .15, -18]);
+    block(source, a.stone, [1.7, 2, 1.5], [x, 7.2, -18]);
+    piece(source, new THREE.ConeGeometry(1.1, 1.1, 4), a.trim, x, 8.7, -18).rotation.y = Math.PI / 4;
     ivy(source, m, [x + Math.sign(x) * .6, -17.3], 8, x > 0 ? 31 : 61);
   }
-  arch(source, m, 0, 5.4, -18.3, 3.7, .85, 1, 25);
+  arch(source, a, 0, 5.4, -18.3, 3.7, .85, 1, 25);
   for (let x = -14; x <= 14; x += 3) {
     if (Math.abs(x) < 7) continue;
-    block(source, m.stone, [2.7, 6, 1.5], [x, 3, -22]);
-    block(source, m.trim, [2.9, .3, 1.8], [x, 6.2, -22]);
-    arch(source, m, x, 4.1, -21.1, .75, .2, .2, 9);
+    block(source, ps.slate, [2.7, 6, 1.5], [x, 3, -22]);
+    block(source, a.trim, [2.9, .3, 1.8], [x, 6.2, -22]);
+    arch(source, a, x, 4.1, -21.1, .75, .2, .2, 9);
     block(source, m.dark, [1.2, 2.7, .1], [x, 2.8, -21.15]);
     for (const dx of [-.35, .35]) block(source, m.iron, [.035, 2.7, .08], [x + dx, 2.8, -21]);
   }
   // Silhouettes of the wider city, still geometry rather than a painted backdrop.
   for (let i = 0; i < 18; i++) {
     const x = (i - 9) * 4, h = 10 + rand() * 16;
-    block(source, m.dark, [2.8 + rand() * 2, h, 4], [x, h / 2, -35 - rand() * 9]);
+    block(source, ps.slateDark, [2.8 + rand() * 2, h, 4], [x, h / 2, -35 - rand() * 9]);
     if (i % 3 === 0) piece(source, new THREE.ConeGeometry(2, 5, 4), m.iron, x, h + 2.5, -37);
   }
   for (const side of [-1, 1]) for (let i = 0; i < 8; i++) {
     const height = 10 + rand() * 9, z = -25 + i * 7;
-    block(source, m.stone, [4, height, 5.5], [side * (24 + rand() * 5), height / 2, z]);
+    block(source, ps.slate, [4, height, 5.5], [side * (24 + rand() * 5), height / 2, z]);
     for (let floor = 0; floor < 3; floor++) {
       for (let window = 0; window < 3; window++) {
         block(source, m.dark, [.06, 1.4, .6], [side * 21.94, 3 + floor * 2.7, z - 1.5 + window * 1.5]);
@@ -176,15 +188,17 @@ export function createArtWorld(renderer) {
     }
     if (i % 2) piece(source, new THREE.ConeGeometry(3.1, 4, 4), m.iron, side * 25, height + 2, z).rotation.y = Math.PI / 4;
   }
+  const ferns = [];
   for (let i = 0; i < 50; i++) {
     const side = i % 2 ? 1 : -1, x = side * (10.2 + rand() * 5), z = -21 + rand() * 42;
-    shrub(source, m, x, z, rand);
-    if (i % 2 === 0) {
+    // Felci CC0 al posto dei cespugli a foglie appuntite (aspetto «giocattolo»); stessi punti e scala variabile.
+    ferns.push([x, z, 1.5 + rand() * 1.3, rand() * Math.PI * 2]);
+    if (i % 4 === 0) {
       const shard = piece(source, new THREE.CylinderGeometry(0, .14 + rand() * .15, .5 + rand() * 1.3, 5), m.violet, x + .4, .45, z);
       shard.rotation.z = (rand() - .5) * .5;
     }
     if (i % 4 === 0) {
-      const rubble = piece(source, new THREE.DodecahedronGeometry(.3 + rand() * .35), m.stone, x - .4, .2, z);
+      const rubble = piece(source, new THREE.DodecahedronGeometry(.3 + rand() * .35), a.stone, x - .4, .2, z);
       rubble.scale.y = .5; rubble.rotation.set(rand(), rand(), rand());
     }
   }
@@ -193,7 +207,7 @@ export function createArtWorld(renderer) {
     for (let n = 0; n < 7; n++) {
       const x = side * (10 + rand() * 5), z = -17 + rand() * 32;
       curve(source, m.wood, [[x + side * 2, 0, z - 2], [x + side, .3, z], [x, .17, z + 1], [x - side, .06, z + 3]], .1 + rand() * .1);
-      for (let p = 0; p < 4; p++) shrub(source, m, x + (rand() - .5) * 2, z + (rand() - .5) * 2, rand);
+      for (let p = 0; p < 4; p++) { const fx = x + (rand() - .5) * 2, fz = z + (rand() - .5) * 2, fs = 1.2 + rand() * 1.2, fa = rand() * Math.PI * 2; if (p < 2) ferns.push([fx, fz, fs, fa]); }
     }
     for (let n = 0; n < 14; n++) {
       const x = side * 15.3, z = -19 + n * 2.7, height = 1.2 + rand() * 1.5;
@@ -205,8 +219,8 @@ export function createArtWorld(renderer) {
     }
     const fallen = new THREE.Group(); source.add(fallen);
     fallen.position.set(side * 11, .7, -4); fallen.rotation.z = Math.PI / 2; fallen.rotation.y = .4 * side;
-    block(fallen, m.stone, [.8, 3, .8], [0, 0, 0]);
-    block(fallen, m.trim, [1.1, .3, 1.1], [0, 1.4, 0]);
+    block(fallen, a.stone, [.8, 3, .8], [0, 0, 0]);
+    block(fallen, a.trim, [1.1, .3, 1.1], [0, 1.4, 0]);
     // Original heraldic banner: geometry, folds and a simple inlaid sigil.
     const banner = new THREE.Group(); source.add(banner); banner.position.set(side * 13, 5.6, -15);
     link(banner, m.iron, [-.9, 0, 0], [.9, 0, 0], .035);
@@ -232,8 +246,14 @@ export function createArtWorld(renderer) {
     const rune = block(source, i % 5 === 0 ? m.luminous : m.brass, [.08, .025, i % 5 === 0 ? .5 : .2], [Math.sin(a) * 5.6, .09, -9 + Math.cos(a) * 5.6]);
     rune.rotation.y = a;
   }
-  for (let i = 0; i < 7; i++) block(source, m.paving, [2.9, .12, 2.6], [20 + i * 3, 0, 7]);
+  // UV in metri per i blocchi e le modanature con materiali PBR (prima di unire le geometrie).
+  source.traverse((node) => {
+    if (!node.isMesh || !node.material.name?.startsWith('plaza-')) return;
+    if (node.geometry.type === 'BoxGeometry') worldBoxUV(node.geometry, 1.8);
+    else if (node.geometry.type === 'ExtrudeGeometry') { const uv = node.geometry.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) / 1.8, uv.getY(i) / 1.8); }
+  });
   plazaRoot.add(batchArchitecture(source));
+  addFerns(plazaRoot, ferns);
   const p = portal(plazaRoot, m);
   const actor = createAdventurer(m); scene.add(actor.root);
   const auraMat = new THREE.MeshBasicMaterial({ color: '#edc58c', transparent: true, opacity: .18, side: THREE.DoubleSide, depthWrite: false });
@@ -260,7 +280,7 @@ export function createArtWorld(renderer) {
       if (id === 'caves' && !caveWorld) caveWorld = createCaveWorld(scene, m);
       if (caveWorld) caveWorld.root.visible = id === 'caves';
       plazaRoot.visible = id === 'plaza'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
-      scene.background.set(id === 'caves' ? '#141523' : id === 'garden' ? '#152e32' : '#101e30'); scene.fog.color.set(id === 'caves' ? '#242338' : id === 'garden' ? '#24483f' : '#253346');
+      applyAtmosphere(id);
     },
     updateGarden(state, reducedMotion) { if (state.area === 'caves' && caveWorld) caveWorld.update(state, reducedMotion); if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
     addEnemy(enemy) {
