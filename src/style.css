@@ -307,6 +307,10 @@ footer { z-index: 9; }
 #actions #surge-state { position: absolute; left: 50%; bottom: calc(100% + 14px); transform: translateX(-50%); white-space: nowrap; font: 600 14px/1.2 system-ui, sans-serif; letter-spacing: 0; color: #fff4dc; background: rgba(20, 16, 24, .88); border: 2px solid currentColor; border-radius: 6px; padding: 2px 7px; pointer-events: none; }
 #actions #attack.surge-ready { outline: 3px double #fff4dc; outline-offset: 3px; }
 /* Tasto Attacco a filo del bordo destro (telefono verticale e orizzontale): il riquadro Impeto si allinea a destra. */
+#actions #surge-state::before { content: 'IMPETO '; }
+/* Telefono: il tasto Attacco è a filo del bordo e ha l'Abilità sopra: lo stato Impeto sta dentro il tasto, al posto della combo. */
 @media (max-width: 700px), (max-height: 560px) and (max-width: 1000px) {
-  #actions #surge-state { left: auto; right: 0; transform: none; }
+  #actions #surge-state { position: static; transform: none; white-space: normal; padding: 1px 4px; line-height: 1.15; text-align: center; }
+  #actions #surge-state::before { content: none; }
+  #actions #attack:has(#surge-state:not([hidden])) #combo-label { display: none; }
 }

@@ -129,7 +129,7 @@ try {
     run.measures.surge = await measure(page); check(run.measures.surge, '#surge-state', `${name} impeto`);
     run.surgeBeforeAttack = (await page.locator('#surge-state').textContent()).trim();
     await page.keyboard.down('KeyJ');
-    const outcome = await advanceUntil(page, () => /IMPETO (A SEGNO|A VUOTO)/.test(document.getElementById('surge-state').textContent), null, 5000, 16);
+    const outcome = await advanceUntil(page, () => /A SEGNO|A VUOTO/.test(document.getElementById('surge-state').textContent), null, 5000, 16);
     await page.keyboard.up('KeyJ');
     assert.ok(outcome, `esito Impeto (stato: ${(await page.locator('#surge-state').textContent()).trim()})`);
     run.surgeOutcome = (await page.locator('#surge-state').textContent()).trim();

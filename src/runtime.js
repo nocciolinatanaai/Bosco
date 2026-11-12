@@ -231,8 +231,8 @@ export function startRuntime($) {
       if (event.type === 'return-shot-fired') notice('TIRO DI RITORNO · Due frecce, una sola apertura.', 3);
       if(event.type==='artifact-triggered'){notice(event.attunement==='ward'?'CUSTODIA · Il prossimo colpo entro 6 s è ridotto del 75%':'IMPETO · Prossimo attacco base ×1,5 entro 3 s · vigore e abilità anticipata',2.5);audio.play(event.attunement==='ward'?'guard':'echo');}
       if (event.type === 'ward-consumed') floatText(`CUSTODIA −75%`, state.x, state.z, 'evade');
-      if (event.type === 'surge-consumed') surgeFeedback = { text: 'IMPETO USATO', until: state.time + 1.2, chargeId: event.id };
-      if ((event.type === 'hit' || event.type === 'miss') && event.chargeId && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: event.type === 'hit' ? 'IMPETO A SEGNO ×1,5' : 'IMPETO A VUOTO', until: state.time + 1.2 };
+      if (event.type === 'surge-consumed') surgeFeedback = { text: 'USATO', until: state.time + 1.2, chargeId: event.id };
+      if ((event.type === 'hit' || event.type === 'miss') && event.chargeId && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: event.type === 'hit' ? 'A SEGNO ×1,5' : 'A VUOTO', until: state.time + 1.2 };
       if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Il prossimo attacco arriverà comunque: esci dal cerchio o schiva', 2.5);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : event.reach ? 'FRATTURA A DISTANZA · Il Custode ti prende di mira: esci dal cerchio sotto di te' : 'FRATTURA · Spostati dal punto segnato', 2.2);
@@ -318,7 +318,8 @@ export function startRuntime($) {
     // Impeto: stato reale della carica (simulazione), non una particella decorativa.
     const surge = state.artifact.surgeCharge, feedback = surgeFeedback && state.time < surgeFeedback.until ? surgeFeedback.text : '';
     $('surge-state').hidden = !(surge > 0 || feedback);
-    $('surge-state').textContent = surge > 0 ? `IMPETO ×1,5 · ${surge.toFixed(1)} s` : feedback;
+    // Il prefisso «IMPETO» è aggiunto dal CSS dove c'è spazio (desktop); sul telefono il testo sta dentro il tasto.
+    $('surge-state').textContent = surge > 0 ? `×1,5 · ${surge.toFixed(1)} s` : feedback;
     $('attack').classList.toggle('surge-ready', surge > 0);
     $('attack').setAttribute('aria-label', surge > 0 ? `Attacco base potenziato da Impeto, danno ×1,5, ${surge.toFixed(0)} secondi.` : 'Attacco base. Tieni premuto per continuare la combo.');
     $('attack').style.setProperty('--swing', `${state.action?.kind === 'basic' ? state.action.elapsed / state.action.duration * 100 : 0}%`);

@@ -21,6 +21,16 @@ Verifiche passate:
 - caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check
   desktop/mobile.
 
+Catture 1440×900 complete in docs/assets/combat-pass-01/. Su telefono le catture hanno
+corretto due difetti del riquadro Impeto; le immagini 390×844 e 844×390 arrivano nella
+stessa PR.
+
+**Direzione grafica del proprietario (12/11).** Restare su Three.js per il web, senza
+passare a Godot, ma migliorare la grafica «di tanto». Sul mobile oggi gli standard sono
+elevatissimi. Proposta di Tonino da concordare con Codex:
+- asset e texture CC0 di qualità più alta (Poly Haven, Quaternius, Kenney);
+- luci, materiali e post-elaborazione misurati con confronti prima/dopo.
+
 Restano aperti l'Assassino che vince senza subire attacchi e Impeto più lento per
 Combattente e Guaritore nel bot. Nessun deploy, main, social, spesa, Supabase o
 risveglio. Codex revisore.

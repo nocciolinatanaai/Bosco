@@ -60,7 +60,7 @@ segnali, non dimostrano che una persona li capisca.
 | --- | --- | --- |
 | «Non interrompibile» | barra del Custode (`#boss-resolute`) ed etichetta sopra ogni avversario temprato, quindi anche il Guardiano | glifo scudo con lucchetto + testo, bordo pieno, 14 px |
 | Frattura a distanza | barra del Custode (`#boss-reach`), avviso e cerchio sul giocatore dall'inizio della carica, con una traccia a terra dal Custode al cerchio | simbolo ◎ + testo, bordo tratteggiato, 14 px |
-| Impeto | sopra il tasto Attacco: «IMPETO ×1,5 · n s», poi «IMPETO A SEGNO ×1,5» / «A VUOTO»; doppio contorno sul tasto; `aria-label` aggiornato | testo + contorno doppio |
+| Impeto | desktop: sopra il tasto Attacco «IMPETO ×1,5 · n s», poi «IMPETO A SEGNO ×1,5» / «A VUOTO»; telefono: dentro il tasto Attacco («×1,5 · n s»), al posto della combo, perché sopra c’è l’Abilità; doppio contorno sul tasto; `aria-label` aggiornato | testo + contorno doppio |
 | Custodia | stato del Sigillo nell'HUD: «Custodia carica · prossimo colpo −75%»; numero «CUSTODIA −75%» al consumo | testo |
 
 Visibilità: ogni segnale legge lo stato della simulazione a ogni fotogramma (`resolute`,
@@ -130,3 +130,45 @@ Dopo:
    vale PRODUCT-03.
 5. Segnali verificati solo come presenza, dimensione e posizione. Sulla comprensione
    servono persone.
+
+## Catture reali (build con CSP, input da tastiera)
+
+Lo script `scripts/combat-pass-capture.mjs` guida la build con l'orologio controllato di
+Playwright. Il motivo: SwiftShader headless va a circa 1,5 fps, e a tempo reale le
+schivate falliscono. Così ogni passo è un fotogramma di gioco da 16 ms; durante gli
+screenshot il tempo riprende per pochi decimi di secondo.
+
+Per ogni segnale verifica:
+- dimensione ≥ 14 px;
+- tutto dentro lo schermo;
+- nessun taglio;
+- nessuna sovrapposizione ai comandi.
+
+Movimento ridotto attivo, audio spento. Rapporto: `capture-desktop.json`.
+
+**1440×900, completo:**
+- `desktop-far-fracture.jpg`: cerchio sul giocatore e traccia dal Custode;
+- `desktop-impeto-charge.jpg`;
+- `desktop-impeto-used.jpg`, con esito reale «IMPETO A SEGNO ×1,5»;
+- `desktop-resolute.jpg`: barra ed etichetta;
+- `desktop-warden-resolute.jpg`: Guardiano del rintocco;
+- versioni `-gray` in scala di grigi;
+- `desktop-boss.webm`: sequenza accelerata 16×.
+
+Lo script verifica anche che «Non interrompibile» sparisca all'impatto successivo.
+
+**390×844 e 844×390.** Le catture hanno trovato due difetti reali, entrambi corretti:
+1. il riquadro Impeto usciva dal bordo destro;
+2. poi copriva il tasto Abilità.
+
+Sul telefono lo stato ora sta dentro il tasto Attacco. Le catture di questi due formati
+si aggiungono a questa PR appena il giro in corso finisce; finché non ci sono, non le
+dichiaro superate.
+
+## Esiti delle verifiche
+
+- `npm test`: 160 superati.
+- `npm run build`: ok.
+- caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check: superati
+  su desktop e mobile, prima delle due correzioni CSS del riquadro Impeto.
+- Catture: 1440×900 superate; 390×844 e 844×390 in corso.
