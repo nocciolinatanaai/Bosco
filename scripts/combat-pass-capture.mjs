@@ -101,13 +101,14 @@ try {
   const entry = html.match(/src="([^"]+\.js)"/)[1]; report.buildEntrySha256 = createHash('sha256').update(await readFile(`dist/${entry.replace(/^\.?\//, '')}`)).digest('hex');
   browser = await chromium.launch({ executablePath: process.env.MYTHWOOD_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   // CAPTURE_VIEWPORTS=mobile,landscape per ripetere solo alcuni formati.
+  // CAPTURE_NO_VIDEO=1 disattiva la registrazione video su desktop (la sola che rallenta gli screenshot sotto SwiftShader).
   const only = (process.env.CAPTURE_VIEWPORTS || '').split(',').filter(Boolean);
   for (const [name, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844], ['landscape', 844, 390]].filter(([n]) => !only.length || only.includes(n))) {
     const run = { name, viewport: `${width}x${height}`, captures: [], measures: {} }; report.runs.push(run); await save();
     let ctx;
     // CAPTURE_PARTS=warden ripete solo le Cave.
     if (process.env.CAPTURE_PARTS !== 'warden') {
-    ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop'); page = ctx.page;
+    ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop' && !process.env.CAPTURE_NO_VIDEO); page = ctx.page;
     // Avvicinati fin dentro la gittata dell'arco (14,4) ma oltre 6 unità, poi colpisci: provocazione.
     // Avvicinati tenendo Attacco finché una freccia arriva a segno (provocazione), poi fermati oltre 6 unità.
     await page.keyboard.down('KeyW'); await page.keyboard.down('KeyJ');
