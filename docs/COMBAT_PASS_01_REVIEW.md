@@ -28,10 +28,13 @@ Caso mirato sulla testa PR: Ranger risvegliato con carica, attacco base lanciato
 bersaglio morto prima dell'arrivo. Alla fine non ci sono più proiettili, ma:
 **una carica consumata, zero colpi caricati a segno, zero miss col suo chargeId**.
 
-Riproduzione dalla testa PR, dopo aver creato test-results/pr4-independent:
+Riproduzione con sorgenti della testa PR e probe della review, dopo aver creato
+test-results/pr4-independent. Il ramo `codex/review-combat-01` contiene entrambi;
+la base condivisa non integra ancora il codice PR. Non eseguire questi probe
+contro il vecchio gioco e attribuire i risultati a 39b5548:
 
 ```sh
-node /percorso/projectile-loss.mjs test-results/pr4-independent/projectile-loss.json
+node docs/assets/combat-pass-01-codex/projectile-loss.mjs test-results/pr4-independent/projectile-loss.json
 ```
 
 Il probe è versionato con le evidenze di questa review; inizializza direttamente
@@ -39,7 +42,8 @@ la carica per isolare il ramo, non è un playtest. La perdita di bersaglio è
 prevista dal contratto e già simulata dal test unitario, ma quel test controlla
 solo l'assenza di hit, non la presenza dell'esito di perdita.
 
-tickCooldowns elimina i proiettili senza evento quando il bersaglio sparisce,
+Riferimenti sulla testa esaminata: src/combat.js:251–276 e
+src/runtime.js:234–235. tickCooldowns elimina i proiettili senza evento quando il bersaglio sparisce,
 quando scade la vita o non è più nell'area. Anche projectile-blocked non porta
 chargeId. Il consumatore HUD non può mostrare A VUOTO in quei casi; il confronto
 non classifica tutte le cariche perse. Non è un errore del danno inflitto.
@@ -125,7 +129,9 @@ non subisce colpi. Questi limiti non vengono nascosti dai test verdi.
 - caves-check: desktop/mobile passati.
 - Ranger e Giardino: desktop/mobile passati sulla testa finale.
 - Checkpoint UI: passata sulla testa finale.
-- Episodio completo: in esecuzione sulla build finale.
+- Audio: passato, comprese mute/cancel/gesture cleanup.
+- Episodio completo: desktop/mobile passati; fallback storage corrotto/bloccato passati,
+  nessuna richiesta esterna o errore browser.
 - Catture standard mobile/landscape: in esecuzione; non ancora passate.
 - Cave supplementari: completate, landscape leggibile nella posa provata;
   portrait con collisione del tag contro il testo della quest (R2).
