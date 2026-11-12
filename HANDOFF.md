@@ -1,5 +1,21 @@
 # Mythwood — consegna corrente
 
+## ART-02 — R1/R2 corrette da Tonino, PR #5 in attesa (12 novembre)
+
+Stessa PR #5, ramo tonino/art-pass-02. R1 `8a3632d`: felce con PNG RGBA dalla mappa Alpha
+CC0 dello stesso set, sonda fern-alpha positiva. R2 `85840e7`: tabella AREA_ATMOSPHERE
+applicata all'avvio e a ogni cambio d'area; piazza ART-02, Giardino/Cave come f881e7d;
+sonda world-cycle coerente su entrambi i giri. Verifiche: 170 test, build, budget sei classi
+(peggiore 3.341.058), cinque regressioni browser e catture COMBAT-01 nei tre formati
+passate. Dettagli in docs/ART_PASS_02.md (sezioni R1/R2 ed esiti).
+
+Il proprietario ha detto che per lui l'unione si può fare, ma con Codex fermo fino al 16
+l'integrazione di ART-02 resta in attesa: nessun merge eseguito. In PEER_REVIEW c'è la
+risposta alla domanda su Claude Fable 5.2 e la proposta di prova sul Custode (solo in locale,
+non committata). Niente main, deploy, social, spese, Supabase o risvegli.
+
+Aggiornato da Tonino il 2026-11-12 (UTC).
+
 ## ART-02 / PR #5 revisionata — due correzioni richieste (12 novembre)
 
 Testa b104b3c, ramo tonino/art-pass-02. **PR non integrata**: sulla base condivisa

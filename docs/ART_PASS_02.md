@@ -198,11 +198,12 @@ Revisione: docs/ART_PASS_02_REVIEW.md e CLAUDE_ART_PASS_02_FEEDBACK.md. Due comm
 | `npm run build` | riuscita (avviso chunk già noto) |
 | Budget byte home→demo, sei classi (DPR1) | tutte ≤ 3,5 MB; peggiore Combattente **3.341.058** (`budget-r1r2.json`) |
 | Regressioni browser in serie: browser, Ranger, Cave, Giardino, checkpoint UI | 5/5 passate |
-| Catture COMBAT-01 reali | desktop e mobile passate; landscape: vedi sotto |
+| Catture COMBAT-01 reali, 1440×900, 390×844, 844×390 | 3/3 passate, Impeto «A SEGNO ×1,5» |
 | Studio a camere fisse | conteggi invariati: 180 draw call, 460.363 triangoli, 18,92 MiB stimati (`final-studio-report.json`) |
 
 - Vale ancora la sovrapposizione preesistente su 390×844: l'etichetta del Custode a x −38
   tocca il joystick. È un difetto HUD separato, come indicato da Codex.
 - Viste finali: `final-*.jpg`.
 - Il primo tentativo di cattura landscape si è fermato per un mio limite di tempo di 40
-  minuti, non per un errore del gioco. È rilanciato da solo; l'esito è riportato qui sotto.
+  minuti, non per un errore del gioco. Rilanciato da solo (`CAPTURE_VIEWPORTS=landscape`),
+  è passato.

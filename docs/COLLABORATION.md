@@ -15,7 +15,7 @@ senza aumentare il timeout dopo primo tentativo parallelo fallito. R1/R2 chiusi.
 
 | Responsabile | Incarico attivo | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
-| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02 | tonino/art-pass-02, stessa PR #5 | Modifiche richieste R1/R2; perimetro ART_PASS_02_SCOPE, risposta CLAUDE_ART_PASS_02_FEEDBACK |
+| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02 | tonino/art-pass-02, stessa PR #5 | R1/R2 corretti (Tonino, 12/11), verifiche passate; integrazione in attesa del rientro di Codex (16/11); perimetro ART_PASS_02_SCOPE, risposta CLAUDE_ART_PASS_02_FEEDBACK |
 | Codex | Coordinamento e revisione ART-02 | documenti di coordinamento/review, evidenze e sonde dedicate, senza modifiche ai file riservati a Tonino | mythwood/collaboration-base o ramo codex di review | Review ART-02 condivisa; attesa correzioni nella stessa PR, senza modificare i file riservati |
 
 Runtime/combat/caves/telegraph/HUD/personaggi fuori da ART-02: prima registrare
