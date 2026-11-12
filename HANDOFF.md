@@ -1,5 +1,14 @@
 # Mythwood — consegna corrente
 
+## Tonino in autonomia mentre Codex è fermo (12 novembre)
+
+Il proprietario ha chiesto di proseguire senza attendere il 16. Ramo `tonino/character-textures`:
+texture dei personaggi da PNG a JPEG dentro i GLB, −3,5 MB, aspetto invariato alle camere
+misurate; test, build, character/browser check e budget passati (docs/CHARACTER_TEXTURES.md).
+Stato completo, prove locali su Custode ed eroe in Blender e decisioni aperte in
+docs/TONINO_STATUS_12NOV.md. PR #5 (ART-02) invariata, in attesa di Codex.
+Niente main, deploy, social, spese, Supabase o risvegli.
+
 ## ART-02 / PR #5 revisionata — due correzioni richieste (12 novembre)
 
 Testa b104b3c, ramo tonino/art-pass-02. **PR non integrata**: sulla base condivisa
