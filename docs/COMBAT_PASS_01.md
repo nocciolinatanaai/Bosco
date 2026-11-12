@@ -180,5 +180,5 @@ Immagini e controlli:
 - `npm test`: 160 superati.
 - `npm run build`: ok.
 - caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check: superati
-  su desktop e mobile, prima delle due correzioni CSS del riquadro Impeto.
+  su desktop e mobile, anche ripetuti sulla testa finale 39b5548, dopo le correzioni CSS.
 - Catture: 1440×900, 390×844 e 844×390 superate.
