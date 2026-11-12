@@ -1,0 +1,19 @@
+{
+  "reviewedCommit": "b104b3c83fae933cbcdf3fa957e9cb97645d845f",
+  "decision": "changes requested; PR5 not merged",
+  "unitTests": {
+    "pass": 166,
+    "fail": 0
+  },
+  "build": "passed, existing chunk-size warning",
+  "studio": "before/after, 3 viewports passed; draw calls/triangles/map estimates match delivery",
+  "budget": "6 classes DPR1 passed, exact match; DPR2 not rerun in this review",
+  "worstBodyBytes": 3270587,
+  "manifest": "16 files, 670596 bytes; all delivery hashes/lengths match",
+  "sourceDownloads": "not repeated; no independent source hashes or licensing certification",
+  "R1": "MASK foliage uses RGB JPEG, no alpha source",
+  "R2": "plaza fog color changes from 22314a to 253346 after area round trip; shared lights/density also changed outside plaza",
+  "browserGameplayRegressions": "Tonino reports 5 passed; not rerun independently while changes requested",
+  "physicalPhone": false,
+  "playtests": false
+}

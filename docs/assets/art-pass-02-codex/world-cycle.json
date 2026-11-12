@@ -1,0 +1,372 @@
+{
+  "result": {
+    "before": {
+      "initial": {
+        "fog": "253346",
+        "density": 0.018,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.45,
+            "color": "93adc9",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.45,
+            "color": "b3c9e4",
+            "position": [
+              -10,
+              22,
+              14
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.2,
+            "color": "b38acb",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "garden": {
+        "fog": "24483f",
+        "density": 0.018,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.45,
+            "color": "93adc9",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.45,
+            "color": "b3c9e4",
+            "position": [
+              -10,
+              22,
+              14
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.2,
+            "color": "b38acb",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "afterGarden": {
+        "fog": "253346",
+        "density": 0.018,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.45,
+            "color": "93adc9",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.45,
+            "color": "b3c9e4",
+            "position": [
+              -10,
+              22,
+              14
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.2,
+            "color": "b38acb",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "caves": {
+        "fog": "242338",
+        "density": 0.018,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.45,
+            "color": "93adc9",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.45,
+            "color": "b3c9e4",
+            "position": [
+              -10,
+              22,
+              14
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.2,
+            "color": "b38acb",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "afterCaves": {
+        "fog": "253346",
+        "density": 0.018,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.45,
+            "color": "93adc9",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.45,
+            "color": "b3c9e4",
+            "position": [
+              -10,
+              22,
+              14
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 1.2,
+            "color": "b38acb",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "plazaRoundTripMatches": true
+    },
+    "after": {
+      "initial": {
+        "fog": "22314a",
+        "density": 0.022,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.32,
+            "color": "8ea7c7",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 2.1,
+            "color": "c7d6ef",
+            "position": [
+              -15,
+              16,
+              11
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 0.75,
+            "color": "a98bcf",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "garden": {
+        "fog": "24483f",
+        "density": 0.022,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.32,
+            "color": "8ea7c7",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 2.1,
+            "color": "c7d6ef",
+            "position": [
+              -15,
+              16,
+              11
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 0.75,
+            "color": "a98bcf",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "afterGarden": {
+        "fog": "253346",
+        "density": 0.022,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.32,
+            "color": "8ea7c7",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 2.1,
+            "color": "c7d6ef",
+            "position": [
+              -15,
+              16,
+              11
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 0.75,
+            "color": "a98bcf",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "caves": {
+        "fog": "242338",
+        "density": 0.022,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.32,
+            "color": "8ea7c7",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 2.1,
+            "color": "c7d6ef",
+            "position": [
+              -15,
+              16,
+              11
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 0.75,
+            "color": "a98bcf",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "afterCaves": {
+        "fog": "253346",
+        "density": 0.022,
+        "lights": [
+          {
+            "type": "HemisphereLight",
+            "intensity": 0.32,
+            "color": "8ea7c7",
+            "position": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 2.1,
+            "color": "c7d6ef",
+            "position": [
+              -15,
+              16,
+              11
+            ]
+          },
+          {
+            "type": "DirectionalLight",
+            "intensity": 0.75,
+            "color": "a98bcf",
+            "position": [
+              10,
+              7,
+              -10
+            ]
+          }
+        ]
+      },
+      "plazaRoundTripMatches": false
+    }
+  },
+  "errors": [],
+  "external": []
+}
