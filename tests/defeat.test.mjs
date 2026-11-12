@@ -8,11 +8,13 @@ test('il riepilogo conserva il colpo effettivo, non viene sovrascritto da danni 
   assert.ok(Object.isFrozen(s.lastDamage)); assert.match(defeatMessage(s), /32 PV.*Onda/);
   dodge(s); hurt(s, 26, { name: 'Altro', kind: 'fracture' }); assert.equal(s.lastDamage.kind, 'nova');
   assert.match(defeatMessage(s), /allontanati/i);
+  assert.match(defeatMessage(s), /solo quando non compare «Non interrompibile»/, 'non promettere interruzioni contro la resistenza');
 });
 test('colpo letale registra soltanto la vita rimasta; nuova sessione non conserva la sconfitta', () => {
   const s = createSession('fighter'); s.hp = 7; hurt(s, 26, { name: 'Custode', kind: 'fracture' });
   assert.equal(s.status, 'defeated'); assert.equal(s.lastDamage.amount, 7);
-  assert.match(defeatMessage(s), /7 PV.*Frattura/); assert.equal(createSession('fighter').lastDamage, null);
+  assert.match(defeatMessage(s), /7 PV.*Frattura/);
+  assert.match(defeatMessage(s), /«Non interrompibile»: schiva, lo scatto non ferma il colpo/); assert.equal(createSession('fighter').lastDamage, null);
   assert.match(defeatMessage(createSession('fighter')), /Puoi riprovare/);
 });
 test('riparo riduce il danno registrato e input invalido non sostituisce la causa', () => {
