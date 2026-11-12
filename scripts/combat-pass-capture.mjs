@@ -42,24 +42,23 @@ function check(m, sel, label) {
   assert.deepEqual(item.overlaps, [], `${label}: ${sel} sovrapposto ai comandi`);
   return item;
 }
-// Attende nel browser che la carica del Custode scenda sotto la soglia e preme Spazio (schivata d'impatto).
-const dodgeAtImpact = (page) => page.evaluate(() => new Promise((resolve) => {
-  const started = performance.now();
-  const tick = () => {
-    const m = document.getElementById('boss-intent').textContent.match(/(FRATTURA|ONDA)[^·]*· ([\d.]+) s/);
-    if (m && Number(m[2]) <= .25) {
-      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space', key: ' ', bubbles: true }));
-      setTimeout(() => document.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', key: ' ', bubbles: true })), 60);
-      return resolve(Number(m[2]));
-    }
-    if (performance.now() - started > 240000) return resolve(null);
-    requestAnimationFrame(tick);
-  };
-  tick();
-}));
+// Orologio controllato: ogni passo fa girare i fotogrammi a 16 ms di tempo di gioco, qualunque sia
+// la velocità reale del rendering (SwiftShader headless va a ~1,5 fps). Input e letture restano reali.
+async function advanceUntil(page, predicate, arg = null, maxMs = 30000, stepMs = 48) {
+  for (let t = 0; t < maxMs; t += stepMs) { if (await page.evaluate(predicate, arg)) return true; await page.clock.runFor(stepMs); }
+  return page.evaluate(predicate, arg);
+}
+const visibleSel = (sel) => { const el = document.querySelector(sel); return Boolean(el && !el.hidden && !el.closest('[hidden]')); };
+// Lo screenshot ha bisogno di fotogrammi reali: per la sola cattura l'orologio riprende in tempo reale
+// (a ~1,5 fps il gioco avanza di pochi decimi di secondo), poi si ferma di nuovo.
+async function capture(page, path) {
+  await page.clock.resume();
+  try { await page.screenshot({ path, timeout: 120000 }); }
+  finally { await page.clock.pauseAt(await page.evaluate(() => Date.now() + 20)); }
+}
 async function shot(page, name, run, gray = false) {
-  const path = `${out}/${name}.png`; await page.screenshot({ path }); run.captures.push(path);
-  if (gray) { const style = await page.addStyleTag({ content: 'html{filter:grayscale(1)!important}' }); await page.screenshot({ path: `${out}/${name}-gray.png` }); run.captures.push(`${out}/${name}-gray.png`); await style.evaluate((n) => n.remove()); }
+  const path = `${out}/${name}.png`; await capture(page, path); run.captures.push(path);
+  if (gray) { const style = await page.addStyleTag({ content: 'html{filter:grayscale(1)!important}' }); await capture(page, `${out}/${name}-gray.png`); run.captures.push(`${out}/${name}-gray.png`); await style.evaluate((n) => n.remove()); }
 }
 async function setup(browser, name, width, height, fixture, video = false) {
   const mobile = name !== 'desktop';
@@ -68,12 +67,18 @@ async function setup(browser, name, width, height, fixture, video = false) {
   page.on('pageerror', (e) => errors.push(e.message));
   await page.route('**/*', (r) => { if (new URL(r.request().url()).origin !== ORIGIN) { external.push(r.request().url()); return r.abort(); } return r.continue(); });
   await page.addInitScript((data) => { localStorage.setItem('mythwood.checkpoint.v1', JSON.stringify(data)); }, fixture);
+  // Prima del caricamento: three.js conserva il riferimento a requestAnimationFrame. Il tempo scorre finché non lo fermiamo.
+  await page.clock.install();
   await page.goto(`${ORIGIN}/demo.html`, { waitUntil: 'networkidle' });
-  await page.locator('#resume-saved').click();
+  // Con l'orologio finto i controlli di stabilità di Playwright attendono fotogrammi: clic e scelte eseguiti nella pagina.
+  const click = (id) => page.evaluate((i) => document.getElementById(i).click(), id);
+  await page.locator('#resume-saved').waitFor(); await click('resume-saved');
   // Movimento ridotto e qualità leggera; l'audio resta spento (predefinito).
-  await page.locator('#help').click(); await page.locator('#quality-select').selectOption('light');
-  await page.locator('#motion-option').check(); await page.locator('#close-info').click();
-  await page.locator('#world').focus(); // i tasti non vanno a un campo del pannello appena chiuso
+  await click('help');
+  await page.evaluate(() => { const q = document.getElementById('quality-select'); q.value = 'light'; q.dispatchEvent(new Event('change', { bubbles: true })); const m = document.getElementById('motion-option'); if (!m.checked) m.click(); });
+  await click('close-info');
+  await page.evaluate(() => document.getElementById('world').focus()); // i tasti non vanno a un campo del pannello appena chiuso
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 500)); await page.clock.runFor(500);
   return { context, page, errors, external };
 }
 
@@ -88,48 +93,60 @@ try {
     const run = { name, viewport: `${width}x${height}`, captures: [], measures: {} }; report.runs.push(run); await save();
     let ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop'); page = ctx.page;
     // Avvicinati fin dentro la gittata dell'arco (14,4) ma oltre 6 unità, poi colpisci: provocazione.
-    // Il browser headless (SwiftShader) va a pochi fotogrammi al secondo: si attende lo stato, non un tempo fisso.
+    // Avvicinati tenendo Attacco finché una freccia arriva a segno (provocazione), poi fermati oltre 6 unità.
     await page.keyboard.down('KeyW'); await page.keyboard.down('KeyJ');
-    await page.waitForFunction(() => Number(document.getElementById('boss-hp').value) < 280, null, { timeout: 240000 });
+    assert.ok(await advanceUntil(page, () => Number(document.getElementById('boss-hp').value) < 280, null, 20000), 'freccia a segno');
     await page.keyboard.up('KeyW'); await page.keyboard.up('KeyJ');
-    await page.locator('#boss-reach').waitFor({ state: 'visible', timeout: 180000 });
+    assert.ok(await advanceUntil(page, visibleSel, '#boss-reach', 10000, 16), 'Frattura a distanza annunciata');
     run.measures.farFracture = await measure(page); check(run.measures.farFracture, '#boss-reach', `${name} far`);
     await shot(page, `${name}-far-fracture`, run, name === 'desktop');
-    // Impeto: schivata all'impatto della carica (fino a 5 tentativi), poi attacco base.
-    let charged = false;
-    for (let attempt = 0; attempt < 5 && !charged; attempt++) {
-      await dodgeAtImpact(page);
-      charged = await page.locator('#surge-state').filter({ hasText: '×1,5' }).waitFor({ state: 'visible', timeout: 15000 }).then(() => true, () => false);
+    // Impeto: schivata all'ultimo istante della carica (lettura dell'HUD), poi un attacco base.
+    // Un'Onda lanciata quando si è già fuori dal suo cerchio non colpisce, quindi non attiva il Sigillo: si ritenta.
+    const endOfCharge = () => { const m = document.getElementById('boss-intent').textContent.match(/· ([\d.]+) s/); return Boolean(m && Number(m[1]) <= .1); };
+    const chargedNow = () => /×1,5/.test(document.getElementById('surge-state').textContent) && !document.getElementById('surge-state').hidden;
+    run.dodgeAttempts = 0;
+    for (; run.dodgeAttempts < 6 && !run.surgeCharged; run.dodgeAttempts++) {
+      await advanceUntil(page, () => !/· 0\.[01] s/.test(document.getElementById('boss-intent').textContent), null, 3000, 32);
+      assert.ok(await advanceUntil(page, endOfCharge, null, 12000, 16), 'fine carica');
+      await page.keyboard.press('Space');
+      run.surgeCharged = await advanceUntil(page, chargedNow, null, 1000, 16);
     }
-    run.surgeCharged = charged;
-    if (charged) {
-      run.measures.surge = await measure(page); check(run.measures.surge, '#surge-state', `${name} impeto`);
-      await shot(page, `${name}-impeto-charge`, run, name === 'desktop');
-      await page.keyboard.press('KeyJ');
-      await page.locator('#surge-state').filter({ hasText: /IMPETO (A SEGNO|A VUOTO|USATO)/ }).waitFor({ state: 'visible', timeout: 60000 });
-      run.surgeOutcome = (await page.locator('#surge-state').textContent()).trim();
-      await shot(page, `${name}-impeto-used`, run);
+    assert.ok(run.surgeCharged, 'schivata d’impatto: carica Impeto');
+    run.measures.surge = await measure(page); check(run.measures.surge, '#surge-state', `${name} impeto`);
+    await shot(page, `${name}-impeto-charge`, run, name === 'desktop');
+    run.surgeBeforeAttack = (await page.locator('#surge-state').textContent()).trim();
+    await page.keyboard.down('KeyJ');
+    const outcome = await advanceUntil(page, () => /IMPETO (A SEGNO|A VUOTO)/.test(document.getElementById('surge-state').textContent), null, 5000, 16);
+    await page.keyboard.up('KeyJ');
+    assert.ok(outcome, `esito Impeto (stato: ${(await page.locator('#surge-state').textContent()).trim()})`);
+    run.surgeOutcome = (await page.locator('#surge-state').textContent()).trim();
+    await shot(page, `${name}-impeto-used`, run);
+    // Resistenza: tiro caricato (Q) che interrompe; da lì «Non interrompibile» finché il Custode non completa un attacco.
+    for (let attempt = 0; attempt < 6 && !(await page.evaluate(visibleSel, '#boss-resolute')); attempt++) {
+      await page.keyboard.press('KeyQ'); await advanceUntil(page, visibleSel, '#boss-resolute', 1500, 32);
+      if (!(await page.evaluate(visibleSel, '#boss-resolute'))) await page.clock.runFor(1500);
     }
-    // Resistenza del Custode: il tiro caricato (Q) interrompe; da lì «Non interrompibile».
-    for (let attempt = 0; attempt < 8 && !(await page.locator('#boss-resolute').isVisible()); attempt++) { await page.keyboard.press('KeyQ'); await page.locator('#boss-resolute').waitFor({ state: 'visible', timeout: 30000 }).catch(() => {}); }
-    await page.locator('#boss-resolute').waitFor({ state: 'visible', timeout: 5000 });
+    assert.ok(await page.evaluate(visibleSel, '#boss-resolute'), 'resistenza attiva');
     run.measures.resolute = await measure(page); check(run.measures.resolute, '#boss-resolute', `${name} resolute`);
     await shot(page, `${name}-resolute`, run, name === 'desktop');
+    // Il segnale sparisce con il flag: all'impatto successivo.
+    run.resoluteClearedAfterImpact = await advanceUntil(page, (sel) => { const el = document.querySelector(sel); return el.hidden; }, '#boss-resolute', 8000, 32);
     assert.deepEqual(ctx.errors, []); assert.deepEqual(ctx.external, []);
     const video = page.video(); await ctx.context.close();
     if (video) { const src = await video.path(); await rename(src, `${out}/desktop-boss.webm`); run.video = `${out}/desktop-boss.webm`; }
     // Guardiano del rintocco: stessa regola, segnale sulla sua etichetta (non ha la barra del Custode).
     if (name !== 'landscape') {
       ctx = await setup(browser, name, width, height, CAVES); page = ctx.page;
-      await page.locator('#cave-travel').click(); await page.waitForFunction(() => document.getElementById('cave-travel').textContent === 'Entra nelle Cave dei Sussurri');
-      await page.locator('#cave-travel').click(); await page.waitForFunction(() => document.getElementById('region').textContent.includes('Cave dei Sussurri'));
+      await page.evaluate(() => document.getElementById('cave-travel').click()); assert.ok(await advanceUntil(page, () => document.getElementById('cave-travel').textContent === 'Entra nelle Cave dei Sussurri', null, 20000));
+      await page.evaluate(() => document.getElementById('cave-travel').click()); assert.ok(await advanceUntil(page, () => document.getElementById('region').textContent.includes('Cave dei Sussurri'), null, 5000));
+      await page.evaluate(() => document.getElementById('world').focus());
       // Avanza finché l'etichetta del Guardiano è visibile (entro 12 unità), poi tiro caricato.
       await page.keyboard.down('KeyW');
-      await page.waitForFunction(() => [...document.querySelectorAll('.enemy-label')].some((l) => !l.hidden && l.textContent.includes('rintocco')), null, { timeout: 240000 });
+      assert.ok(await advanceUntil(page, () => [...document.querySelectorAll('.enemy-label')].some((l) => !l.hidden && l.textContent.includes('rintocco')), null, 15000), 'Guardiano in vista');
       await page.keyboard.up('KeyW');
-      const tag = page.locator('.enemy-label .resolute-tag:not([hidden])');
-      for (let attempt = 0; attempt < 8 && !(await tag.count()); attempt++) { await page.keyboard.press('KeyQ'); await tag.first().waitFor({ state: 'visible', timeout: 30000 }).catch(() => {}); }
-      await tag.first().waitFor({ state: 'visible', timeout: 5000 });
+      const tagged = () => [...document.querySelectorAll('.enemy-label .resolute-tag')].some((t) => !t.hidden && !t.parentElement.hidden);
+      for (let attempt = 0; attempt < 6 && !(await page.evaluate(tagged)); attempt++) { await page.keyboard.press('KeyQ'); await advanceUntil(page, tagged, null, 2000, 32); }
+      assert.ok(await page.evaluate(tagged), 'Guardiano non interrompibile');
       run.measures.warden = await measure(page); check(run.measures.warden, '.enemy-label .resolute-tag', `${name} warden`);
       await shot(page, `${name}-warden-resolute`, run, name === 'desktop');
       assert.deepEqual(ctx.errors, []); assert.deepEqual(ctx.external, []); await ctx.context.close();
@@ -139,6 +156,6 @@ try {
   report.status = 'passed'; report.finishedAtUtc = new Date().toISOString(); await save(); console.log(JSON.stringify(report.runs.map((r) => ({ name: r.name, status: r.status, surge: r.surgeCharged, outcome: r.surgeOutcome }))));
 } catch (error) {
   report.status = 'failed'; report.error = error.message;
-  if (page && !page.isClosed()) await page.screenshot({ path: `${out}/failure.png` }).catch(() => {});
+  if (page && !page.isClosed()) { await page.clock.resume().catch(() => {}); await page.screenshot({ path: `${out}/failure.png`, timeout: 60000 }).catch(() => {}); }
   await save(); throw error;
 } finally { await browser?.close(); server.kill('SIGTERM'); }
