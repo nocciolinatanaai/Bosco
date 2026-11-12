@@ -1,0 +1,229 @@
+{
+  "status": "passed",
+  "fixture": "tools/daria-combat: combat.js session, runtime.js yaw/animate rule, fixed 1/60 s; Chromium/SwiftShader, not a device",
+  "variants": {
+    "refined": {
+      "summary": {
+        "frames": 402,
+        "gripErrorMax": 0.1083,
+        "bowTravelFrames": 0,
+        "bowInHandFrames": 220,
+        "nockHandDuringDrawMean": 0.3463057692307692,
+        "nockHandDuringDrawMax": 0.6553,
+        "impacts": [
+          {
+            "t": 1.7167,
+            "aimError": 11.73,
+            "yawError": 1.28,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0.1083
+          },
+          {
+            "t": 3.1667,
+            "aimError": 0.64,
+            "yawError": 0.64,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0.1083
+          },
+          {
+            "t": 4.2167,
+            "aimError": 0.01,
+            "yawError": 0.01,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0.1083
+          }
+        ],
+        "bowStepMax": 0.331396348803061,
+        "bowStepTop": [
+          {
+            "t": 2.45,
+            "step": 0.331396348803061,
+            "phase": "dodge"
+          },
+          {
+            "t": 2.4667,
+            "step": 0.3146898314213536,
+            "phase": "dodge"
+          },
+          {
+            "t": 2.4333,
+            "step": 0.27752073796385013,
+            "phase": "dodge"
+          },
+          {
+            "t": 2.1,
+            "step": 0.2573633618058328,
+            "phase": "run"
+          },
+          {
+            "t": 2.4833,
+            "step": 0.24674150441301926,
+            "phase": "dodge"
+          }
+        ],
+        "aimErrorDuringDrawMax": 99.3,
+        "plantedFootSlipMedian": null,
+        "plantedFootSlipP90": null,
+        "plantedSamples": 0,
+        "yawErrorMaxWhileRunning": 133.35,
+        "arrowVisibleDuringDodge": false,
+        "drawFrames": 52,
+        "completedDraws": [
+          {
+            "start": 1.5,
+            "frames": 13,
+            "finalNockHand": 0.1011,
+            "lastQuarterMean": 0.148,
+            "midDrawMax": 0.5769
+          },
+          {
+            "start": 2.9,
+            "frames": 16,
+            "finalNockHand": 0.0869,
+            "lastQuarterMean": 0.11910000000000001,
+            "midDrawMax": 0.6296
+          },
+          {
+            "start": 4,
+            "frames": 13,
+            "finalNockHand": 0.1075,
+            "lastQuarterMean": 0.15755,
+            "midDrawMax": 0.6553
+          }
+        ]
+      }
+    },
+    "pass01": {
+      "summary": {
+        "frames": 402,
+        "gripErrorMax": 0,
+        "bowTravelFrames": 129,
+        "bowInHandFrames": 220,
+        "nockHandDuringDrawMean": 0.3257038461538463,
+        "nockHandDuringDrawMax": 0.7874,
+        "impacts": [
+          {
+            "t": 1.7167,
+            "aimError": 0.21,
+            "yawError": 1.28,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0
+          },
+          {
+            "t": 3.1667,
+            "aimError": 0.37,
+            "yawError": 0.64,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0
+          },
+          {
+            "t": 4.2167,
+            "aimError": 0,
+            "yawError": 0.01,
+            "arrowVisibleOnImpactFrame": false,
+            "bowInHand": 1,
+            "gripError": 0
+          }
+        ],
+        "bowStepMax": 0.3379918933939097,
+        "bowStepTop": [
+          {
+            "t": 2.45,
+            "step": 0.3379918933939097,
+            "phase": "dodge"
+          },
+          {
+            "t": 2.4667,
+            "step": 0.3267891369063543,
+            "phase": "dodge"
+          },
+          {
+            "t": 2.9667,
+            "step": 0.2981975519684895,
+            "phase": "windup"
+          },
+          {
+            "t": 4.05,
+            "step": 0.2943292883829267,
+            "phase": "windup"
+          },
+          {
+            "t": 2.95,
+            "step": 0.2907069658608133,
+            "phase": "windup"
+          }
+        ],
+        "aimErrorDuringDrawMax": 50.87,
+        "plantedFootSlipMedian": 0.836413773200748,
+        "plantedFootSlipP90": 4.154297052450609,
+        "plantedSamples": 28,
+        "yawErrorMaxWhileRunning": 133.35,
+        "arrowVisibleDuringDodge": false,
+        "drawFrames": 52,
+        "completedDraws": [
+          {
+            "start": 1.5,
+            "frames": 13,
+            "finalNockHand": 0.0807,
+            "lastQuarterMean": 0.134275,
+            "midDrawMax": 0.7507
+          },
+          {
+            "start": 2.9,
+            "frames": 16,
+            "finalNockHand": 0.0277,
+            "lastQuarterMean": 0.046675,
+            "midDrawMax": 0.5361
+          },
+          {
+            "start": 4,
+            "frames": 13,
+            "finalNockHand": 0.0765,
+            "lastQuarterMean": 0.12742499999999998,
+            "midDrawMax": 0.7874
+          }
+        ]
+      }
+    }
+  },
+  "errors": [],
+  "external": [],
+  "layer": {
+    "upperMovingVsStanding": {
+      "torso": 0.019,
+      "arm_upper_R": 0,
+      "arm_lower_R": 0,
+      "palm_R": 0,
+      "arm_upper_L": 0,
+      "arm_lower_L": 0,
+      "palm_L": 0
+    },
+    "upperMovingVsRun": {
+      "torso": 42.918,
+      "arm_upper_R": 73.902,
+      "arm_lower_R": 29.608,
+      "palm_R": 57.556,
+      "arm_upper_L": 134.009,
+      "arm_lower_L": 81.425,
+      "palm_L": 32.358
+    },
+    "legsMovingVsStanding": {
+      "leg_upper_L": 60.581,
+      "leg_lower_L": 45.22,
+      "leg_upper_R": 25.761,
+      "leg_lower_R": 14.446
+    },
+    "legsMovingVsRun": {
+      "leg_upper_L": 0,
+      "leg_lower_L": 0,
+      "leg_upper_R": 0.012,
+      "leg_lower_R": 0
+    },
+    "repeatDrift": 0
+  }
+}

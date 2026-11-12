@@ -93,7 +93,7 @@ Elementi:
 - [M] **Oggi la decisione non serve** (critica 1): il Custode cade prima che la scelta
   conti. Modifica minima proposta nella critica 1.
 
-### 6:00–6:45 · Crescita percepibile
+### 6:00–6:45 · Crescita percepibile (proposta degli echi **ritirata**, vedi PRODUCT_DECISIONS_02)
 - **Cosa fa.** Subito dopo il Custode, due echi si rialzano dal sigillo spezzato.
 - **Cosa capisce.** Quello che all'inizio richiedeva cinque colpi ora lo risolve un solo
   scatto vicino: *sono diventato più forte grazie a Liora.*
@@ -235,7 +235,7 @@ vittoria sul Custode, e di nuovo alla chiusura del Giardino.
 | 3 | Testo del ricordo di Liora a ≤ 30 parole, impulso visibile al primo scatto | Medio-alto: momento memorabile | Basso | Nessuna | Codex (journey.js) |
 | 4 | Opt-in del salvataggio al momento di valore (critica 3) | Medio-alto sul ritorno | Basso-medio | Regole LOCAL_CHECKPOINTS | Codex |
 | 5 | Riga di voce al sigillo (domanda d'apertura) | Medio | Basso | 3 | Codex o Tonino, da concordare |
-| 6 | Due echi deboli dopo il Custode (crescita percepibile) | Medio | Medio | 1, stato cleared | Codex |
+| 6 | ~~Due echi deboli dopo il Custode~~ **ritirata** (PRODUCT_DECISIONS_02): nessun comportamento osservabile la giustifica; la crescita si mostra nel Giardino | — | — | — | — |
 | 7 | Chiusura del Giardino con ingresso delle Cave e rintocco | Medio | Medio | PR Rintocco rivista | Tonino (Rintocco) + Codex |
 | 8 | Daria: transizione animata dell'arco fra schiena e mano | Basso-medio (clip social) | Medio | PR #1 | Tonino |
 

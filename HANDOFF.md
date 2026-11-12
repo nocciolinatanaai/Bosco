@@ -3,6 +3,19 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## PR #2 verificata e risposta PRODUCT-02
+
+Testa efaf903 verificata con 141 test, build, test:daria, Ranger desktop/mobile;
+esperimento decision-experiment-02 riprodotto. BOW-01 accettato come passaggio
+intermedio, nessun via libera grafico finale o deploy. PRODUCT_RESPONSE_02
+contiene la risposta e 72 controfattuali su Impeto: politica eager cambia
+combo e può mancare il bersaglio; il peggioramento non persiste con la politica
+che completa la combo. Evidenze in docs/assets/pr2-codex-review/ e script
+scripts/impeto-policy-probe.mjs. REACH estende solo soglia di attacco, non
+sostituisce Onda con Frattura: chiesta verifica del secondo ciclo distante.
+Nessuna modifica reale a combattimento, artefatti, Rintocco o produzione.
+Ordine di cancellazione risvegli preservato; nessun monitor avviato.
+
 ## Ripresa 12 novembre — niente risvegli, nuova risposta Tonino
 
 Il proprietario ha annullato i risvegli: nessun monitor watch trovato attivo,
@@ -85,6 +98,33 @@ riprodotti: home 3,73 MB, home+demo Ranger 5,53 MB, Combattente 6,24 MB.
 Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
+
+## Monitor delle consegne — lato Tonino (2026-11-11)
+
+Letto e applicato docs/AGENT_MONITOR.md (74c682e, integrato nel ramo con un merge).
+Verificati nell'ambiente di Tonino:
+- attività programmata che risveglia la sessione: "Monitor consegne MYTHWOOD", ogni ora;
+- eventi delle PR sottoscritte;
+- notifica push, prova inviata.
+
+Il monitor di Codex gira (baseline 74c682e). Nessuna connessione diretta alle chat.
+Dettagli e limiti: docs/TONINO_MONITOR.md. Ultima SHA esaminata del ramo condiviso: 841b4ec (12/11, 00:35 UTC: solo documentazione; Codex registra di aver letto PR #2 e Rintocco 3222cd1, revisione indipendente non ancora svolta. Nessuna richiesta a Tonino, nessuna azione).
+
+## BOW-01 / PRODUCT-02 (Tonino, 2026-11-11) — ramo tonino/bow-transition-01
+
+- **Transizione dell'arco schiena↔mano senza scatti** (ranger-skinned.js). Salto massimo
+  per fotogramma da 1,033 a 0,338 unità (arco sempre in mano: 0,331). Arco in mano a ogni
+  colpo, schivata a metà passaggio senza rimbalzi. Controllo in test:daria, che fallisce con
+  il codice precedente. Sequenze in docs/assets/bow-transition-01/.
+- **Controprove di Codex** (docs/PRODUCT_DECISIONS_02.md, esperimento isolato, sorgenti intatti):
+  - tiro fuori aggro risolto da provocazione + Frattura mirata a distanza, e vale anche per
+    Mago e Guaritore;
+  - Custodia come carica consumabile protegge davvero il colpo successivo (8 invece di 32
+    danni, anche con un errore ritardato);
+  - due echi dopo la vittoria ritirati;
+  - nuova controprova: Impeto peggiora Tank e Combattente.
+- Rintocco pubblicato come riferimento (origin/tonino/rintocco), non integrato. `hit()` intatta.
+- Limite: il braccio non accompagna l'arco.
 
 ## PRODUCT-01 — dieci minuti da far provare a un amico (Tonino, 2026-11-11)
 

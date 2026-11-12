@@ -20,12 +20,16 @@ const stats=frames=>{
   const draws=[];let cur=[];
   for(let i=0;i<frames.length;i++){const f=frames[i];if(f.phase==='windup')cur.push(f);else{if(cur.length&&f.impactNow)draws.push(cur);cur=[];}}
   const fullDraw=draws.map(d=>({start:d[0].t,frames:d.length,finalNockHand:d.at(-1).nockHand,lastQuarterMean:d.slice(Math.floor(d.length*.75)).reduce((a,x)=>a+x.nockHand,0)/Math.max(1,d.length-Math.floor(d.length*.75)),midDrawMax:Math.max(...d.map(x=>x.nockHand))}));
+  // BOW-01: largest frame-to-frame jump of the bow in the actor's own space (scene units / frame).
+  const steps=[];for(let i=1;i<frames.length;i++){const a=frames[i-1].bowLocal,b=frames[i].bowLocal;if(a&&b)steps.push({t:frames[i].t,step:Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2]),phase:frames[i].phase});}
+  steps.sort((x,y)=>y.step-x.step);
   const impacts=frames.filter(f=>f.impactNow);
   return {
     frames:frames.length,
-    gripErrorMax:max(pick(f=>f.gripError!==undefined&&f.phase!=='run','gripError')),bowInHandFrames:frames.filter(f=>f.phase!=='run').length,
+    gripErrorMax:max(pick(f=>f.gripError!==undefined&&f.phase!=='run'&&(f.bowInHand??1)>=.999,'gripError')),bowTravelFrames:frames.filter(f=>(f.bowInHand??1)<.999&&(f.bowInHand??1)>.001).length,bowInHandFrames:frames.filter(f=>f.phase!=='run').length,
     nockHandDuringDrawMean:mean(pick(f=>f.phase==='windup','nockHand')),nockHandDuringDrawMax:max(pick(f=>f.phase==='windup','nockHand')),
-    impacts:impacts.map(f=>({t:f.t,aimError:f.aimError,yawError:f.yawError,arrowVisibleOnImpactFrame:f.arrowVisible})),
+    impacts:impacts.map(f=>({t:f.t,aimError:f.aimError,yawError:f.yawError,arrowVisibleOnImpactFrame:f.arrowVisible,bowInHand:f.bowInHand,gripError:f.gripError})),
+    bowStepMax:steps[0]?.step??null,bowStepTop:steps.slice(0,5),
     aimErrorDuringDrawMax:max(pick(f=>f.phase==='windup','aimError')),
     plantedFootSlipMedian:q(.5),plantedFootSlipP90:q(.9),plantedSamples:slips.length,
     yawErrorMaxWhileRunning:max(pick(f=>f.phase==='run','yawError')),
@@ -42,7 +46,7 @@ try{
   await page.goto('http://127.0.0.1:5193/tools/daria-combat/');await page.waitForFunction(()=>window.combatReady);
   for(const variant of ['refined','pass01']){
     assert.equal(await page.evaluate(v=>window.combatSetup(v),variant),true);
-    const frames=[];const shots=new Set(['0.5','1.2','1.66','2.42','3.05','3.1','4.1','4.17']);
+    const frames=[];const shots=new Set(['0.5','1.2','1.66','2.42','3.05','3.1','4.1','4.17',...(process.env.BOW_FILMSTRIP?['4','4.05','4.15','4.55','4.65','4.75','4.85','5.6','5.65','5.7','5.8','5.9','6']:[])]);
     for(;;){const f=await page.evaluate(()=>window.combatStep());if(f.done)break;frames.push(f);
       const key=String(+f.t.toFixed(2));
       if(shots.has(key)||f.impactNow){await page.evaluate(()=>window.combatRender(true));await page.locator('canvas').screenshot({path:`${out}/${variant}-${key.replace('.','_')}${f.impactNow?'-impact':''}.png`});}
@@ -54,6 +58,12 @@ try{
   // Acceptance criteria for the playable model (the previous model is measured for comparison only).
   const a=report.variants.pass01.summary;
   assert.ok(a.gripErrorMax<.01,'Arco nel punto di presa della mano');
+  // BOW-01: no teleport. The largest per-frame bow step may not exceed by more than 15% the largest step
+  // of a bow that is always held in the hand (the previous model, measured in the same run and script).
+  const held=report.variants.refined.summary.bowStepMax;
+  assert.ok(a.bowStepMax<=held*1.15,`Arco senza scatti: passo massimo ${a.bowStepMax.toFixed(3)} vs arco sempre in mano ${held.toFixed(3)}`);
+  assert.ok(a.impacts.every(i=>i.bowInHand>=.999&&i.gripError<.01),'Al colpo l\'arco è in mano, nel punto di presa');
+  assert.ok(a.bowTravelFrames>0,'La transizione schiena↔mano avviene davvero (fotogrammi intermedi presenti)');
   assert.ok(a.impacts.length===3&&a.impacts.every(i=>i.aimError<2),'Al colpo l\'arco punta il bersaglio (<2°)');
   assert.ok(a.plantedFootSlipMedian<1.5,'Piede d\'appoggio quasi fermo in corsa (mediana <1,5 m/s)');
   const L=report.layer,mx=o=>Math.max(...Object.values(o));

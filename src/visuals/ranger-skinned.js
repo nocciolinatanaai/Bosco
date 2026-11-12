@@ -92,7 +92,7 @@ export function attachSkinnedRanger(root,{variant='pass01'}={}) {
       const head=model.getObjectByName('head'),headPosition=new THREE.Vector3(),nock=new THREE.Vector3();
       const left=new THREE.Vector3(),right=new THREE.Vector3(),chest=new THREE.Vector3(),forward=new THREE.Vector3(),xAxis=new THREE.Vector3(),up=new THREE.Vector3(0,1,0),basis=new THREE.Matrix4();
       // Authored animation is sampled by normalized game action phase, never changes hit timing.
-      visual={refined,dressed,nock,arrowDir:new THREE.Vector3(),yAxis:new THREE.Vector3(0,1,0),legs,legMixer,legAction,stride,runPhase:0,lastWorld:new THREE.Vector3(),hasWorld:false,aimYaw:0,parentQ:new THREE.Quaternion(),parentE:new THREE.Euler(),legQ:legs.map(()=>new THREE.Quaternion()),presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
+      visual={refined,dressed,nock,bowBlend:1,bowTarget:1,backPos:new THREE.Vector3(),handPos:new THREE.Vector3(),backQuat:new THREE.Quaternion(),handQuat:new THREE.Quaternion(),stowRoll:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),.62),arrowDir:new THREE.Vector3(),yAxis:new THREE.Vector3(0,1,0),legs,legMixer,legAction,stride,runPhase:0,lastWorld:new THREE.Vector3(),hasWorld:false,aimYaw:0,parentQ:new THREE.Quaternion(),parentE:new THREE.Euler(),legQ:legs.map(()=>new THREE.Quaternion()),presentation,model,mixer,poseSampler,clips,palmL,palmR,torso,bow,echo,arrow,cape,vertices,original,left,right,chest,forward,xAxis,up,basis,lineGeo,scarf,quiver,braid,head,headPosition,yaw:0,lastTime:null};
       for(const node of fallbackChildren)node.visible=false;
       root.add(presentation);root.userData.visualStatus='ready';root.userData.visualSource='System G6 CC0 / Mythwood accessories';
       root.userData.visualClips=Object.keys(clips);root.userData.visualVariant=variant;
@@ -155,14 +155,30 @@ export function attachSkinnedRanger(root,{variant='pass01'}={}) {
     v.forward.set(0,0,1);
     v.xAxis.crossVectors(v.up,v.forward).normalize();v.basis.makeBasis(v.xAxis,v.up,v.forward);v.bow.quaternion.setFromRotationMatrix(v.basis);
     v.bow.position.copy(v.left).addScaledVector(v.forward,-.12);
-    if(v.dressed&&!action&&!(combat.dodge>0)&&moving){
-      // Running with an empty draw hand: the bow rides across the back (as in the sheet) instead of cutting through the legs.
-      v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));
-      v.bow.position.set(v.chest.x+.02,v.chest.y+.22,v.chest.z-.3);v.bow.rotateZ(.62);
+    let inHand=1;
+    if(v.dressed){
+      // BOW-01: the bow travels between back and hand instead of teleporting. Running with an empty draw hand
+      // stows it across the back (as in the sheet); any action brings it to the hand in 0.14 s, before the
+      // earliest release (0.22 s). During a dodge the current destination is kept, so it does not bounce.
+      if(!(combat.dodge>0))v.bowTarget=(!action&&moving)?0:1;
+      const rate=v.bowTarget>v.bowBlend?1/.14:1/.30;
+      v.bowBlend=reducedMotion?v.bowTarget:v.bowBlend+Math.sign(v.bowTarget-v.bowBlend)*Math.min(Math.abs(v.bowTarget-v.bowBlend),rate*dt);
+      const e=v.bowBlend*v.bowBlend*(3-2*v.bowBlend);inHand=e;
+      if(e<1){
+        v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));
+        v.backPos.set(v.chest.x+.02,v.chest.y+.22,v.chest.z-.3);
+        v.backQuat.copy(v.bow.quaternion).multiply(v.stowRoll);
+        v.handPos.copy(v.bow.position);v.handQuat.copy(v.bow.quaternion);
+        // Path over the left shoulder: lifted and pushed outward in the middle so the bow never crosses the torso.
+        const arc=Math.sin(Math.PI*e);
+        v.bow.position.lerpVectors(v.backPos,v.handPos,e);v.bow.position.x+=arc*.16;v.bow.position.y+=arc*.24;
+        v.bow.quaternion.slerpQuaternions(v.backQuat,v.handQuat,e);
+      }
     }
+    root.userData.bowInHand=inHand;
     const draw=drawing?Math.min(1,action.elapsed/action.windup):0;
-    let pull=draw*.28,nockY=0;
-    if(v.dressed&&drawing){
+    let pull=(v.dressed&&inHand<.999)?0:draw*.28,nockY=0;
+    if(v.dressed&&drawing&&inHand>=.999){
       // The string follows the drawing hand when it is near the bow plane; released string snaps back.
       v.bow.updateMatrixWorld(true);v.bow.worldToLocal(v.palmR.getWorldPosition(v.nock));
       pull=Math.min(.5,Math.max(pull*.5,-v.nock.z));nockY=Math.max(-.25,Math.min(.25,v.nock.y));
@@ -171,7 +187,7 @@ export function attachSkinnedRanger(root,{variant='pass01'}={}) {
     // Arrow lies on the rest at the grip and its tail sits on the nock.
     v.arrowDir.set(0,-nockY,.45+pull).normalize();v.arrow.quaternion.setFromUnitVectors(v.yAxis,v.arrowDir);
     v.arrow.position.set(0,nockY,-pull).addScaledVector(v.arrowDir,.45);
-    v.arrow.visible=Boolean(drawing);v.echo.visible=Boolean(combat.evolved);
+    v.arrow.visible=Boolean(drawing)&&inHand>=.999;v.echo.visible=Boolean(combat.evolved);
     v.presentation.worldToLocal(v.torso.getWorldPosition(v.chest));v.cape.position.set(v.chest.x,v.chest.y+.05,v.chest.z-(v.refined?.24:.18));v.cape.rotation.y=v.refined?v.yaw:0;
     v.presentation.worldToLocal(v.head.getWorldPosition(v.headPosition));v.braid.position.copy(v.headPosition);v.braid.rotation.y=v.model.rotation.y;
     v.scarf.position.set(v.chest.x,v.chest.y+.48,v.chest.z);v.quiver.position.set(v.chest.x+.16,v.chest.y+.1,v.chest.z-.3);

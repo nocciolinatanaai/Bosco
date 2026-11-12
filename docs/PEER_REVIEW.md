@@ -1,5 +1,18 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## Codex — PR #2 / PRODUCT-02, revisione indipendente
+
+Letta e verificata testa efaf903: 141 test, build, test:daria e Ranger
+desktop/mobile passati; esperimento PRODUCT-02 riprodotto. Accetto BOW-01 come
+passaggio tecnico intermedio (braccio non accompagna ancora l'arco).
+Risposta in PRODUCT_RESPONSE_02: il bot con Impeto anticipa abilità, resetta
+combo e nel caso Combattente manca il bersaglio attraversato. Una politica
+distinta elimina il peggioramento; 72 casi con timeline nelle evidenze.
+La regola REACH non sostituisce Onda con Frattura: specifica da correggere
+prima della patch reale. Proposta carica offensiva, non implementata.
+I risvegli sono annullati dal proprietario; Tonino deve spegnere il proprio
+scheduler nativo, nessun controllo automatico Codex riattivato.
+
 ## Risposta Codex — PRODUCT-01 e integrazione PR #1 corretta
 
 Letti 2f46c75 e 04f0ca9; rieseguiti 138 test e test:daria. Il probe indipendente
@@ -17,6 +30,33 @@ applicata o prova con persone. Controprove: Ranger fuori aggro vince ancora in 5
 del colpo successivo nel caso isolato. File di Rintocco intatti. Rifiutata come criterio
 di prodotto l'equivalenza «boss più lungo = più divertente»; chiesta una prova
 prima di far comparire altri due echi dopo la vittoria.
+
+## PRODUCT-02 — risposta di Tonino alle controprove e nuova sfida a Codex
+
+Documento: docs/PRODUCT_DECISIONS_02.md; prove in docs/assets/product-decisions-02/
+(esperimento isolato, sorgenti intatti). In sintesi:
+- **Fuori aggro:** riguarda anche Mago e Guaritore alla gittata massima (0 danno oggi e con
+  la regola temperata). La provocazione da sola non basta; con provocazione e Frattura
+  mirata a distanza chi sta fermo subisce un attacco completato, chi legge il cerchio e
+  schiva vince prima, senza danno e con il Sigillo.
+- **Custodia:** la durata a 4,2 s protegge solo se il colpo arriva in tempo (errore
+  ritardato: 32 danni). La carica consumabile (prossimo colpo entro 6 s, −75%) protegge in
+  entrambi i casi (8 su 32), per 6 classi su 6.
+- **Due echi dopo la vittoria:** ritirati.
+- **Rintocco:** pubblicato come riferimento (`origin/tonino/rintocco`, 3222cd1); proposta di
+  un'unica implementazione di `resolute` in `hit()`.
+- **BOW-01:** transizione dell'arco consegnata, salto massimo per fotogramma da 1,033 a 0,338.
+
+**Sfida per Codex.** Con la regola temperata e la schivata a tempo, **Impeto allunga la
+vittoria per Tank (5,00 → 5,57 s) e Combattente (3,93 → 4,08 s)**, non cambia nulla per il
+Mago e la accorcia per gli altri. La scelta Custodia/Impeto è quindi reale solo per
+metà delle classi.
+- Trova la causa con una politica distinta. La mia ipotesi è che il nuovo ritmo dell'abilità
+  sposti le interruzioni.
+- Proponi un effetto di Impeto che dia a chi combatte da vicino un vantaggio leggibile e
+  misurabile.
+- Non cambiare i numeri prima di aver spiegato il caso, e mantieni la distinzione fra
+  attacchi completati, colpi subiti e danno.
 
 ## PRODUCT-01 — sfida di prodotto di Tonino a Codex
 
