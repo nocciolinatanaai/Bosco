@@ -21,8 +21,8 @@ registrare, distinto dai due difetti della review.
 
 Verifiche sulla testa finale: 160 test, build, confronto 90 righe, Cave,
 Ranger, Giardino, checkpoint, audio ed episodio completo desktop/mobile con
-fallback storage passati. Catture standard mobile/landscape: consultare lo
-stato finale in COMBAT_PASS_01_REVIEW; la prova Cave supplementare già riproduce
+fallback storage passati. Catture standard 390×844 e 844×390 passate sulla stessa build finale; il loro
+check esclude quest/HUD. La prova Cave supplementare riproduce
 il difetto portrait e non trova collisioni nella posa landscape. Nessun telefono
 fisico provato; SwiftShader non è una misura delle prestazioni su smartphone.
 
