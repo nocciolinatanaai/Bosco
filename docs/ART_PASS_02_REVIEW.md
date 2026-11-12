@@ -111,6 +111,7 @@ npm run build
 node scripts/art-pass-02-review.mjs test-results/art02-review
 MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium node scripts/loading-budget-check.mjs test-results/art02-budget
 node docs/assets/art-pass-02-codex/world-cycle.mjs
+python3 docs/assets/art-pass-02-codex/fern-alpha.py
 ```
 
 La sonda del giro aree prepara da sola la base e usa WebGL a 2×2 per leggere la
