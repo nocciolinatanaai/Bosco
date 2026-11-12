@@ -40,8 +40,8 @@
   },
   "pass01": {
     "file": "daria-pass01.glb",
-    "bytes": 1065704,
-    "sha256": "b781ee73302e07eb449e35e3caeb7023613aa57b661a48b0445a277b88114432",
+    "bytes": 835336,
+    "sha256": "ed59be1503941ebf072ff92f7f747b45d036aeeab69bc8baa257c0ded098636a",
     "triangles": 16370,
     "script": "scripts/prepare-daria-pass01.py (Blender 4.3 / bpy 4.3.0)",
     "derived_from": "daria-refined.glb in this folder (same System G6 CC0 anatomy, skeleton and five clips; the upstream archive is not required)",
@@ -65,6 +65,12 @@
     ],
     "status": "Character-art pass 01: closer to the approved sheet, not a final sculpt; see docs/art/DARIA_PASS_01.md",
     "materials": 16,
-    "images": 9
+    "images": 9,
+    "generatorSha256": "b781ee73302e07eb449e35e3caeb7023613aa57b661a48b0445a277b88114432",
+    "generatorBytes": 1065704,
+    "vertexQuantization": {
+      "script": "scripts/quantize-glb.py",
+      "note": "Normali int8 (KHR_mesh_quantization), UV uint16, pesi e colori uint8 normalizzati; posizioni, indici e animazioni invariati. Con perdita, confronto a camere fisse."
+    }
   }
 }

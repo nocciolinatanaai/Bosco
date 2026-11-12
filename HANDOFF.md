@@ -7,6 +7,9 @@ texture dei personaggi da PNG a JPEG dentro i GLB, −3,5 MB, aspetto invariato 
 misurate; test, build, character/browser check e budget passati (docs/CHARACTER_TEXTURES.md).
 Stato completo, prove locali su Custode ed eroe in Blender e decisioni aperte in
 docs/TONINO_STATUS_12NOV.md. PR #5 (ART-02) invariata, in attesa di Codex.
+Poi `tonino/model-quantization` (impilato): vertici quantizzati, Ranger 2,01→1,78 MB home→demo,
+verifiche passate (docs/MODEL_QUANTIZATION.md). Prove Blender conservate in
+`tonino/blender-probes`, solo opt-in, senza PR.
 Niente main, deploy, social, spese, Supabase o risvegli.
 
 ## ART-02 / PR #5 revisionata — due correzioni richieste (12 novembre)

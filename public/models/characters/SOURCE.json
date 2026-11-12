@@ -6,8 +6,8 @@
   "characters": {
     "tank": {
       "file": "tank.glb",
-      "bytes": 493984,
-      "sha256": "60153a74d364b457bbfe80fc2f02b8636fe5edee19613ac811af883acd95498b",
+      "bytes": 440624,
+      "sha256": "2127adad996defccf3c0b6b9647ae6f212d600859cca73ffcc1f10442f5a0a59",
       "clips": [
         "attack",
         "dodge",
@@ -27,8 +27,8 @@
     },
     "fighter": {
       "file": "fighter.glb",
-      "bytes": 606052,
-      "sha256": "11bf400b17c887cf48665a7bc329ac0e5db558ebb6a7daa4f1fea1cb22b98c52",
+      "bytes": 550476,
+      "sha256": "df76c62ce92186e7aaa8515a1b5466d35cba2f54fac2eaa355f0e6a968099cde",
       "clips": [
         "attack",
         "dodge",
@@ -48,8 +48,8 @@
     },
     "assassin": {
       "file": "assassin.glb",
-      "bytes": 591356,
-      "sha256": "a5db98e11e2ef9199f4f66b217f21e2ab19a0ec108d4adc12890ff81ce1e767e",
+      "bytes": 531280,
+      "sha256": "f6879f92561fe4a5e1f108c65ba5473b14263c83371c77d27bf53f43c60b8997",
       "clips": [
         "attack",
         "dodge",
@@ -69,8 +69,8 @@
     },
     "mage": {
       "file": "mage.glb",
-      "bytes": 587776,
-      "sha256": "d0ebbbf5e71f22080d36914785ef53a45afeaae1d76b018aa9fb9a4196ca67d1",
+      "bytes": 537992,
+      "sha256": "0363dda6cbada1ec6f910e9ff870dea52cb673483259dd63dcf411b196d1c2f0",
       "clips": [
         "attack",
         "dodge",
@@ -90,8 +90,8 @@
     },
     "healer": {
       "file": "healer.glb",
-      "bytes": 551892,
-      "sha256": "fc97500749b252c9e6a57e930dfc130e3250d42baa7daa77e6c3e36638e71663",
+      "bytes": 493736,
+      "sha256": "ae2ef717100915c3a4d78c0d1f84285aacb18993e475d6073cad27250daaf0db",
       "clips": [
         "attack",
         "dodge",
@@ -114,5 +114,9 @@
     "script": "scripts/recompress-character-textures.py",
     "command": "python3 -I scripts/recompress-character-textures.py 88 public/models/characters/*.glb",
     "note": "PNG di colore base ricodificate in JPEG q88 4:4:4 dentro il GLB; geometria, pesi e clip invariati. Materiali OPAQUE: alfa ignorata da glTF. Ricodifica con perdita, confronto a camere fisse nel rapporto."
+  },
+  "vertexQuantization": {
+    "script": "scripts/quantize-glb.py",
+    "note": "Normali int8 (KHR_mesh_quantization), UV uint16, pesi e colori uint8 normalizzati; posizioni, indici e animazioni invariati. Con perdita, confronto a camere fisse."
   }
 }

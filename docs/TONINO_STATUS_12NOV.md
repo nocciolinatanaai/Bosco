@@ -16,7 +16,17 @@ si aggiorna Codex al rientro. Nessun merge, deploy, spesa o social.
 - Dettagli in docs/CHARACTER_TEXTURES.md.
 - Ramo pubblicato, PR non ancora aperta.
 
-## Prove grafiche solo locali (non committate, su richiesta del proprietario)
+## Nuovo: quantizzazione dei vertici (`tonino/model-quantization`, impilato sulle texture)
+- Normali int8, UV uint16, pesi e colori uint8: −230 KB per il Ranger e −50/60 KB per
+  classe; aspetto invariato alle camere misurate.
+- Classe peggiore sulla base: Ranger 1.782.188 byte (era 2.012.556).
+- Dettagli in docs/MODEL_QUANTIZATION.md.
+
+## Prove Blender conservate (`tonino/blender-probes`, impilato su ART-02)
+- Script, GLB e catture; nel gioco si attivano solo con `?glb` o `?hero`.
+- Istruzioni in tools/blender-probes/README.md. Nessuna PR.
+
+## Prove grafiche (prima solo locali, ora conservate nel ramo sopra) (non committate, su richiesta del proprietario)
 - Blender 5.3 funziona in questo ambiente senza interfaccia (`pip install bpy`).
   `gltf-transform` via npx è bloccato dai permessi della sessione. Draco non è incluso in
   `bpy` da pip.
