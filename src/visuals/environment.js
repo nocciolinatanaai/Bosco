@@ -85,13 +85,23 @@ function portal(root, m) {
   return { material, rings: front };
 }
 
+// Atmosfera per area, un solo punto di verità: applicata all'avvio e a ogni cambio d'area, anche
+// al ritorno. ART-02 cambia solo la piazza (nebbia più densa per la prospettiva aerea; chiave
+// lunare più bassa e fredda, riempimento meno piatto); Giardino e Cave conservano l'assetto
+// precedente (f881e7d) finché un incarico non le ridisegna con confronti propri.
+const BEFORE_ART02 = { fogDensity: .018, environment: .22, hemi: ['#93adc9', '#25202d', .45], sun: ['#b3c9e4', 1.45, [-10, 22, 14]], rim: ['#b38acb', 1.2] };
+export const AREA_ATMOSPHERE = {
+  plaza: { background: '#101e30', fog: '#22314a', fogDensity: .022, environment: .3, hemi: ['#8ea7c7', '#2a2433', .32], sun: ['#c7d6ef', 2.1, [-15, 16, 11]], rim: ['#a98bcf', .75] },
+  garden: { ...BEFORE_ART02, background: '#152e32', fog: '#24483f' },
+  caves: { ...BEFORE_ART02, background: '#141523', fog: '#242338' },
+};
+
 export function createArtWorld(renderer) {
-  // ART-02 luce: nebbia un po' più densa per staccare gli edifici di fondo (prospettiva aerea).
-  const scene = new THREE.Scene(); scene.background = new THREE.Color('#101e30'); scene.fog = new THREE.FogExp2('#22314a', .022);
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(); scene.fog = new THREE.FogExp2('#000000', .02);
   const room = new RoomEnvironment();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromScene(room, .04);
-  scene.environment = environment.texture; scene.environmentIntensity = .3;
+  scene.environment = environment.texture;
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
   // ART-02: architettura e terreno della piazza con materiali PBR CC0; personaggi invariati.
@@ -99,14 +109,22 @@ export function createArtWorld(renderer) {
   const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
   let caveWorld = null, gardenWorld = null, area = 'plaza';
   const rand = random(215);
-  // Chiave lunare fredda più bassa (ombre più lunghe, piani separati), riempimento meno piatto;
-  // il calore resta al portale e ai cerchi: blu/oro come gerarchia, non come buio.
-  scene.add(new THREE.HemisphereLight('#8ea7c7', '#2a2433', .32));
-  const sun = new THREE.DirectionalLight('#c7d6ef', 2.1);
-  sun.position.set(-15, 16, 11); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+  // Luci create una volta; colori, intensità e posizione della chiave vengono da AREA_ATMOSPHERE.
+  const hemi = new THREE.HemisphereLight(); scene.add(hemi);
+  const sun = new THREE.DirectionalLight();
+  sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -25, right: 25, top: 25, bottom: -25, near: .5, far: 70 });
   sun.shadow.bias = -.0005; sun.shadow.normalBias = .035; scene.add(sun);
-  const rim = new THREE.DirectionalLight('#a98bcf', .75); rim.position.set(10, 7, -10); scene.add(rim);
+  const rim = new THREE.DirectionalLight(); rim.position.set(10, 7, -10); scene.add(rim);
+  function applyAtmosphere(id) {
+    const at = AREA_ATMOSPHERE[id] || AREA_ATMOSPHERE.plaza;
+    scene.background.set(at.background); scene.fog.color.set(at.fog); scene.fog.density = at.fogDensity;
+    scene.environmentIntensity = at.environment;
+    hemi.color.set(at.hemi[0]); hemi.groundColor.set(at.hemi[1]); hemi.intensity = at.hemi[2];
+    sun.color.set(at.sun[0]); sun.intensity = at.sun[1]; sun.position.set(...at.sun[2]); sun.shadow.needsUpdate = true;
+    rim.color.set(at.rim[0]); rim.intensity = at.rim[1];
+  }
+  applyAtmosphere('plaza');
   block(source, m.dark, [78, .5, 70], [7, -.4, 0]);
   // Terreno: ciottoli a ventaglio continui (la scala dei ciottoli dice la distanza), lastroni nel
   // cerchio dello scontro, corridoio verso le Cave. UV nel mondo: nessuna cucitura fra pezzi.
@@ -262,7 +280,7 @@ export function createArtWorld(renderer) {
       if (id === 'caves' && !caveWorld) caveWorld = createCaveWorld(scene, m);
       if (caveWorld) caveWorld.root.visible = id === 'caves';
       plazaRoot.visible = id === 'plaza'; if (gardenWorld) gardenWorld.root.visible = id === 'garden';
-      scene.background.set(id === 'caves' ? '#141523' : id === 'garden' ? '#152e32' : '#101e30'); scene.fog.color.set(id === 'caves' ? '#242338' : id === 'garden' ? '#24483f' : '#253346');
+      applyAtmosphere(id);
     },
     updateGarden(state, reducedMotion) { if (state.area === 'caves' && caveWorld) caveWorld.update(state, reducedMotion); if (state.area === 'garden' && gardenWorld) gardenWorld.update(state, reducedMotion); },
     addEnemy(enemy) {
