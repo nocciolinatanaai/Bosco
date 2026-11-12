@@ -304,7 +304,7 @@ footer { z-index: 9; }
 #boss-signals { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 6px 0 0; letter-spacing: 0; }
 #boss-reach { display: inline-flex; align-items: center; gap: 5px; font: 600 14px/1.2 system-ui, sans-serif; color: #fff4dc; background: rgba(20, 16, 24, .82); border: 2px dashed currentColor; border-radius: 6px; padding: 2px 7px; }
 #boss-reach b { font-size: 16px; line-height: 1; }
-#actions #surge-state { position: absolute; left: 50%; bottom: calc(100% + 14px); transform: translateX(-50%); white-space: nowrap; font: 600 14px/1.2 system-ui, sans-serif; letter-spacing: 0; color: #fff4dc; background: rgba(20, 16, 24, .88); border: 2px solid currentColor; border-radius: 6px; padding: 2px 7px; pointer-events: none; }
+#actions #surge-state { position: absolute; right: calc(100% + 12px); top: 50%; transform: translateY(-50%); white-space: nowrap; font: 600 14px/1.2 system-ui, sans-serif; letter-spacing: 0; color: #fff4dc; background: rgba(20, 16, 24, .88); border: 2px solid currentColor; border-radius: 6px; padding: 2px 7px; pointer-events: none; }
 #actions #attack.surge-ready { outline: 3px double #fff4dc; outline-offset: 3px; }
 /* Tasto Attacco a filo del bordo destro (telefono verticale e orizzontale): il riquadro Impeto si allinea a destra. */
 #actions #surge-state::before { content: 'IMPETO '; }
