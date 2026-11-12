@@ -86,11 +86,12 @@ function portal(root, m) {
 }
 
 export function createArtWorld(renderer) {
-  const scene = new THREE.Scene(); scene.background = new THREE.Color('#101e30'); scene.fog = new THREE.FogExp2('#253346', .018);
+  // ART-02 luce: nebbia un po' più densa per staccare gli edifici di fondo (prospettiva aerea).
+  const scene = new THREE.Scene(); scene.background = new THREE.Color('#101e30'); scene.fog = new THREE.FogExp2('#22314a', .022);
   const room = new RoomEnvironment();
   const pmrem = new THREE.PMREMGenerator(renderer);
   const environment = pmrem.fromScene(room, .04);
-  scene.environment = environment.texture; scene.environmentIntensity = .22;
+  scene.environment = environment.texture; scene.environmentIntensity = .3;
   room.dispose(); pmrem.dispose();
   const m = createMaterials(), source = new THREE.Group();
   // ART-02: architettura e terreno della piazza con materiali PBR CC0; personaggi invariati.
@@ -98,21 +99,23 @@ export function createArtWorld(renderer) {
   const plazaRoot = new THREE.Group(); plazaRoot.name = 'Piazza-del-ritorno'; scene.add(plazaRoot);
   let caveWorld = null, gardenWorld = null, area = 'plaza';
   const rand = random(215);
-  scene.add(new THREE.HemisphereLight('#93adc9', '#25202d', .45));
-  const sun = new THREE.DirectionalLight('#b3c9e4', 1.45);
-  sun.position.set(-10, 22, 14); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
+  // Chiave lunare fredda più bassa (ombre più lunghe, piani separati), riempimento meno piatto;
+  // il calore resta al portale e ai cerchi: blu/oro come gerarchia, non come buio.
+  scene.add(new THREE.HemisphereLight('#8ea7c7', '#2a2433', .32));
+  const sun = new THREE.DirectionalLight('#c7d6ef', 2.1);
+  sun.position.set(-15, 16, 11); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -25, right: 25, top: 25, bottom: -25, near: .5, far: 70 });
   sun.shadow.bias = -.0005; sun.shadow.normalBias = .035; scene.add(sun);
-  const rim = new THREE.DirectionalLight('#b38acb', 1.2); rim.position.set(10, 7, -10); scene.add(rim);
+  const rim = new THREE.DirectionalLight('#a98bcf', .75); rim.position.set(10, 7, -10); scene.add(rim);
   block(source, m.dark, [78, .5, 70], [7, -.4, 0]);
   // Terreno: ciottoli a ventaglio continui (la scala dei ciottoli dice la distanza), lastroni nel
   // cerchio dello scontro, corridoio verso le Cave. UV nel mondo: nessuna cucitura fra pezzi.
-  worldPlane(source, ps.cobble, [-17.8, -24.5, 17.8, 21.5], .01, 2.6);
+  worldPlane(source, ps.cobble, [-17.8, -24.5, 17.8, 32], .01, 2.6);
   worldPlane(source, ps.cobble, [17.8, 3.4, 41, 10.6], .01, 2.6);
   worldDisc(source, ps.flagstone, 0, -9, 6.3, .02, 3.2, 72);
   // Sentiero di lastroni dall'ingresso al cerchio: la piazza ha una direzione, non solo una superficie.
-  worldPlane(source, ps.flagstone, [-2.1, -2.8, 2.1, 21.5], .018, 3.2);
-  for (const x of [-2.25, 2.25]) block(source, a.trim, [.3, .1, 24.3], [x, .05, 9.35]);
+  worldPlane(source, ps.flagstone, [-2.1, -2.8, 2.1, 32], .018, 3.2);
+  for (const x of [-2.25, 2.25]) block(source, a.trim, [.3, .1, 34.8], [x, .05, 14.6]);
   for (let i = 0; i < 48; i++) { // cordolo di conci attorno al cerchio
     const angle = i * Math.PI / 24, kerb = block(source, a.trim, [.95, .12, .38], [Math.sin(angle) * 6.45, .06, -9 + Math.cos(angle) * 6.45]);
     kerb.rotation.y = angle;

@@ -33,7 +33,7 @@ function surface(id, tint, { normal = 1, roughness = 1, ao = 1 } = {}) {
 export function createPlazaSurfaces() {
   return {
     cobble: surface('cobble', '#ffffff', { normal: 1.1 }),
-    flagstone: surface('flagstone', '#e8e3d6', { normal: .9 }),
+    flagstone: surface('flagstone', '#a9a69d', { normal: .9 }), // più scuro: i cerchi di pericolo devono staccare anche in scala di grigi
     ashlar: surface('ashlar', '#aeb8c4', { normal: 1 }),
     ashlarTrim: surface('ashlar', '#d3d6d4', { normal: .8 }),
     slate: surface('slate', '#7f8b99', { normal: .55 }),
