@@ -1,0 +1,208 @@
+{
+  "status": "passed",
+  "metric": "sum of response body bytes, cold context per role, mobile 390x844; not wire transfer or time to interactive",
+  "deviceScaleFactor": 1,
+  "enforce": true,
+  "runs": [
+    {
+      "role": "tank",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2520995,
+      "expectedModel": "/models/characters/tank.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/tank.glb",
+          "bytes": 440624,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "fighter",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2630847,
+      "expectedModel": "/models/characters/fighter.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/fighter.glb",
+          "bytes": 550476,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "assassin",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2611651,
+      "expectedModel": "/models/characters/assassin.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/assassin.glb",
+          "bytes": 531280,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "mage",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2618363,
+      "expectedModel": "/models/characters/mage.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/mage.glb",
+          "bytes": 537992,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "ranger",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2915707,
+      "expectedModel": "/models/ranger/daria-pass01.glb",
+      "largest": [
+        {
+          "url": "/models/ranger/daria-pass01.glb",
+          "bytes": 835336,
+          "status": 200
+        },
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "role": "healer",
+      "homeBytes": 76518,
+      "homePlusDemoBytes": 2574107,
+      "expectedModel": "/models/characters/healer.glb",
+      "largest": [
+        {
+          "url": "/assets/demo-Cy4uihYg.js",
+          "bytes": 799552,
+          "status": 200
+        },
+        {
+          "url": "/models/characters/healer.glb",
+          "bytes": 493736,
+          "status": 200
+        },
+        {
+          "url": "/art/custode-probe/custode.glb",
+          "bytes": 388892,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/fern.bin",
+          "bytes": 176176,
+          "status": 200
+        },
+        {
+          "url": "/art/environment-pass02/ashlar_normal.jpg",
+          "bytes": 92782,
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "external": []
+}
