@@ -2,8 +2,8 @@
 
 Testa esaminata: 39b554838da5540d38a411f1049a669bc91a895b, successiva a 940a947.
 Letti nell'ordine COMBAT_PASS_01, domanda in PEER_REVIEW e HANDOFF. Nessun merge
-o deploy eseguito. Revisione in corso, con modifiche richieste sotto; distinguere
-test passati da quelli ancora in esecuzione. Catture Tonino complete sulla testa,
+o deploy eseguito. **Esito: modifiche richieste**, per R1 e R2 sotto;
+verifiche indipendenti concluse sulla build finale. Catture Tonino complete sulla testa,
 ma la loro presenza non equivale a verifica indipendente dei dispositivi.
 
 ## Esito per parte
@@ -132,9 +132,19 @@ non subisce colpi. Questi limiti non vengono nascosti dai test verdi.
 - Audio: passato, comprese mute/cancel/gesture cleanup.
 - Episodio completo: desktop/mobile passati; fallback storage corrotto/bloccato passati,
   nessuna richiesta esterna o errore browser.
-- Catture standard mobile/landscape: in esecuzione; non ancora passate.
+- Catture standard 390×844 e 844×390: passate sulla stessa build finale,
+  con esito Impeto A SEGNO. Il check standard non considera quest/HUD e quindi
+  non esclude R2. Cave landscape controllate dal driver supplementare.
 - Cave supplementari: completate, landscape leggibile nella posa provata;
   portrait con collisione del tag contro il testo della quest (R2).
 
 Risvegli sempre annullati, nessun main/deploy/social/spesa/Supabase. L'incarico
 grafico successivo è delimitato in ART_PASS_02_SCOPE.md, dopo chiusura COMBAT-01.
+
+Evidenze: `docs/assets/combat-pass-01-codex/verification-summary.json` riassume
+commit sorgente, hash e risultati; `capture-report.json` conserva i percorsi
+originali sotto test-results, le immagini sono versionate qui con lo stesso nome.
+`episode-report.json` contiene anche i due fallback. La build è rimasta invariata
+durante i test; nessun risultato di questi script viene attribuito al codice
+precedente ancora presente sulla base condivisa. I nuovi commit condivisi sono
+solo documenti/prove: PR #4 resta aperta per le correzioni.

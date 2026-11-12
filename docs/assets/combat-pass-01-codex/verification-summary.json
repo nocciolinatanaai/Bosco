@@ -24,8 +24,9 @@
   "checkpoints": "passed",
   "audio": "passed",
   "episode": "desktop/mobile and corrupt/blocked storage passed",
-  "standardCapture": "pending",
+  "standardCapture": "mobile 390x844 and landscape 844x390 passed; checker excludes quest/HUD overlap (R2)",
   "extraWardenCapture": "completed; portrait quest overlap confirmed",
   "mergeDecision": "changes requested",
-  "physicalPhoneTest": false
+  "physicalPhoneTest": false,
+  "reviewFinishedAtUtc": "2026-11-12T11:57:22.944Z"
 }
