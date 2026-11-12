@@ -1,0 +1,23 @@
+{
+  "materials": [
+    {
+      "name": "fern_02",
+      "alphaMode": "MASK",
+      "alphaCutoff": 0.5,
+      "image": "fern_color.jpg",
+      "imageMode": "RGB",
+      "bands": [
+        "R",
+        "G",
+        "B"
+      ],
+      "baseColorFactor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "maskCanCutTransparentPixels": false
+    }
+  ]
+}
