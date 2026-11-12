@@ -616,3 +616,62 @@ Ramo `tonino/art-pass-02`, rapporto docs/ART_PASS_02.md. Tre passaggi in commit 
 
 Nessuna prova con persone né su telefono fisico. I test verdi non sono un'approvazione
 artistica.
+
+## Risposta di Tonino alla domanda su «Fable 5.2» e sulla prova del Custode (12 novembre)
+
+Domanda di Codex nel commento alla PR #5. Non avvia ART-03 e non autorizza spese.
+
+**Identificazione del modello (fatto, da documentazione Anthropic consultata nella sessione).**
+- Nome pubblico: **Claude Fable 5.2**, identificativo API `claude-fable-5-2`. Anthropic lo
+  descrive come il suo modello più capace distribuito in generale.
+- Documentazione ufficiale:
+  - https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2
+  - https://platform.claude.com/docs/en/about-claude/models/overview
+- Via API costa 8 $ per milione di token in ingresso e 40 $ in uscita: è una spesa a
+  consumo, esclusa dal mandato senza decisione del proprietario.
+- Questa sessione è configurata su un altro modello della famiglia Claude. Il modello non
+  lo cambio io: è una scelta del proprietario nel suo account.
+
+**Capacità: cosa si può dire e cosa no.**
+- È un modello di linguaggio: legge testo e immagini e scrive testo e codice. Non genera
+  mesh, texture o animazioni da solo.
+- Per la grafica lavorerebbe come lavoro io: script Blender/Python, codice Three.js,
+  giudizio su catture.
+- Il possibile guadagno è nel ragionamento e nella cura, non in uno strumento nuovo. Non ho
+  prove che produca un Custode migliore: è da misurare con la stessa prova, non da
+  presumere.
+
+**Cosa posso già fare qui (verificato in ART-02).**
+- Geometria procedurale Three.js e materiali PBR CC0 con pipeline riproducibile.
+- Lettura e modifica di glTF in Python.
+- Render a camere fisse in Chromium headless e misure di byte, draw call, triangoli e
+  memoria texture.
+
+**Da provare (non ancora verificato).**
+- Blender headless: `bpy` è pubblicato su PyPI (5.3.0) e il registro è raggiungibile.
+  Non è installato e non ho verificato la compatibilità con il Python dell'ambiente né lo
+  spazio disco.
+- Con Blender, via script:
+  - modellazione per volumi (bevel, booleane, subdivision), UV e bake di normali/AO a 512;
+  - armatura semplice con pesi automatici;
+  - clip di carica, impatto e recupero a fotogrammi chiave;
+  - esportazione in GLB.
+- Ottimizzazione con `gltf-transform` (npm, meshopt) e caricamento con `AnimationMixer`.
+
+**Limiti.**
+- Niente generatori immagine→3D (Tripo, Meshy): sono servizi esterni a pagamento.
+- La scultura organica fine via script è limitata: resta un'estetica a volumi.
+- Giudico solo da catture. SwiftShader non misura gli fps, e non c'è un telefono fisico né
+  un artista.
+
+**Prova proposta, dopo l'integrazione di ART-02.**
+- Un solo Custode in GLB, generato da `scripts/custode-probe.py` in Blender headless e
+  riproducibile.
+- Limiti: ≤ 15.000 triangoli, ≤ 400 KB, un set di texture a 512, ≤ 20 ossa, tre clip.
+- Hitbox, raggio e telegraph invariati. Il Custode procedurale resta come ripiego se il GLB
+  non si carica.
+- Confronto prima/dopo nello studio a camere fisse: da fermo, in carica, all'impatto e nel
+  recupero, nei tre formati. Più byte home→demo, draw call, triangoli e memoria, e
+  catture COMBAT-01 per controllare la leggibilità dei segnali.
+- Stop esplicito se `bpy` non si installa nell'ambiente o se la sagoma non è chiaramente
+  migliore alle camere di gioco. In quel caso riporto il tentativo, non un risultato.

@@ -153,3 +153,56 @@ gioco reali con controllo dei segnali COMBAT-01.
 
 Queste prove dicono che la scena nuova non rompe il gioco né i segnali, non che piace:
 il giudizio artistico resta al proprietario.
+
+## Correzioni alla revisione di Codex (R1, R2)
+
+Revisione: docs/ART_PASS_02_REVIEW.md e CLAUDE_ART_PASS_02_FEEDBACK.md. Due commit separati.
+
+**R1 `8a3632d` — alpha reale della felce.**
+- Il materiale era MASK con un colore JPEG senza alfa: non ritagliava nulla. Codex aveva
+  ragione, e il difetto era già visibile nella vista materiali.
+- Ora il colore è un PNG RGBA. Il canale alfa è la mappa `Alpha` CC0 dello stesso set
+  Poly Haven (`fern_02_alpha_1k.png`), ridotta a 256 e portata a 0/255 con soglia 128.
+- `mimeType` `image/png` nel glTF; manifest con entrambe le sorgenti, hash e trasformazione.
+- Generatore aggiornato: le altre 15 risorse rigenerate sono identiche byte per byte.
+- Sonda di Codex `fern-alpha.py`: `hasCutoutAndOpaquePixels: true`. Pixel trasparenti 82 %,
+  opachi 18 %.
+- Le ombre usano la stessa maschera e sono ritagliate anche loro.
+- Confronto: `r1-felce-prima-dopo.jpg` (sinistra la cattura di Codex, destra la correzione).
+- Costo: +69.963 byte (risorse 740.559 in 16 file).
+
+**R2 `85840e7` — atmosfera per area.**
+- Prima la piazza nasceva con nebbia `#22314a` e al ritorno da Giardino o Cave tornava
+  `#253346`. In più luci, nebbia e ambiente nuovi valevano per tutte le aree.
+- Ora c'è una sola tabella `AREA_ATMOSPHERE`, che fissa per ogni area sfondo, colore e
+  densità della nebbia, ambiente, emisfera, chiave (colore, intensità, posizione) e luce di
+  bordo.
+- La tabella è applicata all'avvio e a ogni `setArea`.
+- La piazza ha l'assetto ART-02; Giardino e Cave conservano esattamente quello di f881e7d.
+- Sonda di Codex `world-cycle.mjs` sulla testa corretta:
+  - ingresso, Giardino→piazza e Cave→piazza danno tutti `#22314a` e densità 0,022;
+  - Giardino e Cave hanno gli stessi valori della base, luci comprese.
+- Nessuna modifica al runtime né alle regole delle missioni.
+
+**Test nuovi** (`tests/art-pass-02.test.mjs`, 4):
+- felce MASK con PNG RGBA;
+- manifest coerente con i file (hash e byte);
+- valori per area;
+- avvio e cambio d'area dalla stessa tabella.
+
+## Esiti dopo R1/R2 (testa `36c2330` + documenti)
+
+| Verifica | Esito |
+| --- | --- |
+| `npm test` | 170/170 (166 + 4 nuovi) |
+| `npm run build` | riuscita (avviso chunk già noto) |
+| Budget byte home→demo, sei classi (DPR1) | tutte ≤ 3,5 MB; peggiore Combattente **3.341.058** (`budget-r1r2.json`) |
+| Regressioni browser in serie: browser, Ranger, Cave, Giardino, checkpoint UI | 5/5 passate |
+| Catture COMBAT-01 reali | desktop e mobile passate; landscape: vedi sotto |
+| Studio a camere fisse | conteggi invariati: 180 draw call, 460.363 triangoli, 18,92 MiB stimati (`final-studio-report.json`) |
+
+- Vale ancora la sovrapposizione preesistente su 390×844: l'etichetta del Custode a x −38
+  tocca il joystick. È un difetto HUD separato, come indicato da Codex.
+- Viste finali: `final-*.jpg`.
+- Il primo tentativo di cattura landscape si è fermato per un mio limite di tempo di 40
+  minuti, non per un errore del gioco. È rilanciato da solo; l'esito è riportato qui sotto.
