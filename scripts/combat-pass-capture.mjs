@@ -14,8 +14,9 @@ const report = { status: 'running', startedAtUtc: new Date().toISOString(), note
 const save = () => writeFile(`${out}/report${process.env.CAPTURE_VIEWPORTS ? '-' + process.env.CAPTURE_VIEWPORTS.replace(/,/g, '-') : ''}.json`, JSON.stringify(report, null, 2));
 const AWAKENED = { version: 4, attunement: 'surge', autoSave: true, role: 'ranger', stage: 'awakened', traces: 0, garden: { step: 0, area: 'plaza', sentryDefeated: false }, caves: { step: 0, inside: false, wardenDefeated: false } };
 const CAVES = { version: 3, attunement: 'ward', autoSave: true, role: 'ranger', stage: 'guardian', traces: 3, garden: { step: 4, area: 'plaza', sentryDefeated: false } };
-const SIGNALS = ['#boss-resolute', '#boss-reach', '#surge-state', '.enemy-label .resolute-tag'];
-const CONTROLS = ['#attack', '#skill', '#dash', '#joystick', '#movement', '#pause', '#evolve'];
+const SIGNALS = ['#boss-resolute', '#boss-reach', '#surge-state', '.enemy-label .resolute-tag', '#hud-resolute'];
+// Comandi e pannelli di testo (revisione R2): un segnale leggibile non copre né pulsanti né istruzioni.
+const CONTROLS = ['#attack', '#skill', '#dash', '#joystick', '#movement', '#pause', '#evolve', '.quest', '#hud', '#boss', 'header', '#garden-actions'];
 
 function measure(page) {
   return page.evaluate(([signals, controls]) => {
@@ -100,7 +101,10 @@ try {
   const only = (process.env.CAPTURE_VIEWPORTS || '').split(',').filter(Boolean);
   for (const [name, width, height] of [['desktop', 1440, 900], ['mobile', 390, 844], ['landscape', 844, 390]].filter(([n]) => !only.length || only.includes(n))) {
     const run = { name, viewport: `${width}x${height}`, captures: [], measures: {} }; report.runs.push(run); await save();
-    let ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop'); page = ctx.page;
+    let ctx;
+    // CAPTURE_PARTS=warden ripete solo le Cave.
+    if (process.env.CAPTURE_PARTS !== 'warden') {
+    ctx = await setup(browser, name, width, height, AWAKENED, name === 'desktop'); page = ctx.page;
     // Avvicinati fin dentro la gittata dell'arco (14,4) ma oltre 6 unità, poi colpisci: provocazione.
     // Avvicinati tenendo Attacco finché una freccia arriva a segno (provocazione), poi fermati oltre 6 unità.
     await page.keyboard.down('KeyW'); await page.keyboard.down('KeyJ');
@@ -149,8 +153,9 @@ try {
     assert.deepEqual(ctx.errors, []); assert.deepEqual(ctx.external, []);
     const video = page.video(); await ctx.context.close();
     if (video) { const src = await video.path(); await rename(src, `${out}/desktop-boss.webm`); run.video = `${out}/desktop-boss.webm`; }
+    }
     // Guardiano del rintocco: stessa regola, segnale sulla sua etichetta (non ha la barra del Custode).
-    if (name !== 'landscape') {
+    {
       ctx = await setup(browser, name, width, height, CAVES); page = ctx.page;
       await page.evaluate(() => document.getElementById('cave-travel').click()); assert.ok(await advanceUntil(page, () => document.getElementById('cave-travel').textContent === 'Entra nelle Cave dei Sussurri', null, 20000));
       await page.evaluate(() => document.getElementById('cave-travel').click()); assert.ok(await advanceUntil(page, () => document.getElementById('region').textContent.includes('Cave dei Sussurri'), null, 5000));
@@ -160,10 +165,14 @@ try {
       // 2,4 s di gioco a 5 unità/s: da z 12 a circa z 0, 8 unità dal Guardiano (etichetta visibile entro 12).
       for (let t = 0; t < 2400; t += 48) await page.clock.runFor(48);
       await page.keyboard.up('KeyW');
-      const tagged = () => [...document.querySelectorAll('.enemy-label .resolute-tag')].some((t) => !t.hidden && !t.parentElement.hidden);
+      const tagged = () => !document.getElementById('hud-resolute').hidden;
       for (let attempt = 0; attempt < 6 && !(await page.evaluate(tagged)); attempt++) { await page.keyboard.press('KeyQ'); await advanceUntil(page, tagged, null, 2000, 32); }
       assert.ok(await page.evaluate(tagged), 'Guardiano non interrompibile');
-      run.measures.warden = await measure(page); check(run.measures.warden, '.enemy-label .resolute-tag', `${name} warden`);
+      run.measures.warden = await measure(page);
+      // Stato persistente nell'HUD; il glifo sul Guardiano, se visibile, non deve coprire pannelli o comandi.
+      check(run.measures.warden, '#hud-resolute', `${name} warden HUD`);
+      run.wardenTagOnTarget = run.measures.warden.items.some((i) => i.sel === '.enemy-label .resolute-tag');
+      if (run.wardenTagOnTarget) check(run.measures.warden, '.enemy-label .resolute-tag', `${name} warden tag`);
       await shot(page, `${name}-warden-resolute`, run, name === 'desktop');
       assert.deepEqual(ctx.errors, []); assert.deepEqual(ctx.external, []); await ctx.context.close();
     }

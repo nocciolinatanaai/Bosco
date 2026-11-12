@@ -314,3 +314,7 @@ footer { z-index: 9; }
   #actions #surge-state::before { content: none; }
   #actions #attack:has(#surge-state:not([hidden])) #combo-label { display: none; }
 }
+/* R2: stato di resistenza nell'HUD del personaggio (Guardiano senza barra propria); il glifo sul bersaglio
+   si nasconde quando coprirebbe pannelli o comandi, invece di sovrapporre due testi. */
+#hud #hud-resolute:not([hidden]) { display: flex; width: fit-content; margin-top: 6px; }
+.enemy-label.tag-occluded .resolute-tag { visibility: hidden; }

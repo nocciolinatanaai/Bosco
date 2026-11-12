@@ -233,7 +233,7 @@ export function startRuntime($) {
       if (event.type === 'ward-consumed') floatText(`CUSTODIA −75%`, state.x, state.z, 'evade');
       if (event.type === 'surge-consumed') surgeFeedback = { text: 'USATO', until: state.time + 1.2, chargeId: event.id };
       if (event.type === 'surge-outcome' && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: SURGE_OUTCOME_TEXT[event.outcome], until: state.time + 1.2 };
-      if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Il prossimo attacco arriverà comunque: esci dal cerchio o schiva', 2.5);
+      if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Esci dal cerchio o schiva', 2.5);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : event.reach ? 'FRATTURA A DISTANZA · Il Custode ti prende di mira: esci dal cerchio sotto di te' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
@@ -333,13 +333,18 @@ export function startRuntime($) {
     $('dash').setAttribute('aria-label', state.evolved ? 'Passo di risonanza. Scatta e colpisce i nemici vicini; 30 vigore.' : 'Scatto. Richiede 30 vigore.');
     $('dash').querySelector('strong').textContent = state.evolved ? 'Risonanza' : 'Scatto';
     $('rank').textContent = state.evolved ? 'PRIMA RISONANZA' : 'RANGO INIZIALE';
+    let hudResolute = null;
     for (const enemy of state.enemies) {
       const label = labels.get(enemy.id); if (!label) continue;
       label.querySelector('progress').value = enemy.hp;
       label.querySelector('span').textContent = enemy.sealed ? 'Custode · sigillato' : enemy.name;
       label.querySelector('.resolute-tag').hidden = !enemy.resolute;
+      // Avversario temprato senza barra propria (Guardiano): lo stato vive anche nell'HUD del personaggio.
+      if (enemy.tempered && !enemy.boss && inArea(state, enemy) && enemy.hp > 0) hudResolute = hudResolute || (enemy.resolute ? enemy : null);
       label.classList.toggle('selected', current?.id === enemy.id);
     }
+    $('hud-resolute').hidden = !hudResolute;
+    $('hud-resolute-name').textContent = hudResolute ? ` · ${hudResolute.name.split(' ')[0]}` : '';
   }
 
   function primary() { if (active()) { attack(state); consumeEvents(); updateUI(); } }
@@ -390,6 +395,13 @@ export function startRuntime($) {
   $('skill').addEventListener('click', skill); $('dash').addEventListener('click', dash);
   $('evolve').addEventListener('click', () => { if (active()) { evolve(state); consumeEvents(); updateUI(); } });
 
+  const PANELS = ['.quest', '#garden-actions', '#follow-trail', '#hud', '#boss', '#actions', '#touch-controls', 'header', '#toast'];
+  function occludesPanels(r) {
+    if (!r.width) return false;
+    return PANELS.some((sel) => { const el = document.querySelector(sel); if (!el || el.hidden) return false;
+      const p = el.getBoundingClientRect(); if (!p.width || (sel === '#toast' && !el.textContent)) return false;
+      return r.left < p.right && p.left < r.right && r.top < p.bottom && p.top < r.bottom; });
+  }
   function syncEnemyViews() {
     for (const enemy of state.enemies) {
       if (enemyViews.has(enemy.id)) continue;
@@ -570,6 +582,10 @@ export function startRuntime($) {
           projected.set(enemy.x, 2.45, enemy.z).project(camera);
           label.hidden = !inArea(state, enemy) || enemy.hp <= 0 || projected.z > 1 || Math.abs(projected.x) > 1 || Math.abs(projected.y) > 1 || Math.hypot(enemy.x - state.x, enemy.z - state.z) > 12;
           label.style.transform = `translate(${(projected.x * .5 + .5) * innerWidth}px, ${(-projected.y * .5 + .5) * innerHeight}px) translate(-50%, -100%)`;
+          // Il glifo sul bersaglio non copre istruzioni, HUD o comandi: se ci finirebbe sopra si nasconde,
+          // e resta lo stato nell'indicatore (barra del Custode o HUD del personaggio).
+          const tag = label.querySelector('.resolute-tag');
+          if (!label.hidden && !tag.hidden) label.classList.toggle('tag-occluded', occludesPanels(tag.getBoundingClientRect()));
         }
       }
       const narrow = innerWidth < 700;

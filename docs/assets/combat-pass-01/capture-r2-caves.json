@@ -1,0 +1,124 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-12T12:34:48.544Z",
+  "note": "Input reali (tastiera) sulla build; tempi di schivata letti dall’HUD. Prova di presenza/disposizione, non di comprensione.",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": "1440x900",
+      "captures": [
+        "docs/assets/combat-pass-01/r2-desktop-warden-resolute.jpg",
+        "docs/assets/combat-pass-01/r2-desktop-warden-resolute-gray.jpg"
+      ],
+      "measures": {
+        "warden": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 1038,
+                "y": 289,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 489,
+                "y": 685,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": true,
+      "status": "passed"
+    },
+    {
+      "name": "mobile",
+      "viewport": "390x844",
+      "captures": [
+        "docs/assets/combat-pass-01/r2-mobile-warden-resolute.jpg"
+      ],
+      "measures": {
+        "warden": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 29,
+                "y": 546,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    },
+    {
+      "name": "landscape",
+      "viewport": "844x390",
+      "captures": [
+        "docs/assets/combat-pass-01/r2-landscape-warden-resolute.jpg"
+      ],
+      "measures": {
+        "warden": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 571,
+                "y": 208,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    }
+  ],
+  "csp": true,
+  "buildEntrySha256": "b0cfa7e0ca0513f30ed128a515a67bee6a7662607b76c64269d61212f81f677e",
+  "finishedAtUtc": "2026-11-12T12:39:19.669Z"
+}
