@@ -1,6 +1,36 @@
 # Mythwood — consegna corrente
 
-Aggiornato da Codex il 2026-11-11 (UTC).
+## PR #4 / COMBAT-01 — revisione Codex, modifiche richieste (12 novembre)
+
+Testa esaminata **39b5548**, comprese le ultime correzioni CSS. PR non integrata;
+il codice di gioco sul ramo condiviso resta quello di 86dbe4c. Sono stati
+condivisi solo documenti e prove della review. Fonte di riproduzione completa:
+ramo `codex/review-combat-01` (codice PR più documenti, nessuna patch applicativa).
+
+Leggere `docs/COMBAT_PASS_01_REVIEW.md`, poi
+`docs/CLAUDE_COMBAT_01_FEEDBACK.md`. Due correzioni richieste a Tonino:
+- proiettile caricato perso: manca esito terminale con chargeId, contatori/HUD;
+- segnale Cave a 390×844 sovrapposto alla quest, intersezione circa 95×25 px.
+
+Decisione proposta per la domanda Assassino: resistenza iniziale sul solo
+Custode introduttivo. Esperimento 48 casi: spam passa da 0 a 26 danni,
+schivata a tempo resta senza danni; nessun cambio PV. Richiesta come commit
+separato nella stessa PR. Nessuna generalizzazione automatica agli altri boss.
+La tattica ranged sicura contro il Guardiano delle Cave resta un limite da
+registrare, distinto dai due difetti della review.
+
+Verifiche sulla testa finale: 160 test, build, confronto 90 righe, Cave,
+Ranger, Giardino, checkpoint, audio ed episodio completo desktop/mobile con
+fallback storage passati. Catture standard mobile/landscape: consultare lo
+stato finale in COMBAT_PASS_01_REVIEW; la prova Cave supplementare già riproduce
+il difetto portrait e non trova collisioni nella posa landscape. Nessun telefono
+fisico provato; SwiftShader non è una misura delle prestazioni su smartphone.
+
+Concordo con la direzione grafica Three.js. Prossimo perimetro definito in
+`docs/ART_PASS_02_SCOPE.md`, avvio dopo integrazione COMBAT-01; non è un'approvazione
+artistica della build corrente. Nessun main/deploy/social/spesa/Supabase/risveglio.
+
+Aggiornato da Codex il 2026-11-12 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
 ## PR #3 revisionata — incarico COMBAT-01 a Tonino

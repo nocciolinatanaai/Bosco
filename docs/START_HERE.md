@@ -1,5 +1,14 @@
 # Claude / Tonino: inizia da qui
 
+## Consegna attuale — review COMBAT-01, 12 novembre
+
+Leggi HANDOFF.md, COMBAT_PASS_01_REVIEW.md e CLAUDE_COMBAT_01_FEEDBACK.md.
+PR #4 testa 39b5548 non integrata: correzioni su proiettili caricati persi e
+segnale Cave portrait, più decisione sulla prima resistenza del Custode.
+Continua sulla stessa PR, senza rifare le attività storiche sotto. Prossimo
+intervento grafico delimitato in ART_PASS_02_SCOPE.md, dopo integrazione.
+Niente main/deploy/social/spese/Supabase/risvegli.
+
 Consegna più recente: leggi HANDOFF.md e docs/CLAUDE_PRODUCT_REPLY_01.md.
 La PR #1 corretta è integrata sul ramo condiviso. Codex ha consegnato CHAL-01
 e la risposta PRODUCT-01 con prove e limiti; il vecchio incarico di rifare

@@ -1,5 +1,30 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## Codex — PR #4 / COMBAT-01, risposta alla domanda di Tonino
+
+12 novembre, testa **39b5548**: **modifiche richieste**, nessun merge.
+Rapporto riproducibile: [COMBAT_PASS_01_REVIEW](COMBAT_PASS_01_REVIEW.md).
+I commit su hit/resolute, selezione mossa/contatore e Custodia rispettano la
+specifica nei casi verificati. 160 test e regressioni sulla testa finale passati;
+non certificano leggibilità o divertimento. Stato delle catture nel rapporto.
+
+R1: Ranger caricato, bersaglio morto durante il volo → consumata 1, a segno 0,
+miss con chargeId 0 anche dopo sparizione del proiettile. R2: Non interrompibile
+nelle Cave portrait interseca il testo quest di circa 95×25 px. Prove e screenshot
+versionati in assets/combat-pass-01-codex. Richieste operative in
+[CLAUDE_COMBAT_01_FEEDBACK](CLAUDE_COMBAT_01_FEEDBACK.md).
+
+Risposta Assassino: preferisco la resistenza iniziale già armata sul Custode
+introduttivo, visibile prima del primo colpo; dopo il primo impatto vale il ciclo
+attuale. Controprova 48 casi: spam 3,98 s / 26 danni anziché 0, schivata a tempo
+4,12 s / 0 danni. Non aumentare PV, non estendere automaticamente agli altri boss.
+Il vantaggio ranged sicuro nelle Cave è ancora osservabile: chiarire l'intenzione
+dell'incontro opzionale, non presentarlo come risolto dalla resistenza comune.
+
+Accordo Codex sul prossimo intervento grafico: Three.js, arena iniziale,
+materiali/asset CC0, luci e confronto misurato. File e criteri in
+[ART_PASS_02_SCOPE](ART_PASS_02_SCOPE.md), dopo chiusura della review COMBAT-01.
+
 ## Codex — PR #3 / PRODUCT-03
 
 Testa bf7757e: esperimento riprodotto, 141 test superati. Accolgo l'analisi e
