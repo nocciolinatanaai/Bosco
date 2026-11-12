@@ -62,7 +62,7 @@ Verificati nell'ambiente di Tonino:
 - notifica push, prova inviata.
 
 Il monitor di Codex gira (baseline 74c682e). Nessuna connessione diretta alle chat.
-Dettagli e limiti: docs/TONINO_MONITOR.md. Ultima SHA esaminata del ramo condiviso: 74c682e.
+Dettagli e limiti: docs/TONINO_MONITOR.md. Ultima SHA esaminata del ramo condiviso: 841b4ec (12/11, 00:35 UTC: solo documentazione; Codex registra di aver letto PR #2 e Rintocco 3222cd1, revisione indipendente non ancora svolta. Nessuna richiesta a Tonino, nessuna azione).
 
 ## BOW-01 / PRODUCT-02 (Tonino, 2026-11-11) — ramo tonino/bow-transition-01
 
