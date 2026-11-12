@@ -1,5 +1,5 @@
 import { createCaves, cavePosition, advanceWarden, interactCaves as caveInteraction } from './caves.js';
-import { createArtifact, selectAttunement, activateArtifact } from './artifacts.js';
+import { createArtifact, selectAttunement, activateArtifact, consumeWard, WARD_FACTOR } from './artifacts.js';
 import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
 import { createTrail, resonateTrail } from './trail.js';
@@ -137,12 +137,14 @@ export function hurt(s, amount, source = null) {
     }
     return 0;
   }
-  const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 ? .25 : 1)));
+  const warded = consumeWard(s);
+  const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 || warded ? WARD_FACTOR : 1)));
+  if (warded) emit(s, 'ward-consumed', { raw: amount, amount: actual });
   if (actual <= 0) return 0;
   s.hp -= actual; s.invulnerable = .28;
   s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
-  emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 });
-  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; emit(s, 'defeated'); }
+  emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 || warded, warded });
+  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; s.artifact.wardCharge = 0; emit(s, 'defeated'); }
   return actual;
 }
 
@@ -236,6 +238,7 @@ export function tickCooldowns(s, delta) {
   if (s.status !== 'playing' || dt === 0) return 0;
   s.time += dt;
   s.artifact.cooldown=Math.max(0,s.artifact.cooldown-dt);
+  if (s.artifact.wardCharge > 0) { s.artifact.wardCharge = Math.max(0, s.artifact.wardCharge - dt); if (s.artifact.wardCharge === 0) emit(s, 'ward-expired'); }
   for (const key of ['cooldown', 'dashCooldown', 'returnShot', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
   if (s.staminaDelay === 0) s.stamina = Math.min(100, s.stamina + 20 * dt);
   if (s.dodgeRemaining > 0) {

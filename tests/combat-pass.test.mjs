@@ -140,3 +140,34 @@ test('Telegraph della Frattura lontana: centro sul giocatore, raggio, durata e d
   const w2 = windupAt(s, boss, 2, 2); assert.equal(w2.kind, 'fracture'); s.x = 2 + w2.radius + .1; const hp = s.hp;
   finishAttack(s, boss); assert.equal(s.hp, hp);
 });
+
+// ── 3/5: Custodia come carica ──
+import { attuneArtifact, hurt } from '../src/game.js';
+function warded(role = 'ranger') {
+  const { s, boss } = bossFight(role); attuneArtifact(s, 'ward'); boss.timer = 99;
+  assert.equal(dodge(s), true); assert.equal(hurt(s, 30), 0); // schivata d'impatto
+  assert.equal(s.artifact.wardCharge, 6); s.dodgeRemaining = 0; s.invulnerable = 0; drainEvents(s);
+  return s;
+}
+test('Custodia: il prossimo colpo vero entro 6 s è ridotto del 75%, una sola volta', () => {
+  const s = warded(); const hp = s.hp;
+  assert.equal(hurt(s, 32), 8); assert.equal(s.artifact.wardCharge, 0);
+  assert.ok(drainEvents(s).some(e => e.type === 'ward-consumed' && e.raw === 32 && e.amount === 8));
+  s.invulnerable = 0; assert.equal(hurt(s, 32), 32, 'secondo colpo pieno'); assert.equal(s.hp, hp - 40);
+});
+test('Custodia: non si consuma su schivata o invulnerabilità, scade a 6 s, non si accumula', () => {
+  let s = warded();
+  s.invulnerable = .2; assert.equal(hurt(s, 32), 0); assert.equal(s.artifact.wardCharge, 6, 'invulnerabilità: carica intatta');
+  s.invulnerable = 0; s.dashCooldown = 0; s.stamina = 100; dodge(s); hurt(s, 32);
+  assert.equal(s.artifact.wardCharge, 6, 'schivata d’impatto durante il recupero: nessuna seconda carica, nessun consumo');
+  s = warded(); for (let t = 0; t < 5.9; t += DT) tickCooldowns(s, DT); assert.ok(s.artifact.wardCharge > 0);
+  for (let t = 0; t < .2; t += DT) tickCooldowns(s, DT); assert.equal(s.artifact.wardCharge, 0);
+  assert.ok(drainEvents(s).some(e => e.type === 'ward-expired')); s.invulnerable = 0; assert.equal(hurt(s, 32), 32, 'scaduta');
+});
+test('Custodia: lo Scudo d’urto del Tank non spreca la carica; checkpoint e sconfitta la azzerano', () => {
+  const s = warded('tank'); s.shield = 1; assert.equal(hurt(s, 32), 8); assert.equal(s.artifact.wardCharge, 6, 'scudo già attivo: nessun doppio sconto, carica conservata');
+  s.shield = 0; s.invulnerable = 0; assert.equal(hurt(s, 32), 8); assert.equal(s.artifact.wardCharge, 0);
+  const t = warded(); const cp = checkpointFromSession(t); assert.equal(JSON.stringify(cp).includes('ward'), true, 'solo la scelta');
+  assert.equal(JSON.stringify(cp).includes('Charge'), false); assert.equal(restoreCheckpoint(cp).artifact.wardCharge, 0);
+  t.hp = 1; t.invulnerable = 0; hurt(t, 100); assert.equal(t.status, 'defeated'); assert.equal(t.artifact.wardCharge, 0);
+});

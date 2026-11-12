@@ -30,8 +30,9 @@ test('Rintocco: centro fisso, uscita dal volume e schivata reale attivano regole
  advanceEnemies(s,.02);assert.equal(e.phase,'windup');assert.equal(e.aimX,e.x);assert.equal(e.aimZ,e.z);
  s.x=7;const hp=s.hp;step(s,1.7);assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,0);
  e.phase='windup';e.windup=.02;s.x=4;s.z=-8;assert.equal(dodge(s,1,0),true);advanceEnemies(s,.02);
- assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,6);assert.ok(s.shield>0);
- e.phase='windup';e.windup=.02;s.invulnerable=0;s.dodgeRemaining=0;s.shield=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-22);
+ assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,6);assert.ok(s.artifact.wardCharge>0);
+ e.phase='windup';e.windup=.02;s.invulnerable=0;s.dodgeRemaining=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-6,'Custodia: rintocco successivo ridotto del 75%');assert.equal(s.artifact.wardCharge,0);
+ e.phase='windup';e.windup=.02;s.invulnerable=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-6-22,'carica consumata: danno pieno');
  const phase=e.phase;s.area='plaza';step(s,1);assert.equal(e.phase,phase,'Nemico fuori area congelato');
 });
 test('Cave: confini di movimento e nessun bersaglio del Giardino attivo',()=>{

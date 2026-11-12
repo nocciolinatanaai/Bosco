@@ -7,8 +7,8 @@ test('sigillo bloccato prima del ricordo e tecniche disponibili per tutte le cla
  for(const r of CLASSES)for(const mode of ['ward','surge']){const s=awakened(r.id);assert.equal(attuneArtifact(s,mode),true);assert.equal(attuneArtifact(s,'__proto__'),false);}
 });
 test('Custodia richiede un impatto evitato, non il solo comando di schivata',()=>{
- const s=awakened();attuneArtifact(s,'ward');dodge(s);assert.equal(s.shield,0);const hp=s.hp;
- hurt(s,40);assert.equal(s.hp,hp);assert.equal(s.shield,2.2);assert.equal(s.artifact.cooldown,6);
+ const s=awakened();attuneArtifact(s,'ward');dodge(s);assert.equal(s.artifact.wardCharge,0);const hp=s.hp;
+ hurt(s,40);assert.equal(s.hp,hp);assert.equal(s.artifact.wardCharge,6);assert.equal(s.shield,0);assert.equal(s.artifact.cooldown,6);
  hurt(s,40);assert.equal(drainEvents(s).filter(e=>e.type==='artifact-triggered').length,1);
  s.invulnerable=0;s.dodgeRemaining=0;assert.equal(hurt(s,40),10);
 });
