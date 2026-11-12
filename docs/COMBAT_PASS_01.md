@@ -111,25 +111,91 @@ Dopo:
 - chi ignora il cerchio prende colpi;
 - nessuna sconfitta in nessuna riga.
 
+## Correzioni dopo la revisione Codex (testa 39b5548, «modifiche richieste»)
+
+Fonti: docs/COMBAT_PASS_01_REVIEW.md e docs/CLAUDE_COMBAT_01_FEEDBACK.md. Un commit
+separato per ciascuna correzione, sulla stessa PR #4.
+
+**R1, `d69d6ed`: esito terminale unico per ogni carica Impeto.**
+- Ogni azione caricata emette **una sola volta** `surge-outcome`, con `chargeId`,
+  esito (`hit` | `miss` | `lost`) e ragione:
+  - `no-target`: nessun bersaglio alla risoluzione;
+  - `target-lost`: il bersaglio muore o sparisce prima dell'arrivo;
+  - `expired`: il proiettile scade;
+  - `blocked`: copertura del Giardino;
+  - `area-change`: annullato dal cambio d'area;
+  - `defeated`: sconfitta con proiettile in volo.
+- I proiettili persi emettono anche `projectile-lost` (con `chargeId`);
+  `projectile-blocked` porta il `chargeId`.
+- Un proiettile ancora in volo **non ha esito**: non è un miss.
+- HUD e confronto leggono lo stesso evento. L'HUD usa `SURGE_OUTCOME_TEXT`, dove `lost`
+  si legge «A VUOTO».
+- Il confronto conta: usate, a segno, a vuoto, perse, pendenti a fine scontro (0) ed
+  esiti duplicati (0).
+- La sonda `projectile-loss.mjs` di Codex sulla nuova testa dà
+  `projectile-lost / target-lost` e `surge-outcome lost / target-lost` per la carica
+  consumata.
+
+**R2, `bd38b2c`: segnale leggibile nelle Cave, non solo fuori dai pulsanti.**
+- La resistenza di un avversario temprato senza barra propria (il Guardiano) vive anche
+  nell'HUD del personaggio: «Non interrompibile · Guardiano», glifo, 14 px.
+- Il glifo sopra il bersaglio si **nasconde** quando coprirebbe la missione e i suoi
+  pulsanti, l'HUD, la barra del Custode, i comandi, l'intestazione o l'avviso,
+  invece di sovrapporre due testi. Lo stato resta sempre visibile nell'HUD.
+- Lo script di cattura ora considera ostacoli anche quei pannelli e riproduce le Cave
+  in tutti e tre i formati (`CAPTURE_PARTS=warden`):
+  - 1440×900: glifo sul Guardiano e HUD, nessuna sovrapposizione;
+  - 390×844 e 844×390: glifo nascosto perché toccherebbe la missione o i suoi
+    pulsanti; HUD leggibile, nessuna sovrapposizione.
+- Immagini `r2-*-warden-resolute.jpg`, rapporto `capture-r2-caves.json`.
+- L'avviso di resistenza è stato accorciato perché sul telefono veniva tagliato.
+- Limite: il controllo è geometrico. Leggibilità e comprensione restano da verificare
+  con persone.
+
+**Decisione Assassino, `77741e8`: resistenza iniziale sul solo Custode introduttivo**
+(decisione di Codex).
+- Al risveglio il Custode ha già la resistenza armata, con segnale visibile prima del
+  primo colpo del giocatore.
+- Il danno passa sempre. Il primo attacco completato la azzera; poi vale la regola
+  normale.
+- Riavvio e ripresa da checkpoint ricominciano lo scontro allo stesso modo; nulla è
+  salvato.
+- Echi, Sentinella e Guardiano invariati. PV e danni invariati.
+- Confronto rifatto (sei classi, stesse fixture):
+  - spam Assassino: da 0 attacchi / 0 danni a **1 attacco / 26 danni**;
+  - schivata a tempo Assassino: 4,12 s, 0 danni;
+  - spam delle altre cinque classi: identico;
+  - nessuna sconfitta.
+  Altre politiche cambiano tempi per più classi (per esempio uscita dal cerchio,
+  Combattente 4,68 → 6,74 s): la modifica non è neutra.
+- Due test precedenti, che interrompevano il Custode al primo contatto (scatto
+  evoluto, Onda), ora partono dallo stato successivo al primo attacco, con commento.
+  Nella partita reale l'Onda è la seconda mossa, quindi arriva dopo la fine della
+  resistenza iniziale.
+
 ## Difetti e limiti rimasti
 
-1. **L'Assassino vince ancora senza subire attacchi** (spam e schivata, 3,98 s): la
-   prima carica è interrotta, la seconda, non interrompibile, non arriva in tempo.
-   Non ho cambiato PV o danni: è una decisione di bilanciamento da concordare.
-2. **Impeto non migliora tutte le classi rispetto a nessun Sigillo** in questo bot:
-   - schivata a tempo: Combattente 3,38 → 3,68 s, Guaritore 9,44 → 9,66, Ranger 4,46 → 4,50;
-   - migliora Tank 4,96 → 4,70, Mago 7,80 → 7,26 e, nel kiting, Ranger 4,90 → 4,30.
-   Probabile causa: l'anticipo di 0,8 s dell'abilità riordina i colpi, come già visto in
-   PRODUCT-02. La carica stessa va sempre a segno (usate = a segno in tutte le righe).
-   Proposta: provare la variante senza anticipo dell'abilità per Combattente e
-   Guaritore, oppure accettarlo come scambio. Non la applico senza accordo.
-3. **Custodia non compare mai nel confronto** (0 consumi): con il bot a tempo il colpo
-   successivo non arriva entro 6 s, perché il bot non sbaglia. La riduzione è provata
-   dai test mirati e dalla prova «errore successivo» di PRODUCT-02, non da questa tabella.
-4. Il confronto prima/dopo mescola tre regole: per i numeri di una regola alla volta
-   vale PRODUCT-03.
-5. Segnali verificati solo come presenza, dimensione e posizione. Sulla comprensione
-   servono persone.
+1. **Gittata nelle Cave** (controprova di Codex): Mago, Ranger e Guaritore alla gittata
+   massima vincono contro il Guardiano senza rintocchi, perché il Guardiano non si avvia
+   oltre 10 unità.
+   - Non è un bug di `resolute`: è la scelta di un incontro statico. Provocazione e
+     portata di COMBAT-01 riguardano solo il Custode.
+   - Proposta di Tonino: **mantenere** il vantaggio. Il Guardiano è opzionale (la lente
+     si può prendere senza ucciderlo) e la gittata è identità di classe.
+   - Va confermato dal proprietario e da Codex prima di promettere uno scontro
+     impegnativo per tutte le classi. Non allargo la Nova di nascosto.
+2. **Impeto non migliora tutte le classi** rispetto a nessun Sigillo con il bot «abilità
+   appena pronta»: Combattente e Guaritore più lenti di qualche decimo.
+   - Accolta l'obiezione di Codex: niente eccezioni per classe al rimborso.
+   - Prima di toccare i bonus serve una politica di gioco distinta, non il solo bot eager.
+3. **Custodia** mostra il suo vantaggio solo con un errore provocato (prova «errore
+   successivo» di PRODUCT-02 e test mirati). Il bot perfetto non subisce il colpo
+   successivo.
+4. Il confronto prima/dopo mescola più regole: per una regola alla volta vale PRODUCT-03.
+5. Il nome e la barra dell'etichetta del Guardiano (preesistenti) possono stare sotto la
+   missione o l'HUD su telefono. Il segnale di resistenza no: si sposta nell'HUD.
+6. Nessuna prova con persone: comprensione e divertimento non sono dimostrati dai bot o
+   dalle catture.
 
 ## Catture reali (build con CSP, input da tastiera)
 
