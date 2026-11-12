@@ -67,8 +67,9 @@ export function createSealedGuardian(m){
  const leftElbow=root.getObjectByName('guardian-left-elbow'),rightElbow=root.getObjectByName('guardian-right-elbow');
  let rig={left,right,leftLeg,rightLeg,leftElbow,rightElbow,torso,core};
  root.userData.leftArm=left;root.userData.rightArm=right;root.userData.design='sealed-stone-warden';
- // Prova locale: Custode modellato in Blender (GLB) con le stesse giunture; il procedurale resta di ripiego.
- if(typeof document!=='undefined'&&new URLSearchParams(location.search).has('glb')){
+ // ART-03 (candidato): Custode modellato in Blender (tools/blender-probes/custode-probe.py), stesse giunture e stessa posa;
+ // il procedurale resta di ripiego se il GLB non si carica. ?noglb mostra il procedurale per i confronti.
+ if(typeof document!=='undefined'&&!(typeof location!=='undefined'&&new URLSearchParams(location.search).has('noglb'))){
   pendingGlb=import('three/addons/loaders/GLTFLoader.js').then(({GLTFLoader})=>new GLTFLoader().loadAsync((import.meta.env?.BASE_URL||'/')+'art/custode-probe/custode.glb')).then((gltf)=>{
    const g=gltf.scene;g.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(o.material.name==='custode-stone')o.material.color.set(STONE_TINT);}});
    const n=(k)=>g.getObjectByName(k);
