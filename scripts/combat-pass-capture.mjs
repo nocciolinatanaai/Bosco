@@ -104,16 +104,20 @@ try {
     // Un'Onda lanciata quando si è già fuori dal suo cerchio non colpisce, quindi non attiva il Sigillo: si ritenta.
     const endOfCharge = () => { const m = document.getElementById('boss-intent').textContent.match(/· ([\d.]+) s/); return Boolean(m && Number(m[1]) <= .1); };
     const chargedNow = () => /×1,5/.test(document.getElementById('surge-state').textContent) && !document.getElementById('surge-state').hidden;
-    run.dodgeAttempts = 0;
-    for (; run.dodgeAttempts < 6 && !run.surgeCharged; run.dodgeAttempts++) {
-      await advanceUntil(page, () => !/· 0\.[01] s/.test(document.getElementById('boss-intent').textContent), null, 3000, 32);
-      assert.ok(await advanceUntil(page, endOfCharge, null, 12000, 16), 'fine carica');
-      await page.keyboard.press('Space');
-      run.surgeCharged = await advanceUntil(page, chargedNow, null, 1000, 16);
-    }
+    const dodgeForCharge = async () => {
+      for (let attempt = 0; attempt < 6; attempt++) {
+        run.dodgeAttempts = (run.dodgeAttempts || 0) + 1;
+        await advanceUntil(page, () => !/· 0\.[01] s/.test(document.getElementById('boss-intent').textContent), null, 3000, 32);
+        assert.ok(await advanceUntil(page, endOfCharge, null, 12000, 16), 'fine carica');
+        await page.keyboard.press('Space');
+        if (await advanceUntil(page, chargedNow, null, 1000, 16)) return true;
+      }
+      return false;
+    };
+    // 1) carica e misura, poi subito l'attacco base (nessuna cattura in mezzo: durante lo screenshot il tempo scorre).
+    run.surgeCharged = await dodgeForCharge();
     assert.ok(run.surgeCharged, 'schivata d’impatto: carica Impeto');
     run.measures.surge = await measure(page); check(run.measures.surge, '#surge-state', `${name} impeto`);
-    await shot(page, `${name}-impeto-charge`, run, name === 'desktop');
     run.surgeBeforeAttack = (await page.locator('#surge-state').textContent()).trim();
     await page.keyboard.down('KeyJ');
     const outcome = await advanceUntil(page, () => /IMPETO (A SEGNO|A VUOTO)/.test(document.getElementById('surge-state').textContent), null, 5000, 16);
@@ -121,6 +125,8 @@ try {
     assert.ok(outcome, `esito Impeto (stato: ${(await page.locator('#surge-state').textContent()).trim()})`);
     run.surgeOutcome = (await page.locator('#surge-state').textContent()).trim();
     await shot(page, `${name}-impeto-used`, run);
+    // 2) una seconda carica solo per la cattura.
+    if (await dodgeForCharge()) await shot(page, `${name}-impeto-charge`, run, name === 'desktop');
     // Resistenza: tiro caricato (Q) che interrompe; da lì «Non interrompibile» finché il Custode non completa un attacco.
     for (let attempt = 0; attempt < 6 && !(await page.evaluate(visibleSel, '#boss-resolute')); attempt++) {
       await page.keyboard.press('KeyQ'); await advanceUntil(page, visibleSel, '#boss-resolute', 1500, 32);
