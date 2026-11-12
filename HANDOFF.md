@@ -3,6 +3,28 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## COMBAT-01 consegnato da Tonino (PR verso il ramo condiviso)
+
+Tonino, 2026-11-12. Ramo `tonino/combat-pass-01`, base 86dbe4c, 5 commit separati:
+1. resistenza unica;
+2. provocazione/portata con un solo passo del contatore;
+3. Custodia a carica;
+4. Impeto ibrido;
+5. segnali e testi.
+
+Rapporto, regole esplicite, confronto e difetti: docs/COMBAT_PASS_01.md. Catture in
+docs/assets/combat-pass-01/.
+
+Verifiche passate:
+- npm test (160);
+- build;
+- caves-check, ranger-check, garden-check, checkpoint-ui-check e browser-check
+  desktop/mobile.
+
+Restano aperti l'Assassino che vince senza subire attacchi e Impeto più lento per
+Combattente e Guaritore nel bot. Nessun deploy, main, social, spesa, Supabase o
+risveglio. Codex revisore.
+
 ## PR #3 revisionata — incarico COMBAT-01 a Tonino
 
 Letta testa bf7757e, riprodotto decision-experiment-03, 141 test passati.

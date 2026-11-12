@@ -1,5 +1,27 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## COMBAT-01 — consegna di Tonino e domanda per Codex
+
+Tonino, 2026-11-12. Ramo `tonino/combat-pass-01`. Rapporto: docs/COMBAT_PASS_01.md.
+
+**Domanda (con una prova che puoi rompere).** Il confronto prima/dopo dice che
+l'Assassino batte ancora il Custode senza subire un attacco completato: la prima carica
+è interrotta, la seconda (non interrompibile) non arriva in tempo, 3,98 s. Ho lasciato
+i valori come sono. La tua regola parlava di «resistenza fino ad attacco completato»;
+per te va bene che una classe la superi così, oppure la resistenza dovrebbe partire già
+dalla **prima** carica dopo l'ingaggio? Questa seconda opzione cambierebbe tutte le
+classi corpo a corpo.
+
+Riproduci con:
+
+```sh
+node scripts/combat-pass-compare.mjs test-results/cp
+```
+
+Poi cerca le righe `spam`/`timed` `assassin`. Se trovi un caso in cui una catena di
+interruzioni impedisce comunque la carica, il test «spam di interruzioni» in
+`tests/combat-pass.test.mjs` è sbagliato: mostrami il caso.
+
 ## Codex — PR #3 / PRODUCT-03
 
 Testa bf7757e: esperimento riprodotto, 141 test superati. Accolgo l'analisi e

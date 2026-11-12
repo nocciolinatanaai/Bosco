@@ -8,6 +8,7 @@ import { createMemoryTrail } from './visuals/memory-trail.js';
 import { qualitySettings } from './graphics-quality.js';
 import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
+import { RESOLUTE_GLYPH } from './ui.js';
 import { journey, storyObjective, memoryFor } from './journey.js';
 import { ATTUNEMENTS, artifactUnlocked } from './artifacts.js';
 import { screenMovement, joystickVector } from './controls.js';
@@ -28,7 +29,7 @@ export function startRuntime($) {
   window.addEventListener('pagehide', () => { void audio.setPaused(true); });
   let memoryKind = null, lastGuide = null, portraitFailed = false;
   const memory = $('memory'),artifactMenu=$('artifact-menu');
-  let pendingAttunement=null,pausedBeforeArtifact=false;
+  let pendingAttunement=null,pausedBeforeArtifact=false,surgeFeedback=null;
   $('liora-portrait').addEventListener('error', () => { portraitFailed = true; $('liora-portrait').hidden = true; $('liora-frame').hidden = true; memory.classList.remove('with-portrait'); });
   let selected = 'fighter', state = null, paused = false, pausedBeforeInfo = false;
   let target = null, approachId = null, heldAttack = false, pointerId = null;
@@ -149,7 +150,7 @@ export function startRuntime($) {
     $('artifact-open').hidden=!artifactUnlocked(state);
     const attuned=ATTUNEMENTS.find(a=>a.id===state.artifact.attunement);
     $('artifact-status').hidden=!artifactUnlocked(state);
-    $('artifact-status').textContent=attuned?`Sigillo · ${attuned.name} · ${state.artifact.cooldown>0?Math.ceil(state.artifact.cooldown)+' s':'pronto'}`:'Sigillo ritrovato · scegli una tecnica dal menu Sigillo';
+    $('artifact-status').textContent=state.artifact.wardCharge>0?`Custodia carica · prossimo colpo −75% · ${Math.ceil(state.artifact.wardCharge)} s`:attuned?`Sigillo · ${attuned.name} · ${state.artifact.cooldown>0?Math.ceil(state.artifact.cooldown)+' s':'pronto'}`:'Sigillo ritrovato · scegli una tecnica dal menu Sigillo';
   }
   document.querySelectorAll('[data-attunement]').forEach(button=>button.addEventListener('click',()=>{
     if(!state)return;const id=button.dataset.attunement,choice=ATTUNEMENTS.find(a=>a.id===id);if(!choice)return;
@@ -220,7 +221,7 @@ export function startRuntime($) {
       effects.event(event, state, motionReduced());
       if (event.type === 'evolved') void audio.setPaused(paused).then(() => { if (active()) audio.event(event); });
       else audio.event(event);
-      if (event.type === 'hit') floatText(`${event.amount}${event.critical ? '!' : ''}`, event.x, event.z, event.critical ? 'critical' : '');
+      if (event.type === 'hit') floatText(`${event.amount}${event.critical ? '!' : ''}${event.chargeId ? ' ×1,5' : ''}`, event.x, event.z, event.critical || event.chargeId ? 'critical' : '');
       if (event.type === 'heal') { if (event.amount > 0) floatText(`+${event.amount}`, state.x, state.z, 'healing'); notice('Risonanza vitale · impulso rilasciato', 2); }
       if (event.type === 'hurt') {
         floatText(`−${event.amount}`, state.x, state.z, 'damage');
@@ -228,9 +229,13 @@ export function startRuntime($) {
       }
       if (event.type === 'return-shot-ready') notice('TIRO DI RITORNO · Usa l’abilità entro 4 secondi per scoccare due frecce.', 4);
       if (event.type === 'return-shot-fired') notice('TIRO DI RITORNO · Due frecce, una sola apertura.', 3);
-      if(event.type==='artifact-triggered'){notice(event.attunement==='ward'?'CUSTODIA · Protezione del sigillo per 2,2 secondi':'IMPETO · Vigore recuperato e abilità anticipata',2.5);audio.play(event.attunement==='ward'?'guard':'echo');}
+      if(event.type==='artifact-triggered'){notice(event.attunement==='ward'?'CUSTODIA · Il prossimo colpo entro 6 s è ridotto del 75%':'IMPETO · Prossimo attacco base ×1,5 entro 3 s · vigore e abilità anticipata',2.5);audio.play(event.attunement==='ward'?'guard':'echo');}
+      if (event.type === 'ward-consumed') floatText(`CUSTODIA −75%`, state.x, state.z, 'evade');
+      if (event.type === 'surge-consumed') surgeFeedback = { text: 'IMPETO USATO', until: state.time + 1.2, chargeId: event.id };
+      if ((event.type === 'hit' || event.type === 'miss') && event.chargeId && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: event.type === 'hit' ? 'IMPETO A SEGNO ×1,5' : 'IMPETO A VUOTO', until: state.time + 1.2 };
+      if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Il prossimo attacco arriverà comunque: esci dal cerchio o schiva', 2.5);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
-      if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : 'FRATTURA · Spostati dal punto segnato', 2.2);
+      if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : event.reach ? 'FRATTURA A DISTANZA · Il Custode ti prende di mira: esci dal cerchio sotto di te' : 'FRATTURA · Spostati dal punto segnato', 2.2);
       if (event.type === 'miss' && !heldAttack && !keys.has('KeyJ')) notice('Fuori portata · avvicinati al bersaglio', 1.8);
       if (event.type === 'cave-progress') {
         if (['enter', 'leave'].includes(event.interaction)) { syncEnemyViews(); switchArea(); }
@@ -310,11 +315,19 @@ export function startRuntime($) {
     $('dash-state').textContent = state.stamina < 30 ? 'POCO VIGORE' : state.dashCooldown > 0 ? `${state.dashCooldown.toFixed(1)} s` : '30 VIGORE';
     $('attack').disabled = state.status !== 'playing';
     $('combo-label').textContent = state.action?.kind === 'basic' ? `COLPO ${state.action.combo} / 3` : 'TIENI PREMUTO';
+    // Impeto: stato reale della carica (simulazione), non una particella decorativa.
+    const surge = state.artifact.surgeCharge, feedback = surgeFeedback && state.time < surgeFeedback.until ? surgeFeedback.text : '';
+    $('surge-state').hidden = !(surge > 0 || feedback);
+    $('surge-state').textContent = surge > 0 ? `IMPETO ×1,5 · ${surge.toFixed(1)} s` : feedback;
+    $('attack').classList.toggle('surge-ready', surge > 0);
+    $('attack').setAttribute('aria-label', surge > 0 ? `Attacco base potenziato da Impeto, danno ×1,5, ${surge.toFixed(0)} secondi.` : 'Attacco base. Tieni premuto per continuare la combo.');
     $('attack').style.setProperty('--swing', `${state.action?.kind === 'basic' ? state.action.elapsed / state.action.duration * 100 : 0}%`);
     $('region').textContent = `◇ ${state.region}`;
     const boss = state.enemies.find((e) => e.boss); $('boss').hidden = state.area !== 'plaza' || boss.hp <= 0 || boss.sealed; $('boss-hp').value = boss.hp;
     $('boss-intent').textContent = boss.phase === 'windup' ? `${boss.attackKind === 'nova' ? 'ONDA · ALLONTANATI' : 'FRATTURA · SPOSTATI'} · ${boss.windup.toFixed(1)} s` : boss.phase === 'recovery' || boss.phase === 'stagger' ? `APERTURA · ${boss.recovery.toFixed(1)} s` : 'OSSERVA IL SUO ATTACCO';
     $('boss').classList.toggle('charging', boss.phase === 'windup');
+    $('boss-resolute').hidden = !boss.resolute; $('boss-reach').hidden = !(boss.phase === 'windup' && boss.reach);
+    if (boss.phase === 'windup' && boss.reach) $('boss-intent').textContent = `FRATTURA A DISTANZA · ${boss.windup.toFixed(1)} s`;
     $('evolve').hidden = state.evolved || !canEvolve(state);
     $('dash').setAttribute('aria-label', state.evolved ? 'Passo di risonanza. Scatta e colpisce i nemici vicini; 30 vigore.' : 'Scatto. Richiede 30 vigore.');
     $('dash').querySelector('strong').textContent = state.evolved ? 'Risonanza' : 'Scatto';
@@ -323,6 +336,7 @@ export function startRuntime($) {
       const label = labels.get(enemy.id); if (!label) continue;
       label.querySelector('progress').value = enemy.hp;
       label.querySelector('span').textContent = enemy.sealed ? 'Custode · sigillato' : enemy.name;
+      label.querySelector('.resolute-tag').hidden = !enemy.resolute;
       label.classList.toggle('selected', current?.id === enemy.id);
     }
   }
@@ -383,7 +397,8 @@ export function startRuntime($) {
         const label = document.createElement('div'); label.className = 'enemy-label';
         const name = document.createElement('span'); name.textContent = enemy.sealed ? 'Custode · sigillato' : enemy.name;
         const hp = document.createElement('progress'); hp.max = enemy.maxHp; hp.value = enemy.hp;
-        label.append(name, hp); $('world-labels').append(label); labels.set(enemy.id, label);
+        const tag = document.createElement('b'); tag.className = 'resolute-tag'; tag.hidden = true; tag.innerHTML = `${RESOLUTE_GLYPH}Non interrompibile`;
+        label.append(tag, name, hp); $('world-labels').append(label); labels.set(enemy.id, label);
       }
     }
   }
@@ -394,6 +409,7 @@ export function startRuntime($) {
   }
 
   function beginSession(restoredState = null, replaceSave = false) {
+    surgeFeedback = null;
     clearControls(); effects.clear(); audio.stop();
     void audio.setEnabled($('audio-start').checked);
     for (const { group, marker } of enemyViews.values()) {
