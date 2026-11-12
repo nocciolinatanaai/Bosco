@@ -54,7 +54,7 @@ def fetch(url, path):
     return path.read_bytes()
 for key, (slug, size, use) in MODELS.items():
     # Gli URL dei file inclusi vengono dall'API pubblica dei file di Poly Haven (salvata in cache).
-    files = json.loads(fetch(f'https://api.polyhaven.com/files/{slug}', CACHE / f'{slug}_files.json'))['gltf']['1k']['gltf']
+    maps = json.loads(fetch(f'https://api.polyhaven.com/files/{slug}', CACHE / f'{slug}_files.json')); files = maps['gltf']['1k']['gltf']
     urls = {pathlib.Path(n).name: v['url'] for n, v in files['include'].items()}
     MODEL_URL_OF = lambda name: files['url'] if name.endswith('.gltf') else urls[pathlib.Path(name).name]
     gltf_raw = fetch(files['url'], CACHE / f'{slug}_1k.gltf')
@@ -66,9 +66,22 @@ for key, (slug, size, use) in MODELS.items():
         raw = fetch(MODEL_URL_OF(uri), CACHE / pathlib.Path(uri).name)
         if kind == 'arm': image['uri'] = None; continue
         img = Image.open(io.BytesIO(raw)).convert('RGB').resize((size, size), Image.LANCZOS)
-        buf = io.BytesIO(); img.save(buf, 'JPEG', quality=80, optimize=True, subsampling=2); data = buf.getvalue()
-        name = f'{key}_{kind}.jpg'; (OUT / name).write_bytes(data); image['uri'] = name; keep[name] = True
-        entry['files'].append({'file': name, 'from': MODEL_URL_OF(uri), 'sourceSha256': sha(raw), 'transform': f'1024→{size} Lanczos, JPEG q80', 'sha256': sha(data), 'bytes': len(data)})
+        if kind == 'color':
+            # Il materiale è alphaMode MASK: il colore porta la maschera CC0 «Alpha» del set nel canale A
+            # (PNG RGBA), altrimenti il ritaglio non avrebbe alcun dato. Maschera binarizzata a 0/255.
+            alpha_url = maps['Alpha']['1k']['png']['url']
+            alpha_raw = fetch(alpha_url, CACHE / pathlib.Path(alpha_url).name)
+            mask = Image.open(io.BytesIO(alpha_raw)).convert('L').resize((size, size), Image.LANCZOS).point(lambda v: 255 if v >= 128 else 0)
+            img.putalpha(mask)
+            buf = io.BytesIO(); img.save(buf, 'PNG', optimize=True); data = buf.getvalue()
+            name = f'{key}_{kind}.png'; image['mimeType'] = 'image/png'
+            entry['files'].append({'file': name, 'from': [MODEL_URL_OF(uri), alpha_url], 'sourceSha256': [sha(raw), sha(alpha_raw)],
+                                   'transform': f'colore 1024→{size} Lanczos + maschera Alpha 1024→{size} Lanczos soglia 128 → PNG RGBA', 'sha256': sha(data), 'bytes': len(data)})
+        else:
+            buf = io.BytesIO(); img.save(buf, 'JPEG', quality=80, optimize=True, subsampling=2); data = buf.getvalue()
+            name = f'{key}_{kind}.jpg'; image['mimeType'] = 'image/jpeg'
+            entry['files'].append({'file': name, 'from': MODEL_URL_OF(uri), 'sourceSha256': sha(raw), 'transform': f'1024→{size} Lanczos, JPEG q80', 'sha256': sha(data), 'bytes': len(data)})
+        (OUT / name).write_bytes(data); image['uri'] = name; keep[name] = True
     # Rimuove l'ARM: immagini, texture e riferimenti nei materiali; ruvidità/metallo costanti.
     dropped = [i for i, im in enumerate(gltf['images']) if im['uri'] is None]
     remap_img = {old: new for new, old in enumerate(i for i in range(len(gltf['images'])) if i not in dropped)}
