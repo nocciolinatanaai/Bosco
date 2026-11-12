@@ -67,3 +67,29 @@ export function batchArchitecture(root) {
   root.clear();
   return result;
 }
+
+// ART-02: UV in metri per i blocchi (una texture si ripete ogni `unit` metri invece di
+// stirarsi su ogni faccia). Ordine facce di BoxGeometry: +x, -x, +y, -y, +z, -z.
+export function worldBoxUV(geometry, unit = 2) {
+  const { width: w, height: h, depth: d } = geometry.parameters || {};
+  if (!w) return geometry;
+  const dims = [[d, h], [d, h], [w, d], [w, d], [w, h], [w, h]], uv = geometry.attributes.uv;
+  const perFace = uv.count / 6;
+  for (let i = 0; i < uv.count; i++) { const [a, b] = dims[Math.floor(i / perFace)]; uv.setXY(i, uv.getX(i) * a / unit, uv.getY(i) * b / unit); }
+  uv.needsUpdate = true; return geometry;
+}
+// Piano orizzontale con UV in coordinate del mondo (x, z) / unit: le texture del terreno
+// restano continue fra pezzi diversi.
+export function worldPlane(parent, material, [x0, z0, x1, z1], y = 0, unit = 3) {
+  const geometry = new THREE.PlaneGeometry(x1 - x0, z1 - z0, 1, 1); geometry.rotateX(-Math.PI / 2);
+  geometry.translate((x0 + x1) / 2, y, (z0 + z1) / 2);
+  const pos = geometry.attributes.position, uv = geometry.attributes.uv;
+  for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / unit, -pos.getZ(i) / unit);
+  const mesh = piece(parent, geometry, material); mesh.castShadow = false; return mesh;
+}
+export function worldDisc(parent, material, cx, cz, radius, y = 0, unit = 3, segments = 64) {
+  const geometry = new THREE.CircleGeometry(radius, segments); geometry.rotateX(-Math.PI / 2); geometry.translate(cx, y, cz);
+  const pos = geometry.attributes.position, uv = geometry.attributes.uv;
+  for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / unit, -pos.getZ(i) / unit);
+  const mesh = piece(parent, geometry, material); mesh.castShadow = false; return mesh;
+}

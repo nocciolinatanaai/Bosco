@@ -13,6 +13,7 @@ renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight, false);
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
 const world = createArtWorld(renderer);
+if (!before) { await (await import('/src/visuals/plaza-surfaces.js')).plazaSurfacesReady(); await (await import('/src/visuals/plaza-props.js')).plazaPropsReady(); }
 world.player.userData.setClass(CLASSES.find((r) => r.id === 'ranger'));
 const daria = world.player.getObjectByName('Daria-ranger-prototype'); if (daria?.userData.loadVisual) await daria.userData.loadVisual();
 const enemy = { x: 0, z: -9, boss: true, phase: 'idle', windup: 0, chargeDuration: 1.15, recoveryDuration: 1.5, recovery: 0, attackKind: 'fracture', radius: 3.6, aimX: 0, aimZ: -9, hp: 280, sealed: false, reach: false };

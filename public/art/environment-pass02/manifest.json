@@ -138,6 +138,47 @@
           "bytes": 16221
         }
       ]
+    },
+    {
+      "id": "fern",
+      "source": "https://polyhaven.com/a/fern_02",
+      "slug": "fern_02",
+      "use": "felci lungo i bordi e fra le rovine",
+      "size": 256,
+      "files": [
+        {
+          "file": "fern_normal.jpg",
+          "from": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_nor_gl_1k.jpg",
+          "sourceSha256": "45bce132c6e96a0864bc89ab5da51361ab3f4afa83a6669ae499ab5ca811f621",
+          "transform": "1024→256 Lanczos, JPEG q80",
+          "sha256": "e0be496faa47819322abcc01be2800a51d32926ba9c2c3fec60e50039fdfefe4",
+          "bytes": 6769
+        },
+        {
+          "file": "fern_color.jpg",
+          "from": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_diff_1k.jpg",
+          "sourceSha256": "a828a6e7b4c01c826911e2eac4b3afc7457dab7b3b392a31c681ed88b7d50029",
+          "transform": "1024→256 Lanczos, JPEG q80",
+          "sha256": "54d177d47d0befc365f6c23288b329645da38ca466fad2cb6f68f453ea6c3158",
+          "bytes": 6749
+        },
+        {
+          "file": "fern.bin",
+          "from": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fern_02/fern_02.bin",
+          "sourceSha256": "fe1abb762bcbbc7ad9e86925c8080437a62add257d9280e9142fdc85c226e64c",
+          "transform": "invariato",
+          "sha256": "fe1abb762bcbbc7ad9e86925c8080437a62add257d9280e9142fdc85c226e64c",
+          "bytes": 176176
+        },
+        {
+          "file": "fern.gltf",
+          "from": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fern_02/fern_02_1k.gltf",
+          "sourceSha256": "33974295ee19670af4877705fc7d91f33f42d6302f0d44a625e072271223031f",
+          "transform": "URI locali; ARM rimossa, ruvidità 0,85 e metallo 0 costanti",
+          "sha256": "4799162835b3fdb4a6861c1f9dce262290c90150e33c5ac8370ab403d7c5bcb7",
+          "bytes": 3850
+        }
+      ]
     }
   ]
 }
