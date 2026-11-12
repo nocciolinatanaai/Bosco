@@ -11,6 +11,7 @@ import { createMaterials } from './materials.js';
 import { batchArchitecture, block, curve, ellipsoid, link, piece, random, worldBoxUV, worldPlane, worldDisc } from './geometry.js';
 import { createPlazaSurfaces } from './plaza-surfaces.js';
 import { addFerns } from './plaza-props.js';
+import { dressPlaza } from './plaza-dressing.js';
 import { createAdventurer, createGuardian } from './actors.js';
 
 function arch(root, m, x, y, z, radius, thickness = .65, depth = 1, count = 21, rotation = 0) {
@@ -254,6 +255,7 @@ export function createArtWorld(renderer) {
   });
   plazaRoot.add(batchArchitecture(source));
   addFerns(plazaRoot, ferns);
+  dressPlaza(plazaRoot); // ENV-03: cristalli, pozzanghere, fiori, lanterne (fuori da sentiero e cerchio)
   const p = portal(plazaRoot, m);
   const actor = createAdventurer(m); scene.add(actor.root);
   const auraMat = new THREE.MeshBasicMaterial({ color: '#edc58c', transparent: true, opacity: .18, side: THREE.DoubleSide, depthWrite: false });
