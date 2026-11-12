@@ -54,12 +54,13 @@ const visibleSel = (sel) => { const el = document.querySelector(sel); return Boo
 async function capture(page, path) {
   await page.clock.resume();
   try { await page.screenshot({ path, timeout: 120000 }); }
-  finally {
-    // Il tempo reale continua mentre si calcola l'istante: si riprova con un margine più ampio.
-    for (let margin = 50; ; margin *= 2) {
-      try { await page.clock.pauseAt(await page.evaluate((m) => Date.now() + m, margin)); break; }
-      catch (error) { if (margin > 5000 || !/past/.test(error.message)) throw error; }
-    }
+  finally { await pauseSoon(page); }
+}
+// Il tempo reale continua mentre si calcola l'istante: si riprova con un margine più ampio.
+async function pauseSoon(page) {
+  for (let margin = 50; ; margin *= 2) {
+    try { await page.clock.pauseAt(await page.evaluate((m) => Date.now() + m, margin)); return; }
+    catch (error) { if (margin > 20000 || !/past/.test(error.message)) throw error; }
   }
 }
 async function shot(page, name, run, gray = false) {
@@ -84,7 +85,7 @@ async function setup(browser, name, width, height, fixture, video = false) {
   await page.evaluate(() => { const q = document.getElementById('quality-select'); q.value = 'light'; q.dispatchEvent(new Event('change', { bubbles: true })); const m = document.getElementById('motion-option'); if (!m.checked) m.click(); });
   await click('close-info');
   await page.evaluate(() => document.getElementById('world').focus()); // i tasti non vanno a un campo del pannello appena chiuso
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 500)); await page.clock.runFor(500);
+  await pauseSoon(page); await page.clock.runFor(500);
   return { context, page, errors, external };
 }
 
