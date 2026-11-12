@@ -1,0 +1,67 @@
+{
+  "status": "failed",
+  "startedAtUtc": "2026-11-12T14:47:22.168Z",
+  "note": "Input reali (tastiera) sulla build; tempi di schivata letti dall’HUD. Prova di presenza/disposizione, non di comprensione.",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": "1440x900",
+      "captures": [],
+      "measures": {
+        "farFracture": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 599,
+                "y": 137,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#boss-reach",
+              "text": "◎Frattura a distanza · esci dal cerchio",
+              "fontSize": 14,
+              "rect": {
+                "x": 784,
+                "y": 137,
+                "w": 288,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 986,
+                "y": 284,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "csp": true,
+  "buildEntrySha256": "75562dd5a247b4b48c13848abff5c26eb29d3b3ff819b1cce36423eecd15c75a",
+  "error": "page.screenshot: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n"
+}

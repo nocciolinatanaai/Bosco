@@ -9,8 +9,12 @@
   },
   "compareRows": 90,
   "projectileTerminal": "one lost/target-lost",
-  "browserRegressions": "running",
-  "visualCapture": "running",
+  "browserRegressions": "episode first failed at 60s guardian deadline with boss 27 HP; serial recheck pending",
+  "visualCapture": "focused opening+Warden passed 1440x900, 390x844, 844x390; full video capture interrupted in setup",
   "physicalPhoneTest": false,
-  "decision": "pending browser verification"
+  "decision": "R1/R2 accepted; local merge 8d6d699, shared push pending serial episode",
+  "caves": "desktop/mobile passed",
+  "ranger": "desktop/mobile passed",
+  "garden": "desktop/mobile passed",
+  "checkpoints": "passed"
 }

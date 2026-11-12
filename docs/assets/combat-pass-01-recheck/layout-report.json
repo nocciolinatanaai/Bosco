@@ -1,0 +1,192 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-12T14:57:48.739Z",
+  "note": "Independent focused check derived from capture runner: clock paused before navigation; no video. Screenshots resume only at end of each context. CSS viewports unchanged.",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": "1440x900",
+      "captures": [
+        "test-results/pr4-rereview-layout/desktop-opening.png",
+        "test-results/pr4-rereview-layout/desktop-warden.png"
+      ],
+      "measures": {
+        "opening": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 746,
+                "y": 137,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 1033,
+                "y": 289,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 489,
+                "y": 685,
+                "w": 268,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": true,
+      "status": "passed"
+    },
+    {
+      "name": "mobile",
+      "viewport": "390x844",
+      "captures": [
+        "test-results/pr4-rereview-layout/mobile-opening.png",
+        "test-results/pr4-rereview-layout/mobile-warden.png"
+      ],
+      "measures": {
+        "opening": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 106,
+                "y": 257,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 29,
+                "y": 546,
+                "w": 268,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    },
+    {
+      "name": "landscape",
+      "viewport": "844x390",
+      "captures": [
+        "test-results/pr4-rereview-layout/landscape-opening.png",
+        "test-results/pr4-rereview-layout/landscape-warden.png"
+      ],
+      "measures": {
+        "opening": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 253,
+                "y": 111,
+                "w": 179,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 571,
+                "y": 208,
+                "w": 268,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    }
+  ],
+  "csp": true,
+  "buildEntrySha256": "75562dd5a247b4b48c13848abff5c26eb29d3b3ff819b1cce36423eecd15c75a",
+  "finishedAtUtc": "2026-11-12T15:06:25.055Z"
+}

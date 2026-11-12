@@ -2,8 +2,9 @@
 
 Testa Tonino **a7926ed** (gioco e CSS 3108ed0, ultimo commit documentale).
 Correzioni lette in COMBAT_PASS_01, PEER_REVIEW e HANDOFF; stessa PR #4.
-Checkpoint della review: verifiche browser e catture ancora in esecuzione,
-nessuna integrazione dichiarata prima della loro conclusione.
+R1 e R2 verificati e accolti. Merge locale 8d6d699, testo di sconfitta corretto
+in 82a9935. Push condiviso ancora sospeso per ripetizione seriale dell’episodio
+completo; il primo tentativo parallelo ha incontrato il limite di tempo sotto.
 
 ## Risposta ai rilievi
 
@@ -14,8 +15,10 @@ nessuna integrazione dichiarata prima della loro conclusione.
   contatore miss resta zero: è corretto, il nuovo contratto distingue lost.
 - R2: lo stato del Guardiano resta nell'HUD quando il glifo sul bersaglio
   coprirebbe missione o comandi. Il controllo comprende ora pannelli e avviso,
-  e riproduce le Cave anche landscape. Catture consegnate ispezionate; verifica
-  indipendente ancora in corso. Non basta la sola presenza del nuovo HUD.
+  e riproduce le Cave anche landscape. Catture consegnate ispezionate e prove
+  indipendenti concluse nei tre formati: segnale 14 px, dentro viewport, senza
+  taglio o collisioni con i pannelli; il tag sul bersaglio si nasconde sul telefono.
+  Verificato anche il segnale iniziale del Custode prima di qualunque attacco.
 - Resistenza iniziale: correttamente limitata al Custode in questa demo;
   danni validi, primo attacco la consuma, ripresa/riavvio ricominciano lo scontro.
   Il confronto ripetuto conferma Assassino spam 3,98 s / un attacco / 26 danni,
@@ -44,8 +47,16 @@ futuri boss, sui premi competitivi o sul divertimento di persone reali.
 
 - 166 test della testa PR passati; build passata, warning chunk >500 kB.
 - Confronto 90 righe ripetuto; sonda R1 e test del consiglio di sconfitta passati.
-- Regressioni browser: in esecuzione.
-- Catture indipendenti desktop/portrait/landscape: in esecuzione.
+- Cave, Ranger, Giardino e checkpoint: desktop/mobile passati sulla testa PR.
+- Episodio completo: primo tentativo fallito al limite di 60 s sul Custode,
+  27 PV rimasti, giocatore 104/130 PV. Immagine diagnostica mostra un altro
+  impatto, quindi il combattimento continuava; non è prova sufficiente a
+  escludere un problema. Ripetizione seriale in corso sulla build integrata.
+- Catture indipendenti mirate: apertura Custode e Guardiano superati in
+  1440×900, 390×844 e 844×390, senza video. La cattura completa con video è
+  stata interrotta in setup desktop per costo/attesa; non dichiarata passata.
+  Le altre immagini di combattimento consegnate da Tonino sono state ispezionate,
+  non riprodotte tutte dal nuovo driver.
 
 Evidenze in docs/assets/combat-pass-01-recheck. In questa sessione il binario
 ffmpeg atteso da Playwright non era presente; è stato riusato /usr/bin/ffmpeg
@@ -54,3 +65,13 @@ La prima cattura non avviata per questo motivo non è un difetto di gioco.
 Nessuna prova su smartphone fisico, nessuna approvazione artistica dai test.
 ART-02 resta delimitato da ART_PASS_02_SCOPE, dopo integrazione COMBAT-01.
 Niente main, deploy, social, spese, Supabase o risvegli.
+
+## Metodo delle catture indipendenti
+
+layout-probe.mjs deriva dal runner di Tonino e conserva fixture, comandi reali,
+clock a passi e controlli dei pannelli. Mette in pausa il clock prima della
+navigazione, avanza 500 ms di inizializzazione e non registra video; riprende
+il tempo per la cattura finale di ciascun contesto, che poi chiude. Non cambia
+viewport CSS, qualità o codice applicativo. Il report conserva hash della build.
+I percorsi originali del report sotto test-results corrispondono ai file
+versionati qui con lo stesso nome. Non è una misura di fps né un playtest umano.

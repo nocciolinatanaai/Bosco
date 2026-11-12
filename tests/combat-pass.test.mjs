@@ -222,7 +222,7 @@ test('Impeto: nessun doppio bonus. La falciata a più bersagli usa una sola cari
   const { s, boss } = surged('fighter');
   const shade = s.enemies.find(e => e.id === 'shade-a'); Object.assign(shade, { hp: 500, maxHp: 500, phase: 'idle', x: 1, z: -8.2 });
   s.combo = 2; s.comboReset = 1; attack(s); assert.equal(s.action.combo, 3);
-  s.action.duration = s.action.windup + .1; s.inputBuffer = 0; tickCooldowns(s, s.action.windup); 
+  s.action.duration = s.action.windup + .1; s.inputBuffer = 0; tickCooldowns(s, s.action.windup);
   let ev = drainEvents(s); while (s.action) { tickCooldowns(s, DT); ev = ev.concat(drainEvents(s)); }
   const charged = ev.filter(e => e.type === 'hit' && e.chargeId);
   assert.equal(ev.filter(e => e.type === 'surge-consumed').length, 1);

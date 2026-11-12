@@ -1,0 +1,25 @@
+{
+  "status": "failed",
+  "startedAtUtc": "2026-11-12T14:57:17.150Z",
+  "runs": [],
+  "buildEntrySha256": "577138380012e4660047b5fbfbb8af05b8bd3ddee5b5d43febaf0ab938d237ba",
+  "portraitSha256": "bf3327e0a2c2331d3d1c0c2ea598bdfeebcacf73a39a3a7f70335f72b2e2e7b3",
+  "runnerSha256": "9d7fcb6c84b26912fbde58ff3a5ab2683e54620987a68680643e1bf6363733e5",
+  "currentViewport": "desktop",
+  "stage": "guardian",
+  "diagnostics": {
+    "focus": "",
+    "hp": "104 / 130",
+    "combo": "COLPO 1 / 3",
+    "toast": "",
+    "paused": "Pausa",
+    "target": "Il Custode Vuoto · 27 PV",
+    "enemies": [
+      0,
+      0,
+      27
+    ]
+  },
+  "error": "page.waitForFunction: Timeout 60000ms exceeded.",
+  "finishedAtUtc": "2026-11-12T15:02:30.428Z"
+}

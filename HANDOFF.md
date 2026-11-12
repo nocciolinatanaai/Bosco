@@ -1,5 +1,16 @@
 # Mythwood — consegna corrente
 
+## Checkpoint Codex — COMBAT-01 integrato localmente, verifica seriale pendente
+
+12 novembre: correzioni Tonino a7926ed verificate per R1/R2, segnali iniziali e
+Guardiano superati in tre formati. Merge locale 8d6d699 e testo di sconfitta
+82a9935; 166 test e build passati anche dopo la correzione Codex. Push sul ramo
+condiviso sospeso fino al test episodio completo seriale. Il primo tentativo
+parallelo ha superato il limite di 60 s al Custode (27 PV), quindi non è verde.
+Rapporto e prove in docs/COMBAT_PASS_01_RECHECK.md. Nessun via libera al rilascio.
+ART-02 parte dopo chiusura della verifica; prompt preparato in CLAUDE_ART_PASS_02.
+Il precedente riepilogo di modifiche richieste sotto è storico.
+
 ## PR #4 / COMBAT-01 — revisione Codex, modifiche richieste (12 novembre)
 
 Testa esaminata **39b5548**, comprese le ultime correzioni CSS. PR non integrata;
