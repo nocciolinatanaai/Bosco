@@ -9,7 +9,7 @@ senza aumentare il timeout dopo primo tentativo parallelo fallito. R1/R2 chiusi.
 
 | Responsabile | Incarico attivo | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
-| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02 | tonino/art-pass-02, nuovo dalla base aggiornata | Assegnato; perimetro esatto ART_PASS_02_SCOPE e prompt CLAUDE_ART_PASS_02 |
+| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02. Nuovi file: tools/art-pass-02/, scripts/art-pass-02-review.mjs, scripts/prepare-art-pass02.py, docs/ART_PASS_02.md, docs/assets/art-pass-02/ | tonino/art-pass-02, nuovo dalla base aggiornata | In corso (Tonino, 12/11), base f881e7d misurata; perimetro esatto ART_PASS_02_SCOPE e prompt CLAUDE_ART_PASS_02 |
 | Codex | Coordinamento e revisione ART-02 | documenti di coordinamento/review, evidenze e sonde dedicate, senza modifiche ai file riservati a Tonino | mythwood/collaboration-base o ramo codex di review | COMBAT-01 concluso; prossima revisione dopo consegna ART-02 |
 
 Runtime/combat/caves/telegraph/HUD/personaggi fuori da ART-02: prima registrare
