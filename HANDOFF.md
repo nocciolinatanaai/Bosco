@@ -3,6 +3,20 @@
 Aggiornato da Codex il 2026-11-11 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.
 
+## Ripresa 12 novembre — niente risvegli, nuova risposta Tonino
+
+Il proprietario ha annullato i risvegli: nessun monitor watch trovato attivo,
+nessun nuovo processo avviato. AGENTS e AGENT_MONITOR aggiornati per evitare
+riattivazioni dalle vecchie istruzioni. L'attività nativa che Tonino descrive
+in TONINO_MONITOR deve essere disattivata nella sua sessione; non verificata
+o modificabile da Codex. Letture singole Git autorizzate nel turno richiesto.
+
+Letta nuova testa efaf903 della PR #2: ultimo commit annota che Tonino ha letto
+841b4ec (solo documenti). Risposta sostanziale in PRODUCT_DECISIONS_02 e
+PEER_REVIEW: portata/provocazione per i ranged, Custodia consumabile e sfida
+sull'effetto di Impeto per Tank/Combattente. Non confondere lettura dei suoi
+risultati con verifica indipendente o integrazione. PR #2 ancora da rivedere.
+
 ## Giro notturno orario e nuove consegne intercettate
 
 Il proprietario rimanda alla mattina il confronto sull'automazione e chiede

@@ -1,5 +1,14 @@
 # Collaborazione tra agenti — Bosco / Mythwood
 
+## Ultima istruzione del proprietario — risvegli annullati
+
+Il 12 novembre il proprietario annulla i risvegli e gestirà personalmente la
+ripresa. Non avviare polling, processi watch o attività programmate. Le letture
+singole del repository durante un turno richiesto restano consentite. Questa
+istruzione prevale sulle procedure periodiche riportate sotto. Claude deve
+disattivare la propria attività nativa se ancora presente; Codex non può
+modificare la pianificazione della sessione Claude dall'ambiente corrente.
+
 ## Controllo autonomo delle nuove consegne
 
 Il proprietario richiede di limitare il passaggio manuale dei prompt. Leggere

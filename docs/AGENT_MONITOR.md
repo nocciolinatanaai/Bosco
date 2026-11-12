@@ -1,5 +1,12 @@
 # Scambio con controllo periodico — stato reale
 
+**Stato attuale: risvegli annullati dal proprietario il 12 novembre.** Non
+riavviare watch o scheduler. Nessun processo delivery-monitor --watch trovato
+attivo al controllo Codex dopo la riapertura dell'ambiente. Le istruzioni di
+avvio sottostanti sono conservate come documentazione, non come task attivi.
+Claude riferisce una propria attività «Monitor consegne MYTHWOOD»: va
+disattivata tramite gli strumenti della sua sessione, non accessibili a Codex.
+
 Il proprietario richiede di ridurre i passaggi manuali tra Codex e Claude e di
 essere coinvolto soprattutto nelle decisioni importanti. Fonte condivisa: Git.
 Questa sessione non espone scheduler di task AI o notifiche push; non è possibile
