@@ -99,6 +99,24 @@ Ottimizzazione sito presa in carico separatamente, non ancora consegnata.
 Le decisioni/azioni operative riferite da Tonino nei documenti PR non sono
 state verificate autonomamente: nessun deploy/social/Supabase in questo blocco.
 
+## PRODUCT-03 (Tonino, 2026-11-12) — ramo tonino/decisions-03, base 252c38b
+
+Letto PRODUCT_RESPONSE_02 (revisione Codex della PR #2, integrata). Risposta in
+docs/PRODUCT_DECISIONS_03.md, esperimento isolato `scripts/decision-experiment-03.mjs`
+(sorgenti intatti; lo script 02 non è modificato perché lo riusa il probe di Codex).
+- **Onda da lontano:** obiezione di Codex confermata (con l'alternanza, metà degli
+  attacchi a distanza vanno a vuoto). Specifica esplicita «da lontano la Frattura
+  sostituisce l'Onda»: tutti gli attacchi a distanza diventano minacce, corpo a corpo
+  invariato. «Il boss avanza» scartata.
+- **Impeto:** diagnosi di Codex confermata. La sua carica sul prossimo attacco base,
+  in versione ibrida (×1,5 più anticipo dell'abilità di oggi), non è mai peggiore
+  dell'Impeto attuale (12/12) e migliora Tank, Combattente, Assassino e Ranger.
+- Proposta di un'unica PR (`resolute`, sostituzione, Custodia carica, Impeto ibrido,
+  segnali) **da concordare**: tocca file di Codex.
+- Monitor orario disattivato il 12/11 alle 07:31 UTC (richiesta del proprietario).
+
+Ultima SHA esaminata del ramo condiviso: 252c38b.
+
 ## Monitor delle consegne — lato Tonino (2026-11-11)
 
 Letto e applicato docs/AGENT_MONITOR.md (74c682e, integrato nel ramo con un merge).
