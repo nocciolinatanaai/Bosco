@@ -349,7 +349,10 @@ export function evolve(s) {
   if (!canEvolve(s)) return false;
   s.evolved = true; s.action = null; s.inputBuffer = 0; s.skillBuffer = 0; s.maxHp = Math.round(s.role.hp * 1.3); s.hp = s.maxHp; s.stamina = 100;
   s.cooldown = 0; s.dashCooldown = 0;
-  for (const enemy of s.enemies) if (enemy.boss) { enemy.sealed = false; enemy.timer = 1.2; }
+  // Custode introduttivo: resistenza già armata all'ingaggio (decisione COMBAT-01, revisione Codex).
+  // Il primo attacco arriva in ogni caso e si legge; dopo il primo attacco completato vale la regola normale.
+  // Solo il Custode: echi, Sentinella e Guardiano delle Cave restano interrompibili dal primo colpo.
+  for (const enemy of s.enemies) if (enemy.boss) { enemy.sealed = false; enemy.timer = 1.2; enemy.resolute = true; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: true, opening: true }); }
   emit(s, 'evolved'); return true;
 }
 

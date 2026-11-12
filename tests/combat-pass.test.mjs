@@ -7,11 +7,14 @@ import { restoreCheckpoint, checkpointFromSession } from '../src/checkpoints.js'
 const DT = .02;
 function step(s, seconds) { for (let t = 0; t < seconds - 1e-9; t += DT) { tickCooldowns(s, DT); advanceEnemies(s, DT); } }
 // Custode sbloccato, echi già sconfitti: stessa preparazione di game.test.
-function bossFight(role = 'tank') {
+function bossFight(role = 'tank', opening = false) {
   const s = createSession(role);
   for (const e of s.enemies) if (!e.boss) { e.hp = 0; e.phase = 'dead'; }
   assert.equal(evolve(s), true); drainEvents(s);
   const boss = s.enemies.find(e => e.boss);
+  // I contratti della regola corrente partono dallo stato dopo il primo attacco completato;
+  // la resistenza iniziale ha i suoi test dedicati in fondo al file.
+  if (opening === false) boss.resolute = false;
   return { s, boss };
 }
 // Scudo d'urto del Tank: interrompe (stagger 1) tutti i nemici entro 4,2 × 1,2.
@@ -57,9 +60,11 @@ test('Resistenza: nessuna resistenza permanente (morte, riavvio, checkpoint, cam
   Object.assign(s, { x: 0, z: -5 }); shieldBash(s); assert.equal(boss.resolute, true);
   // Checkpoint: la resistenza non è nello schema e il ripristino riparte pulito.
   const cp = checkpointFromSession(s); assert.equal(JSON.stringify(cp).includes('resolute'), false);
-  const restored = restoreCheckpoint(cp); assert.ok(restored.enemies.every(e => !e.resolute));
+  // La ripresa ricomincia lo scontro: nessuna resistenza acquisita, solo quella iniziale del Custode.
+  const restored = restoreCheckpoint(cp); assert.ok(restored.enemies.filter(e => !e.boss).every(e => !e.resolute));
+  assert.equal(restored.enemies.find(e => e.boss).resolute, true);
   // Riavvio: una sessione nuova non eredita nulla.
-  assert.ok(createSession('tank').enemies.every(e => e.resolute === false));
+  assert.ok(createSession('tank').enemies.every(e => e.resolute === false), 'prima del risveglio nessuno è resistente');
   // Echi normali: mai temprati, si interrompono sempre.
   const plain = createSession('tank'); Object.assign(plain, { x: -5, z: 4.5 });
   const shade = plain.enemies.find(e => e.id === 'shade-a');
@@ -276,4 +281,34 @@ test('R1: colpo già risolto non genera un secondo esito; melee a segno/a vuoto 
   assert.deepEqual(outcomes(ev).map((e) => e.outcome), ['hit']);
   ({ s } = surged('fighter', { x: 0, z: 8 })); attack(s); ev = resolveAction(s);
   assert.deepEqual(outcomes(ev).map((e) => [e.outcome, e.reason]), [['miss', 'no-target']]);
+});
+
+// ── Decisione Assassino: resistenza iniziale sul solo Custode introduttivo ──
+test('Resistenza iniziale: armata al risveglio, visibile prima del primo colpo, anche dopo riavvio e ripresa', () => {
+  const { s, boss } = bossFight('assassin', true);
+  assert.equal(boss.resolute, true, 'armata all’ingaggio, prima di qualunque colpo del giocatore');
+  const fresh = createSession('assassin'); for (const e of fresh.enemies) if (!e.boss) { e.hp = 0; e.phase = 'dead'; }
+  evolve(fresh); assert.equal(fresh.enemies.find((e) => e.boss).resolute, true, 'riavvio');
+  const resumed = restoreCheckpoint({ version: 4, attunement: null, autoSave: false, role: 'assassin', stage: 'awakened', traces: 0, garden: { step: 0, area: 'plaza', sentryDefeated: false }, caves: { step: 0, inside: false, wardenDefeated: false } });
+  assert.equal(resumed.enemies.find((e) => e.boss).resolute, true, 'ripresa da checkpoint');
+  assert.equal(JSON.stringify(checkpointFromSession(resumed)).includes('resolute'), false, 'non salvata');
+  assert.ok(s.enemies.filter((e) => !e.boss).every((e) => !e.resolute), 'solo il Custode');
+  assert.equal(createSession('assassin').enemies.find((e) => e.boss).resolute, false, 'Custode ancora sigillato: nessuna resistenza');
+});
+test('Resistenza iniziale: il primo colpo non interrompe ma fa danno; dopo il primo attacco completato torna la regola normale', () => {
+  const { s, boss } = bossFight('tank', true);
+  Object.assign(s, { x: 0, z: -5 }); boss.timer = 0; advanceEnemies(s, DT); assert.equal(boss.phase, 'windup');
+  const hp = boss.hp; shieldBash(s);
+  assert.equal(boss.phase, 'windup', 'la prima carica non si interrompe'); assert.ok(boss.hp < hp, 'danno valido');
+  let g = 0; while (boss.phase === 'windup' && g++ < 400) { s.hp = s.maxHp; step(s, DT); }
+  assert.equal(boss.resolute, false, 'primo attacco completato: resistenza iniziale finita');
+  g = 0; while (boss.phase !== 'idle' && boss.phase !== 'pursuit' && g++ < 400) { s.hp = s.maxHp; step(s, DT); }
+  shieldBash(s); assert.equal(boss.phase, 'stagger', 'ora la prima interruzione vale'); assert.equal(boss.resolute, true, 'e riarma la regola corrente');
+});
+test('Resistenza iniziale: Guardiano delle Cave ed echi invariati', async () => {
+  const { CAVE_GATE } = await import('../src/caves.js');
+  const { interactCaves } = await import('../src/game.js');
+  const c = restoreCheckpoint({ version: 3, attunement: null, autoSave: false, role: 'tank', stage: 'guardian', traces: 3, garden: { step: 4, area: 'plaza', sentryDefeated: false } });
+  Object.assign(c, CAVE_GATE); interactCaves(c, 'enter');
+  assert.equal(c.enemies.find((e) => e.type === 'warden').resolute, false);
 });
