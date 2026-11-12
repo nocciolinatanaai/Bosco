@@ -171,3 +171,57 @@ test('Custodia: lo Scudo d’urto del Tank non spreca la carica; checkpoint e sc
   assert.equal(JSON.stringify(cp).includes('Charge'), false); assert.equal(restoreCheckpoint(cp).artifact.wardCharge, 0);
   t.hp = 1; t.invulnerable = 0; hurt(t, 100); assert.equal(t.status, 'defeated'); assert.equal(t.artifact.wardCharge, 0);
 });
+
+// ── 4/5: Impeto ibrido ──
+function surged(role, at = { x: 0, z: -6 }) {
+  const { s, boss } = bossFight(role); attuneArtifact(s, 'surge'); boss.timer = 99; s.cooldown = 3; s.stamina = 50;
+  assert.equal(dodge(s), true); assert.equal(hurt(s, 30), 0);
+  assert.equal(s.artifact.surgeCharge, 3); assert.equal(s.stamina, 50 - 30 + 18); assert.ok(Math.abs(s.cooldown - 2.2) < 1e-9, 'anticipo abilità conservato');
+  s.dodgeRemaining = 0; s.invulnerable = 0; s.action = null; Object.assign(s, at); drainEvents(s);
+  return { s, boss };
+}
+const resolveAction = (s) => { let g = 0; while (s.action && g++ < 100) tickCooldowns(s, DT); return drainEvents(s); };
+test('Impeto: il prossimo attacco base fa ×1,5, consumato alla risoluzione; il successivo è normale', () => {
+  const { s, boss } = surged('fighter');
+  assert.equal(attack(s), true); assert.equal(s.artifact.surgeCharge > 0, true, 'non consumato all’avvio');
+  let ev = resolveAction(s); const hit1 = ev.find(e => e.type === 'hit' && e.enemyId === boss.id);
+  assert.equal(hit1.amount, Math.round(16 * 1.5 * 1.5)); assert.ok(hit1.chargeId > 0); assert.equal(s.artifact.surgeCharge, 0);
+  assert.equal(ev.filter(e => e.type === 'surge-consumed').length, 1);
+  s.comboReset = 0; attack(s); ev = resolveAction(s);
+  assert.equal(ev.find(e => e.type === 'hit').amount, Math.round(16 * 1.5)); assert.equal(ev.find(e => e.type === 'hit').chargeId, 0);
+});
+test('Impeto: va a vuoto ma si consuma; annullato dalla schivata non si consuma; scade a 3 s; l’abilità non lo usa', () => {
+  let { s } = surged('fighter', { x: 0, z: 8 });
+  attack(s); let ev = resolveAction(s);
+  assert.equal(s.artifact.surgeCharge, 0); assert.ok(ev.some(e => e.type === 'miss' && e.chargeId > 0), 'miss caricato');
+  assert.equal(ev.some(e => e.type === 'hit' && e.chargeId), false, 'nessun colpo caricato a segno');
+  ({ s } = surged('fighter')); attack(s); s.dashCooldown = 0; s.stamina = 100; assert.equal(dodge(s), true);
+  assert.equal(s.action, null); assert.ok(s.artifact.surgeCharge > 0, 'annullato prima della risoluzione: carica intatta');
+  ({ s } = surged('fighter')); s.cooldown = 0; cast(s); resolveAction(s); assert.ok(s.artifact.surgeCharge > 0, 'l’abilità non consuma');
+  ({ s } = surged('fighter')); for (let t = 0; t < 3.05; t += DT) tickCooldowns(s, DT);
+  assert.equal(s.artifact.surgeCharge, 0); assert.ok(drainEvents(s).some(e => e.type === 'surge-expired'));
+});
+test('Impeto a distanza: il proiettile lanciato conserva il danno calcolato; se si perde la carica è usata ma non a segno', () => {
+  let { s, boss } = surged('ranger', { x: 0, z: 0 });
+  attack(s); let ev = resolveAction(s);
+  assert.equal(s.artifact.surgeCharge, 0, 'consumata al lancio'); assert.equal(s.projectiles[0].damage, 15 * 1.5);
+  let g = 0; while (s.projectiles.length && g++ < 200) tickCooldowns(s, DT); ev = ev.concat(drainEvents(s));
+  const landed = ev.find(e => e.type === 'hit' && e.chargeId);
+  assert.equal(landed.amount, Math.round(15 * 1.5 * 1.5));
+  ({ s, boss } = surged('ranger', { x: 0, z: 2 }));
+  attack(s); resolveAction(s); assert.equal(s.projectiles.length, 1); boss.hp = 0; boss.phase = 'dead';
+  g = 0; while (s.projectiles.length && g++ < 200) tickCooldowns(s, DT); ev = drainEvents(s);
+  assert.equal(ev.some(e => e.type === 'hit' && e.chargeId), false, 'proiettile perso: nessun colpo caricato contato');
+});
+test('Impeto: nessun doppio bonus. La falciata a più bersagli usa una sola carica; l’attacco in coda è normale', () => {
+  const { s, boss } = surged('fighter');
+  const shade = s.enemies.find(e => e.id === 'shade-a'); Object.assign(shade, { hp: 500, maxHp: 500, phase: 'idle', x: 1, z: -8.2 });
+  s.combo = 2; s.comboReset = 1; attack(s); assert.equal(s.action.combo, 3);
+  s.action.duration = s.action.windup + .1; s.inputBuffer = 0; tickCooldowns(s, s.action.windup); 
+  let ev = drainEvents(s); while (s.action) { tickCooldowns(s, DT); ev = ev.concat(drainEvents(s)); }
+  const charged = ev.filter(e => e.type === 'hit' && e.chargeId);
+  assert.equal(ev.filter(e => e.type === 'surge-consumed').length, 1);
+  assert.equal(new Set(charged.map(e => e.chargeId)).size, 1, 'stessa carica per l’intera azione');
+  assert.ok(charged.some(e => e.enemyId === boss.id) && charged.some(e => e.enemyId === shade.id), 'due bersagli, un’azione');
+  s.comboReset = 0; attack(s); ev = resolveAction(s); assert.equal(ev.some(e => e.type === 'hit' && e.chargeId), false);
+});

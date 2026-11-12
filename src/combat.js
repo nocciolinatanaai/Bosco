@@ -1,5 +1,5 @@
 import { createCaves, cavePosition, advanceWarden, interactCaves as caveInteraction } from './caves.js';
-import { createArtifact, selectAttunement, activateArtifact, consumeWard, WARD_FACTOR } from './artifacts.js';
+import { createArtifact, selectAttunement, activateArtifact, consumeWard, consumeSurge, WARD_FACTOR, SURGE_FACTOR } from './artifacts.js';
 import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
 import { createTrail, resonateTrail } from './trail.js';
@@ -144,7 +144,7 @@ export function hurt(s, amount, source = null) {
   s.hp -= actual; s.invulnerable = .28;
   s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
   emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 || warded, warded });
-  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; s.artifact.wardCharge = 0; emit(s, 'defeated'); }
+  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; s.artifact.wardCharge = 0; s.artifact.surgeCharge = 0; emit(s, 'defeated'); }
   return actual;
 }
 
@@ -153,7 +153,7 @@ export function clearResolute(s, enemy) {
   enemy.resolute = false; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: false });
 }
 
-function hit(s, enemy, damage, stagger = 0, critical = false) {
+function hit(s, enemy, damage, stagger = 0, critical = false, chargeId = 0) {
   if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return;
   s.lesson.hit = true;
   const amount = Math.min(enemy.hp, Math.round(damage * (s.evolved ? 1.5 : 1)));
@@ -172,7 +172,7 @@ function hit(s, enemy, damage, stagger = 0, critical = false) {
       if (enemy.tempered) { enemy.resolute = true; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: true }); }
     }
   }
-  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical, resisted });
+  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical, resisted, chargeId });
   if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; clearResolute(s, enemy); emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
   if (!s.resonanceReady && !s.evolved && s.enemies.filter(e => !e.boss && (e.area || 'plaza') === 'plaza').every(e => e.hp <= 0)) {
     s.resonanceReady = true; emit(s, 'resonance-ready');
@@ -182,14 +182,14 @@ function hit(s, enemy, damage, stagger = 0, critical = false) {
   if (!s.cleared && s.enemies.filter(e => (e.area || 'plaza') === 'plaza').every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
 }
 
-function projectile(s, action, damage, empowered = false, echo = false) {
+function projectile(s, action, damage, empowered = false, echo = false, chargeId = 0) {
   const target = s.enemies.find((e) => inArea(s, e) && e.id === action.targetId && e.hp > 0 && !e.sealed && distance(e, s) <= action.range);
-  if (!target) { emit(s, 'miss'); return null; }
+  if (!target) { emit(s, 'miss', { chargeId }); return null; }
   const offset = echo ? .6 : 0;
   const item = { id: ++s.sequence, x: s.x + action.facing.z * offset, z: s.z - action.facing.x * offset, targetId: target.id, speed: empowered ? 23 : 18,
-    life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style };
+    life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style, chargeId };
   s.projectiles.push(item);
-  emit(s, 'projectile', { projectileId: item.id, x: s.x, z: s.z });
+  emit(s, 'projectile', { projectileId: item.id, x: s.x, z: s.z, chargeId });
   return item;
 }
 
@@ -202,10 +202,14 @@ function resolve(s, action) {
   });
   emit(s, 'strike', { kind: action.kind, style: s.role.style, combo: action.combo, range: action.range, x: s.x, z: s.z, facing: { ...action.facing } });
   if (action.kind === 'basic') {
-    if (ranged(s)) { projectile(s, action, s.role.basicDamage); return; }
+    // Impeto: una carica per azione. Con più bersagli (falciata del Combattente) il ×1,5 vale per l'intera azione.
+    let chargeId = 0;
+    if (consumeSurge(s)) { emit(s, 'surge-consumed', { combo: action.combo }); chargeId = s.sequence; }
+    const mult = chargeId ? SURGE_FACTOR : 1;
+    if (ranged(s)) { projectile(s, action, s.role.basicDamage * mult, false, false, chargeId); return; }
     const targets = action.combo === 3 && s.role.id === 'fighter' ? inFront : inFront.sort((a, b) => distance(a, s) - distance(b, s)).slice(0, 1);
-    for (const enemy of targets) hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1), action.combo === 3 ? .3 : 0);
-    if (!targets.length) emit(s, 'miss');
+    for (const enemy of targets) hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1) * mult, action.combo === 3 ? .3 : 0, false, chargeId);
+    if (!targets.length) emit(s, 'miss', { chargeId });
     return;
   }
   if (s.role.id === 'ranger') {
@@ -238,6 +242,7 @@ export function tickCooldowns(s, delta) {
   if (s.status !== 'playing' || dt === 0) return 0;
   s.time += dt;
   s.artifact.cooldown=Math.max(0,s.artifact.cooldown-dt);
+  if (s.artifact.surgeCharge > 0) { s.artifact.surgeCharge = Math.max(0, s.artifact.surgeCharge - dt); if (s.artifact.surgeCharge === 0) emit(s, 'surge-expired'); }
   if (s.artifact.wardCharge > 0) { s.artifact.wardCharge = Math.max(0, s.artifact.wardCharge - dt); if (s.artifact.wardCharge === 0) emit(s, 'ward-expired'); }
   for (const key of ['cooldown', 'dashCooldown', 'returnShot', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
   if (s.staminaDelay === 0) s.stamina = Math.min(100, s.stamina + 20 * dt);
@@ -265,7 +270,7 @@ export function tickCooldowns(s, delta) {
     if (s.area === 'garden' && blockedByGardenCover(p, next)) {
       p.life = 0; emit(s, 'projectile-blocked', { x: p.x, z: p.z }); continue;
     }
-    if (d <= step + .4) { hit(s, target, p.damage, p.empowered ? .65 : 0); p.life = 0; }
+    if (d <= step + .4) { hit(s, target, p.damage, p.empowered ? .65 : 0, false, p.chargeId || 0); p.life = 0; }
     else { p.x += (target.x - p.x) / d * step; p.z += (target.z - p.z) / d * step; }
   }
   s.projectiles = s.projectiles.filter((p) => p.life > 0);
