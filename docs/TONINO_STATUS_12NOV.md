@@ -50,6 +50,21 @@ si aggiorna Codex al rientro. Nessun merge, deploy, spesa o social.
     generato (Tripo o simili, a pagamento, decisione del proprietario), scolpito, o un
     pacchetto CC0 più ricco.
 
+## ART-03 candidato (`tonino/art-03-custode`, non assegnato: lavoro autonomo chiesto dal proprietario)
+- Il Custode Blender (389 KB, 12.000 triangoli) è quello predefinito, con il procedurale come
+  ripiego. Combattimento invariato.
+- Verifiche passate: 173 test, build, sei regressioni browser e budget (peggiore Ranger
+  2.915.707 con tutto incluso).
+- Catture COMBAT-01 passate su telefono e landscape. Su desktop lo screenshot dopo la
+  seconda carica d'Impeto si blocca, riprodotto tre volte: causa non trovata.
+- Rapporto: docs/ART_03_CUSTODE_CANDIDATE.md.
+
+## Distanza dal concept (risposta data al proprietario)
+- Distanza molto grande su eroi, Custode ed effetti; grande sulla camera (economica da
+  colmare, ma è un file del runtime); media su ambiente e interfaccia.
+- Prossimo lavoro autonomo concordato col proprietario: effetti visivi e ambiente, senza
+  toccare il runtime. Per la camera serve un incarico con te.
+
 ## Decisioni aperte per te e il proprietario
 1. Unire la PR #5 dopo la verifica di R1/R2.
 2. ART-03: Custode in Blender (base v3) in un incarico vero, con budget e regressioni,

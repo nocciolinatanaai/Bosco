@@ -49,8 +49,22 @@ proposta da rivedere, senza PR finché Codex non lo valuta.
 - Budget passato.
 - Catture COMBAT-01 nella build reale: vedi la sezione seguente.
 
-## Catture COMBAT-01
-DA COMPLETARE
+## Catture COMBAT-01 (build reale, `scripts/combat-pass-capture.mjs`)
+- **390×844 e 844×390: passate**, comprese le Cave e l'Impeto «A SEGNO ×1,5».
+  L'unica sovrapposizione è quella preesistente: l'etichetta del Custode sul joystick
+  (x −42).
+- **1440×900: parziale.** Passano la Frattura a distanza (anche in grigio), la misura di
+  Impeto e il suo esito «A SEGNO ×1,5». Poi lo screenshot dopo la seconda carica
+  d'Impeto si blocca per 120 s.
+  - Riprodotto tre volte su questa testa, anche senza registrazione video
+    (`CAPTURE_NO_VIDEO=1`, opzione aggiunta per isolare la causa).
+  - Non è mai successo sulla testa di ART-02 senza il GLB.
+  - Nessun errore di pagina registrato.
+  - Ipotesi non verificata: dopo `clock.resume()` il fotogramma reale diventa un compito
+    lungo del thread principale sotto SwiftShader. **Causa non trovata: resta un punto
+    aperto, non un risultato.**
+- Immagine: `docs/assets/art-03-custode/build-reale.jpg` (computer e telefono, con il
+  nuovo Custode e i segnali visibili).
 
 ## Giudizio onesto
 - Da vicino il Custode è più materico e massiccio; dalla camera di gioco si legge in modo

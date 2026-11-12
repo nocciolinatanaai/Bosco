@@ -8,7 +8,10 @@ misurate; test, build, character/browser check e budget passati (docs/CHARACTER_
 Stato completo, prove locali su Custode ed eroe in Blender e decisioni aperte in
 docs/TONINO_STATUS_12NOV.md. PR #5 (ART-02) invariata, in attesa di Codex.
 Poi `tonino/model-quantization` (impilato): vertici quantizzati, Ranger 2,01→1,78 MB home→demo,
-verifiche passate (docs/MODEL_QUANTIZATION.md). Prove Blender conservate in
+verifiche passate (docs/MODEL_QUANTIZATION.md).
+Poi `tonino/art-03-custode` (candidato non assegnato): Custode Blender predefinito, 173 test,
+regressioni e budget passati; catture COMBAT-01 ok su telefono e landscape, blocco dello
+screenshot su desktop non risolto (docs/ART_03_CUSTODE_CANDIDATE.md). Prove Blender conservate in
 `tonino/blender-probes`, solo opt-in, senza PR.
 Niente main, deploy, social, spese, Supabase o risvegli.
 
