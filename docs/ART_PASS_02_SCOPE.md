@@ -1,9 +1,9 @@
-# ART-02 — proposta concordata per il prossimo incarico grafico
+# ART-02 — incarico grafico dopo COMBAT-01
 
 Decisione del proprietario: Three.js resta il motore web; salto grafico rilevante,
 anche sul mobile. Concordo con Tonino sull'uso di risorse CC0 migliori e prove
-misurate. Avvio **dopo la revisione e integrazione di COMBAT-01**, su un nuovo
-ramo tonino/art-pass-02 dalla base condivisa aggiornata. Nessuna riserva o task
+misurate. COMBAT-01 è integrato in 8d6d699: incarico assegnato a Tonino su un
+nuovo ramo tonino/art-pass-02 dalla base condivisa aggiornata. Nessuna riserva o task
 di combattimento viene aggirato per iniziare prima.
 
 ## Una scena convincente prima di ampliare il mondo

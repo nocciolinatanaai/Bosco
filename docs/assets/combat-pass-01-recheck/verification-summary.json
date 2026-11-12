@@ -1,5 +1,5 @@
 {
-  "reviewedCommit": "a7926ed",
+  "reviewedCommit": "a7926edd60cbb7609dbab49011125ba009955a05",
   "build": "PR head before Codex defeat text correction",
   "demoScript": "./assets/demo-C-MtQFVr.js",
   "demoScriptSha256": "75562dd5a247b4b48c13848abff5c26eb29d3b3ff819b1cce36423eecd15c75a",
@@ -9,12 +9,24 @@
   },
   "compareRows": 90,
   "projectileTerminal": "one lost/target-lost",
-  "browserRegressions": "episode first failed at 60s guardian deadline with boss 27 HP; serial recheck pending",
+  "browserRegressions": "serial desktop/mobile episode + corrupt/blocked storage passed on integrated build",
   "visualCapture": "focused opening+Warden passed 1440x900, 390x844, 844x390; full video capture interrupted in setup",
   "physicalPhoneTest": false,
-  "decision": "R1/R2 accepted; local merge 8d6d699, shared push pending serial episode",
+  "decision": "accepted and integrated locally; ready for shared push",
   "caves": "desktop/mobile passed",
   "ranger": "desktop/mobile passed",
   "garden": "desktop/mobile passed",
-  "checkpoints": "passed"
+  "checkpoints": "passed",
+  "mergeCommit": "8d6d699",
+  "defeatAdviceCommit": "82a9935",
+  "integratedDemoScript": "./assets/demo-vutR5lpA.js",
+  "integratedDemoScriptSha256": "b401f98c89c3ed09df69a00560e143e7c02d0b57a1eb6453e22c5588961f01b6",
+  "integratedUnitTests": {
+    "pass": 166,
+    "fail": 0
+  },
+  "firstEpisodeAttempt": "failed at guardian 60s deadline under concurrent browser load; preserved separately",
+  "finishedAtUtc": "2026-11-12T15:15:57.942Z",
+  "runnerReportCorrection": "stage reset to starting per viewport, after successful serial run; no test logic change",
+  "runnerReportSyntaxCheck": "node --check passed"
 }

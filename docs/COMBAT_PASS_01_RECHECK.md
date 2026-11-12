@@ -2,9 +2,9 @@
 
 Testa Tonino **a7926ed** (gioco e CSS 3108ed0, ultimo commit documentale).
 Correzioni lette in COMBAT_PASS_01, PEER_REVIEW e HANDOFF; stessa PR #4.
-R1 e R2 verificati e accolti. Merge locale 8d6d699, testo di sconfitta corretto
-in 82a9935. Push condiviso ancora sospeso per ripetizione seriale dell’episodio
-completo; il primo tentativo parallelo ha incontrato il limite di tempo sotto.
+**Esito: approvata e integrata sul ramo di collaborazione**, merge 8d6d699.
+Testo di sconfitta corretto in 82a9935. Verifica seriale dell’episodio completo
+conclusa sulla build integrata; il primo tentativo fallito resta documentato sotto.
 
 ## Risposta ai rilievi
 
@@ -45,13 +45,18 @@ futuri boss, sui premi competitivi o sul divertimento di persone reali.
 
 ## Verifiche e prossimo incarico
 
-- 166 test della testa PR passati; build passata, warning chunk >500 kB.
+- 166 test della testa PR passati; ripetuti e passati anche dopo integrazione
+  e correzione del testo di sconfitta. Build finale passata, warning chunk >500 kB.
 - Confronto 90 righe ripetuto; sonda R1 e test del consiglio di sconfitta passati.
 - Cave, Ranger, Giardino e checkpoint: desktop/mobile passati sulla testa PR.
 - Episodio completo: primo tentativo fallito al limite di 60 s sul Custode,
   27 PV rimasti, giocatore 104/130 PV. Immagine diagnostica mostra un altro
   impatto, quindi il combattimento continuava; non è prova sufficiente a
-  escludere un problema. Ripetizione seriale in corso sulla build integrata.
+  escludere un problema. Ripetizione seriale **passata**, desktop/mobile e fallback
+  storage corrotto/bloccato, stessa logica di test e stessa scadenza di 60 s.
+  Nessun aumento del timeout, nessun hook o cambio di danno per far passare il test.
+  Il risultato sostiene l’ipotesi del carico concorrente, senza dimostrare che
+  il runner sia privo di scadenze intermittenti in ogni ambiente.
 - Catture indipendenti mirate: apertura Custode e Guardiano superati in
   1440×900, 390×844 e 844×390, senza video. La cattura completa con video è
   stata interrotta in setup desktop per costo/attesa; non dichiarata passata.
@@ -75,3 +80,22 @@ il tempo per la cattura finale di ciascun contesto, che poi chiude. Non cambia
 viewport CSS, qualità o codice applicativo. Il report conserva hash della build.
 I percorsi originali del report sotto test-results corrispondono ai file
 versionati qui con lo stesso nome. Non è una misura di fps né un playtest umano.
+
+ART-02 può iniziare dalla base aggiornata: incarico in CLAUDE_ART_PASS_02 e
+file riservati in COLLABORATION. Nessuna riapplicazione di 3222cd1 o COMBAT-01.
+
+Riproduzione delle prove mirate dalla base integrata:
+
+```sh
+npm run build
+MYTHWOOD_CHROMIUM_PATH=/usr/bin/chromium node docs/assets/combat-pass-01-recheck/layout-probe.mjs test-results/recheck-layout
+node docs/assets/combat-pass-01-recheck/projectile-loss.mjs test-results/projectile-loss-recheck.json
+```
+
+Non ricostruire dist mentre un altro controllo browser la sta usando.
+
+Correzione successiva del solo report in browser-check: azzerare stage a
+starting al cambio viewport. Prima conservava idle-defeat del desktop durante
+l'avvio mobile, inducendo una lettura errata dello stato. Non modifica input,
+asserzioni o scadenze. Il report della prova conclusa conserva l'hash del runner
+prima di questa correzione; verifica sintattica della riga aggiornata separata.

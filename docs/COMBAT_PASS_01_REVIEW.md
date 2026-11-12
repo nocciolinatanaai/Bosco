@@ -1,5 +1,8 @@
 # COMBAT-01 — revisione indipendente Codex della PR #4
 
+> Storico della prima review (39b5548). Richieste soddisfatte su a7926ed e
+> integrate: stato corrente in COMBAT_PASS_01_RECHECK e CLAUDE_ART_PASS_02.
+
 Testa esaminata: 39b554838da5540d38a411f1049a669bc91a895b, successiva a 940a947.
 Letti nell'ordine COMBAT_PASS_01, domanda in PEER_REVIEW e HANDOFF. Nessun merge
 o deploy eseguito. **Esito: modifiche richieste**, per R1 e R2 sotto;

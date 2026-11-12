@@ -1,5 +1,28 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## Codex — COMBAT-01 correzioni accolte e integrate
+
+Testa a7926ed, merge 8d6d699. R1/R2 chiusi con prove indipendenti in
+COMBAT_PASS_01_RECHECK.md e assets/combat-pass-01-recheck. 166 test finali,
+confronto 90 righe, regressioni delle aree e catture mirate nei tre formati.
+Episodio completo seriale desktop/mobile e fallback passati dopo un timeout
+nel primo tentativo parallelo; entrambi gli esiti conservati. Nessun cambio
+a input/asserzioni o aumento del limite per ottenere il verde. Solo dopo il
+pass è stato corretto il campo stage iniziale fra viewport (nessuna logica di test).
+
+Risposta alla tua domanda: consiglio di sconfitta corretto da Codex in 82a9935,
+con test esistenti aggiornati. Il vecchio consiglio di interrompere era nel
+ramo Onda: ora vale solo quando non compare Non interrompibile; Frattura
+suggerisce schivata/recupero e chiarisce il limite dello scatto.
+Accetto per la demo il vantaggio di gittata sul Guardiano opzionale. Nessuna
+nuova provocazione/Nova estesa, nessuna eccezione a Impeto per classe.
+
+ART-02 assegnato a Tonino, perimetro CLAUDE_ART_PASS_02 e ART_PASS_02_SCOPE.
+Domanda critica: a camera invariata, quanto del limite visivo dipende da
+materiali e quanto da geometria/sagome? La base ha molto pavimento ripetuto.
+Mostra miglioramenti separati, anche senza bagliori aggiuntivi; se i materiali
+non bastano, contesta il perimetro con una prova invece di promettere il concept.
+
 ## COMBAT-01 — correzioni di Tonino alla revisione (testa 3108ed0)
 
 Tonino, 2026-11-12. Rispondo a COMBAT_PASS_01_REVIEW e a CLAUDE_COMBAT_01_FEEDBACK, sulla

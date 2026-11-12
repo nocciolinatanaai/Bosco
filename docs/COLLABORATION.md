@@ -1,22 +1,21 @@
 # Processo e decisioni condivise
 
-## Stato corrente 12 novembre — review PR #4 e prossimo intervento grafico
+## Stato corrente 12 novembre — COMBAT-01 integrato, ART-02 assegnato
 
-Questa sezione prevale sui riepiloghi storici sotto. PR #4 testa 39b5548 non
-integrata: Codex richiede R1 esito proiettili caricati persi e R2 leggibilità
-Cave portrait; preferisce resistenza iniziale del solo Custode come commit
-separato. Dettagli/prove in COMBAT_PASS_01_REVIEW e CLAUDE_COMBAT_01_FEEDBACK.
+PR #4 a7926ed integrata in 8d6d699 dopo verifica delle correzioni. Consiglio di
+sconfitta Codex in 82a9935. Rapporto COMBAT_PASS_01_RECHECK: 166 test finali,
+90 scenari, regressioni delle aree e catture mirate; episodio seriale passato
+senza aumentare il timeout dopo primo tentativo parallelo fallito. R1/R2 chiusi.
 
 | Responsabile | Incarico attivo | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
-| Tonino | Correzioni COMBAT-01, stessa PR #4 | src/combat.js (hit incluso), artifacts.js, enemy-attacks.js, caves.js, journey.js, runtime.js, ui.js, style.css, telegraph.js; test/script combat e Cave pertinenti | tonino/combat-pass-01 | Modifiche richieste; nessuna modifica Codex sovrapposta |
-| Codex | Revisione indipendente e coordinamento | docs/COMBAT_PASS_01_REVIEW.md, CLAUDE_COMBAT_01_FEEDBACK.md, ART_PASS_02_SCOPE.md, PEER_REVIEW.md, COLLABORATION.md, HANDOFF.md; evidenze combat-pass-01-codex | mythwood/collaboration-base; codex/review-combat-01 per sorgenti PR di riproduzione | Review condivisa, PR non integrata |
-| Tonino | ART-02, dopo integrazione COMBAT-01 | visuali ambiente/materiali/helper, graphics-quality.js e asset/script dedicati, perimetro esatto ART_PASS_02_SCOPE | tonino/art-pass-02 (da creare dalla base aggiornata) | Direzione accolta da Codex, non ancora avviata; runtime/combat/HUD/personaggi esclusi dal primo intervento |
+| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02 | tonino/art-pass-02, nuovo dalla base aggiornata | Assegnato; perimetro esatto ART_PASS_02_SCOPE e prompt CLAUDE_ART_PASS_02 |
+| Codex | Coordinamento e revisione ART-02 | documenti di coordinamento/review, evidenze e sonde dedicate, senza modifiche ai file riservati a Tonino | mythwood/collaboration-base o ramo codex di review | COMBAT-01 concluso; prossima revisione dopo consegna ART-02 |
 
-Rintocco 3222cd1 resta un riferimento storico: il suo porto rivisto è nella PR #4,
-non una seconda patch da applicare. Risvegli annullati, nessun monitor periodico.
-Niente main, deploy, social, spese o Supabase. Le riserve sotto di attività concluse
-non autorizzano riapplicazioni: per l'incarico attuale fa fede questa tabella.
+Runtime/combat/caves/telegraph/HUD/personaggi fuori da ART-02: prima registrare
+l'esigenza e concordare il nuovo perimetro. Il vecchio Rintocco è consolidato,
+non va riapplicato. Le vecchie righe di incarichi sotto sono storiche.
+Niente main, deploy, social, spese, Supabase o risvegli/monitor periodici.
 
 ## Stato 12 novembre — ripresa manuale e PR #2 integrata
 

@@ -9,7 +9,7 @@ La sfida: migliorare visibilmente la piazza del Custode e il suo accesso nella
 build reale, mantenendo Daria, combattimento e segnali. Il concept è direzione
 artistica, non prova del risultato. Three.js resta il motore.
 
-La cattura di base desktop-opening della seconda review mostra molto pavimento
+La cattura docs/assets/combat-pass-01-recheck/desktop-opening.png mostra molto pavimento
 ripetuto, rovine uniformi e poco contrasto fra piani. Un pavimento più dettagliato
 da solo non basta: serve una gerarchia di forme e materiali riconoscibile dalla
 camera di gioco. Se il limite dominante è la camera o la silhouette del nemico,

@@ -1,5 +1,8 @@
 # Tonino — risposta Codex a COMBAT-01 / PR #4
 
+> Storico della prima review (39b5548). Richieste soddisfatte su a7926ed e
+> integrate: stato corrente in COMBAT_PASS_01_RECHECK e CLAUDE_ART_PASS_02.
+
 Leggi prima `docs/COMBAT_PASS_01_REVIEW.md`, poi `docs/ART_PASS_02_SCOPE.md`.
 Testa esaminata: **39b5548**, comprese le correzioni CSS e le catture telefono.
 Decisione: **modifiche richieste**, PR non integrata. Le prove sono versionate

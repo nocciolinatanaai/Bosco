@@ -1,45 +1,34 @@
 # Mythwood — consegna corrente
 
-## Checkpoint Codex — COMBAT-01 integrato localmente, verifica seriale pendente
+## COMBAT-01 integrato; prossimo incarico ART-02 (12 novembre)
 
-12 novembre: correzioni Tonino a7926ed verificate per R1/R2, segnali iniziali e
-Guardiano superati in tre formati. Merge locale 8d6d699 e testo di sconfitta
-82a9935; 166 test e build passati anche dopo la correzione Codex. Push sul ramo
-condiviso sospeso fino al test episodio completo seriale. Il primo tentativo
-parallelo ha superato il limite di 60 s al Custode (27 PV), quindi non è verde.
-Rapporto e prove in docs/COMBAT_PASS_01_RECHECK.md. Nessun via libera al rilascio.
-ART-02 parte dopo chiusura della verifica; prompt preparato in CLAUDE_ART_PASS_02.
-Il precedente riepilogo di modifiche richieste sotto è storico.
+PR #4 testa a7926ed verificata e integrata con merge **8d6d699** sul ramo
+mythwood/collaboration-base. R1 e R2 chiusi: esito terminale unico per le cariche,
+segnale del Guardiano leggibile nell'HUD quando il glifo coprirebbe la quest.
+Resistenza iniziale del solo Custode accolta. Il vecchio Rintocco 3222cd1 è
+consolidato nel porto della PR: non riapplicarlo separatamente.
 
-## PR #4 / COMBAT-01 — revisione Codex, modifiche richieste (12 novembre)
+Codex ha corretto il consiglio di sconfitta (82a9935): lo scatto non interrompe
+un attacco quando compare Non interrompibile. Nessun cambio a PV/danni/mosse.
+Accolto il vantaggio di gittata contro il Guardiano opzionale per questa demo,
+con limite esplicito e senza generalizzarlo ai futuri boss.
 
-Testa esaminata **39b5548**, comprese le ultime correzioni CSS. PR non integrata;
-il codice di gioco sul ramo condiviso resta quello di 86dbe4c. Sono stati
-condivisi solo documenti e prove della review. Fonte di riproduzione completa:
-ramo `codex/review-combat-01` (codice PR più documenti, nessuna patch applicativa).
+Verifiche: 166 test e build sulla versione integrata; confronto 90 righe;
+Cave/Ranger/Giardino/checkpoint desktop/mobile sulla testa PR. Segnale iniziale
+Custode e Guardiano verificati indipendentemente in 1440×900, 390×844, 844×390.
+Episodio completo seriale desktop/mobile e fallback storage passati sulla build
+integrata. Primo tentativo parallelo fallito a 60 s con Custode a 27 PV:
+report conservato, nessun aumento del timeout. Cattura completa con video
+interrotta in setup; le catture indipendenti sono mirate, non un rifacimento
+integrale di quelle di Tonino. Rapporto: docs/COMBAT_PASS_01_RECHECK.md.
 
-Leggere `docs/COMBAT_PASS_01_REVIEW.md`, poi
-`docs/CLAUDE_COMBAT_01_FEEDBACK.md`. Due correzioni richieste a Tonino:
-- proiettile caricato perso: manca esito terminale con chargeId, contatori/HUD;
-- segnale Cave a 390×844 sovrapposto alla quest, intersezione circa 95×25 px.
-
-Decisione proposta per la domanda Assassino: resistenza iniziale sul solo
-Custode introduttivo. Esperimento 48 casi: spam passa da 0 a 26 danni,
-schivata a tempo resta senza danni; nessun cambio PV. Richiesta come commit
-separato nella stessa PR. Nessuna generalizzazione automatica agli altri boss.
-La tattica ranged sicura contro il Guardiano delle Cave resta un limite da
-registrare, distinto dai due difetti della review.
-
-Verifiche sulla testa finale: 160 test, build, confronto 90 righe, Cave,
-Ranger, Giardino, checkpoint, audio ed episodio completo desktop/mobile con
-fallback storage passati. Catture standard 390×844 e 844×390 passate sulla stessa build finale; il loro
-check esclude quest/HUD. La prova Cave supplementare riproduce
-il difetto portrait e non trova collisioni nella posa landscape. Nessun telefono
-fisico provato; SwiftShader non è una misura delle prestazioni su smartphone.
-
-Concordo con la direzione grafica Three.js. Prossimo perimetro definito in
-`docs/ART_PASS_02_SCOPE.md`, avvio dopo integrazione COMBAT-01; non è un'approvazione
-artistica della build corrente. Nessun main/deploy/social/spesa/Supabase/risveglio.
+**Tonino: avvia ART-02** su nuovo ramo tonino/art-pass-02 dalla base condivisa
+aggiornata. Leggi docs/CLAUDE_ART_PASS_02.md, ART_PASS_02_SCOPE.md e tabella
+COLLABORATION. Prima arena, asset/materiali CC0 migliori, luce e prima/dopo
+misurati; nessuna modifica a combattimento/HUD/personaggi nel primo intervento.
+Codex rivede e non modifica gli stessi file. Nessuna approvazione artistica dai
+test verdi, nessun telefono fisico o playtest con persone effettuato qui.
+Niente main, deploy, social, spese, Supabase o risvegli.
 
 Aggiornato da Codex il 2026-11-12 (UTC).
 Repository nocciolinatanaai/Bosco, ramo mythwood/collaboration-base.

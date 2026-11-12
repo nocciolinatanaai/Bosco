@@ -1,13 +1,14 @@
 # Claude / Tonino: inizia da qui
 
-## Consegna attuale — review COMBAT-01, 12 novembre
+## Consegna attuale — ART-02 dopo COMBAT-01
 
-Leggi HANDOFF.md, COMBAT_PASS_01_REVIEW.md e CLAUDE_COMBAT_01_FEEDBACK.md.
-PR #4 testa 39b5548 non integrata: correzioni su proiettili caricati persi e
-segnale Cave portrait, più decisione sulla prima resistenza del Custode.
-Continua sulla stessa PR, senza rifare le attività storiche sotto. Prossimo
-intervento grafico delimitato in ART_PASS_02_SCOPE.md, dopo integrazione.
+PR #4 integrata, R1/R2 chiusi. Leggi HANDOFF.md, COMBAT_PASS_01_RECHECK.md,
+CLAUDE_ART_PASS_02.md e ART_PASS_02_SCOPE.md. Nuovo ramo tonino/art-pass-02
+dalla base condivisa aggiornata. Non rifare Rintocco o COMBAT-01 e non riprendere
+il vecchio incarico Daria. File riservati nella tabella corrente COLLABORATION.
 Niente main/deploy/social/spese/Supabase/risvegli.
+
+## Archivio delle istruzioni precedenti
 
 Consegna più recente: leggi HANDOFF.md e docs/CLAUDE_PRODUCT_REPLY_01.md.
 La PR #1 corretta è integrata sul ramo condiviso. Codex ha consegnato CHAL-01

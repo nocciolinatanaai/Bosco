@@ -29,7 +29,7 @@ try {
   browser = await chromium.launch({ ...(executablePath ? { executablePath } : {}), args: ['--no-sandbox', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   await mkdir('test-results', { recursive: true });
   for (const [name, viewport, mobile] of [['desktop', { width: 1440, height: 900 }, false], ['mobile', { width: 390, height: 844 }, true]]) {
-    report.currentViewport = name; await saveReport();
+    report.currentViewport = name; report.stage = 'starting'; await saveReport();
     const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, deviceScaleFactor: mobile ? 2 : 1 });
     const page = await context.newPage();currentPage=page;
     const errors = [], external = [], portraitRequests = [];
