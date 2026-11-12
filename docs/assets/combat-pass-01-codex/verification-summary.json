@@ -1,0 +1,31 @@
+{
+  "reviewedCommit": "39b554838da5540d38a411f1049a669bc91a895b",
+  "applicationSourceHashes": {
+    "src/combat.js": "3a6ed04e4b63072caf62d4a24ab30065c884985d0cd369717ead13ad563c28a7",
+    "src/artifacts.js": "d16e92d10be75db7cdd63ef4276086370872da5c3be0aef3690d227304331366",
+    "src/caves.js": "b19ca5c674d758740962034ac8af47e493bb184604dbab9e48a8f6dcff4f06d4",
+    "src/enemy-attacks.js": "ca2f15a57cab514f4ca3d878e8a907496f99bcabca57b4876eec6c5f5e4aaf77",
+    "src/runtime.js": "64ae9c2d8263e5a2fade2c98ee4f9eba5935d5efb914ec7a9298c678848ade78",
+    "src/style.css": "b64fcee74e1f339a30c03d2d321bcbf9a2c3334ca8f03458ab77dfdf869a5a15",
+    "src/ui.js": "e498c08dd19889e101dd851ab33893317b544429452af65503d657429cde86d9",
+    "src/visuals/telegraph.js": "f6e3e760ec5264ca3976645cb87740a9ea5e3a1f0574b79810dcd6b9e4d3a9a6",
+    "src/journey.js": "e75850cbef12e17e1a8973ce9e5c42cd1b7a2bacd31c4e29e6da3cece3ac834c"
+  },
+  "demoEntry": "./assets/demo-DQty4YrS.js",
+  "demoEntrySha256": "ae8cbd9d0e396976f28c39719ddae75ad5fba0a62cb0f4881327ed1311bdd8b6",
+  "unitTests": {
+    "pass": 160,
+    "fail": 0
+  },
+  "build": "passed with >500kB chunk warning",
+  "caves": "desktop/mobile passed",
+  "ranger": "desktop/mobile passed",
+  "garden": "desktop/mobile passed",
+  "checkpoints": "passed",
+  "audio": "passed",
+  "episode": "pending",
+  "standardCapture": "pending",
+  "extraWardenCapture": "completed; portrait quest overlap confirmed",
+  "mergeDecision": "changes requested",
+  "physicalPhoneTest": false
+}

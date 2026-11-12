@@ -1,0 +1,83 @@
+{
+  "status": "completed",
+  "runs": [
+    {
+      "name": "landscape",
+      "tagged": true,
+      "measures": {
+        "viewport": {
+          "w": 844,
+          "h": 390
+        },
+        "items": [
+          {
+            "sel": ".enemy-label .resolute-tag",
+            "text": "Non interrompibile",
+            "fontSize": 14,
+            "rect": {
+              "x": 507,
+              "y": 98,
+              "w": 179,
+              "h": 25
+            },
+            "inside": true,
+            "clipped": false,
+            "overlaps": []
+          }
+        ]
+      },
+      "panels": [
+        {
+          "selector": ".quest",
+          "intersectionWidth": 0,
+          "intersectionHeight": 24.796875
+        },
+        {
+          "selector": "#hud",
+          "intersectionWidth": 125.952392578125,
+          "intersectionHeight": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "tagged": true,
+      "measures": {
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "items": [
+          {
+            "sel": ".enemy-label .resolute-tag",
+            "text": "Non interrompibile",
+            "fontSize": 14,
+            "rect": {
+              "x": 131,
+              "y": 243,
+              "w": 179,
+              "h": 25
+            },
+            "inside": true,
+            "clipped": false,
+            "overlaps": []
+          }
+        ]
+      },
+      "panels": [
+        {
+          "selector": ".quest",
+          "intersectionWidth": 94.81671142578125,
+          "intersectionHeight": 24.796875
+        },
+        {
+          "selector": "#hud",
+          "intersectionWidth": 178.765625,
+          "intersectionHeight": 0
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

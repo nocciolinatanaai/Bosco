@@ -57,9 +57,13 @@ sovrapposto al lungo testo della quest. Il suo check esclude quest/HUD e rileva
 soltanto collisioni coi comandi. Dimensione 14 px e presenza non garantiscono
 leggibilità se due testi occupano lo stesso spazio.
 
-Inoltre il driver originale esclude il Guardiano a 844×390. Non tratto quel
-segnale come verificato su tutti i formati. È in esecuzione un controllo mirato
-landscape/portrait, con misura delle intersezioni anche con quest e HUD.
+Il driver originale esclude il Guardiano a 844×390. Ho completato un controllo
+mirato supplementare su entrambi i formati, con misure e screenshot indipendenti:
+- landscape: tag x=507, y=98, 179×25 px, dentro viewport, nessuna intersezione
+  con quest/HUD nella posa provata;
+- portrait: tag x=131, y=243, 179×25 px; **interseca la quest per circa 95×25 px**.
+  La cattura riproduce la collisione testuale già visibile nella consegna Tonino.
+Il nuovo problema non è il font o il bordo: il controllo non considera i pannelli.
 Richiesta: segnale persistente leggibile sul bersaglio o nel suo stato HUD,
 senza coprire istruzioni o controlli; cattura Cave anche in landscape. La soluzione
 non deve essere ridurre il testo sotto soglia o cambiare il solo runner.
@@ -95,6 +99,17 @@ riavvio/ripresa e visibilità prima del primo colpo del giocatore.
 
 ## Impeto e altri limiti dichiarati
 
+Controprova supplementare nelle Cave, ferma alla gittata base evoluta massima:
+Mago a 11,85 vince in 9,84 s, Ranger a 14,25 in 7,26 s e Guaritore a 10,65 in
+14,24 s, tutti con zero attacchi completati e zero danni. Il Guardiano non si
+avvia oltre 10 unità. Il confronto originale delle Cave prova solo posizione
+vicina/spam e schivata: non esclude questa tattica sicura.
+È un limite della scelta di incontro statico, non un bug introdotto da resolute;
+provocazione/portata in COMBAT-01 sono assegnate al Custode. Registrarlo fra i
+limiti del Rintocco, senza allargare di nascosto la Nova per colpire tutti.
+Decidere se il vantaggio di gittata è intenzionale per questo guardiano
+opzionale prima di promettere uno scontro impegnativo a tutte le classi.
+
 Non introdurrei eccezioni invisibili al rimborso cooldown solo per Combattente
 e Guaritore per ottimizzare questo bot. La diagnosi di politica eager resta
 valida. Confrontare una politica distinta prima di cambiare i bonus per classe;
@@ -108,8 +123,12 @@ non subisce colpi. Questi limiti non vengono nascosti dai test verdi.
 - combat-pass-compare: 90 righe riprodotte sulla testa finale.
 - Build: passata, warning chunk >500 kB ancora presente.
 - caves-check: desktop/mobile passati.
-- Ranger, Giardino, checkpoint, episodio completo: in esecuzione sulla build finale.
-- Catture mobile/landscape e Cave supplementari: in esecuzione; non ancora passate.
+- Ranger e Giardino: desktop/mobile passati sulla testa finale.
+- Checkpoint UI: passata sulla testa finale.
+- Episodio completo: in esecuzione sulla build finale.
+- Catture standard mobile/landscape: in esecuzione; non ancora passate.
+- Cave supplementari: completate, landscape leggibile nella posa provata;
+  portrait con collisione del tag contro il testo della quest (R2).
 
 Risvegli sempre annullati, nessun main/deploy/social/spesa/Supabase. L'incarico
 grafico successivo è delimitato in ART_PASS_02_SCOPE.md, dopo chiusura COMBAT-01.

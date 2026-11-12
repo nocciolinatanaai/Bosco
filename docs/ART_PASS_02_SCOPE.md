@@ -25,8 +25,9 @@ Tre interventi:
 
 ## File e responsabilità
 
-Tonino può intervenire in src/visuals/environment.js, materials.js,
-stone-surface.js, geometry.js per helper necessari, graphics-quality.js e
+Tonino può intervenire in src/visuals/environment.js, src/visuals/materials.js,
+src/visuals/stone-surface.js, src/visuals/geometry.js per helper necessari,
+src/graphics-quality.js e
 nuovi moduli di props/materiali. Asset locali in public/art/environment-pass02/
 con manifest, licenze, fonti e hash. Fixture/script dedicati per confronto.
 Runtime/combat/caves/telegraph, HUD e personaggi sono fuori dal primo intervento:
