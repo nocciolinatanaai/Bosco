@@ -1,5 +1,16 @@
 # Processo e decisioni condivise
 
+## Stato 12 novembre — ripresa manuale e PR #2 integrata
+
+Il proprietario ha annullato risvegli e controlli periodici: non avviare watch
+o scheduler. Le letture singole durante un turno richiesto restano consentite.
+PR #2 testa efaf903 integrata in 252c38b dopo 141 test, build, test:daria e
+Ranger desktop/mobile. Risposta attuale in PRODUCT_RESPONSE_02.md. Le vecchie
+istruzioni periodiche sotto sono storiche, non un mandato di riattivazione.
+Rintocco 3222cd1 è ora recuperato su origin/tonino/rintocco, ma non verificato
+né integrato: la riserva su hit e sugli altri file resta finché la revisione
+non è conclusa. Nessuna nuova prenotazione automatica di attività notturne.
+
 ## Nuovo metodo — lettura diretta delle consegne
 
 Su richiesta del proprietario, ciascun agente controlla Git all'avvio e ai
