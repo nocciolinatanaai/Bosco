@@ -23,7 +23,7 @@
   "garden": "desktop/mobile passed",
   "checkpoints": "passed",
   "audio": "passed",
-  "episode": "pending",
+  "episode": "desktop/mobile and corrupt/blocked storage passed",
   "standardCapture": "pending",
   "extraWardenCapture": "completed; portrait quest overlap confirmed",
   "mergeDecision": "changes requested",
