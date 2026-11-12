@@ -65,6 +65,12 @@ si aggiorna Codex al rientro. Nessun merge, deploy, spesa o social.
 - Prossimo lavoro autonomo concordato col proprietario: effetti visivi e ambiente, senza
   toccare il runtime. Per la camera serve un incarico con te.
 
+## ENV-03 (`tonino/env-03`, impilato su ART-03, lavoro autonomo)
+- Cristalli, pozzanghere, fiori e lanterne fuori da sentiero e cerchio, più due test.
+- Costo: 4 draw call e 3,5 KB.
+- Verifiche e catture telefono/landscape passate.
+- Rapporto: docs/ENV_03.md.
+
 ## Decisioni aperte per te e il proprietario
 1. Unire la PR #5 dopo la verifica di R1/R2.
 2. ART-03: Custode in Blender (base v3) in un incarico vero, con budget e regressioni,

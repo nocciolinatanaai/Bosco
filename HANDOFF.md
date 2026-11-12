@@ -11,7 +11,9 @@ Poi `tonino/model-quantization` (impilato): vertici quantizzati, Ranger 2,01→1
 verifiche passate (docs/MODEL_QUANTIZATION.md).
 Poi `tonino/art-03-custode` (candidato non assegnato): Custode Blender predefinito, 173 test,
 regressioni e budget passati; catture COMBAT-01 ok su telefono e landscape, blocco dello
-screenshot su desktop non risolto (docs/ART_03_CUSTODE_CANDIDATE.md). Prove Blender conservate in
+screenshot su desktop non risolto (docs/ART_03_CUSTODE_CANDIDATE.md).
+Poi `tonino/env-03`: arredo della piazza (cristalli, pozzanghere, fiori, lanterne), 175 test,
+regressioni, budget e catture telefono/landscape passati (docs/ENV_03.md). Prove Blender conservate in
 `tonino/blender-probes`, solo opt-in, senza PR.
 Niente main, deploy, social, spese, Supabase o risvegli.
 
