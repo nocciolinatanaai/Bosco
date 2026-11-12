@@ -54,7 +54,13 @@ const visibleSel = (sel) => { const el = document.querySelector(sel); return Boo
 async function capture(page, path) {
   await page.clock.resume();
   try { await page.screenshot({ path, timeout: 120000 }); }
-  finally { await page.clock.pauseAt(await page.evaluate(() => Date.now() + 20)); }
+  finally {
+    // Il tempo reale continua mentre si calcola l'istante: si riprova con un margine più ampio.
+    for (let margin = 50; ; margin *= 2) {
+      try { await page.clock.pauseAt(await page.evaluate((m) => Date.now() + m, margin)); break; }
+      catch (error) { if (margin > 5000 || !/past/.test(error.message)) throw error; }
+    }
+  }
 }
 async function shot(page, name, run, gray = false) {
   const path = `${out}/${name}.png`; await capture(page, path); run.captures.push(path);
