@@ -1,0 +1,16 @@
+{
+  "reviewedCommit": "a7926ed",
+  "build": "PR head before Codex defeat text correction",
+  "demoScript": "./assets/demo-C-MtQFVr.js",
+  "demoScriptSha256": "75562dd5a247b4b48c13848abff5c26eb29d3b3ff819b1cce36423eecd15c75a",
+  "unitTests": {
+    "pass": 166,
+    "fail": 0
+  },
+  "compareRows": 90,
+  "projectileTerminal": "one lost/target-lost",
+  "browserRegressions": "running",
+  "visualCapture": "running",
+  "physicalPhoneTest": false,
+  "decision": "pending browser verification"
+}
