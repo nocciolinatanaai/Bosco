@@ -30,8 +30,9 @@ test('Rintocco: centro fisso, uscita dal volume e schivata reale attivano regole
  advanceEnemies(s,.02);assert.equal(e.phase,'windup');assert.equal(e.aimX,e.x);assert.equal(e.aimZ,e.z);
  s.x=7;const hp=s.hp;step(s,1.7);assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,0);
  e.phase='windup';e.windup=.02;s.x=4;s.z=-8;assert.equal(dodge(s,1,0),true);advanceEnemies(s,.02);
- assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,6);assert.ok(s.shield>0);
- e.phase='windup';e.windup=.02;s.invulnerable=0;s.dodgeRemaining=0;s.shield=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-22);
+ assert.equal(s.hp,hp);assert.equal(s.artifact.cooldown,6);assert.ok(s.artifact.wardCharge>0);
+ e.phase='windup';e.windup=.02;s.invulnerable=0;s.dodgeRemaining=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-6,'Custodia: rintocco successivo ridotto del 75%');assert.equal(s.artifact.wardCharge,0);
+ e.phase='windup';e.windup=.02;s.invulnerable=0;advanceEnemies(s,.02);assert.equal(s.hp,hp-6-22,'carica consumata: danno pieno');
  const phase=e.phase;s.area='plaza';step(s,1);assert.equal(e.phase,phase,'Nemico fuori area congelato');
 });
 test('Cave: confini di movimento e nessun bersaglio del Giardino attivo',()=>{
@@ -56,4 +57,32 @@ test('Guardiano sconfitto: evento, salvataggio e rivisita non lo rigenerano',()=
  const restored=restoreCheckpoint(checkpointFromSession(s));assert.equal(restored.enemies.find(e=>e.type==='warden').hp,0);
  Object.assign(restored,CAVE_ENTRY);interactCaves(restored,'leave');interactCaves(restored,'enter');
  assert.equal(restored.enemies.filter(e=>e.type==='warden').length,1);assert.equal(restored.enemies.find(e=>e.type==='warden').hp,0);
+});
+
+// ── Tonino, 11/11: il Guardiano deve arrivare a suonare e il Sigillo deve servire ──
+import { cast as castSkill } from '../src/game.js';
+import { memoryFor } from '../src/journey.js';
+function mash(role, seconds = 120) { const s = cave(role), e = s.enemies.find(x => x.type === 'warden'); Object.assign(s, { x: 0, z: -5.5 }); let t = 0, novas = 0;
+  while (e.hp > 0 && t < seconds && s.status === 'playing') { castSkill(s) || attack(s); tickCooldowns(s, .02); advanceEnemies(s, .02); novas += drainEvents(s).filter(x => x.type === 'enemy-impact').length; t += .02; }
+  return { s, e, t, novas }; }
+test('Rintocco: nessuna classe abbatte il Guardiano premendo soltanto Attacco/Abilità prima che suoni', () => {
+  for (const role of CLASSES) { const r = mash(role.id); assert.ok(r.novas >= 1, role.id + ': il Guardiano muore senza aver mai suonato (' + r.t.toFixed(1) + ' s)'); }
+});
+test('Rintocco: dopo un’interruzione il rintocco successivo arriva prima e non si interrompe, ma si schiva (Sigillo attivo)', () => {
+  const s = cave('ranger'), e = s.enemies.find(x => x.type === 'warden'); Object.assign(s, { x: 0, z: -4 });
+  step(s, .6); assert.equal(e.phase, 'windup'); assert.equal(e.resolute, false);
+  assert.equal(castSkill(s), true); step(s, .6); assert.notEqual(e.phase, 'windup', 'il primo rintocco si interrompe');
+  let guard = 0; while (e.phase !== 'windup' && guard++ < 400) step(s, .02);
+  assert.equal(e.resolute, true); s.cooldown = 0; castSkill(s); step(s, .7); assert.equal(e.phase, 'windup', 'il rintocco temprato non si interrompe');
+  const hp = s.hp; e.windup = .02; s.action = null; assert.equal(dodge(s, 1, 0), true); advanceEnemies(s, .02);
+  assert.equal(s.hp, hp); assert.equal(s.artifact.cooldown, 6, 'la schivata d’impatto attiva il Sigillo'); assert.equal(e.resolute, false);
+});
+test('Rintocco: il banco della lente è dentro il cerchio, la parete laterale resta sicura', () => {
+  const s = cave('healer'), e = s.enemies.find(x => x.type === 'warden');
+  assert.ok(Math.hypot(CAVE_LENS.x - e.x, CAVE_LENS.z - e.z) < e.radius); assert.ok(Math.hypot(10 - e.x, -8 - e.z) > e.radius);
+});
+test('Finale delle Cave: il testo ricorda se il Guardiano suona ancora o è stato zittito', () => {
+  const a = cave('mage'), b = cave('mage'); b.caves.wardenDefeated = true;
+  assert.match(memoryFor(a, 'caves').body, /Finché suona/); assert.match(memoryFor(b, 'caves').body, /ora tacciono/);
+  assert.equal(memoryFor(a, 'garden').body.includes('rintocco'), false);
 });

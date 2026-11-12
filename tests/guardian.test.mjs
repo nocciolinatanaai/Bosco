@@ -29,7 +29,8 @@ test('uscire dall’Onda evita il danno: il centro non segue il giocatore', () =
   run(s, 1.7); assert.equal(s.hp, s.maxHp); assert.deepEqual([b.aimX, b.aimZ], [0, 0]);
 });
 test('lo scatto evoluto può interrompere Onda prima dell’impatto', () => {
-  const [s, b] = ready(); b.attackCount = 1; prepareEnemyAttack(b, s);
+  // L'Onda è la seconda mossa: arriva dopo il primo attacco completato, quando la resistenza iniziale (COMBAT-01) è finita.
+  const [s, b] = ready(); b.attackCount = 1; b.resolute = false; prepareEnemyAttack(b, s);
   dodge(s, 0, 1); assert.equal(b.phase, 'stagger'); assert.equal(b.windup, 0);
   run(s, .6); assert.equal(drainEvents(s).filter(e => e.type === 'enemy-impact').length, 0);
 });

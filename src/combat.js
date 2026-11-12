@@ -1,9 +1,9 @@
 import { createCaves, cavePosition, advanceWarden, interactCaves as caveInteraction } from './caves.js';
-import { createArtifact, selectAttunement, activateArtifact } from './artifacts.js';
+import { createArtifact, selectAttunement, activateArtifact, consumeWard, consumeSurge, WARD_FACTOR, SURGE_FACTOR } from './artifacts.js';
 import { createGarden, inArea, gardenPosition, blockedByGardenCover, advanceSentry, interactGarden as gardenInteraction } from './garden.js';
 import { CLASSES } from './roles.js';
 import { createTrail, resonateTrail } from './trail.js';
-import { prepareEnemyAttack } from './enemy-attacks.js';
+import { prepareEnemyAttack, GUARDIAN_NEAR, GUARDIAN_REACH, GUARDIAN_PROVOKE } from './enemy-attacks.js';
 
 const clamp = (n, low, high) => Math.min(high, Math.max(low, n));
 const distance = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
@@ -21,7 +21,7 @@ export function createSession(id) {
   const enemy = (id, name, x, z, hp, boss, timer) => ({ id, name, x, z, hp, maxHp: hp, boss, timer,
     sealed: boss, attackCount: 0, attackKind: boss ? 'fracture' : 'strike',
     impactDamage: boss ? 26 : 12, recoveryDuration: boss ? 1.5 : 1, phase: 'idle', windup: 0, chargeDuration: boss ? 1.15 : .9, recovery: 0, stagger: 0, hitFlash: 0, facing: 0,
-    aimX: x, aimZ: z, radius: boss ? 3.6 : 1.8 });
+    aimX: x, aimZ: z, radius: boss ? 3.6 : 1.8, tempered: boss, resolute: false, provoked: 0, reach: false });
   return { role, x: 0, z: 12, hp: role.hp, maxHp: role.hp, stamina: 100, staminaDelay: 0,
     cooldown: 0, dashCooldown: 0, returnShot: 0, shield: 0, invulnerable: 0, dodgeRemaining: 0, dodgeDirection: { x: 0, z: -1 },
     facing: { x: 0, z: -1 }, action: null, combo: 0, comboReset: 0, inputBuffer: 0, skillBuffer: 0,
@@ -137,42 +137,78 @@ export function hurt(s, amount, source = null) {
     }
     return 0;
   }
-  const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 ? .25 : 1)));
+  const warded = consumeWard(s);
+  const actual = Math.min(s.hp, Math.round(amount * (s.shield > 0 || warded ? WARD_FACTOR : 1)));
+  if (warded) emit(s, 'ward-consumed', { raw: amount, amount: actual });
   if (actual <= 0) return 0;
   s.hp -= actual; s.invulnerable = .28;
   s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
-  emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 });
-  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; emit(s, 'defeated'); }
+  emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 || warded, warded });
+  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; dropProjectiles(s, 'defeated'); s.artifact.wardCharge = 0; s.artifact.surgeCharge = 0; emit(s, 'defeated'); }
   return actual;
 }
 
-function hit(s, enemy, damage, stagger = 0, critical = false) {
-  if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return;
+export function clearResolute(s, enemy) {
+  if (!enemy.resolute) return;
+  enemy.resolute = false; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: false });
+}
+
+function hit(s, enemy, damage, stagger = 0, critical = false, chargeId = 0) {
+  if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return false;
   s.lesson.hit = true;
   const amount = Math.min(enemy.hp, Math.round(damage * (s.evolved ? 1.5 : 1)));
   enemy.hp -= amount; enemy.hitFlash = .16;
+  // Provocazione: un Custode colpito resta ingaggiato per 8 s a qualunque distanza.
+  if (enemy.boss && amount > 0) enemy.provoked = GUARDIAN_PROVOKE;
+  // Resistenza unica (Custode e Guardiano del rintocco): la prima interruzione vale,
+  // poi l'avversario non si lascia più interrompere finché non completa un attacco.
+  // Il danno passa sempre; la resistenza non è invulnerabilità.
+  let resisted = false;
   if (stagger > 0 && enemy.hp > 0) {
-    enemy.stagger = Math.max(enemy.stagger, stagger * (enemy.boss ? .45 : 1));
-    enemy.windup = 0; enemy.phase = 'stagger';
+    if (enemy.resolute) resisted = true;
+    else {
+      enemy.stagger = Math.max(enemy.stagger, stagger * (enemy.boss ? .45 : 1));
+      enemy.windup = 0; enemy.phase = 'stagger';
+      if (enemy.tempered) { enemy.resolute = true; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: true }); }
+    }
   }
-  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical });
-  if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
+  emit(s, 'hit', { enemyId: enemy.id, amount, x: enemy.x, z: enemy.z, critical, resisted, chargeId });
+  if (enemy.hp === 0) { enemy.phase = 'dead'; enemy.windup = 0; clearResolute(s, enemy); emit(s, 'enemy-defeated', { enemyId: enemy.id, x: enemy.x, z: enemy.z }); }
   if (!s.resonanceReady && !s.evolved && s.enemies.filter(e => !e.boss && (e.area || 'plaza') === 'plaza').every(e => e.hp <= 0)) {
     s.resonanceReady = true; emit(s, 'resonance-ready');
   }
   if (enemy.type === 'warden' && enemy.hp === 0) { s.caves.wardenDefeated = true; emit(s, 'cave-progress', { interaction: 'warden', completed: false }); }
   if (enemy.type === 'sentry' && enemy.hp === 0) { s.garden.sentryDefeated = true; emit(s, 'garden-progress', { interaction: 'sentry', step: s.garden.step }); }
   if (!s.cleared && s.enemies.filter(e => (e.area || 'plaza') === 'plaza').every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
+  return true;
 }
 
-function projectile(s, action, damage, empowered = false, echo = false) {
+// Impeto: un solo esito terminale per carica, condiviso da HUD e report.
+// hit = colpo caricato a segno; miss = nessun bersaglio alla risoluzione; lost = proiettile caricato
+// lanciato ma mai arrivato (bersaglio perso, scadenza, copertura, cambio area, sconfitta).
+// Un proiettile ancora in volo non ha esito: non è un miss.
+function surgeOutcome(s, chargeId, outcome, reason) {
+  if (chargeId) emit(s, 'surge-outcome', { chargeId, outcome, reason });
+}
+function loseProjectile(s, p, reason) {
+  if (p.life <= 0 && p.resolved) return;
+  p.life = 0; p.resolved = true;
+  emit(s, 'projectile-lost', { projectileId: p.id, chargeId: p.chargeId || 0, reason, x: p.x, z: p.z });
+  surgeOutcome(s, p.chargeId, 'lost', reason);
+}
+function dropProjectiles(s, reason) {
+  for (const p of s.projectiles) if (p.life > 0) loseProjectile(s, p, reason);
+  s.projectiles = [];
+}
+
+function projectile(s, action, damage, empowered = false, echo = false, chargeId = 0) {
   const target = s.enemies.find((e) => inArea(s, e) && e.id === action.targetId && e.hp > 0 && !e.sealed && distance(e, s) <= action.range);
-  if (!target) { emit(s, 'miss'); return null; }
+  if (!target) { emit(s, 'miss', { chargeId }); surgeOutcome(s, chargeId, 'miss', 'no-target'); return null; }
   const offset = echo ? .6 : 0;
   const item = { id: ++s.sequence, x: s.x + action.facing.z * offset, z: s.z - action.facing.x * offset, targetId: target.id, speed: empowered ? 23 : 18,
-    life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style };
+    life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style, chargeId };
   s.projectiles.push(item);
-  emit(s, 'projectile', { projectileId: item.id, x: s.x, z: s.z });
+  emit(s, 'projectile', { projectileId: item.id, x: s.x, z: s.z, chargeId });
   return item;
 }
 
@@ -185,10 +221,16 @@ function resolve(s, action) {
   });
   emit(s, 'strike', { kind: action.kind, style: s.role.style, combo: action.combo, range: action.range, x: s.x, z: s.z, facing: { ...action.facing } });
   if (action.kind === 'basic') {
-    if (ranged(s)) { projectile(s, action, s.role.basicDamage); return; }
+    // Impeto: una carica per azione. Con più bersagli (falciata del Combattente) il ×1,5 vale per l'intera azione.
+    let chargeId = 0;
+    if (consumeSurge(s)) { emit(s, 'surge-consumed', { combo: action.combo }); chargeId = s.sequence; }
+    const mult = chargeId ? SURGE_FACTOR : 1;
+    if (ranged(s)) { projectile(s, action, s.role.basicDamage * mult, false, false, chargeId); return; }
     const targets = action.combo === 3 && s.role.id === 'fighter' ? inFront : inFront.sort((a, b) => distance(a, s) - distance(b, s)).slice(0, 1);
-    for (const enemy of targets) hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1), action.combo === 3 ? .3 : 0);
-    if (!targets.length) emit(s, 'miss');
+    let landed = false;
+    for (const enemy of targets) landed = hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1) * mult, action.combo === 3 ? .3 : 0, false, chargeId) || landed;
+    if (!targets.length) emit(s, 'miss', { chargeId });
+    surgeOutcome(s, chargeId, landed ? 'hit' : 'miss', landed ? 'hit' : 'no-target');
     return;
   }
   if (s.role.id === 'ranger') {
@@ -221,6 +263,8 @@ export function tickCooldowns(s, delta) {
   if (s.status !== 'playing' || dt === 0) return 0;
   s.time += dt;
   s.artifact.cooldown=Math.max(0,s.artifact.cooldown-dt);
+  if (s.artifact.surgeCharge > 0) { s.artifact.surgeCharge = Math.max(0, s.artifact.surgeCharge - dt); if (s.artifact.surgeCharge === 0) emit(s, 'surge-expired'); }
+  if (s.artifact.wardCharge > 0) { s.artifact.wardCharge = Math.max(0, s.artifact.wardCharge - dt); if (s.artifact.wardCharge === 0) emit(s, 'ward-expired'); }
   for (const key of ['cooldown', 'dashCooldown', 'returnShot', 'shield', 'invulnerable', 'comboReset', 'inputBuffer', 'skillBuffer', 'staminaDelay']) s[key] = Math.max(0, s[key] - dt);
   if (s.staminaDelay === 0) s.stamina = Math.min(100, s.stamina + 20 * dt);
   if (s.dodgeRemaining > 0) {
@@ -240,14 +284,19 @@ export function tickCooldowns(s, delta) {
     if (p.delay > 0) { p.delay = Math.max(0, p.delay - dt); continue; }
     p.life -= dt;
     const target = s.enemies.find((e) => inArea(s, e) && e.id === p.targetId && e.hp > 0);
-    if (!target || p.life <= 0) { p.life = 0; continue; }
+    if (!target) { loseProjectile(s, p, 'target-lost'); continue; }
+    if (p.life <= 0) { loseProjectile(s, p, 'expired'); continue; }
     const d = distance(target, p), step = p.speed * dt;
     const travel = Math.min(d, d <= step + .4 ? d : step);
     const next = { x: p.x + (target.x - p.x) / Math.max(d, .001) * travel, z: p.z + (target.z - p.z) / Math.max(d, .001) * travel };
     if (s.area === 'garden' && blockedByGardenCover(p, next)) {
-      p.life = 0; emit(s, 'projectile-blocked', { x: p.x, z: p.z }); continue;
+      emit(s, 'projectile-blocked', { x: p.x, z: p.z, projectileId: p.id, chargeId: p.chargeId || 0 }); loseProjectile(s, p, 'blocked'); continue;
     }
-    if (d <= step + .4) { hit(s, target, p.damage, p.empowered ? .65 : 0); p.life = 0; }
+    if (d <= step + .4) {
+      p.life = 0; p.resolved = true;
+      const landed = hit(s, target, p.damage, p.empowered ? .65 : 0, false, p.chargeId || 0);
+      surgeOutcome(s, p.chargeId, landed ? 'hit' : 'lost', landed ? 'hit' : 'target-lost');
+    }
     else { p.x += (target.x - p.x) / d * step; p.z += (target.z - p.z) / d * step; }
   }
   s.projectiles = s.projectiles.filter((p) => p.life > 0);
@@ -262,13 +311,14 @@ export function advanceEnemies(s, dt) {
     enemy.hitFlash = Math.max(0, enemy.hitFlash - dt);
     if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) continue;
     if (enemy.stagger > 0) { enemy.stagger = Math.max(0, enemy.stagger - dt); enemy.phase = 'stagger'; if (enemy.stagger === 0) { enemy.phase = 'recovery'; enemy.recovery = .4; } continue; }
-    if (enemy.type === 'warden') { advanceWarden(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
+    if (enemy.provoked > 0) enemy.provoked = Math.max(0, enemy.provoked - dt);
+    if (enemy.type === 'warden') { advanceWarden(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload), () => clearResolute(s, enemy)); continue; }
     if (enemy.type === 'sentry') { advanceSentry(s, enemy, dt, (amount, source) => hurt(s, amount, source), (type, payload) => emit(s, type, payload)); continue; }
     if (enemy.phase === 'windup') {
       enemy.windup = Math.max(0, enemy.windup - dt);
       if (enemy.windup === 0) {
-        enemy.phase = 'recovery'; enemy.recovery = enemy.recoveryDuration;
-        emit(s, 'enemy-impact', { enemyId: enemy.id, x: enemy.aimX, z: enemy.aimZ, radius: enemy.radius, kind: enemy.attackKind });
+        enemy.phase = 'recovery'; enemy.recovery = enemy.recoveryDuration; clearResolute(s, enemy);
+        emit(s, 'enemy-impact', { enemyId: enemy.id, x: enemy.aimX, z: enemy.aimZ, radius: enemy.radius, kind: enemy.attackKind, reach: enemy.reach, damage: enemy.impactDamage });
         if (Math.hypot(s.x - enemy.aimX, s.z - enemy.aimZ) < enemy.radius) hurt(s, enemy.impactDamage, { kind: enemy.attackKind, name: enemy.name });
       }
       continue;
@@ -279,15 +329,16 @@ export function advanceEnemies(s, dt) {
       continue;
     }
     const d = distance(enemy, s);
-    if (d > 14) { enemy.phase = 'idle'; continue; }
+    if (d > 14 && !(enemy.provoked > 0)) { enemy.phase = 'idle'; continue; }
     enemy.phase = 'pursuit'; enemy.facing = Math.atan2(s.x - enemy.x, s.z - enemy.z); enemy.timer -= dt;
     if (d > (enemy.boss ? 3.6 : 2)) {
       const speed = enemy.boss ? 1.45 : 2.1;
       enemy.x += (s.x - enemy.x) / d * dt * speed; enemy.z += (s.z - enemy.z) / d * dt * speed;
     }
-    if (enemy.timer <= 0 && d < (enemy.boss ? 6 : 3.8)) {
+    const reach = enemy.boss ? (enemy.provoked > 0 ? GUARDIAN_REACH : GUARDIAN_NEAR) : 3.8;
+    if (enemy.timer <= 0 && (enemy.boss ? d <= reach && (d < GUARDIAN_NEAR || enemy.provoked > 0) : d < reach)) {
       prepareEnemyAttack(enemy, s);
-      emit(s, 'enemy-windup', { enemyId: enemy.id, boss: enemy.boss, x: enemy.aimX, z: enemy.aimZ, duration: enemy.chargeDuration, kind: enemy.attackKind, radius: enemy.radius });
+      emit(s, 'enemy-windup', { enemyId: enemy.id, boss: enemy.boss, x: enemy.aimX, z: enemy.aimZ, duration: enemy.chargeDuration, kind: enemy.attackKind, radius: enemy.radius, damage: enemy.impactDamage, reach: enemy.reach, resolute: enemy.resolute });
     }
   }
 }
@@ -298,12 +349,22 @@ export function evolve(s) {
   if (!canEvolve(s)) return false;
   s.evolved = true; s.action = null; s.inputBuffer = 0; s.skillBuffer = 0; s.maxHp = Math.round(s.role.hp * 1.3); s.hp = s.maxHp; s.stamina = 100;
   s.cooldown = 0; s.dashCooldown = 0;
-  for (const enemy of s.enemies) if (enemy.boss) { enemy.sealed = false; enemy.timer = 1.2; }
+  // Custode introduttivo: resistenza già armata all'ingaggio (decisione COMBAT-01, revisione Codex).
+  // Il primo attacco arriva in ogni caso e si legge; dopo il primo attacco completato vale la regola normale.
+  // Solo il Custode: echi, Sentinella e Guardiano delle Cave restano interrompibili dal primo colpo.
+  for (const enemy of s.enemies) if (enemy.boss) { enemy.sealed = false; enemy.timer = 1.2; enemy.resolute = true; emit(s, 'enemy-resolute', { enemyId: enemy.id, resolute: true, opening: true }); }
   emit(s, 'evolved'); return true;
 }
 
+// Cambio area: i moduli d'area svuotano i proiettili; qui ogni proiettile ancora in volo riceve il suo esito.
+function changingArea(s, run) {
+  const pending = s.projectiles.filter((p) => p.life > 0), area = s.area;
+  const result = run();
+  if (result && s.area !== area) for (const p of pending) loseProjectile(s, p, 'area-change');
+  return result;
+}
 export function interactGarden(s, id) {
-  const result = gardenInteraction(s, id);
+  const result = changingArea(s, () => gardenInteraction(s, id));
   if (!result) return false;
   emit(s, 'garden-progress', result); return true;
 }
@@ -314,6 +375,6 @@ export function attuneArtifact(s,id){
 }
 
 export function interactCaves(s, id) {
-  const result = caveInteraction(s, id); if (!result) return false;
+  const result = changingArea(s, () => caveInteraction(s, id)); if (!result) return false;
   emit(s, 'cave-progress', result); return true;
 }

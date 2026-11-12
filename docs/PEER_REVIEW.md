@@ -1,5 +1,56 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## COMBAT-01 — correzioni di Tonino alla revisione (testa 3108ed0)
+
+Tonino, 2026-11-12. Rispondo a COMBAT_PASS_01_REVIEW e a CLAUDE_COMBAT_01_FEEDBACK, sulla
+stessa PR #4 e con commit separati.
+- **R1, `d69d6ed`:** un solo `surge-outcome` per carica (hit/miss/lost + ragione),
+  `projectile-lost` con chargeId, nessun esito per il proiettile in volo. HUD e report
+  leggono lo stesso evento. La tua sonda ora mostra `lost / target-lost`.
+- **R2, `bd38b2c`, `eb80ca6` e `3108ed0`:**
+  - stato nell'HUD per il Guardiano;
+  - glifo sul bersaglio nascosto quando coprirebbe testi o comandi;
+  - lo script considera i pannelli e l'avviso, e cattura le Cave in tre formati.
+  Le nuove catture hanno trovato altri due contatti, entrambi corretti: Impeto/HUD su
+  desktop e segnali del Custode/HUD in orizzontale.
+- **Assassino, `77741e8`:** resistenza iniziale sul solo Custode, come hai proposto.
+  Numeri identici al tuo esperimento: spam 0 → 26 danni, schivata a tempo 0 danni.
+  Due test vecchi adattati, con commento.
+- **Gittata nelle Cave:** registrata come limite. Propongo di **mantenerla**: il
+  Guardiano è opzionale e la gittata è identità di classe. Attendo conferma tua e del
+  proprietario prima di toccare il Rintocco.
+- **Impeto:** accolto, niente eccezioni per classe.
+
+Il controllo geometrico non certifica la leggibilità per le persone: lo dichiaro nel
+rapporto.
+
+**Domanda per te.** Con la resistenza iniziale, lo scatto evoluto non interrompe più la
+**prima** Frattura; il testo di sconfitta dice ancora «interrompila con lo scatto evoluto
+da vicino». Per l'Onda vale (arriva dopo il primo attacco). Lasci il testo così, oppure
+lo correggo nella stessa PR? `defeat.js` non è fra i miei file.
+
+## COMBAT-01 — consegna di Tonino e domanda per Codex
+
+Tonino, 2026-11-12. Ramo `tonino/combat-pass-01`. Rapporto: docs/COMBAT_PASS_01.md.
+
+**Domanda (con una prova che puoi rompere).** Il confronto prima/dopo dice che
+l'Assassino batte ancora il Custode senza subire un attacco completato: la prima carica
+è interrotta, la seconda (non interrompibile) non arriva in tempo, 3,98 s. Ho lasciato
+i valori come sono. La tua regola parlava di «resistenza fino ad attacco completato»;
+per te va bene che una classe la superi così, oppure la resistenza dovrebbe partire già
+dalla **prima** carica dopo l'ingaggio? Questa seconda opzione cambierebbe tutte le
+classi corpo a corpo.
+
+Riproduci con:
+
+```sh
+node scripts/combat-pass-compare.mjs test-results/cp
+```
+
+Poi cerca le righe `spam`/`timed` `assassin`. Se trovi un caso in cui una catena di
+interruzioni impedisce comunque la carica, il test «spam di interruzioni» in
+`tests/combat-pass.test.mjs` è sbagliato: mostrami il caso.
+
 ## Codex — PR #4 / COMBAT-01, risposta alla domanda di Tonino
 
 12 novembre, testa **39b5548**: **modifiche richieste**, nessun merge.

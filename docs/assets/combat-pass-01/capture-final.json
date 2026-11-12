@@ -1,0 +1,453 @@
+{
+  "status": "passed",
+  "startedAtUtc": "2026-11-12T14:06:01.900Z",
+  "note": "Input reali (tastiera) sulla build; tempi di schivata letti dall’HUD. Prova di presenza/disposizione, non di comprensione.",
+  "runs": [
+    {
+      "name": "desktop",
+      "viewport": "1440x900",
+      "captures": [
+        "docs/assets/combat-pass-01/desktop-far-fracture.jpg",
+        "docs/assets/combat-pass-01/desktop-far-fracture-gray.jpg",
+        "docs/assets/combat-pass-01/desktop-impeto-used.jpg",
+        "docs/assets/combat-pass-01/desktop-impeto-charge.jpg",
+        "docs/assets/combat-pass-01/desktop-impeto-charge-gray.jpg",
+        "docs/assets/combat-pass-01/desktop-resolute.jpg",
+        "docs/assets/combat-pass-01/desktop-resolute-gray.jpg",
+        "docs/assets/combat-pass-01/desktop-warden-resolute.jpg",
+        "docs/assets/combat-pass-01/desktop-warden-resolute-gray.jpg"
+      ],
+      "measures": {
+        "farFracture": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 607,
+                "y": 137,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#boss-reach",
+              "text": "◎Frattura a distanza · esci dal cerchio",
+              "fontSize": 14,
+              "rect": {
+                "x": 783,
+                "y": 137,
+                "w": 280,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 990,
+                "y": 284,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "surge": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": "#surge-state",
+              "text": "×1,5 · 3.0 s",
+              "fontSize": 14,
+              "rect": {
+                "x": 304,
+                "y": 787,
+                "w": 149,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "resolute": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 750,
+                "y": 137,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 170,
+                "y": 494,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 1440,
+            "h": 900
+          },
+          "items": [
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 1038,
+                "y": 289,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 489,
+                "y": 685,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "dodgeAttempts": 4,
+      "surgeCharged": true,
+      "surgeBeforeAttack": "×1,5 · 3.0 s",
+      "surgeOutcome": "A SEGNO ×1,5",
+      "resoluteClearedAfterImpact": true,
+      "video": "docs/assets/combat-pass-01/desktop-boss.webm",
+      "wardenTagOnTarget": true,
+      "status": "passed"
+    },
+    {
+      "name": "mobile",
+      "viewport": "390x844",
+      "captures": [
+        "docs/assets/combat-pass-01/mobile-far-fracture.jpg",
+        "docs/assets/combat-pass-01/mobile-impeto-used.jpg",
+        "docs/assets/combat-pass-01/mobile-impeto-charge.jpg",
+        "docs/assets/combat-pass-01/mobile-resolute.jpg",
+        "docs/assets/combat-pass-01/mobile-warden-resolute.jpg"
+      ],
+      "measures": {
+        "farFracture": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 110,
+                "y": 257,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#boss-reach",
+              "text": "◎Frattura a distanza · esci dal cerchio",
+              "fontSize": 14,
+              "rect": {
+                "x": 55,
+                "y": 288,
+                "w": 280,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "surge": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#surge-state",
+              "text": "×1,5 · 3.0 s",
+              "fontSize": 14,
+              "rect": {
+                "x": 301,
+                "y": 729,
+                "w": 66,
+                "h": 38
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "resolute": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 110,
+                "y": 257,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": ".enemy-label .resolute-tag",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": -42,
+                "y": 664,
+                "w": 170,
+                "h": 25
+              },
+              "inside": false,
+              "clipped": false,
+              "overlaps": [
+                "#joystick"
+              ]
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 390,
+            "h": 844
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 29,
+                "y": 546,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "dodgeAttempts": 6,
+      "surgeCharged": true,
+      "surgeBeforeAttack": "×1,5 · 3.0 s",
+      "surgeOutcome": "A SEGNO ×1,5",
+      "resoluteClearedAfterImpact": true,
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    },
+    {
+      "name": "landscape",
+      "viewport": "844x390",
+      "captures": [
+        "docs/assets/combat-pass-01/landscape-far-fracture.jpg",
+        "docs/assets/combat-pass-01/landscape-impeto-used.jpg",
+        "docs/assets/combat-pass-01/landscape-impeto-charge.jpg",
+        "docs/assets/combat-pass-01/landscape-resolute.jpg",
+        "docs/assets/combat-pass-01/landscape-warden-resolute.jpg"
+      ],
+      "measures": {
+        "farFracture": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 253,
+                "y": 111,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#boss-reach",
+              "text": "◎Frattura a distanza · esci dal cerchio",
+              "fontSize": 14,
+              "rect": {
+                "x": 253,
+                "y": 142,
+                "w": 280,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "surge": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#surge-state",
+              "text": "×1,5 · 3.0 s",
+              "fontSize": 14,
+              "rect": {
+                "x": 603,
+                "y": 283,
+                "w": 58,
+                "h": 38
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "resolute": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#boss-resolute",
+              "text": "Non interrompibile",
+              "fontSize": 14,
+              "rect": {
+                "x": 253,
+                "y": 111,
+                "w": 170,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            },
+            {
+              "sel": "#surge-state",
+              "text": "×1,5 · 0.2 s",
+              "fontSize": 14,
+              "rect": {
+                "x": 603,
+                "y": 283,
+                "w": 58,
+                "h": 38
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        },
+        "warden": {
+          "viewport": {
+            "w": 844,
+            "h": 390
+          },
+          "items": [
+            {
+              "sel": "#hud-resolute",
+              "text": "Non interrompibile · Guardiano",
+              "fontSize": 14,
+              "rect": {
+                "x": 571,
+                "y": 208,
+                "w": 256,
+                "h": 25
+              },
+              "inside": true,
+              "clipped": false,
+              "overlaps": []
+            }
+          ]
+        }
+      },
+      "dodgeAttempts": 4,
+      "surgeCharged": true,
+      "surgeBeforeAttack": "×1,5 · 3.0 s",
+      "surgeOutcome": "A SEGNO ×1,5",
+      "resoluteClearedAfterImpact": true,
+      "wardenTagOnTarget": false,
+      "status": "passed"
+    }
+  ],
+  "csp": true,
+  "buildEntrySha256": "75562dd5a247b4b48c13848abff5c26eb29d3b3ff819b1cce36423eecd15c75a",
+  "finishedAtUtc": "2026-11-12T14:42:50.779Z"
+}

@@ -120,6 +120,8 @@ test('liberare gli echi apre il risveglio una sola volta, prima del Custode', ()
 test('Passo di risonanza colpisce al punto di partenza una volta e resta vincolato al vigore', () => {
   const s = createSession('fighter'); s.enemies[0].hp = s.enemies[1].hp = 0; evolve(s);
   const boss = s.enemies[2]; s.x = boss.x; s.z = boss.z + 2; const hp = boss.hp;
+  // Resistenza iniziale del Custode (COMBAT-01): il danno passa, l'interruzione no finché non completa un attacco.
+  assert.equal(boss.resolute, true); boss.resolute = false;
   assert.equal(dodge(s, 1, 0), true); assert.equal(boss.hp, hp - 27); assert.ok(boss.stagger > 0);
   advance(s, .3); assert.equal(boss.hp, hp - 27); assert.equal(dodge(s), false);
   advance(s, .4); s.stamina = 29; assert.equal(dodge(s), false); assert.equal(boss.hp, hp - 27);

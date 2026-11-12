@@ -294,3 +294,31 @@ footer { z-index: 9; }
 @media (max-width:700px) and (orientation:portrait) {
   body[data-area="garden"] .quest, body[data-area="caves"] .quest { max-height:calc(100dvh - 500px); overflow-y:auto; }
 }
+
+/* COMBAT-01: segnali di resistenza, Frattura a distanza e carica Impeto (min 14 px, forma + testo). */
+.resolute-tag { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; font: 600 14px/1.2 system-ui, sans-serif; letter-spacing: .3px; color: #fff4dc; background: rgba(20, 16, 24, .82); border: 2px solid currentColor; border-radius: 6px; padding: 2px 7px; text-shadow: none; }
+.resolute-tag[hidden], #boss-reach[hidden], #actions #surge-state[hidden] { display: none; }
+.resolute-tag .glyph { flex: none; }
+.enemy-label { width: max-content; min-width: 88px; }
+.enemy-label .resolute-tag:not([hidden]) { display: flex; width: fit-content; margin: 0 auto 4px; }
+#boss-signals { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 6px 0 0; letter-spacing: 0; }
+#boss-reach { display: inline-flex; align-items: center; gap: 5px; font: 600 14px/1.2 system-ui, sans-serif; color: #fff4dc; background: rgba(20, 16, 24, .82); border: 2px dashed currentColor; border-radius: 6px; padding: 2px 7px; }
+#boss-reach b { font-size: 16px; line-height: 1; }
+#actions #surge-state { position: absolute; right: calc(100% + 12px); top: 50%; transform: translateY(-50%); white-space: nowrap; font: 600 14px/1.2 system-ui, sans-serif; letter-spacing: 0; color: #fff4dc; background: rgba(20, 16, 24, .88); border: 2px solid currentColor; border-radius: 6px; padding: 2px 7px; pointer-events: none; }
+#actions #attack.surge-ready { outline: 3px double #fff4dc; outline-offset: 3px; }
+/* Tasto Attacco a filo del bordo destro (telefono verticale e orizzontale): il riquadro Impeto si allinea a destra. */
+#actions #surge-state::before { content: 'IMPETO '; }
+/* Telefono: il tasto Attacco è a filo del bordo e ha l'Abilità sopra: lo stato Impeto sta dentro il tasto, al posto della combo. */
+@media (max-width: 700px), (max-height: 560px) and (max-width: 1000px) {
+  #actions #surge-state { position: static; transform: none; white-space: normal; padding: 1px 4px; line-height: 1.15; text-align: center; }
+  #actions #surge-state::before { content: none; }
+  #actions #attack:has(#surge-state:not([hidden])) #combo-label { display: none; }
+}
+/* R2: stato di resistenza nell'HUD del personaggio (Guardiano senza barra propria); il glifo sul bersaglio
+   si nasconde quando coprirebbe pannelli o comandi, invece di sovrapporre due testi. */
+#hud #hud-resolute:not([hidden]) { display: flex; width: fit-content; margin-top: 6px; }
+.enemy-label.tag-occluded .resolute-tag { visibility: hidden; }
+/* Telefono orizzontale: l'HUD occupa la colonna destra; i segnali del Custode restano nello spazio libero a sinistra. */
+@media (orientation: landscape) and (max-height: 560px) and (max-width: 1000px) {
+  #boss-signals { justify-content: flex-start; max-width: min(300px, calc(100vw - 30% - 280px)); }
+}
