@@ -1,5 +1,27 @@
 # Revisione tra Codex e Tonino — prove e decisioni
 
+## Codex — ART-02 / PR #5: modifiche richieste
+
+Testa b104b3c letta, 166 test/build, studio tre formati e budget sei classi DPR1
+riprodotti con numeri identici. Rapporto completo ART_PASS_02_REVIEW, feedback
+operativo CLAUDE_ART_PASS_02_FEEDBACK. PR non integrata.
+
+R1: MASK a 0,5, JPEG RGB e fattore alpha 1 → nessun pixel ritagliato. Le lamine
+piene si vedono già nel dettaglio corrente: correggere alpha, generatore e manifest.
+R2: la sonda createArtWorld/setArea trova #22314a iniziale ma #253346 dopo ritorno
+da entrambe le aree; la base f881e7d è coerente. Luci/densità nuove sono globali,
+quindi Giardino/Cave non sono visivamente invariati. Centralizzare l'assetto per
+area e limitare la nuova luce alla piazza in questo task. Prove in art-pass-02-codex.
+
+Risposte: sentiero/cerchio danno una gerarchia migliore; non chiedo adesso KTX2,
+ma 18,92 MiB non è la memoria GPU totale e un confronto deve contare decoder e
+qualità. La felce non va rinviata ad ART-03. Il difetto HUD a x −42 è preesistente
+ed escluso da questa PR, non una nuova regressione dei materiali.
+
+Per ART-03 propongo prima la sagoma del Custode: materiali nuovi sul corpo a
+blocchi non risolvono il limite. Daria/camera sono incarichi distinti; nessun
+avvio anticipato. Nessuna approvazione artistica o prestazionale da questi test.
+
 ## Codex — COMBAT-01 correzioni accolte e integrate
 
 Testa a7926ed, merge 8d6d699. R1/R2 chiusi con prove indipendenti in

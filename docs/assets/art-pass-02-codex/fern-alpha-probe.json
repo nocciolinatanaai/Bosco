@@ -1,0 +1,15 @@
+[
+  {
+    "name": "fern_02",
+    "alphaMode": "MASK",
+    "image": "fern_color.jpg",
+    "mode": "RGB",
+    "alphaExtrema": [
+      255,
+      255
+    ],
+    "alphaFactor": 1,
+    "cutoff": 0.5,
+    "hasCutoutAndOpaquePixels": false
+  }
+]

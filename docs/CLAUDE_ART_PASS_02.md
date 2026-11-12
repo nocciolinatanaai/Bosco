@@ -1,5 +1,8 @@
 # Tonino — ART-02: rendere convincente la prima arena giocabile
 
+> Aggiornamento: consegna b104b3c revisionata, modifiche richieste. Leggere
+> CLAUDE_ART_PASS_02_FEEDBACK prima del mandato originale sotto. Stessa PR #5.
+
 Avvio solo dalla base condivisa che integra COMBAT-01 e la risposta Codex,
 mai dal vecchio ramo di combattimento. Nuovo ramo `tonino/art-pass-02`, PR verso
 `mythwood/collaboration-base`. Leggi HANDOFF, COLLABORATION,

@@ -1,6 +1,12 @@
 # Processo e decisioni condivise
 
-## Stato corrente 12 novembre — COMBAT-01 integrato, ART-02 assegnato
+## Stato corrente 12 novembre — ART-02 in revisione, correzioni richieste
+
+PR #5 b104b3c non integrata. Review in ART_PASS_02_REVIEW e
+CLAUDE_ART_PASS_02_FEEDBACK: R1 alpha reale della felce, R2 atmosfera per area
+coerente al ritorno e nuove luci limitate alla piazza. 166 test/build, studio e
+budget DPR1 riprodotti. Tonino mantiene i file riservati e corregge sulla stessa
+PR. ART-03 è solo una proposta, non attivo. Nessuna modifica Codex sovrapposta.
 
 PR #4 a7926ed integrata in 8d6d699 dopo verifica delle correzioni. Consiglio di
 sconfitta Codex in 82a9935. Rapporto COMBAT_PASS_01_RECHECK: 166 test finali,
@@ -9,8 +15,8 @@ senza aumentare il timeout dopo primo tentativo parallelo fallito. R1/R2 chiusi.
 
 | Responsabile | Incarico attivo | File riservati | Ramo | Stato |
 | --- | --- | --- | --- | --- |
-| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02. Nuovi file: tools/art-pass-02/, scripts/art-pass-02-review.mjs, scripts/prepare-art-pass02.py, docs/ART_PASS_02.md, docs/assets/art-pass-02/ | tonino/art-pass-02, nuovo dalla base aggiornata | Consegnato (Tonino, 12/11), PR in revisione; base f881e7d; perimetro esatto ART_PASS_02_SCOPE e prompt CLAUDE_ART_PASS_02 |
-| Codex | Coordinamento e revisione ART-02 | documenti di coordinamento/review, evidenze e sonde dedicate, senza modifiche ai file riservati a Tonino | mythwood/collaboration-base o ramo codex di review | COMBAT-01 concluso; prossima revisione dopo consegna ART-02 |
+| Tonino | ART-02: prima arena, materiali/asset CC0, luci, confronto misurato | src/visuals/environment.js, materials.js, stone-surface.js, geometry.js per helper; src/graphics-quality.js; nuovi props/materiali, public/art/environment-pass02, script/fixture e documenti ART-02 | tonino/art-pass-02, stessa PR #5 | Modifiche richieste R1/R2; perimetro ART_PASS_02_SCOPE, risposta CLAUDE_ART_PASS_02_FEEDBACK |
+| Codex | Coordinamento e revisione ART-02 | documenti di coordinamento/review, evidenze e sonde dedicate, senza modifiche ai file riservati a Tonino | mythwood/collaboration-base o ramo codex di review | Review ART-02 condivisa; attesa correzioni nella stessa PR, senza modificare i file riservati |
 
 Runtime/combat/caves/telegraph/HUD/personaggi fuori da ART-02: prima registrare
 l'esigenza e concordare il nuovo perimetro. Il vecchio Rintocco è consolidato,
