@@ -225,3 +225,55 @@ test('Impeto: nessun doppio bonus. La falciata a più bersagli usa una sola cari
   assert.ok(charged.some(e => e.enemyId === boss.id) && charged.some(e => e.enemyId === shade.id), 'due bersagli, un’azione');
   s.comboReset = 0; attack(s); ev = resolveAction(s); assert.equal(ev.some(e => e.type === 'hit' && e.chargeId), false);
 });
+
+// ── R1 (revisione Codex): esito terminale unico per i proiettili caricati ──
+import { SURGE_OUTCOME_TEXT } from '../src/artifacts.js';
+const outcomes = (ev) => ev.filter((e) => e.type === 'surge-outcome');
+function flyAll(s) { let ev = [], g = 0; while (s.projectiles.length && g++ < 300) { tickCooldowns(s, DT); ev = ev.concat(drainEvents(s)); } return ev; }
+test('R1: carica Ranger persa perché il bersaglio muore → un solo esito «lost/target-lost», feedback A VUOTO', () => {
+  const { s, boss } = surged('ranger', { x: 0, z: 2 });
+  attack(s); let ev = resolveAction(s);
+  const id = ev.find((e) => e.type === 'surge-consumed').id;
+  assert.equal(s.projectiles.length, 1); assert.equal(outcomes(ev).length, 0, 'proiettile in volo: ancora nessun esito, non è un miss');
+  boss.hp = 0; boss.phase = 'dead';
+  ev = flyAll(s);
+  assert.deepEqual(outcomes(ev).map((e) => [e.chargeId, e.outcome, e.reason]), [[id, 'lost', 'target-lost']]);
+  assert.ok(ev.some((e) => e.type === 'projectile-lost' && e.chargeId === id && e.reason === 'target-lost'));
+  assert.equal(ev.some((e) => e.type === 'hit' && e.chargeId), false);
+  assert.equal(SURGE_OUTCOME_TEXT[outcomes(ev)[0].outcome], 'A VUOTO');
+  for (let i = 0; i < 20; i++) tickCooldowns(s, DT); assert.equal(outcomes(drainEvents(s)).length, 0, 'nessun esito duplicato');
+});
+test('R1: scadenza, copertura, cambio area e sconfitta danno ciascuno un esito con la sua ragione', async () => {
+  // Scadenza.
+  let { s } = surged('ranger', { x: 0, z: 2 }); attack(s); resolveAction(s); s.projectiles[0].life = .01;
+  assert.deepEqual(outcomes(flyAll(s)).map((e) => [e.outcome, e.reason]), [['lost', 'expired']]);
+  // Copertura del Giardino: proiettile caricato che attraversa una colonna.
+  ({ s } = surged('ranger')); s.area = 'garden';
+  const sentry = { id: 'garden-target', name: 'bersaglio', area: 'garden', x: -4, z: 0, hp: 100, maxHp: 100, phase: 'idle', stagger: 0, hitFlash: 0 }; s.enemies.push(sentry);
+  s.projectiles.push({ id: 999, x: -4, z: -5.4, targetId: sentry.id, speed: 18, life: 1.6, delay: 0, damage: 30, empowered: false, echo: false, style: 'bow', chargeId: 77 });
+  let ev = flyAll(s);
+  assert.deepEqual(outcomes(ev).map((e) => [e.chargeId, e.outcome, e.reason]), [[77, 'lost', 'blocked']]);
+  assert.ok(ev.some((e) => e.type === 'projectile-blocked' && e.chargeId === 77));
+  // Sconfitta con proiettile in volo.
+  ({ s } = surged('ranger', { x: 0, z: 2 })); attack(s); resolveAction(s); s.invulnerable = 0; s.hp = 1; hurt(s, 50);
+  assert.deepEqual(outcomes(drainEvents(s)).map((e) => [e.outcome, e.reason]), [['lost', 'defeated']]);
+  // Cambio area (Cave → sentiero) con proiettile in volo: annullato, ragione esplicita.
+  const { CAVE_GATE, CAVE_ENTRY } = await import('../src/caves.js');
+  const { interactCaves } = await import('../src/game.js');
+  const c = restoreCheckpoint({ version: 3, attunement: 'surge', autoSave: false, role: 'ranger', stage: 'guardian', traces: 3, garden: { step: 4, area: 'plaza', sentryDefeated: false } });
+  Object.assign(c, CAVE_GATE); interactCaves(c, 'enter'); Object.assign(c, CAVE_ENTRY); drainEvents(c);
+  const warden = c.enemies.find((e) => e.type === 'warden');
+  c.projectiles.push({ id: 998, x: 0, z: 11, targetId: warden.id, speed: 18, life: 1.6, delay: 0, damage: 30, empowered: false, echo: false, style: 'bow', chargeId: 55 });
+  assert.equal(interactCaves(c, 'leave'), true);
+  ev = drainEvents(c);
+  assert.deepEqual(outcomes(ev).map((e) => [e.chargeId, e.outcome, e.reason]), [[55, 'lost', 'area-change']]);
+  assert.equal(c.projectiles.length, 0);
+});
+test('R1: colpo già risolto non genera un secondo esito; melee a segno/a vuoto hanno un esito ciascuno', () => {
+  let { s } = surged('ranger', { x: 0, z: 0 }); attack(s); let ev = resolveAction(s).concat(flyAll(s));
+  assert.deepEqual(outcomes(ev).map((e) => [e.outcome, e.reason]), [['hit', 'hit']]);
+  ({ s } = surged('fighter')); attack(s); ev = resolveAction(s);
+  assert.deepEqual(outcomes(ev).map((e) => e.outcome), ['hit']);
+  ({ s } = surged('fighter', { x: 0, z: 8 })); attack(s); ev = resolveAction(s);
+  assert.deepEqual(outcomes(ev).map((e) => [e.outcome, e.reason]), [['miss', 'no-target']]);
+});

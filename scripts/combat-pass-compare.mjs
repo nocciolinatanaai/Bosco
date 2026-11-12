@@ -52,7 +52,7 @@ function fight(api, roleId, policyId, attune) {
   const b = s.enemies.find((e) => e.boss);
   Object.assign(s, { x: b.x, z: b.z + (policyId === 'rangedStand' || policyId === 'kite' ? maxRange(s.role) : 6) });
   const m = { win: false, time: 0, attacksCompleted: 0, hitsTaken: 0, damage: 0, interrupts: 0, resisted: 0, misses: 0,
-    surgeUsed: 0, surgeLanded: 0, surgeMissed: 0, wardUsed: 0, wardPrevented: 0, sigil: 0, farFractures: 0 };
+    surgeUsed: 0, surgeLanded: 0, surgeMissed: 0, surgeLost: 0, wardUsed: 0, wardPrevented: 0, sigil: 0, farFractures: 0 };
   const landed = new Set();
   let t = 0, inStagger = false;
   for (; t < LIMIT && b.hp > 0 && s.status === 'playing'; t += DT) {
@@ -63,15 +63,18 @@ function fight(api, roleId, policyId, attune) {
       if (e.type === 'enemy-windup' && e.enemyId === b.id && e.reach) m.farFractures++;
       if (e.type === 'hurt') { m.hitsTaken++; m.damage += e.amount; }
       if (e.type === 'hit' && e.enemyId === b.id && e.resisted) m.resisted++;
-      if (e.type === 'miss') { m.misses++; if (e.chargeId) m.surgeMissed++; }
+      if (e.type === 'miss') m.misses++;
       if (e.type === 'surge-consumed') m.surgeUsed++;
-      if (e.type === 'hit' && e.chargeId && !landed.has(e.chargeId)) { landed.add(e.chargeId); m.surgeLanded++; }
+      // Un solo esito terminale per carica (stesso evento usato dall'HUD).
+      if (e.type === 'surge-outcome') { if (landed.has(e.chargeId)) m.duplicateOutcomes = (m.duplicateOutcomes || 0) + 1; landed.add(e.chargeId); m[{ hit: 'surgeLanded', miss: 'surgeMissed', lost: 'surgeLost' }[e.outcome]]++; }
       if (e.type === 'ward-consumed') { m.wardUsed++; m.wardPrevented += e.raw - e.amount; }
       if (e.type === 'artifact-triggered') m.sigil++;
     }
     if (b.phase === 'stagger' && !inStagger) m.interrupts++; inStagger = b.phase === 'stagger';
   }
   m.win = b.hp <= 0 && s.status === 'playing'; m.time = Number(t.toFixed(2)); m.hpLeft = s.hp;
+  // Cariche ancora in volo quando lo scontro si chiude: pendenti, non miss.
+  m.surgePending = m.surgeUsed - m.surgeLanded - m.surgeMissed - m.surgeLost;
   return m;
 }
 const { restoreCheckpoint: restoreBefore } = await import(pathToFileURL(join(tmp, 'src/checkpoints.js')).href);
@@ -102,10 +105,10 @@ rmSync(tmp, { recursive: true, force: true });
 const report = { base: BASE, head, dt: DT, limitSeconds: LIMIT, note: 'Bot deterministici, stessa fixture prima/dopo. Non sono persone.', policies: Object.fromEntries(Object.entries(POLICIES).map(([k, v]) => [k, v.label])), rows };
 writeFileSync(join(out, 'compare.json'), JSON.stringify(report, null, 2));
 const f = (m) => `${m.win ? 'V' : 'S'} ${m.time}s · att ${m.attacksCompleted} · colpi ${m.hitsTaken} · danno ${m.damage}`;
-const lines = ['| scontro | politica | classe | Sigillo | prima | dopo | Impeto usati/a segno/a vuoto | Custodia usate (danno evitato) | Frattura lontana | resistiti |', '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'];
+const lines = ['| scontro | politica | classe | Sigillo | prima | dopo | Impeto usati/a segno/a vuoto/persi | Custodia usate (danno evitato) | Frattura lontana | resistiti |', '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'];
 for (const r of rows) {
-  if (r.fight === 'custode') lines.push(`| Custode | ${r.policy} | ${r.role} | ${r.attune} | ${f(r.before)} | ${f(r.after)} | ${r.after.surgeUsed}/${r.after.surgeLanded}/${r.after.surgeMissed} | ${r.after.wardUsed} (${r.after.wardPrevented}) | ${r.after.farFractures} | ${r.after.resisted} |`);
+  if (r.fight === 'custode') lines.push(`| Custode | ${r.policy} | ${r.role} | ${r.attune} | ${f(r.before)} | ${f(r.after)} | ${r.after.surgeUsed}/${r.after.surgeLanded}/${r.after.surgeMissed}/${r.after.surgeLost} | ${r.after.wardUsed} (${r.after.wardPrevented}) | ${r.after.farFractures} | ${r.after.resisted} |`);
   else lines.push(`| Rintocco | ${r.policy} | ${r.role} | — | ${r.before.win ? 'V' : 'S'} ${r.before.time}s · rintocchi ${r.before.rings} · danno ${r.before.damage} | ${r.after.win ? 'V' : 'S'} ${r.after.time}s · rintocchi ${r.after.rings} · danno ${r.after.damage} | — | — | — | ${r.after.resisted} |`);
 }
 writeFileSync(join(out, 'compare.md'), `# COMBAT-01 prima (${BASE}) / dopo (${head})\n\nV = vittoria, S = sconfitta o tempo scaduto (${LIMIT} s). att = attacchi completati del nemico; colpi = colpi subiti.\n\n${lines.join('\n')}\n`);
-console.log(`${rows.length} righe → ${out}/compare.json, compare.md`);
+console.log(`${rows.length} righe → ${out}/compare.json, compare.md · cariche pendenti a fine scontro: ${rows.reduce((n, r) => n + (r.after.surgePending || 0), 0)} · esiti duplicati: ${rows.reduce((n, r) => n + (r.after.duplicateOutcomes || 0), 0)}`);

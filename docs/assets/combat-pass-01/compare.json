@@ -1,6 +1,6 @@
 {
   "base": "86dbe4c",
-  "head": "f719ac9",
+  "head": "b7e440e",
   "dt": 0.02,
   "limitSeconds": 60,
   "note": "Bot deterministici, stessa fixture prima/dopo. Non sono persone.",
@@ -31,11 +31,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -49,11 +51,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 182
+        "hpLeft": 182,
+        "surgePending": 0
       }
     },
     {
@@ -73,11 +77,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -91,11 +97,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -115,11 +123,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -133,11 +143,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -157,11 +169,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -175,11 +189,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 59
+        "hpLeft": 59,
+        "surgePending": 0
       }
     },
     {
@@ -199,11 +215,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -217,11 +235,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 104
+        "hpLeft": 104,
+        "surgePending": 0
       }
     },
     {
@@ -241,11 +261,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -259,11 +281,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 74
+        "hpLeft": 74,
+        "surgePending": 0
       }
     },
     {
@@ -283,11 +307,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -301,11 +327,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -325,11 +353,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -343,11 +373,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -367,11 +399,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -385,11 +419,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -409,11 +445,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -427,11 +465,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -451,11 +491,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -469,11 +511,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -493,11 +537,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -511,11 +557,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -535,11 +583,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -553,11 +603,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -577,11 +629,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -595,11 +649,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -619,11 +675,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -637,11 +695,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -661,11 +721,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -679,11 +741,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 59
+        "hpLeft": 59,
+        "surgePending": 0
       }
     },
     {
@@ -703,11 +767,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -721,11 +787,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 59
+        "hpLeft": 59,
+        "surgePending": 0
       }
     },
     {
@@ -745,11 +813,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -763,11 +833,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 59
+        "hpLeft": 59,
+        "surgePending": 0
       }
     },
     {
@@ -787,11 +859,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -805,11 +879,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 104
+        "hpLeft": 104,
+        "surgePending": 0
       }
     },
     {
@@ -829,11 +905,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -847,11 +925,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 104
+        "hpLeft": 104,
+        "surgePending": 0
       }
     },
     {
@@ -871,11 +951,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -889,11 +971,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 104
+        "hpLeft": 104,
+        "surgePending": 0
       }
     },
     {
@@ -913,11 +997,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -931,11 +1017,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 74
+        "hpLeft": 74,
+        "surgePending": 0
       }
     },
     {
@@ -955,11 +1043,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -973,11 +1063,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 74
+        "hpLeft": 74,
+        "surgePending": 0
       }
     },
     {
@@ -997,11 +1089,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1015,11 +1109,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 74
+        "hpLeft": 74,
+        "surgePending": 0
       }
     },
     {
@@ -1039,11 +1135,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1057,11 +1155,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -1081,11 +1181,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1099,11 +1201,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -1123,11 +1227,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1141,11 +1247,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -1165,11 +1273,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1183,11 +1293,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -1207,11 +1319,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1225,11 +1339,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1249,11 +1365,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1267,11 +1385,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 4,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1291,11 +1411,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1309,11 +1431,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -1333,11 +1457,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1351,11 +1477,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -1375,11 +1503,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1393,11 +1523,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -1417,11 +1549,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1435,11 +1569,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -1459,11 +1595,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1477,11 +1615,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -1501,11 +1641,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1519,11 +1661,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -1543,11 +1687,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1561,11 +1707,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -1585,11 +1733,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1603,11 +1753,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -1627,11 +1779,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1645,11 +1799,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -1669,11 +1825,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1687,11 +1845,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -1711,11 +1871,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1729,11 +1891,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 3,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -1753,11 +1917,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1771,11 +1937,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 2,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -1795,11 +1963,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1813,11 +1983,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1837,11 +2009,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1855,11 +2029,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1879,11 +2055,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1897,11 +2075,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1921,11 +2101,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1939,11 +2121,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -1963,11 +2147,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -1981,11 +2167,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 2,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2005,11 +2193,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2023,11 +2213,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 2,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2047,11 +2239,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2065,11 +2259,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -2089,11 +2285,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2107,11 +2305,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -2131,11 +2331,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2149,11 +2351,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 208
+        "hpLeft": 208,
+        "surgePending": 0
       }
     },
     {
@@ -2173,11 +2377,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2191,11 +2397,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -2215,11 +2423,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2233,11 +2443,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -2257,11 +2469,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2275,11 +2489,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 0,
-        "hpLeft": 156
+        "hpLeft": 156,
+        "surgePending": 0
       }
     },
     {
@@ -2299,11 +2515,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2317,11 +2535,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -2341,11 +2561,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2359,11 +2581,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -2383,11 +2607,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2401,11 +2627,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 117
+        "hpLeft": 117,
+        "surgePending": 0
       }
     },
     {
@@ -2425,11 +2653,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2443,11 +2673,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -2467,11 +2699,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2485,11 +2719,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -2509,11 +2745,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2527,11 +2765,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -2551,11 +2791,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2569,11 +2811,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2593,11 +2837,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2611,11 +2857,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2635,11 +2883,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2653,11 +2903,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2677,11 +2929,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2695,11 +2949,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2719,11 +2975,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2737,11 +2995,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2761,11 +3021,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2779,11 +3041,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -2803,11 +3067,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2821,11 +3087,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 59
+        "hpLeft": 59,
+        "surgePending": 0
       }
     },
     {
@@ -2845,11 +3113,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2863,11 +3133,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 104
+        "hpLeft": 104,
+        "surgePending": 0
       }
     },
     {
@@ -2887,11 +3159,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2905,11 +3179,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 74
+        "hpLeft": 74,
+        "surgePending": 0
       }
     },
     {
@@ -2929,11 +3205,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2947,11 +3225,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -2971,11 +3251,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -2989,11 +3271,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 3,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -3013,11 +3297,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3031,11 +3317,13 @@
         "surgeUsed": 1,
         "surgeLanded": 1,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 2,
-        "hpLeft": 111
+        "hpLeft": 111,
+        "surgePending": 0
       }
     },
     {
@@ -3055,11 +3343,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3073,11 +3363,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -3097,11 +3389,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3115,11 +3409,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -3139,11 +3435,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3157,11 +3455,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 1,
         "farFractures": 1,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -3181,11 +3481,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3199,11 +3501,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -3223,11 +3527,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3241,11 +3547,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 2,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {
@@ -3265,11 +3573,13 @@
         "surgeUsed": 0,
         "surgeLanded": 0,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 0,
         "farFractures": 0,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       },
       "after": {
         "win": true,
@@ -3283,11 +3593,13 @@
         "surgeUsed": 2,
         "surgeLanded": 2,
         "surgeMissed": 0,
+        "surgeLost": 0,
         "wardUsed": 0,
         "wardPrevented": 0,
         "sigil": 2,
         "farFractures": 3,
-        "hpLeft": 130
+        "hpLeft": 130,
+        "surgePending": 0
       }
     },
     {

@@ -33,3 +33,5 @@ export function consumeSurge(s){
  const a=s.artifact;if(!(a.surgeCharge>0))return false;
  a.surgeCharge=0;return true;
 }
+// Testo dell'esito Impeto vicino al tasto Attacco: un proiettile perso è «a vuoto» come un miss.
+export const SURGE_OUTCOME_TEXT=Object.freeze({hit:'A SEGNO ×1,5',miss:'A VUOTO',lost:'A VUOTO'});

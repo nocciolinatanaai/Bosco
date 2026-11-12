@@ -10,7 +10,7 @@ import { defeatMessage } from './defeat.js';
 import { createCombatAudio } from './audio/index.js';
 import { RESOLUTE_GLYPH } from './ui.js';
 import { journey, storyObjective, memoryFor } from './journey.js';
-import { ATTUNEMENTS, artifactUnlocked } from './artifacts.js';
+import { ATTUNEMENTS, artifactUnlocked, SURGE_OUTCOME_TEXT } from './artifacts.js';
 import { screenMovement, joystickVector } from './controls.js';
 import { createArtWorld, createPipeline } from './visuals/environment.js';
 import { updateTelegraph } from './visuals/telegraph.js';
@@ -232,7 +232,7 @@ export function startRuntime($) {
       if(event.type==='artifact-triggered'){notice(event.attunement==='ward'?'CUSTODIA · Il prossimo colpo entro 6 s è ridotto del 75%':'IMPETO · Prossimo attacco base ×1,5 entro 3 s · vigore e abilità anticipata',2.5);audio.play(event.attunement==='ward'?'guard':'echo');}
       if (event.type === 'ward-consumed') floatText(`CUSTODIA −75%`, state.x, state.z, 'evade');
       if (event.type === 'surge-consumed') surgeFeedback = { text: 'USATO', until: state.time + 1.2, chargeId: event.id };
-      if ((event.type === 'hit' || event.type === 'miss') && event.chargeId && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: event.type === 'hit' ? 'A SEGNO ×1,5' : 'A VUOTO', until: state.time + 1.2 };
+      if (event.type === 'surge-outcome' && surgeFeedback?.chargeId === event.chargeId) surgeFeedback = { ...surgeFeedback, text: SURGE_OUTCOME_TEXT[event.outcome], until: state.time + 1.2 };
       if (event.type === 'enemy-resolute' && event.resolute) notice('NON INTERROMPIBILE · Il prossimo attacco arriverà comunque: esci dal cerchio o schiva', 2.5);
       if (event.type === 'evaded') floatText('SCHIVATO', state.x, state.z, 'evade');
       if (event.type === 'enemy-windup' && event.boss) notice(event.kind === 'nova' ? 'ONDA DEL SIGILLO · Allontanati dal Custode, poi torna a colpire' : event.reach ? 'FRATTURA A DISTANZA · Il Custode ti prende di mira: esci dal cerchio sotto di te' : 'FRATTURA · Spostati dal punto segnato', 2.2);

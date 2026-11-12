@@ -144,7 +144,7 @@ export function hurt(s, amount, source = null) {
   s.hp -= actual; s.invulnerable = .28;
   s.lastDamage = Object.freeze({ amount: actual, kind: source?.kind || 'unknown', name: source?.name || 'un nemico' });
   emit(s, 'hurt', { amount: actual, guarded: s.shield > 0 || warded, warded });
-  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; s.projectiles = []; s.artifact.wardCharge = 0; s.artifact.surgeCharge = 0; emit(s, 'defeated'); }
+  if (s.hp === 0) { s.status = 'defeated'; s.returnShot = 0; s.action = null; dropProjectiles(s, 'defeated'); s.artifact.wardCharge = 0; s.artifact.surgeCharge = 0; emit(s, 'defeated'); }
   return actual;
 }
 
@@ -154,7 +154,7 @@ export function clearResolute(s, enemy) {
 }
 
 function hit(s, enemy, damage, stagger = 0, critical = false, chargeId = 0) {
-  if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return;
+  if (!inArea(s, enemy) || enemy.hp <= 0 || enemy.sealed) return false;
   s.lesson.hit = true;
   const amount = Math.min(enemy.hp, Math.round(damage * (s.evolved ? 1.5 : 1)));
   enemy.hp -= amount; enemy.hitFlash = .16;
@@ -180,11 +180,30 @@ function hit(s, enemy, damage, stagger = 0, critical = false, chargeId = 0) {
   if (enemy.type === 'warden' && enemy.hp === 0) { s.caves.wardenDefeated = true; emit(s, 'cave-progress', { interaction: 'warden', completed: false }); }
   if (enemy.type === 'sentry' && enemy.hp === 0) { s.garden.sentryDefeated = true; emit(s, 'garden-progress', { interaction: 'sentry', step: s.garden.step }); }
   if (!s.cleared && s.enemies.filter(e => (e.area || 'plaza') === 'plaza').every((e) => e.hp <= 0)) { s.cleared = true; emit(s, 'cleared'); }
+  return true;
+}
+
+// Impeto: un solo esito terminale per carica, condiviso da HUD e report.
+// hit = colpo caricato a segno; miss = nessun bersaglio alla risoluzione; lost = proiettile caricato
+// lanciato ma mai arrivato (bersaglio perso, scadenza, copertura, cambio area, sconfitta).
+// Un proiettile ancora in volo non ha esito: non è un miss.
+function surgeOutcome(s, chargeId, outcome, reason) {
+  if (chargeId) emit(s, 'surge-outcome', { chargeId, outcome, reason });
+}
+function loseProjectile(s, p, reason) {
+  if (p.life <= 0 && p.resolved) return;
+  p.life = 0; p.resolved = true;
+  emit(s, 'projectile-lost', { projectileId: p.id, chargeId: p.chargeId || 0, reason, x: p.x, z: p.z });
+  surgeOutcome(s, p.chargeId, 'lost', reason);
+}
+function dropProjectiles(s, reason) {
+  for (const p of s.projectiles) if (p.life > 0) loseProjectile(s, p, reason);
+  s.projectiles = [];
 }
 
 function projectile(s, action, damage, empowered = false, echo = false, chargeId = 0) {
   const target = s.enemies.find((e) => inArea(s, e) && e.id === action.targetId && e.hp > 0 && !e.sealed && distance(e, s) <= action.range);
-  if (!target) { emit(s, 'miss', { chargeId }); return null; }
+  if (!target) { emit(s, 'miss', { chargeId }); surgeOutcome(s, chargeId, 'miss', 'no-target'); return null; }
   const offset = echo ? .6 : 0;
   const item = { id: ++s.sequence, x: s.x + action.facing.z * offset, z: s.z - action.facing.x * offset, targetId: target.id, speed: empowered ? 23 : 18,
     life: 1.6, delay: echo ? .14 : 0, damage, empowered, echo, style: s.role.style, chargeId };
@@ -208,8 +227,10 @@ function resolve(s, action) {
     const mult = chargeId ? SURGE_FACTOR : 1;
     if (ranged(s)) { projectile(s, action, s.role.basicDamage * mult, false, false, chargeId); return; }
     const targets = action.combo === 3 && s.role.id === 'fighter' ? inFront : inFront.sort((a, b) => distance(a, s) - distance(b, s)).slice(0, 1);
-    for (const enemy of targets) hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1) * mult, action.combo === 3 ? .3 : 0, false, chargeId);
+    let landed = false;
+    for (const enemy of targets) landed = hit(s, enemy, s.role.basicDamage * (action.combo === 3 ? 1.65 : action.combo === 2 ? 1.15 : 1) * mult, action.combo === 3 ? .3 : 0, false, chargeId) || landed;
     if (!targets.length) emit(s, 'miss', { chargeId });
+    surgeOutcome(s, chargeId, landed ? 'hit' : 'miss', landed ? 'hit' : 'no-target');
     return;
   }
   if (s.role.id === 'ranger') {
@@ -263,14 +284,19 @@ export function tickCooldowns(s, delta) {
     if (p.delay > 0) { p.delay = Math.max(0, p.delay - dt); continue; }
     p.life -= dt;
     const target = s.enemies.find((e) => inArea(s, e) && e.id === p.targetId && e.hp > 0);
-    if (!target || p.life <= 0) { p.life = 0; continue; }
+    if (!target) { loseProjectile(s, p, 'target-lost'); continue; }
+    if (p.life <= 0) { loseProjectile(s, p, 'expired'); continue; }
     const d = distance(target, p), step = p.speed * dt;
     const travel = Math.min(d, d <= step + .4 ? d : step);
     const next = { x: p.x + (target.x - p.x) / Math.max(d, .001) * travel, z: p.z + (target.z - p.z) / Math.max(d, .001) * travel };
     if (s.area === 'garden' && blockedByGardenCover(p, next)) {
-      p.life = 0; emit(s, 'projectile-blocked', { x: p.x, z: p.z }); continue;
+      emit(s, 'projectile-blocked', { x: p.x, z: p.z, projectileId: p.id, chargeId: p.chargeId || 0 }); loseProjectile(s, p, 'blocked'); continue;
     }
-    if (d <= step + .4) { hit(s, target, p.damage, p.empowered ? .65 : 0, false, p.chargeId || 0); p.life = 0; }
+    if (d <= step + .4) {
+      p.life = 0; p.resolved = true;
+      const landed = hit(s, target, p.damage, p.empowered ? .65 : 0, false, p.chargeId || 0);
+      surgeOutcome(s, p.chargeId, landed ? 'hit' : 'lost', landed ? 'hit' : 'target-lost');
+    }
     else { p.x += (target.x - p.x) / d * step; p.z += (target.z - p.z) / d * step; }
   }
   s.projectiles = s.projectiles.filter((p) => p.life > 0);
@@ -327,8 +353,15 @@ export function evolve(s) {
   emit(s, 'evolved'); return true;
 }
 
+// Cambio area: i moduli d'area svuotano i proiettili; qui ogni proiettile ancora in volo riceve il suo esito.
+function changingArea(s, run) {
+  const pending = s.projectiles.filter((p) => p.life > 0), area = s.area;
+  const result = run();
+  if (result && s.area !== area) for (const p of pending) loseProjectile(s, p, 'area-change');
+  return result;
+}
 export function interactGarden(s, id) {
-  const result = gardenInteraction(s, id);
+  const result = changingArea(s, () => gardenInteraction(s, id));
   if (!result) return false;
   emit(s, 'garden-progress', result); return true;
 }
@@ -339,6 +372,6 @@ export function attuneArtifact(s,id){
 }
 
 export function interactCaves(s, id) {
-  const result = caveInteraction(s, id); if (!result) return false;
+  const result = changingArea(s, () => caveInteraction(s, id)); if (!result) return false;
   emit(s, 'cave-progress', result); return true;
 }
